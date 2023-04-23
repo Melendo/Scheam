@@ -3,30 +3,31 @@
  */
 package Integracion.Factorias;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author 34601
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
-public class FactoriaDAO {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private FactoriaDAO instance;
+import Integracion.Cliente.DAOCliente;
+import Integracion.Empleado.DAOEmpleado;
+import Integracion.Equipo.DAOEquipo;
+import Integracion.Factura.DAOFactura;
+import Integracion.Producto.DAOProducto;
+import Integracion.Tareas.DAOTarea;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public FactoriaDAO getInstance() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+public abstract class FactoriaDAO{
+	
+	private static FactoriaDAOImp instance;
+
+
+	public static FactoriaDAOImp getInstance() {
+		if(instance == null) instance = new FactoriaDAOImp();
+		
+		return instance;
 	}
+	
+	public abstract DAOEmpleado getDaoEmpleado();
+	public abstract DAOEquipo getDaoEquipo();
+	public abstract DAOCliente getDaoCliente();
+	public abstract DAOFactura getDaoFactura();
+	public abstract DAOProducto getDaoProducto();
+	public abstract DAOTarea getDaoTarea();
+
+
+
 }

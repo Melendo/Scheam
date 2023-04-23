@@ -1,86 +1,66 @@
-/**
- * 
- */
 package Negocio.Empleado;
 
 import java.util.Set;
+import Integracion.Factorias.FactoriaDAOImp;
+import Integracion.Empleado.DAOEmpleado;
+import Integracion.Equipo.DAOEquipo;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+
 public class SAEmpleado implements ISAEmpleado {
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#altaEmpleado(TEmpleado empleado)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
+	
+	DAOEmpleado daoe = FactoriaDAOImp.getInstance().getDaoEmpleado();
+
+	
 	public Integer altaEmpleado(TEmpleado empleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	
+		
+		TEmpleado emp = daoe.readById(empleado.getIdEmpleado());
+		if(emp.getIdEmpleado() == -1){
+			return daoe.create(empleado);
+		}else{
+			if(emp.getActivo()) return -1;
+			else{
+				empleado.setActivo(true);
+				return daoe.modify(empleado);
+			}
+		}
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#bajaEmpleado(Integer IDEmpleado)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Integer bajaEmpleado(Integer IDEmpleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Integer bajaEmpleado(Integer id) {
+		if(daoe.readById(id).getIdEmpleado()==-1) return -1;
+		else return daoe.delete(id);	
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#ModificarEmpleado(TEmpleado empleado)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public Integer ModificarEmpleado(TEmpleado empleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		if(daoe.readById(empleado.getIdEmpleado()).getIdEmpleado() == -1) return -1;
+		else return daoe.modify(empleado);		
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#listarEmpleados()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set listarEmpleados() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TEmpleado> listarEmpleados() {	
+		Set<TEmpleado> lista = daoe.readAll();
+		return lista;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#mostrarEmpleadoID(Integer IDEmpleado)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public TEmpleado mostrarEmpleadoID(Integer IDEmpleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public TEmpleado mostrarEmpleadoID(Integer Id) {
+		TEmpleado emp = daoe.readById(Id);
+		if(emp.getIdEmpleado() != -1)
+			return emp;
+		else return null;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISAEmpleado#listarIntegrantesIdEquipo(Integer IDEquipo)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set listarIntegrantesIdEquipo(Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TEmpleado> listarIntegrantesIdEquipo(Integer idEquipo) {
+		DAOEquipo daoeq = FactoriaDAOImp.getInstance().getDaoEquipo();
+		Set<TEmpleado> lista;
+		
+		if(daoeq.readByID(idEquipo).getIdEquipo() == -1){
+			return null;
+		}else{
+			lista = daoe.listarIdEquipo(idEquipo);
+			return lista;
+		}
 	}
+
 }
+
+
