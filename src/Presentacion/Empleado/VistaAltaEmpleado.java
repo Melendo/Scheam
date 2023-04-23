@@ -31,7 +31,7 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 	public void vAltaEmpleado() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Alta Empleado");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AltaEmpleadoWindow.class.getResource("/icons/generales/alta-removebg-preview.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAltaEmpleado.class.getResource("/icons/generales/alta-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -45,7 +45,7 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 		
 		JLabel logo = new JLabel("      Alta Empleado");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(MainWindow.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaAltaEmpleado.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
