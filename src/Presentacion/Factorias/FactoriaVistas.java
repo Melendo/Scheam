@@ -4,44 +4,25 @@
 package Presentacion.Factorias;
 
 import Presentacion.IGUI;
+import Presentacion.VistaPrincipal.MainWindow;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
-public class FactoriaVistas {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private FactoriaVistas instance;
+public abstract class FactoriaVistas {
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public FactoriaVistas getInstance() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	private static FactoriaVistas instance;
+	
+	public static FactoriaVistas getInstance() {
+		if (instance == null) {
+			instance = new FactoriaVistasImp();
+		}
+		return instance;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public IGUI generateFrame() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
 		// end-user-code
 	}
+	
+	public abstract IGUI generateMainWindow();
 }

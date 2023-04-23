@@ -1,10 +1,11 @@
 package ScheamLauncher;
 
+import Presentacion.Factorias.FactoriaVistas;
+
 public class Scheam {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		FactoriaVistas.getInstance().generateMainWindow();
 	}
 
 }

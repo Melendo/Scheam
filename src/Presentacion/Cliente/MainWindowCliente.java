@@ -39,15 +39,11 @@ public class MainWindowCliente extends JFrame implements ActionListener, IGUI {
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IGUI#update()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void update() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
+
+	@Override
+	public void update(int event, Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

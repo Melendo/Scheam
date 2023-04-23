@@ -12,9 +12,7 @@ public class SAEmpleado implements ISAEmpleado {
 	DAOEmpleado daoe = FactoriaDAOImp.getInstance().getDaoEmpleado();
 
 	
-	public Integer altaEmpleado(TEmpleado empleado) {
-	
-		
+	public Integer altaEmpleado(TEmpleado empleado) {	
 		TEmpleado emp = daoe.readById(empleado.getIdEmpleado());
 		if(emp.getIdEmpleado() == -1){
 			return daoe.create(empleado);

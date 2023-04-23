@@ -1,13 +1,15 @@
-/**
- * 
- */
+
 package Presentacion.Factorias;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author 34601
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+import Presentacion.IGUI;
+import Presentacion.VistaPrincipal.MainWindow;
+
 public class FactoriaVistasImp extends FactoriaVistas {
+	public FactoriaVistasImp() {
+		
+	}
+	
+	public IGUI generateMainWindow() {
+		return new MainWindow();
+	}
 }
