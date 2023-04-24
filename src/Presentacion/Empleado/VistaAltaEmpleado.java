@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import Negocio.Empleado.TEmpleado;
 
 
-public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
+public class VistaAltaEmpleado extends JFrame implements IGUI {
 	
 	private JPanel contentPane;
 	private JTextField nombretextfield;
@@ -147,13 +147,6 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 		setVisible(false);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
@@ -165,6 +158,7 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 	        return;
 		case Eventos.VistaAltaEmpleadoOK:
 			JOptionPane.showMessageDialog(null, "Éxito dando de Alta");
+			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
 			break;
 		}
 	}

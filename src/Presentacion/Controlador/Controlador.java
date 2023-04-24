@@ -10,5 +10,5 @@ public abstract class Controlador {
 		return instance;
 	}
 
-	public void update(int event, Object objeto) {}
+	public abstract void update(int event, Object objeto);
 }

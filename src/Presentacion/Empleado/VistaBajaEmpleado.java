@@ -78,7 +78,6 @@ public class VistaBajaEmpleado extends JFrame implements IGUI, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
 		// end-user-code
 	}
 

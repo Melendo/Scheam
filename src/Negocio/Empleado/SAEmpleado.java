@@ -11,26 +11,45 @@ public class SAEmpleado implements ISAEmpleado {
 	
 	DAOEmpleado daoe = FactoriaDAOImp.getInstance().getDaoEmpleado();
 
-	//añadir funcion readbyDNI 
-	public Integer altaEmpleado(TEmpleado empleado) {	
+	
+	public Integer altaEmpleado(TEmpleado empleado) {
+		
+		System.out.println("Intentando altaEmpleado - SAEmpleado");
 		TEmpleado emp = daoe.readByDNI(empleado.getDNI());
+		
 		if(emp.getDNI().equals("-1")){
+			System.out.println("altaEmpleado Realizado (creado) - SAEmpleado");
 			return daoe.create(empleado);
 		}else{
-			if(emp.getActivo()) return -1;
+			if(emp.getActivo()) {
+				System.out.println("altaEmpleado No Realizado (existe y activo) - SAEmpleado");
+				return -1;
+			}
 			else{
 				empleado.setActivo(true);
+				System.out.println("altaEmpleado Realizado (reactivado) - SAEmpleado");
 				return daoe.modify(empleado);
 			}
 		}
 	}
 
 	public Integer bajaEmpleado(Integer id) {
-		if(daoe.readById(id).getIdEmpleado()==-1) return -1;
-		else return daoe.delete(id);	
+		
+		System.out.println("Intentando bajaEmpleado - SAEmpleado");
+		
+		if(daoe.readById(id).getIdEmpleado()== -1) {
+			System.out.println("bajaEmpleado No Realizado (no exite) - SAEmpleado");
+			return -1;
+		}
+		else {
+			System.out.println("bajaEmpleado Realizado - SAEmpleado");
+			return daoe.delete(id);	
+		}
 	}
 
 	public Integer ModificarEmpleado(TEmpleado empleado) {
+		
+		
 		if(daoe.readById(empleado.getIdEmpleado()).getIdEmpleado() == -1) return -1;
 		else return daoe.modify(empleado);		
 	}

@@ -4,8 +4,6 @@
 package Presentacion.Factorias;
 
 import Presentacion.IGUI;
-import Presentacion.Controlador.Eventos;
-import Presentacion.VistaPrincipal.MainWindow;
 
 public abstract class FactoriaVistas {
 

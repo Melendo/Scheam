@@ -12,6 +12,7 @@ public class Eventos {
     public static final int AltaEmpleado = 111;
     public static final int VistaAltaEmpleadoOK = 112;
     public static final int VistaAltaEmpleadoNoOK = 113;
+    public static final int VistaAltaEmpleadoOKReactivar = 114;
 
     public static final int VistaBajaEmpleado = 121;
     public static final int VistaBajaEmpleadoOK = 122;
