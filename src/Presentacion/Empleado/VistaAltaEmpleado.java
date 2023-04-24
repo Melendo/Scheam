@@ -33,6 +33,8 @@ public class VistaAltaEmpleado extends JFrame implements IGUI {
 	private JTextField telefonotextfield;
 	private JTextField sueldotextfield;
 	
+	private boolean cerrar = true;
+	
 	public VistaAltaEmpleado() {
 		vAltaEmpleado();
 	}
@@ -127,7 +129,8 @@ public class VistaAltaEmpleado extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+				dispose();
 			}
 		});
 		cancelbutton.setBounds(249, 188, 90, 23);
@@ -144,7 +147,10 @@ public class VistaAltaEmpleado extends JFrame implements IGUI {
 		empleado.setTlfn(Integer.parseInt(telefonotextfield.getText()));
 		empleado.setSueldo(Double.parseDouble(sueldotextfield.getText()));
 		Controlador.getInstance().update(Eventos.AltaEmpleado, empleado);
-		setVisible(false);
+		if (cerrar) 
+			dispose();
+		else
+			cerrar = true;
 	}
 
 	@Override
@@ -153,11 +159,16 @@ public class VistaAltaEmpleado extends JFrame implements IGUI {
 		case Eventos.VistaAltaEmpleado:
 			setVisible(true);
 			break;
-		case Eventos.VistaAltaEmpleadoNoOK:
+		case Eventos.AltaEmpleadoNoOK:
 	        JOptionPane.showMessageDialog(null, "Error al dar de Alta");
-	        return;
-		case Eventos.VistaAltaEmpleadoOK:
+	        cerrar = false;
+	        break;
+		case Eventos.AltaEmpleadoOK:
 			JOptionPane.showMessageDialog(null, "Éxito dando de Alta");
+			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+			break;
+		case Eventos.AltaEmpleadoOKReactivar:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta. Se ha reactivado el Empleado.");
 			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
 			break;
 		}

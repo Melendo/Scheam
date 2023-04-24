@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
+import java.util.HashSet;
 
 public class DAOEmpleado implements IDAOEmpleado {
 
@@ -54,31 +55,108 @@ public class DAOEmpleado implements IDAOEmpleado {
 	}
 
 	public Integer delete(Integer idempleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOEmpleado");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE empleados set activo = false where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idempleado);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOEmpleado");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer modify(TEmpleado empleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Modify - DAOEmpleado");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+						
+			String sql = "UPDATE empleados set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, empleado.getNombre());
+			ps.setString(2, empleado.getApellidos());
+			ps.setString(3, empleado.getDNI());
+			ps.setString(4, empleado.getE_mail());
+			ps.setInt(5, empleado.getTlfn());
+			ps.setDouble(6, empleado.getSueldo());
+			ps.setInt(7, empleado.getIdEmpleado());
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOEmpleado");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Set<TEmpleado> readAll() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readAll - DAOEmpleado");
+		Set<TEmpleado> result = new HashSet<TEmpleado>();
+		TEmpleado aux;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM empleados WHERE activo");
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux = new TEmpleado();
+				aux.setIdEmpleado(rs.getInt("id_empleado"));
+				aux.setNombre(rs.getString("nombre"));
+				aux.setApellidos(rs.getString("apellidos"));
+				aux.setDNI(rs.getString("DNI"));
+				aux.setE_mail(rs.getString("email"));
+				aux.setTlfn(rs.getInt("telefono"));
+				aux.setSueldo(rs.getDouble("sueldo"));
+				result.add(aux);
+				while (rs.next()) {
+					aux = new TEmpleado();
+					aux.setIdEmpleado(rs.getInt("id_empleado"));
+					aux.setNombre(rs.getString("nombre"));
+					aux.setApellidos(rs.getString("apellidos"));
+					aux.setDNI(rs.getString("DNI"));
+					aux.setE_mail(rs.getString("email"));
+					aux.setTlfn(rs.getInt("telefono"));
+					aux.setSueldo(rs.getDouble("sueldo"));
+					result.add(aux);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("Readall realizado - DAOEmpleado");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 	
 	public TEmpleado readByDNI(String dni) {
 		System.out.println("Intentando readByDNI - DAOEmpleado");
 		TEmpleado result = new TEmpleado();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT DNI, activo FROM EMPLEADOS WHERE DNI = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT DNI, activo FROM empleados WHERE DNI = ?");
 			ps.setString(1, dni);
 
 			ResultSet rs = ps.executeQuery();
@@ -92,6 +170,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 			
 			rs.close();
 			ps.close();
+			con.close();
 			System.out.println("ReadByDNI realizado - DAOEmpleado");
 
 		} catch (SQLException e) {
@@ -99,6 +178,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		}
 		return result;
 	}
+	
 	public TEmpleado readById(Integer idempleado) {
 		System.out.println("Intentando readByID - DAOEmpleado");
 		TEmpleado result = new TEmpleado();
@@ -110,8 +190,16 @@ public class DAOEmpleado implements IDAOEmpleado {
 
 			if (!rs.next())
 				result.setIdEmpleado(-1);
-			else
-				result.setIdEmpleado(rs.getInt(1));
+			else {
+				result.setIdEmpleado(rs.getInt("id_empleado"));
+				result.setNombre(rs.getString("nombre"));
+				result.setApellidos(rs.getString("apellidos"));
+				result.setDNI(rs.getString("DNI"));
+				result.setE_mail(rs.getString("email"));
+				result.setTlfn(rs.getInt("telefono"));
+				result.setSueldo(rs.getDouble("sueldo"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
 			
 			rs.close();
 			ps.close();

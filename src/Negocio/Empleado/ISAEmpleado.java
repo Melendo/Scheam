@@ -8,7 +8,7 @@ public interface ISAEmpleado {
 
 	public Integer bajaEmpleado(Integer IDEmpleado);
 
-	public Integer ModificarEmpleado(TEmpleado empleado);
+	public Integer modificarEmpleado(TEmpleado empleado);
 
 	public Set<TEmpleado> listarEmpleados();
 

@@ -24,7 +24,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class MainWindow extends JFrame implements ActionListener, IGUI {
+public class MainWindow extends JFrame implements IGUI {
 	
 	public MainWindow() {
 		vMainWindow();
@@ -133,9 +133,6 @@ public class MainWindow extends JFrame implements ActionListener, IGUI {
 		
 		setVisible(false);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {}
 
 	@Override
 	public void update(int event, Object object) {

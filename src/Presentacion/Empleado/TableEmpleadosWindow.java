@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
 
+//PLANTILLA TABLAS!!! HAY QUE METERLO EN CADA VISTA
 public class TableEmpleadosWindow extends JFrame {
 
 	private JPanel contentPane;

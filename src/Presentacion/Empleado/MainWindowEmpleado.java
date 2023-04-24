@@ -23,7 +23,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
+public class MainWindowEmpleado extends JFrame implements IGUI {
 	
 	public MainWindowEmpleado() {
 		vMainWindowEmpleado();
@@ -80,6 +80,8 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		JButton bajabutton = new JButton("Baja Empleado");
 		bajabutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaBajaEmpleado, null);
+				dispose();
 			}
 		});
 		bajabutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -93,6 +95,13 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		modbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		modbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		modbutton.setBackground(Color.WHITE);
+		modbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				dispose();
+			}
+		});
 		buttonpanel.add(modbutton);
 		
 		JButton listallbutton = new JButton("Listado de todos los empleados");
@@ -100,6 +109,12 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		listallbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listallbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listallbutton.setBackground(Color.WHITE);
+		listallbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.ListarEmpleado, null);
+			}
+		});
 		buttonpanel.add(listallbutton);
 		
 		JButton listidbutton = new JButton("Listado de empleado por ID"); 
@@ -107,6 +122,13 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		listidbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listidbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listidbutton.setBackground(Color.WHITE);
+		listidbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
+				dispose();
+			}
+		});
 		buttonpanel.add(listidbutton);
 		
 		JButton listintegrequipobutton = new JButton("Listado integrantes de un equipo");
@@ -126,13 +148,6 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 			}
 		});
 		
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	@Override
