@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -75,7 +77,8 @@ public class MainWindow extends JFrame implements ActionListener, IGUI {
 		empleadoButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) { 
-				//mainwindowempleado
+				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+				dispose();
 			}
 		});
 		buttonPanel.add(empleadoButton);
@@ -128,11 +131,18 @@ public class MainWindow extends JFrame implements ActionListener, IGUI {
 		//TODO actionlistener a mainwindowtareas
 		buttonPanel.add(tareasButton);
 		
-		setVisible(true);
+		setVisible(false);
 	}
-	
-	public void update() {}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {}
+
+	@Override
+	public void update(int event, Object object) {
+		switch (event) {
+		case Eventos.MainWindow:
+			setVisible(true);
+			break;
+		}
+	}
 }

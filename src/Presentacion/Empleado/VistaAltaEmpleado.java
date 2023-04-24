@@ -4,11 +4,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
@@ -16,6 +19,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+
+import Negocio.Empleado.TEmpleado;
 
 
 public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
@@ -27,6 +32,10 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 	private JTextField emailtextfield;
 	private JTextField telefonotextfield;
 	private JTextField sueldotextfield;
+	
+	public VistaAltaEmpleado() {
+		vAltaEmpleado();
+	}
 
 	public void vAltaEmpleado() {
 		setMinimumSize(new Dimension(500, 360));
@@ -109,7 +118,7 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 		JButton okbutton = new JButton("Ok");
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				ok();
 			}
 		});
 		okbutton.setBounds(142, 188, 90, 23);
@@ -123,6 +132,19 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 		});
 		cancelbutton.setBounds(249, 188, 90, 23);
 		infopanel.add(cancelbutton);
+		
+	}
+	
+	private void ok() {
+		TEmpleado empleado = new TEmpleado();
+		empleado.setNombre(nombretextfield.getText());
+		empleado.setApellidos(apellidostextfield.getText());
+		empleado.setDNI(dnitextfield.getText());
+		empleado.setE_mail(emailtextfield.getText());
+		empleado.setTlfn(Integer.parseInt(telefonotextfield.getText()));
+		empleado.setSueldo(Double.parseDouble(sueldotextfield.getText()));
+		Controlador.getInstance().update(Eventos.AltaEmpleado, empleado);
+		setVisible(false);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -134,7 +156,16 @@ public class VistaAltaEmpleado extends JFrame implements IGUI, ActionListener {
 
 	@Override
 	public void update(int event, Object object) {
-		// TODO Auto-generated method stub
-		
+		switch(event) {
+		case Eventos.VistaAltaEmpleado:
+			setVisible(true);
+			break;
+		case Eventos.VistaAltaEmpleadoNoOK:
+	        JOptionPane.showMessageDialog(null, "Error al dar de Alta");
+	        return;
+		case Eventos.VistaAltaEmpleadoOK:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta");
+			break;
+		}
 	}
 }

@@ -8,18 +8,26 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
+	
+	public MainWindowEmpleado() {
+		vMainWindowEmpleado();
+	}
 
 	public void vMainWindowEmpleado() {
 		setBounds(100, 100, 994, 515);
@@ -43,6 +51,13 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		toppanel.add(emplogo, BorderLayout.WEST);
 		
 		JButton backbutton = new JButton("Volver");
+		backbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindow, null);
+				dispose();
+			}
+		});
 		toppanel.add(backbutton, BorderLayout.EAST);
 		
 		JPanel buttonpanel = new JPanel();
@@ -55,6 +70,8 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 		altabutton.setBackground(Color.WHITE);
 		altabutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaAltaEmpleado, null);
+				dispose();
 			}
 		});
 		buttonpanel.setLayout(new GridLayout(0, 3, 0, 0));
@@ -108,6 +125,7 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 				setVisible(false);
 			}
 		});
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -119,7 +137,11 @@ public class MainWindowEmpleado extends JFrame implements IGUI, ActionListener {
 
 	@Override
 	public void update(int event, Object object) {
-		// TODO Auto-generated method stub
+		switch(event) {
+		case Eventos.MainWindowEmpleado:
+			setVisible(true);
+			break;
+		}
 		
 	}
 }

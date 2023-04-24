@@ -15,4 +15,5 @@ public interface ISAEmpleado {
 	public TEmpleado mostrarEmpleadoID(Integer IDEmpleado);
 	
 	public Set<TEmpleado> listarIntegrantesIdEquipo(Integer IDEquipo);
+	
 }

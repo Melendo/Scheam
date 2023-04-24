@@ -4,6 +4,7 @@
 package Presentacion.Factorias;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Eventos;
 import Presentacion.VistaPrincipal.MainWindow;
 
 public abstract class FactoriaVistas {
@@ -17,12 +18,6 @@ public abstract class FactoriaVistas {
 		return instance;
 	}
 
-	public IGUI generateFrame() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
-	}
+	public abstract IGUI generateFrame(int event, Object object);
 	
-	public abstract IGUI generateMainWindow();
 }

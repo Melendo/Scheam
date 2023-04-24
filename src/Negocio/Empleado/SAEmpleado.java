@@ -11,10 +11,10 @@ public class SAEmpleado implements ISAEmpleado {
 	
 	DAOEmpleado daoe = FactoriaDAOImp.getInstance().getDaoEmpleado();
 
-	
+	//añadir funcion readbyDNI 
 	public Integer altaEmpleado(TEmpleado empleado) {	
-		TEmpleado emp = daoe.readById(empleado.getIdEmpleado());
-		if(emp.getIdEmpleado() == -1){
+		TEmpleado emp = daoe.readByDNI(empleado.getDNI());
+		if(emp.getDNI().equals("-1")){
 			return daoe.create(empleado);
 		}else{
 			if(emp.getActivo()) return -1;
