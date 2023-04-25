@@ -108,6 +108,10 @@ public class VistaBajaEmpleado extends JFrame implements IGUI {
 			JOptionPane.showMessageDialog(null, "Error al dar de Baja");
 			cerrar = false;
 			break;
+		case Eventos.BajaEmpleadoNoOK2:
+			JOptionPane.showMessageDialog(null, "Error al dar de Baja. Empleado ya dado de Baja");
+			cerrar = false;
+			break;
 		}
 		
 	}

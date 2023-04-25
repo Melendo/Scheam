@@ -82,7 +82,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 						
-			String sql = "UPDATE empleados set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ? where id_empleado = ?";
+			String sql = "UPDATE empleados set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ?, activo = ? where id_empleado = ?";
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, empleado.getNombre());
@@ -91,7 +91,8 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.setString(4, empleado.getE_mail());
 			ps.setInt(5, empleado.getTlfn());
 			ps.setDouble(6, empleado.getSueldo());
-			ps.setInt(7, empleado.getIdEmpleado());
+			ps.setBoolean(7, empleado.getActivo());
+			ps.setInt(8, empleado.getIdEmpleado());
 			
 			ps.executeUpdate();
 			
@@ -156,7 +157,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		System.out.println("Intentando readByDNI - DAOEmpleado");
 		TEmpleado result = new TEmpleado();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT DNI, activo FROM empleados WHERE DNI = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM empleados WHERE DNI = ?");
 			ps.setString(1, dni);
 
 			ResultSet rs = ps.executeQuery();
@@ -164,8 +165,14 @@ public class DAOEmpleado implements IDAOEmpleado {
 			if (!rs.next()) 
 				result.setDNI("-1");
 			else  {
-				result.setDNI(rs.getString(1));
-				result.setActivo(rs.getBoolean(2));
+				result.setIdEmpleado(rs.getInt("id_empleado"));
+				result.setNombre(rs.getString("nombre"));
+				result.setApellidos(rs.getString("apellidos"));
+				result.setDNI(rs.getString("DNI"));
+				result.setE_mail(rs.getString("email"));
+				result.setTlfn(rs.getInt("telefono"));
+				result.setSueldo(rs.getDouble("sueldo"));
+				result.setActivo(rs.getBoolean("activo"));
 			}
 			
 			rs.close();

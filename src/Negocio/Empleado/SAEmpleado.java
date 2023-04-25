@@ -20,9 +20,9 @@ public class SAEmpleado implements ISAEmpleado {
 				System.out.println("altaEmpleado No Realizado (existe y activo) - SAEmpleado");
 				return -1;
 			} else {
-				empleado.setActivo(true);
+				emp.setActivo(true);
 				System.out.println("altaEmpleado Realizado (reactivado) - SAEmpleado");
-				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
+				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(emp);
 				return 2;
 			}
 		}
@@ -31,13 +31,18 @@ public class SAEmpleado implements ISAEmpleado {
 	public Integer bajaEmpleado(Integer id) {
 
 		System.out.println("Intentando bajaEmpleado - SAEmpleado");
+		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(id);
 
-		if (FactoriaDAOImp.getInstance().getDaoEmpleado().readById(id).getIdEmpleado() == -1) {
+		if (emp.getIdEmpleado() == -1) {
 			System.out.println("bajaEmpleado No Realizado (no exite) - SAEmpleado");
 			return -1;
-		} else {
+		}
+		
+		if(emp.getActivo()) {
 			System.out.println("bajaEmpleado Realizado - SAEmpleado");
 			return FactoriaDAOImp.getInstance().getDaoEmpleado().delete(id);
+		} else{
+			return -2;
 		}
 	}
 
@@ -47,8 +52,10 @@ public class SAEmpleado implements ISAEmpleado {
 		if (emp.getIdEmpleado() == -1)
 			return -1;
 		else {
-			if (empleado.getDNI() == null || (empleado.getDNI() != null && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != empleado.getDNI())) {
-				
+			if (empleado.getDNI() != null  && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1")
+				return -2;
+			else {
+					
 				if (empleado.getDNI() == null)
 					empleado.setDNI(emp.getDNI());
 				if (empleado.getNombre() == null)
@@ -61,11 +68,11 @@ public class SAEmpleado implements ISAEmpleado {
 					empleado.setTlfn(emp.getTlfn());
 				if (empleado.getSueldo() == null)
 					empleado.setSueldo(emp.getSueldo());
-			}
-			else
-				return -2;
-
-			return FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
+				if(empleado.getActivo() == null) {
+					empleado.setActivo(true);
+				}
+				return FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
+			}				
 		}
 	}
 

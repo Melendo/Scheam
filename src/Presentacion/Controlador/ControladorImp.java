@@ -47,6 +47,7 @@ public class ControladorImp extends Controlador {
         	System.out.println("Entrando a BajaEmpleado - Controlador");
         	res = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado((Integer) objeto);
         	if (res == -1) gui.update(Eventos.BajaEmpleadoNoOK, null);
+        	else if(res == -2) gui.update(Eventos.BajaEmpleadoNoOK2, null);
         	else gui.update(Eventos.BajaEmpleadoOK, objeto);
         	break;
         case Eventos.ListarEmpleado:
@@ -55,6 +56,7 @@ public class ControladorImp extends Controlador {
         	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEmpleado, null);
         	gui.update(event, lista);
         	gui.update(Eventos.VistaListarEmpleado, null);
+        	break;
         case Eventos.VistaModificarEmpleado:
         	System.out.println("Entrando a VistaModificarEmpleados - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
