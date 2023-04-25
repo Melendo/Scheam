@@ -26,7 +26,7 @@ public class VistaListarEmpleado extends JFrame implements IGUI {
 	}
 
 	public void vListarEmpleado() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TableEmpleadosWindow.class.getResource("/icons/empleado.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarEmpleado.class.getResource("/icons/empleado.png")));
 		setTitle("Listado Empleados");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
