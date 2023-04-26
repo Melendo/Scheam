@@ -60,10 +60,13 @@ public class SAProducto implements ISAProducto {
 	}
 
 	public TProducto mostrarProductoID(Integer IDProducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
+		if (emp.getIdproyecto() != -1)
+			return emp;
+		else { 
+			emp.setIdproyecto(-1);
+			return emp;
+		}
 	}
 
 	public Integer cerrarProducto(Integer IDProducto) {
