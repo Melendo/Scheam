@@ -1,12 +1,15 @@
 package Integracion.Producto;
 
+import Negocio.Empleado.TEmpleado;
 import Negocio.Producto.TProducto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
 public class DAOProducto implements IDAOProducto {
@@ -62,7 +65,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE productos set activo = false where id_producto = ?";
+			String sql = "UPDATE productos set activo = false where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idproducto);
 			ps.executeUpdate();
@@ -84,7 +87,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_empleado = ?";
+			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, producto.getNombre());
@@ -108,24 +111,146 @@ public class DAOProducto implements IDAOProducto {
 		return 1;
 	}
 
-	public Set readAll() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TProducto> readAll() {
+		System.out.println("Intentando readAll - DAOProducto");
+		Set<TProducto> result = new HashSet<TProducto>();
+		TProducto aux;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE activo");
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux = new TProducto();
+				aux.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				aux.setGenero(rs.getString("genero"));
+				aux.setIdproyecto(rs.getInt("id_proyecto"));
+				aux.setNombre(rs.getString("nombre"));
+				aux.setPEGI(rs.getInt("PEGI"));
+				aux.setPrecio(rs.getDouble("precio"));
+				aux.setStock(rs.getInt("stock"));
+				aux.setTerminado(rs.getBoolean("terminado"));
+				result.add(aux);
+				while (rs.next()) {
+					aux = new TProducto();
+					aux.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+					aux.setGenero(rs.getString("genero"));
+					aux.setIdproyecto(rs.getInt("id_proyecto"));
+					aux.setNombre(rs.getString("nombre"));
+					aux.setPEGI(rs.getInt("PEGI"));
+					aux.setPrecio(rs.getDouble("precio"));
+					aux.setStock(rs.getInt("stock"));
+					aux.setTerminado(rs.getBoolean("terminado"));
+					result.add(aux);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("Readall realizado - DAOProducto");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public TProducto readById(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readByDNI - DAOProducto");
+		TProducto result = new TProducto();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE id_proyecto = ?");
+			ps.setInt(1, idproducto);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdproyecto(-1);
+			else  {
+				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				result.setGenero(rs.getString("genero"));
+				result.setIdproyecto(rs.getInt("id_proyecto"));
+				result.setNombre(rs.getString("nombre"));
+				result.setPEGI(rs.getInt("PEGI"));
+				result.setPrecio(rs.getDouble("precio"));
+				result.setStock(rs.getInt("stock"));
+				result.setTerminado(rs.getBoolean("terminado"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+			if (result.getIdproyecto() == -1)
+				System.out.println("ReadById realizado (no encontró id_proyecto) - DAOProducto");
+			else
+				System.out.println("ReadById realizado (encontró id_proyecto) - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public Integer cerrarProducto(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando cerrarProducto - DAOProducto");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE productos set activo = false where id_proyecto = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idproducto);
+			ps.executeUpdate();
+			
+			stmt.close();
+			con.close();
+			System.out.println("CerrarProducto Realizado - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
+
+	@Override
+	public TProducto readByNombre(String nombre) {
+		System.out.println("Intentando readByNombre - DAOProducto");
+		TProducto result = new TProducto();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE nombre = ?");
+			ps.setString(1, nombre);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdproyecto(-1);
+			else  {
+				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				result.setGenero(rs.getString("genero"));
+				result.setIdproyecto(rs.getInt("id_proyecto"));
+				result.setNombre(rs.getString("nombre"));
+				result.setPEGI(rs.getInt("PEGI"));
+				result.setPrecio(rs.getDouble("precio"));
+				result.setStock(rs.getInt("stock"));
+				result.setTerminado(rs.getBoolean("terminado"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+			if (result.getIdproyecto() == -1)
+				System.out.println("readByNombre realizado (no encontró nombre) - DAOProducto");
+			else
+				System.out.println("readByNombre realizado (encontró nombre) - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
