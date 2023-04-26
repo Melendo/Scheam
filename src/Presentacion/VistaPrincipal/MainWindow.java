@@ -92,7 +92,13 @@ public class MainWindow extends JFrame implements IGUI {
 		ImageIcon equipoimgicon = new ImageIcon(MainWindow.class.getResource("/icons/equipo.png"));
 		Image modequipoimg = equipoimgicon.getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
 		equipoButton.setIcon(new ImageIcon(modequipoimg));
-		//TODO actionlistener a mainwindowequipo
+		equipoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
+				dispose();
+			}
+		});
 		buttonPanel.add(equipoButton);
 		
 		JButton productoButton = new JButton("Producto");

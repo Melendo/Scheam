@@ -2,12 +2,20 @@
 package Negocio.Equipo;
 
 import java.util.Set;
+import Integracion.Factorias.FactoriaDAOImp;
 
 public class SAEquipo implements ISAEquipo {
 
 	public Integer altaEquipo(TEquipo equipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		
+		System.out.println("Intentando altaEquipo - SAEquipo");
+		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByNombre(equipo.getNombre());
+		
+		if (equ.getNombre().equals("-1")) {
+			System.out.println("altaEquipo Realizado (creado) - SAEquipo");
+			return FactoriaDAOImp.getInstance().getDaoEquipo().create(equ);
+		} else {
+		
 		return null;
 		// end-user-code
 	}

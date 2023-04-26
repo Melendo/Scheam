@@ -143,12 +143,7 @@ public class MainWindowEmpleado extends JFrame implements IGUI {
 			}
 		});
 		buttonpanel.add(listintegrequipobutton);
-		backbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
-		
+
 	}
 
 	@Override

@@ -22,4 +22,6 @@ public interface IDAOEquipo {
 	public Integer bajaIntegrante(Integer idempleado, Integer idequipo);
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado);
+	
+	public TEquipo readByNombre(String nombre);
 }

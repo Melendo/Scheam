@@ -7,6 +7,7 @@ public class TEquipo {
 	private Boolean Activo;
 
 	private Integer IdEquipo;
+	
 	public String getNombre() {
 		return Nombre;
 	}

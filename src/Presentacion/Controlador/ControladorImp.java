@@ -92,7 +92,16 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEmpleadoID, null);
         	}
         	break;
-        	
+        case Eventos.MainWindowEquipo:
+        	System.out.println("Entrando a MainWindowEquipo - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
+        case Eventos.VistaAltaEquipo:
+        	System.out.println("Entrando a VistaAltaEquipo - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
         }
     }
 }

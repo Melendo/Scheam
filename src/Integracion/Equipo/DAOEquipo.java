@@ -4,11 +4,38 @@ import Negocio.Equipo.TEquipo;
 
 import java.util.Set;
 
+import com.mysql.jdbc.ResultSet;
+
 public class DAOEquipo implements IDAOEquipo {
 	
 	@Override
 	public Integer create(TEquipo equipo) {
-		// TODO Auto-generated method stub
+		
+		System.out.println("Intentando create - DAOEmpleado");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "INSERT INTO equipos (nombre, activo) VALUES (?,?);";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, equipo.getNombre());
+			ps.setString(2, true);
+			
+			ps.executeUpdate();
+			ps.close();
+			
+			sql = "select id_equipo from equipo where nombre = ?";
+			ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			
+			equipo.setIdEquipo(rs.getInt(id_equipo));
+			
+			if(equipo instanceof TEquipoDesarrollo){
+				
+			}
+			else
+			
+
 		return null;
 	}
 
@@ -43,6 +70,12 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TEquipo readByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return null;
 	}
