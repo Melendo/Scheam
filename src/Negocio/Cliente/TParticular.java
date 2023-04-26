@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Negocio.Cliente;
 
 public class TParticular extends TCliente {
