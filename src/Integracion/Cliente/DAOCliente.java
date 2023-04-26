@@ -3,6 +3,7 @@ package Integracion.Cliente;
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
 import Negocio.Cliente.TParticular;
+import Negocio.Empleado.TEmpleado;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -157,11 +158,67 @@ public class DAOCliente implements IDAOCliente {
 		return 1;
 	}
 
-	public Set mostrarClientes() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TCliente> mostrarClientes() {
+		System.out.println("Intentando readAll - DAOCliente");
+		Set<TCliente> result = new HashSet<TCliente>();
+		TCliente aux;
+		TParticular aux1;
+		TDistribuidor aux2;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE activo");
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux1 = new TParticular();
+				aux1.setID(rs.getInt("id_cliente"));
+				aux1.setNombre(rs.getString("nombre"));
+				aux1.setEmail("email");
+				aux1.setDNI(rs.getString("DNI"));
+				aux1.setTelefono(rs.getInt("telefono"));;
+				result.add(aux1);
+				while (rs.next()) {
+					aux1 = new TParticular();
+					aux1.setID(rs.getInt("id_cliente"));
+					aux1.setNombre(rs.getString("nombre"));
+					aux1.setEmail("email");
+					aux1.setDNI(rs.getString("DNI"));
+					aux1.setTelefono(rs.getInt("telefono"));;
+					result.add(aux1);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+			}
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux2 = new TDistribuidor();
+				aux2.setID(rs.getInt("id_cliente"));
+				aux2.setNombre(rs.getString("nombre"));
+				aux2.setEmail("email");
+				aux2.setCIF(rs.getString("CIF"));
+				aux2.setDireccion(rs.getString("direccion"));;
+				result.add(aux2);
+				while (rs.next()) {
+					aux2 = new TDistribuidor();
+					aux2.setID(rs.getInt("id_cliente"));
+					aux2.setNombre(rs.getString("nombre"));
+					aux2.setEmail("email");
+					aux2.setCIF(rs.getString("CIF"));
+					aux2.setDireccion(rs.getString("direccion"));;
+					result.add(aux2);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+			}
+			
+			System.out.println("Readall realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public TCliente mostrarClienteID(Integer idcliente) {

@@ -16,7 +16,7 @@ public interface IDAOCliente {
 	public Integer modify(TDistribuidor distribuidor);
 	public Integer modify(TParticular particular);
 	
-	public Set mostrarClientes();
+	public Set<TCliente> mostrarClientes();
 
 	public TCliente mostrarClienteID(Integer idcliente);
 }
