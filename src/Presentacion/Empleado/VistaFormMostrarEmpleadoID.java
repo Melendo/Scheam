@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
@@ -22,6 +24,8 @@ public class VistaFormMostrarEmpleadoID extends JFrame implements IGUI {
 	
 	private JPanel contentPane;
 	private JTextField idtextfield;
+	
+	private boolean cerrar = true;
 	
 	public VistaFormMostrarEmpleadoID () {
 		vFormMostrarEmpleadoID();
@@ -63,6 +67,7 @@ public class VistaFormMostrarEmpleadoID extends JFrame implements IGUI {
 		JButton okbutton = new JButton("Ok");
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ok();
 				dispose();
 			}
 		});
@@ -77,6 +82,16 @@ public class VistaFormMostrarEmpleadoID extends JFrame implements IGUI {
 		});
 		cancelbutton.setBounds(250, 144, 90, 23);
 		infopanel.add(cancelbutton);
+	}
+	
+	
+	private void ok() {
+		int idempleado = Integer.parseInt(idtextfield.getText());
+		Controlador.getInstance().update(Eventos.MostrarEmpleadoID, idempleado);
+		if (cerrar)
+			dispose();
+		else
+			cerrar = true;
 	}
 
 	@Override

@@ -93,7 +93,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.setDouble(6, empleado.getSueldo());
 			ps.setBoolean(7, empleado.getActivo());
 			ps.setInt(8, empleado.getIdEmpleado());
-			
 			ps.executeUpdate();
 			
 			ps.close();
@@ -178,7 +177,11 @@ public class DAOEmpleado implements IDAOEmpleado {
 			rs.close();
 			ps.close();
 			con.close();
-			System.out.println("ReadByDNI realizado - DAOEmpleado");
+			
+			if (result.getDNI().equals("-1"))
+				System.out.println("ReadByDNI realizado (no encontró DNI) - DAOEmpleado");
+			else
+				System.out.println("ReadByDNI realizado (encontró DNI) - DAOEmpleado");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -220,9 +223,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 	}
 
 	public Set<TEmpleado> listarIdEquipo(Integer idempleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		// TODO Cuando acabe equipo
 		return null;
-		// end-user-code
 	}
 }
