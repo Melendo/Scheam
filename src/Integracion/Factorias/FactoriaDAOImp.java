@@ -20,8 +20,7 @@ public class FactoriaDAOImp extends FactoriaDAO {
 
 	@Override
 	public DAOEquipo getDaoEquipo() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DAOEquipo();
 	}
 
 	@Override

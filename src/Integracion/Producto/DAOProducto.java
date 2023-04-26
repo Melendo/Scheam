@@ -44,7 +44,7 @@ public class DAOProducto implements IDAOProducto {
 			ps.executeUpdate();
 			stmt.close();
 			con.close();
-			System.out.println("Create Realizado - DAOEmpleado");
+			System.out.println("Create Realizado - DAOProducto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,17 +58,54 @@ public class DAOProducto implements IDAOProducto {
 	}
 
 	public Integer delete(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOProducto");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE productos set activo = false where id_producto = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idproducto);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer modify(TProducto producto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando modify - DAOProducto");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, producto.getNombre());
+			ps.setInt(2, producto.getFechalanzamiento());
+			ps.setDouble(3, producto.getPrecio());
+			ps.setString(4, producto.getGenero());
+			ps.setInt(5, producto.getPEGI());
+			ps.setBoolean(6, producto.getTerminado()); //
+			ps.setBoolean(7, true); //activo
+			ps.setInt(8, producto.getStock());
+
+			ps.executeUpdate();
+			stmt.close();
+			con.close();
+			System.out.println("Modify Realizado - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Set readAll() {
