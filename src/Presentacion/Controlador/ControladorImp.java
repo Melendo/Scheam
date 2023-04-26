@@ -84,7 +84,7 @@ public class ControladorImp extends Controlador {
         	TEmpleado emp = FactoriaSA.getInstance().getSAEmpleado().mostrarEmpleadoID((int) objeto);
         	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEmpleadoID, null);
         	gui.update(event,  emp);
-        	gui.update(Eventos.VistaListarEmpleado, null);
+        	gui.update(Eventos.VistaMostrarEmpleadoID, null);
         	break;
         	
         }

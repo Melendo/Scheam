@@ -77,6 +77,7 @@ public class VistaFormMostrarEmpleadoID extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
 				dispose();
 			}
 		});
@@ -96,6 +97,10 @@ public class VistaFormMostrarEmpleadoID extends JFrame implements IGUI {
 
 	@Override
 	public void update(int event, Object object) {
-		
+		switch(event) {
+		case Eventos.VistaFormMostrarEmpleadoID:
+			setVisible(true);
+			break;
+		}
 	}
 }
