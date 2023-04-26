@@ -1,12 +1,15 @@
 package Integracion.Producto;
 
+import Negocio.Empleado.TEmpleado;
 import Negocio.Producto.TProducto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
 public class DAOProducto implements IDAOProducto {
@@ -109,10 +112,48 @@ public class DAOProducto implements IDAOProducto {
 	}
 
 	public Set<TProducto> readAll() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readAll - DAOProducto");
+		Set<TProducto> result = new HashSet<TProducto>();
+		TProducto aux;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE activo");
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux = new TProducto();
+				aux.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				aux.setGenero(rs.getString("genero"));
+				aux.setIdproyecto(rs.getInt("id_proyecto"));
+				aux.setNombre(rs.getString("nombre"));
+				aux.setPEGI(rs.getInt("PEGI"));
+				aux.setPrecio(rs.getDouble("precio"));
+				aux.setStock(rs.getInt("stock"));
+				aux.setTerminado(rs.getBoolean("terminado"));
+				result.add(aux);
+				while (rs.next()) {
+					aux = new TProducto();
+					aux.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+					aux.setGenero(rs.getString("genero"));
+					aux.setIdproyecto(rs.getInt("id_proyecto"));
+					aux.setNombre(rs.getString("nombre"));
+					aux.setPEGI(rs.getInt("PEGI"));
+					aux.setPrecio(rs.getDouble("precio"));
+					aux.setStock(rs.getInt("stock"));
+					aux.setTerminado(rs.getBoolean("terminado"));
+					result.add(aux);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("Readall realizado - DAOProducto");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public TProducto readById(Integer idproducto) {
