@@ -10,5 +10,6 @@ public interface IDAOProducto {
 	public Integer modify(TProducto producto);
 	public Set<TProducto> readAll();
 	public TProducto readById(Integer idproducto);
+	public TProducto readByNombre(String nombre); // anadida
 	public Integer cerrarProducto(Integer idproducto);
 }

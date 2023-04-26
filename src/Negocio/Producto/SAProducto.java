@@ -11,7 +11,7 @@ public class SAProducto implements ISAProducto {
 	public Integer altaProducto(TProducto producto) {
 		
 		System.out.println("Intentando altaProducto - SAProducto");
-		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(producto.getIdproyecto());
+		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre());
 
 		if (emp.getIdproyecto() == -1) {
 			System.out.println("altaProducto Realizado (creado) - SAProducto");
