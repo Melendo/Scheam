@@ -69,6 +69,11 @@ public class ControladorImp extends Controlador {
         	else if (res == -2) gui.update(Eventos.ModificarEmpleadoDNINoOK, null);
         	else gui.update(Eventos.ModificarEmpleadoOK, null);
         	break;
+        case Eventos.VistaFormMostrarEmpleadoID:
+        	System.out.println("Entrando a VistaFormMostrarEmpleadoID - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
         case Eventos.VistaMostrarEmpleadoID:
         	System.out.println("Entrando a VistaMostrarEmpleadoID - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -81,6 +86,7 @@ public class ControladorImp extends Controlador {
         	gui.update(event,  emp);
         	gui.update(Eventos.VistaListarEmpleado, null);
         	break;
+        	
         }
     }
 }
