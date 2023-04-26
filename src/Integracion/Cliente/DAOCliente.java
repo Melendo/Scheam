@@ -222,10 +222,36 @@ public class DAOCliente implements IDAOCliente {
 	}
 
 	public TCliente mostrarClienteID(Integer idcliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readByID - DAOCliente");
+		TCliente result = new TCliente();
+		try {
+			PreparedStatement ps = con.prepareStatement("select * from empleados where id_cliente = ?");
+			ps.setInt(1, idcliente);
+
+			ResultSet rs = ps.executeQuery();
+/*
+			if (!rs.next())
+				result.setIdEmpleado(-1);
+			else {
+				result.setIdEmpleado(rs.getInt("id_empleado"));
+				result.setNombre(rs.getString("nombre"));
+				result.setApellidos(rs.getString("apellidos"));
+				result.setDNI(rs.getString("DNI"));
+				result.setE_mail(rs.getString("email"));
+				result.setTlfn(rs.getInt("telefono"));
+				result.setSueldo(rs.getDouble("sueldo"));
+				result.setActivo(rs.getBoolean("activo"));
+			}*/
+			
+			rs.close();
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("ReadybyDNI realizado - DAOCliente");
+		return result;
 	}
 
 	
