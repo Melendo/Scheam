@@ -84,7 +84,7 @@ public class SAEmpleado implements ISAEmpleado {
 
 	public TEmpleado mostrarEmpleadoID(Integer Id) {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(Id);
-		if (emp.getIdEmpleado() != -1)
+		if (emp.getIdEmpleado() != -1 && emp.getActivo())
 			return emp;
 		else { 
 			emp.setIdEmpleado(-1);

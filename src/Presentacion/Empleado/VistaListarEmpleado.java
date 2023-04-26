@@ -23,7 +23,7 @@ public class VistaListarEmpleado extends JFrame implements IGUI {
 	private JTable table;
 	
 	private EmpleadosTableModel empleadosmodel;
-	
+		
 	public VistaListarEmpleado() {
 		vListarEmpleado();
 	}
@@ -47,6 +47,8 @@ public class VistaListarEmpleado extends JFrame implements IGUI {
 		table = new JTable(empleadosmodel);
 		JScrollPane tablesp = new JScrollPane(table);
 		contentPane.add(tablesp, BorderLayout.CENTER);
+		
+	
 	}
 
 	@SuppressWarnings("unchecked")
