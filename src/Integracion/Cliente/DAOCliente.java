@@ -79,17 +79,82 @@ public class DAOCliente implements IDAOCliente {
 	}
 
 	public Integer delete(Integer idcliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE clientes set activo = false where id_cliente = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idcliente);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
-	public Integer modify(TCliente cliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Integer modify(TDistribuidor distribuidor) {
+		System.out.println("Intentando Modify - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+						
+			String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, distribuidor.getNombre());
+			ps.setString(2, distribuidor.getEmail());
+			ps.setBoolean(3, distribuidor.getActivo());
+			ps.setString(4, distribuidor.getDireccion());
+			ps.setString(5, distribuidor.getCIF());
+			ps.setInt(8, distribuidor.getID());
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
+
+	public Integer modify(TParticular particular) {
+		System.out.println("Intentando Modify - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+						
+			String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, particular.getNombre());
+			ps.setString(2, particular.getEmail());
+			ps.setBoolean(3, particular.getActivo());
+			ps.setString(4, particular.getDNI());
+			ps.setInt(5, particular.getTelefono());
+			ps.setInt(8, particular.getID());
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Set mostrarClientes() {
@@ -105,4 +170,6 @@ public class DAOCliente implements IDAOCliente {
 		return null;
 		// end-user-code
 	}
+
+	
 }
