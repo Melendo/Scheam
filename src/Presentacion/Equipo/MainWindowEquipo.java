@@ -7,7 +7,7 @@ import Presentacion.IGUI;
 public class MainWindowEquipo extends JFrame implements IGUI {
 	
 	public MainWindowEquipo() {
-		
+		vMainWindowEquipo();
 	}
 
 	public void vMainWindowEquipo() {
