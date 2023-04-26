@@ -18,6 +18,7 @@ import Negocio.Empleado.TEmpleado;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
+import Presentacion.Factorias.FactoriaVistas;
 
 public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 	
@@ -25,6 +26,7 @@ public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 	private JTable table;
 	
 	private EmpleadosTableModel empleadosmodel;
+	
 	
 	public VistaMostrarEmpleadoID() {
 		vMostrarEmpleadoID();
@@ -37,7 +39,6 @@ public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
-				dispose();
 			}
 		});
 		setBounds(100, 100, 450, 300);
@@ -68,6 +69,7 @@ public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 			break;
 		case Eventos.MostrarEmpleadoIDNoOK:
 			JOptionPane.showMessageDialog(null, "Error. El empleado no existe");
+			Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
 			break;
 		}
 	}

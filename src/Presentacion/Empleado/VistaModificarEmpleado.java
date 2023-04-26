@@ -185,6 +185,7 @@ public class VistaModificarEmpleado extends JFrame implements IGUI {
 			break;
 		case Eventos.ModificarEmpleadoOK:
 			JOptionPane.showMessageDialog(null, "Modificado con éxito");
+			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
 			break;
 		case Eventos.ModificarEmpleadoDNINoOK:
 			JOptionPane.showMessageDialog(null, "Modificado ha fallado: el DNI ya existe en la base de datos");

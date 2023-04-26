@@ -214,4 +214,43 @@ public class DAOProducto implements IDAOProducto {
 		}
 		return 1;
 	}
+
+	@Override
+	public TProducto readByNombre(String nombre) {
+		System.out.println("Intentando readByNombre - DAOProducto");
+		TProducto result = new TProducto();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE nombre = ?");
+			ps.setString(1, nombre);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdproyecto(-1);
+			else  {
+				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				result.setGenero(rs.getString("genero"));
+				result.setIdproyecto(rs.getInt("id_proyecto"));
+				result.setNombre(rs.getString("nombre"));
+				result.setPEGI(rs.getInt("PEGI"));
+				result.setPrecio(rs.getDouble("precio"));
+				result.setStock(rs.getInt("stock"));
+				result.setTerminado(rs.getBoolean("terminado"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+			if (result.getIdproyecto() == -1)
+				System.out.println("readByNombre realizado (no encontró nombre) - DAOProducto");
+			else
+				System.out.println("readByNombre realizado (encontró nombre) - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
