@@ -2,16 +2,12 @@
 package Integracion.Equipo;
 
 import Negocio.Equipo.TEquipo;
-import Negocio.Equipo.TEquipoDesarrollo;
-import Negocio.Equipo.TEquipoDisenio;
 
 import java.util.Set;
 
 public interface IDAOEquipo {
 
-	public Integer create(TEquipoDesarrollo equipo);
-	
-	public Integer create(TEquipoDisenio equipo);
+	public Integer create(TEquipo equipo);
 
 	public Integer delete(Integer idequipo);
 
