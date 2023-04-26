@@ -5,8 +5,10 @@ import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.MainWindowEmpleado;
 import Presentacion.Empleado.VistaAltaEmpleado;
 import Presentacion.Empleado.VistaBajaEmpleado;
+import Presentacion.Empleado.VistaFormMostrarEmpleadoID;
 import Presentacion.Empleado.VistaListarEmpleado;
 import Presentacion.Empleado.VistaModificarEmpleado;
+import Presentacion.Empleado.VistaMostrarEmpleadoID;
 import Presentacion.VistaPrincipal.MainWindow;
 
 public class FactoriaVistasImp extends FactoriaVistas {
@@ -34,6 +36,12 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaModificarEmpleado:
 			System.out.println("Entrando a ModificarEmpleado - FactoriaVistasImp");
 			return new VistaModificarEmpleado();
+		case Eventos.VistaFormMostrarEmpleadoID:
+			System.out.println("Entrando a VistaFormMostrarEmpleadoID - FactoriaVistasImp");
+			return new VistaFormMostrarEmpleadoID();
+		case Eventos.VistaMostrarEmpleadoID:
+			System.out.println("Entrando a VistaMostrarEmpleadoID - FactoriaVistasImp");
+			return new VistaMostrarEmpleadoID();
 		default:
 			return null;
 		}
