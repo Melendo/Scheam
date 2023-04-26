@@ -2,7 +2,9 @@ package Negocio.Producto;
 
 import java.util.Set;
 
+import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
+import Integracion.Producto.DAOProducto;
 import Negocio.Empleado.TEmpleado;
 
 public class SAProducto implements ISAProducto {
@@ -70,9 +72,7 @@ public class SAProducto implements ISAProducto {
 	}
 
 	public Integer cerrarProducto(Integer IDProducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		//TODO
 		return null;
-		// end-user-code
 	}
 }
