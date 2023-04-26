@@ -2,6 +2,7 @@ package Integracion.Cliente;
 
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
+import Negocio.Cliente.TParticular;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,16 +28,18 @@ public class DAOCliente implements IDAOCliente {
 		System.out.println("Conexión Realizada - DAOCliente");
 	}
 	
-	public Integer create(TCliente cliente) {
+	public Integer create(TParticular particular) {
 		System.out.println("Intentando create - DAOCliente");
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "INSERT INTO clientes (nombre, email, activo) VALUES (?,?,?);";
+			String sql = "INSERT INTO clientes (nombre, email, activo, DNI, telefono) VALUES (?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, cliente.getNombre());
-			ps.setString(2, cliente.getEmail());
+			ps.setString(1, particular.getNombre());
+			ps.setString(2, particular.getEmail());
 			ps.setBoolean(3, true);
+			ps.setString(4, particular.getDNI());
+			ps.setInt(5, particular.getTelefono());
 			
 
 			ps.executeUpdate();
