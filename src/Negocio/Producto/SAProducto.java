@@ -5,7 +5,6 @@ import java.util.Set;
 import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
 import Integracion.Producto.DAOProducto;
-import Negocio.Empleado.TEmpleado;
 
 public class SAProducto implements ISAProducto {
 
