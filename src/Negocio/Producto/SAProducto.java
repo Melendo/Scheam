@@ -54,11 +54,9 @@ public class SAProducto implements ISAProducto {
 		// end-user-code
 	}
 
-	public Set listarProductos() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TProducto> listarProductos() {
+		Set<TProducto> lista = FactoriaDAOImp.getInstance().getDaoProducto().readAll();
+		return lista;
 	}
 
 	public TProducto mostrarProductoID(Integer IDProducto) {
