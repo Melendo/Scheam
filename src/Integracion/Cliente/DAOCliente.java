@@ -129,8 +129,32 @@ public class DAOCliente implements IDAOCliente {
 	}
 
 	public Integer modify(TParticular particular) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando Modify - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+						
+			String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, particular.getNombre());
+			ps.setString(2, particular.getEmail());
+			ps.setBoolean(3, particular.getActivo());
+			ps.setString(4, particular.getDNI());
+			ps.setInt(5, particular.getTelefono());
+			ps.setInt(8, particular.getID());
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Set mostrarClientes() {
