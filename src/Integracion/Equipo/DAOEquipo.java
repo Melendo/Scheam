@@ -1,19 +1,14 @@
 package Integracion.Equipo;
 
 import Negocio.Equipo.TEquipo;
-import Negocio.Equipo.TEquipoDesarrollo;
-import Negocio.Equipo.TEquipoDisenio;
 
 import java.util.Set;
 
 public class DAOEquipo implements IDAOEquipo {
-	public Integer create(TEquipoDesarrollo equipo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	public Integer create(TEquipoDisenio equipo) {
-		//TODO Auto-generated method stub
+	@Override
+	public Integer create(TEquipo equipo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
