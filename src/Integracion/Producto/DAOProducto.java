@@ -108,7 +108,7 @@ public class DAOProducto implements IDAOProducto {
 		return 1;
 	}
 
-	public Set readAll() {
+	public Set<TProducto> readAll() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
