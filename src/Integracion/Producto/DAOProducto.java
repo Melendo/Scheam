@@ -157,10 +157,41 @@ public class DAOProducto implements IDAOProducto {
 	}
 
 	public TProducto readById(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readByDNI - DAOProducto");
+		TProducto result = new TProducto();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE id_proyecto = ?");
+			ps.setInt(1, idproducto);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdproyecto(-1);
+			else  {
+				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
+				result.setGenero(rs.getString("genero"));
+				result.setIdproyecto(rs.getInt("id_proyecto"));
+				result.setNombre(rs.getString("nombre"));
+				result.setPEGI(rs.getInt("PEGI"));
+				result.setPrecio(rs.getDouble("precio"));
+				result.setStock(rs.getInt("stock"));
+				result.setTerminado(rs.getBoolean("terminado"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+			if (result.getIdproyecto() == -1)
+				System.out.println("ReadById realizado (no encontró id_proyecto) - DAOProducto");
+			else
+				System.out.println("ReadById realizado (encontró id_proyecto) - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public Integer cerrarProducto(Integer idproducto) {
