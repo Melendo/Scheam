@@ -130,114 +130,59 @@ public class DAOCliente implements IDAOCliente {
 		return 1;
 	}
 
-	public Integer modify(TDistribuidor distribuidor) {
-		System.out.println("Intentando Modify - DAOCliente");
-		try {
-			Statement stmt = con.createStatement();
-			PreparedStatement ps;
-						
-			String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
-			ps = con.prepareStatement(sql);
-			
-			ps.setString(1, distribuidor.getNombre());
-			ps.setString(2, distribuidor.getEmail());
-			ps.setBoolean(3, distribuidor.getActivo());
-			ps.setString(4, distribuidor.getDireccion());
-			ps.setString(5, distribuidor.getCIF());
-			ps.setInt(8, distribuidor.getID());
-			ps.executeUpdate();
-			
-			ps.close();
-			stmt.close();
-			con.close();
-			
-			System.out.println("Modify Realizado - DAOCliente");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
-		return 1;
-	}
-
-	public Integer modify(TParticular particular) {
-		System.out.println("Intentando Modify - DAOCliente");
-		try {
-			Statement stmt = con.createStatement();
-			PreparedStatement ps;
-						
-			String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
-			ps = con.prepareStatement(sql);
-			
-			ps.setString(1, particular.getNombre());
-			ps.setString(2, particular.getEmail());
-			ps.setBoolean(3, particular.getActivo());
-			ps.setString(4, particular.getDNI());
-			ps.setInt(5, particular.getTelefono());
-			ps.setInt(8, particular.getID());
-			ps.executeUpdate();
-			
-			ps.close();
-			stmt.close();
-			con.close();
-			
-			System.out.println("Modify Realizado - DAOCliente");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
-		return 1;
-	}
-
 	public Set<TCliente> mostrarClientes() {
 		System.out.println("Intentando readAll - DAOCliente");
 		Set<TCliente> result = new HashSet<TCliente>();
 		TCliente aux;
-		TParticular aux1;
-		TDistribuidor aux2;
+		//TParticular particular;
+		//TDistribuidor distribuidor;
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE activo");
 			ResultSet rs = ps.executeQuery();
 			if (!rs.next()) {
 				return result;
 			} else {
-				aux1 = new TParticular();
-				aux1.setID(rs.getInt("id_cliente"));
-				aux1.setNombre(rs.getString("nombre"));
-				aux1.setEmail("email");
-				aux1.setDNI(rs.getString("DNI"));
-				aux1.setTelefono(rs.getInt("telefono"));;
-				result.add(aux1);
-				while (rs.next()) {
-					aux1 = new TParticular();
-					aux1.setID(rs.getInt("id_cliente"));
-					aux1.setNombre(rs.getString("nombre"));
-					aux1.setEmail("email");
-					aux1.setDNI(rs.getString("DNI"));
-					aux1.setTelefono(rs.getInt("telefono"));;
-					result.add(aux1);
+				aux = new TCliente();
+				if(aux instanceof TDistribuidor) {
+					TDistribuidor distribuidor = (TDistribuidor) aux;
+					distribuidor = new TDistribuidor();
+					distribuidor.setID(rs.getInt("id_cliente"));
+					distribuidor.setNombre(rs.getString("nombre"));
+					distribuidor.setEmail("email");
+					distribuidor.setCIF(rs.getString("CIF"));
+					distribuidor.setDireccion(rs.getString("direccion"));;
+					result.add(distribuidor);
+				} else {
+					TParticular particular = (TParticular) aux;
+					particular = new TParticular();
+					particular.setID(rs.getInt("id_cliente"));
+					particular.setNombre(rs.getString("nombre"));
+					particular.setEmail("email");
+					particular.setDNI(rs.getString("DNI"));
+					particular.setTelefono(rs.getInt("telefono"));;
+					result.add(particular);
 				}
-				rs.close();
-				ps.close();
-				con.close();
-			}
-			if (!rs.next()) {
-				return result;
-			} else {
-				aux2 = new TDistribuidor();
-				aux2.setID(rs.getInt("id_cliente"));
-				aux2.setNombre(rs.getString("nombre"));
-				aux2.setEmail("email");
-				aux2.setCIF(rs.getString("CIF"));
-				aux2.setDireccion(rs.getString("direccion"));;
-				result.add(aux2);
 				while (rs.next()) {
-					aux2 = new TDistribuidor();
-					aux2.setID(rs.getInt("id_cliente"));
-					aux2.setNombre(rs.getString("nombre"));
-					aux2.setEmail("email");
-					aux2.setCIF(rs.getString("CIF"));
-					aux2.setDireccion(rs.getString("direccion"));;
-					result.add(aux2);
+					aux = new TCliente();
+					if(aux instanceof TDistribuidor) {
+						TDistribuidor distribuidor = (TDistribuidor) aux;
+						distribuidor = new TDistribuidor();
+						distribuidor.setID(rs.getInt("id_cliente"));
+						distribuidor.setNombre(rs.getString("nombre"));
+						distribuidor.setEmail("email");
+						distribuidor.setCIF(rs.getString("CIF"));
+						distribuidor.setDireccion(rs.getString("direccion"));;
+						result.add(distribuidor);
+					} else {
+						TParticular particular = (TParticular) aux;
+						particular = new TParticular();
+						particular.setID(rs.getInt("id_cliente"));
+						particular.setNombre(rs.getString("nombre"));
+						particular.setEmail("email");
+						particular.setDNI(rs.getString("DNI"));
+						particular.setTelefono(rs.getInt("telefono"));;
+						result.add(particular);
+					}
 				}
 				rs.close();
 				ps.close();
@@ -259,19 +204,28 @@ public class DAOCliente implements IDAOCliente {
 			ps.setInt(1, idcliente);
 
 			ResultSet rs = ps.executeQuery();
-/*
+
 			if (!rs.next())
-				result.setIdEmpleado(-1);
+				result.setID(-1);
 			else {
-				result.setIdEmpleado(rs.getInt("id_empleado"));
-				result.setNombre(rs.getString("nombre"));
-				result.setApellidos(rs.getString("apellidos"));
-				result.setDNI(rs.getString("DNI"));
-				result.setE_mail(rs.getString("email"));
-				result.setTlfn(rs.getInt("telefono"));
-				result.setSueldo(rs.getDouble("sueldo"));
-				result.setActivo(rs.getBoolean("activo"));
-			}*/
+				if(result instanceof TDistribuidor) {
+					TDistribuidor distribuidor = (TDistribuidor) result;
+					distribuidor.setID(rs.getInt("id_cliente"));
+					distribuidor.setNombre(rs.getString("nombre"));
+					distribuidor.setEmail(rs.getString("email"));
+					distribuidor.setCIF(rs.getString("CIF"));
+					distribuidor.setDireccion(rs.getString("direccion"));
+					distribuidor.setActivo(rs.getBoolean("activo"));
+				} else {
+					TParticular particular = (TParticular) result;
+					particular.setID(rs.getInt("id_cliente"));
+					particular.setNombre(rs.getString("nombre"));
+					particular.setEmail(rs.getString("email"));
+					particular.setDNI(rs.getString("DNI"));
+					particular.setTelefono(rs.getInt("telefono"));
+					particular.setActivo(rs.getBoolean("activo"));
+				}				
+			}
 			
 			rs.close();
 			ps.close();
