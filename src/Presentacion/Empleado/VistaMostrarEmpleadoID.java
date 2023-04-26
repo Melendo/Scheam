@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -64,6 +65,9 @@ public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 			lista.add((TEmpleado) object);
 			empleadosmodel.setLista(lista);
 			empleadosmodel.fireTableStructureChanged();
+			break;
+		case Eventos.MostrarEmpleadoIDNoOK:
+			JOptionPane.showMessageDialog(null, "Error. El empleado no existe");
 			break;
 		}
 	}
