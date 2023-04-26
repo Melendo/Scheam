@@ -44,7 +44,7 @@ public class DAOProducto implements IDAOProducto {
 			ps.executeUpdate();
 			stmt.close();
 			con.close();
-			System.out.println("Create Realizado - DAOEmpleado");
+			System.out.println("Create Realizado - DAOProducto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,10 +58,25 @@ public class DAOProducto implements IDAOProducto {
 	}
 
 	public Integer delete(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOProducto");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE productos set activo = false where id_producto = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idproducto);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer modify(TProducto producto) {
