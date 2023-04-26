@@ -113,6 +113,7 @@ public class MainWindowEmpleado extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.ListarEmpleado, null);
+				dispose();
 			}
 		});
 		buttonpanel.add(listallbutton);

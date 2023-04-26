@@ -131,6 +131,7 @@ public class VistaModificarEmpleado extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowEmpleado, e);				
 				dispose();
 			}
 		});

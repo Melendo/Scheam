@@ -8,15 +8,13 @@ import java.util.Set;
 
 public interface IDAOCliente {
 
-	public Integer create(TDistribuidor distribuidor);
-	public Integer create(TParticular particular);
+	public Integer create(TCliente cliente);
 	
 	public Integer delete(Integer idcliente);
 	
-	public Integer modify(TDistribuidor distribuidor);
-	public Integer modify(TParticular particular);
+	public Integer modify(TCliente cliente);
 	
-	public Set mostrarClientes();
+	public Set<TCliente> mostrarClientes();
 
 	public TCliente mostrarClienteID(Integer idcliente);
 }

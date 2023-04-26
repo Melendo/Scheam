@@ -20,9 +20,10 @@ public class SAEmpleado implements ISAEmpleado {
 				System.out.println("altaEmpleado No Realizado (existe y activo) - SAEmpleado");
 				return -1;
 			} else {
-				emp.setActivo(true);
+				empleado.setActivo(true);
+				empleado.setIdEmpleado(emp.getIdEmpleado());
 				System.out.println("altaEmpleado Realizado (reactivado) - SAEmpleado");
-				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(emp);
+				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
 				return 2;
 			}
 		}
@@ -49,7 +50,7 @@ public class SAEmpleado implements ISAEmpleado {
 	public Integer modificarEmpleado(TEmpleado empleado) {
 
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(empleado.getIdEmpleado());
-		if (emp.getIdEmpleado() == -1)
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo())
 			return -1;
 		else {
 			if (empleado.getDNI() != null  && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1")
@@ -85,8 +86,10 @@ public class SAEmpleado implements ISAEmpleado {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(Id);
 		if (emp.getIdEmpleado() != -1)
 			return emp;
-		else
-			return null;
+		else { 
+			emp.setIdEmpleado(-1);
+			return emp;
+		}
 	}
 
 	public Set<TEmpleado> listarIntegrantesIdEquipo(Integer idEquipo) {

@@ -82,9 +82,15 @@ public class ControladorImp extends Controlador {
         case Eventos.MostrarEmpleadoID:
         	System.out.println("Entrando a MostrarEmpleadoID - Controlador");
         	TEmpleado emp = FactoriaSA.getInstance().getSAEmpleado().mostrarEmpleadoID((int) objeto);
-        	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEmpleadoID, null);
-        	gui.update(event,  emp);
-        	gui.update(Eventos.VistaMostrarEmpleadoID, null);
+        	if(emp.getIdEmpleado() == -1) {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEmpleadoID, null);
+        		gui.update(Eventos.MostrarEmpleadoIDNoOK, null);
+        	}
+        	else {
+            	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEmpleadoID, null);
+	        	gui.update(event,  emp);
+	        	gui.update(Eventos.VistaMostrarEmpleadoID, null);
+        	}
         	break;
         	
         }
