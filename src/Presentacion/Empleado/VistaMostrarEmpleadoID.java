@@ -2,6 +2,8 @@ package Presentacion.Empleado;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -13,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import Negocio.Empleado.TEmpleado;
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 
 public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
@@ -30,7 +33,12 @@ public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarEmpleado.class.getResource("/icons/empleado.png")));
 		setTitle("Mostrar Empleado por ID");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+				dispose();
+			}
+		});
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

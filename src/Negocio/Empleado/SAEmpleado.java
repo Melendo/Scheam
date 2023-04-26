@@ -20,9 +20,10 @@ public class SAEmpleado implements ISAEmpleado {
 				System.out.println("altaEmpleado No Realizado (existe y activo) - SAEmpleado");
 				return -1;
 			} else {
-				emp.setActivo(true);
+				empleado.setActivo(true);
+				empleado.setIdEmpleado(emp.getIdEmpleado());
 				System.out.println("altaEmpleado Realizado (reactivado) - SAEmpleado");
-				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(emp);
+				FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
 				return 2;
 			}
 		}
