@@ -96,7 +96,17 @@ public class SAProducto implements ISAProducto {
 	}
 
 	public Integer cerrarProducto(Integer IDProducto) {
-		//TODO
-		return null;
+		System.out.println("Intentando cerrarProducto - SAProducto");
+		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
+		if (emp.getIdproyecto() == -1) {
+			System.out.println("cerrarProducto No Realizado (no exite) - SAProducto");
+			return -1;
+			}
+		if (!emp.getActivo()) {
+			System.out.println("cerrarProducto No Realizado (ya cerrado) - SAProducto");
+			return 2;
+		}
+		
+		return FactoriaDAOImp.getInstance().getDaoProducto().cerrarProducto(IDProducto);
 	}
 }
