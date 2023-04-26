@@ -26,7 +26,7 @@ public class VistaBajaEmpleado extends JFrame implements IGUI {
 	private JPanel contentPane;
 	private JTextField idtextfield;
 	
-	private boolean cerrar = false;
+	private boolean cerrar = true;
 	
 	public VistaBajaEmpleado() {
 		vBajaEmpleado();
@@ -103,7 +103,7 @@ public class VistaBajaEmpleado extends JFrame implements IGUI {
 		case Eventos.BajaEmpleadoOK:
 			JOptionPane.showMessageDialog(null, "Éxito dando de Baja");
 			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
-			return;
+			break;
 		case Eventos.BajaEmpleadoNoOK:
 			JOptionPane.showMessageDialog(null, "Error al dar de Baja");
 			cerrar = false;
