@@ -79,10 +79,24 @@ public class DAOCliente implements IDAOCliente {
 	}
 
 	public Integer delete(Integer idcliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE clientes set activo = false where id_cliente = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idcliente);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer modify(TCliente cliente) {
