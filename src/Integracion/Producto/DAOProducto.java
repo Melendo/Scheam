@@ -65,7 +65,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE productos set activo = false where id_producto = ?";
+			String sql = "UPDATE productos set activo = false where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idproducto);
 			ps.executeUpdate();
@@ -87,7 +87,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_empleado = ?";
+			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, producto.getNombre());
@@ -195,9 +195,23 @@ public class DAOProducto implements IDAOProducto {
 	}
 
 	public Integer cerrarProducto(Integer idproducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando cerrarProducto - DAOProducto");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE productos set activo = false where id_proyecto = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idproducto);
+			ps.executeUpdate();
+			
+			stmt.close();
+			con.close();
+			System.out.println("CerrarProducto Realizado - DAOProducto");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 }
