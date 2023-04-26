@@ -8,8 +8,7 @@ import java.util.Set;
 
 public interface IDAOCliente {
 
-	public Integer create(TDistribuidor distribuidor);
-	public Integer create(TParticular particular);
+	public Integer create(TCliente cliente);
 	
 	public Integer delete(Integer idcliente);
 	

@@ -29,21 +29,33 @@ public class DAOCliente implements IDAOCliente {
 		System.out.println("Conexión Realizada - DAOCliente");
 	}
 	
-	public Integer create(TParticular particular) {
+	public Integer create(TCliente cliente) {
 		System.out.println("Intentando create - DAOCliente");
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "INSERT INTO clientes (nombre, email, activo, DNI, telefono) VALUES (?,?,?,?,?);";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, particular.getNombre());
-			ps.setString(2, particular.getEmail());
-			ps.setBoolean(3, true);
-			ps.setString(4, particular.getDNI());
-			ps.setInt(5, particular.getTelefono());
+			if(cliente instanceof TDistribuidor) {
+				String sql = "INSERT INTO clientes (nombre, email, activo, CIf, direccion) VALUES (?,?,?,?,?);";
+				ps = con.prepareStatement(sql);
+				TDistribuidor distribuidor = (TDistribuidor) cliente;
+				ps.setString(1, distribuidor.getNombre());
+				ps.setString(2, distribuidor.getEmail());
+				ps.setBoolean(3, true);
+				ps.setString(4, distribuidor.getCIF());
+				ps.setString(5, distribuidor.getDireccion());
+				ps.executeUpdate();
+			} else {
+				String sql = "INSERT INTO clientes (nombre, email, activo, DNI, telefono) VALUES (?,?,?,?,?);";
+				ps = con.prepareStatement(sql);
+				TParticular particular = (TParticular) cliente;
+				ps.setString(1, particular.getNombre());
+				ps.setString(2, particular.getEmail());
+				ps.setBoolean(3, true);
+				ps.setString(4, particular.getDNI());
+				ps.setInt(5, particular.getTelefono());
+				ps.executeUpdate();
+			}
 			
-
-			ps.executeUpdate();
 			stmt.close();
 			con.close();
 			System.out.println("Create Realizado - DAOCliente");
@@ -53,31 +65,7 @@ public class DAOCliente implements IDAOCliente {
 		}
 		return 1;
 	}
-	
-	public Integer create(TDistribuidor distribuidor) {
-		System.out.println("Intentando create - DAOCliente");
-		try {
-			Statement stmt = con.createStatement();
-			PreparedStatement ps;
-			String sql = "INSERT INTO clientes (nombre, email, activo, direccion, CIF) VALUES (?,?,?,?,?);";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, distribuidor.getNombre());
-			ps.setString(2, distribuidor.getEmail());
-			ps.setBoolean(3, true);
-			ps.setString(4, distribuidor.getDireccion());
-			ps.setString(5, distribuidor.getCIF());
-			
 
-			ps.executeUpdate();
-			stmt.close();
-			con.close();
-			System.out.println("Create Realizado - DAOCliente");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
-		return 1;
-	}
 
 	public Integer delete(Integer idcliente) {
 		System.out.println("Intentando Delete - DAOCliente");
@@ -93,6 +81,48 @@ public class DAOCliente implements IDAOCliente {
 			stmt.close();
 			con.close();
 			System.out.println("Delete Realizado - DAOCliente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
+	
+	public Integer modify(TCliente cliente) {
+		System.out.println("Intentando Modify - DAOCliente");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			if(cliente instanceof TDistribuidor) {
+				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
+				ps = con.prepareStatement(sql);
+				TDistribuidor distribuidor = (TDistribuidor) cliente;
+				ps.setString(1, distribuidor.getNombre());
+				ps.setString(2, distribuidor.getEmail());
+				ps.setBoolean(3, distribuidor.getActivo());
+				ps.setString(4, distribuidor.getDireccion());
+				ps.setString(5, distribuidor.getCIF());
+				ps.setInt(8, distribuidor.getID());
+				ps.executeUpdate();
+				ps.close();
+			} else {
+				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
+				ps = con.prepareStatement(sql);
+				TParticular particular = (TParticular) cliente;
+				ps.setString(1, particular.getNombre());
+				ps.setString(2, particular.getEmail());
+				ps.setBoolean(3, particular.getActivo());
+				ps.setString(4, particular.getDNI());
+				ps.setInt(5, particular.getTelefono());
+				ps.setInt(8, particular.getID());
+				ps.executeUpdate();
+				ps.close();
+			}			
+			
+			stmt.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOCliente");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
