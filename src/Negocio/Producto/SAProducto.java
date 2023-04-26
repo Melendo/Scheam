@@ -3,10 +3,12 @@ package Negocio.Producto;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Empleado.TEmpleado;
 
 public class SAProducto implements ISAProducto {
 
 	public Integer altaProducto(TProducto producto) {
+		
 		System.out.println("Intentando altaProducto - SAProducto");
 		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(producto.getIdproyecto());
 
@@ -28,10 +30,21 @@ public class SAProducto implements ISAProducto {
 	}
 
 	public Integer bajaProducto(Integer IDProducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		
+		System.out.println("Intentando bajaProducto - SAProducto");
+		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
+
+		if (emp.getIdproyecto() == -1) {
+			System.out.println("bajaProducto No Realizado (no exite) - SAProducto");
+			return -1;
+		}
+		
+		if(emp.getActivo()) {
+			System.out.println("bajaProducto Realizado - SAProducto");
+			return FactoriaDAOImp.getInstance().getDaoProducto().delete(IDProducto);
+		} else{
+			return -2;
+		}
 	}
 
 	public Integer modificarProducto(TProducto producto) {
