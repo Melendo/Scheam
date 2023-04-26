@@ -13,7 +13,8 @@ public interface IDAOCliente {
 	
 	public Integer delete(Integer idcliente);
 	
-	public Integer modify(TCliente cliente);
+	public Integer modify(TDistribuidor distribuidor);
+	public Integer modify(TParticular particular);
 	
 	public Set mostrarClientes();
 
