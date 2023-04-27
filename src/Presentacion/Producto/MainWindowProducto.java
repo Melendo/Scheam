@@ -64,7 +64,7 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		JPanel buttonpanel = new JPanel();
 		getContentPane().add(buttonpanel, BorderLayout.CENTER);
 		
-		JButton altabutton = new JButton("Alta Producto");
+		JButton altabutton = new JButton("Alta producto");
 		altabutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		altabutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		altabutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
@@ -78,10 +78,10 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		buttonpanel.setLayout(new GridLayout(0, 3, 0, 0));
 		buttonpanel.add(altabutton);
 		
-		JButton bajabutton = new JButton("Baja Empleado");
+		JButton bajabutton = new JButton("Baja producto");
 		bajabutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaBajaEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaBajaProducto, null);
 				dispose();
 			}
 		});
@@ -91,7 +91,7 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		bajabutton.setBackground(Color.WHITE);
 		buttonpanel.add(bajabutton);
 		
-		JButton modbutton = new JButton("Modificar Empleado");
+		JButton modbutton = new JButton("Modificar Producto");
 		modbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/generales/modificacion-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
 		modbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		modbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -99,13 +99,13 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		modbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaModificarProducto, null);
 				dispose();
 			}
 		});
 		buttonpanel.add(modbutton);
 		
-		JButton listallbutton = new JButton("Listado de todos los empleados");
+		JButton listallbutton = new JButton("Listado de todos los producto");
 		listallbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
 		listallbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listallbutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -113,13 +113,13 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		listallbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.ListarEmpleado, null);
+				Controlador.getInstance().update(Eventos.ListarProducto, null);
 				dispose();
 			}
 		});
 		buttonpanel.add(listallbutton);
 		
-		JButton listidbutton = new JButton("Listado de empleado por ID"); 
+		JButton listidbutton = new JButton("Listado de producto por ID"); 
 		listidbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
 		listidbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listidbutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -127,23 +127,12 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		listidbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
+				Controlador.getInstance().update(Eventos.VistaFormMostrarProductoID, null);
 				dispose();
 			}
 		});
 		buttonpanel.add(listidbutton);
-		
-		JButton listintegrequipobutton = new JButton("Listado integrantes de un equipo");
-		listintegrequipobutton.setHorizontalTextPosition(SwingConstants.CENTER);
-		listintegrequipobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		Image modintequipoimg = new ImageIcon(MainWindowEmpleado.class.getResource("/icons/empleados/listar_integrantes_equipo-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
-		listintegrequipobutton.setIcon(new ImageIcon(modintequipoimg));
-		listintegrequipobutton.setBackground(Color.WHITE);
-		listintegrequipobutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		buttonpanel.add(listintegrequipobutton);
+
 
 		
 	}

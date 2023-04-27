@@ -6,6 +6,7 @@ import java.util.Set;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Factorias.FactoriaSA;
+import Negocio.Producto.TProducto;
 import Presentacion.IGUI;
 import Presentacion.Factorias.FactoriaVistas;
 
@@ -110,6 +111,78 @@ public class ControladorImp extends Controlador {
         	else if (res == 2) gui.update(Eventos.AltaEquipoOKReactivar, null);
         	else gui.update(Eventos.AltaEquipoOK, null);
         	break;
-        }
+        //TODO
+	    case Eventos.MainWindowProducto:
+	    	System.out.println("Entrando a MainWindowProductoOpen - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.VistaAltaProducto:
+	    	System.out.println("Entrando a VistaAltaProducto - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.AltaProducto:
+	    	System.out.println("Entrando a AltaProducto - Controlador");
+	    	res = FactoriaSA.getInstance().getSAProducto().altaProducto((TProducto) objeto);
+	    	if (res == -1) gui.update(Eventos.AltaProductoNoOK, null); 
+	    	else if (res == 2) gui.update(Eventos.AltaProductoOKReactivar, null);
+	    	else gui.update(Eventos.AltaProductoOK, null);
+	    	break;
+	    case Eventos.VistaBajaProducto:
+	    	System.out.println("Entrando a VistaBajaProducto - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.BajaProducto:
+	    	System.out.println("Entrando a BajaProducto - Controlador");
+	    	res = FactoriaSA.getInstance().getSAProducto().bajaProducto((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.BajaProductoNoOK, null);
+	    	else if(res == -2) gui.update(Eventos.BajaProductoNoOK2, null);
+	    	else gui.update(Eventos.BajaProductoOK, objeto);
+	    	break;
+	    case Eventos.ListarProducto:
+	    	System.out.println("Entrando a ListarProductos - Controlador");
+	    	Set<TProducto> listaPr = FactoriaSA.getInstance().getSAProducto().listarProductos();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarProducto, null);
+	    	gui.update(event, listaPr);
+	    	gui.update(Eventos.VistaListarProducto, null);
+	    	break;
+	    case Eventos.VistaModificarProducto:
+	    	System.out.println("Entrando a VistaModificarProductos - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.ModificarProducto:
+	    	System.out.println("Entrando a ModificarProductos - Controlador");
+	    	res = FactoriaSA.getInstance().getSAProducto().modificarProducto((TProducto) objeto);
+	    	if (res == -1) gui.update(Eventos.ModificarProductoNoOK, null);
+	    	else if (res == -2) gui.update(Eventos.ModificarProductoNombreNoOK, null);
+	    	else gui.update(Eventos.ModificarProductoOK, null);
+	    	break;
+	    case Eventos.VistaFormMostrarProductoID:
+	    	System.out.println("Entrando a VistaFormMostrarProductoID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event,null);
+	    	break;
+	    case Eventos.VistaMostrarProductoID:
+	    	System.out.println("Entrando a VistaMostrarProductoID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.MostrarProductoID:
+	    	System.out.println("Entrando a MostrarProductoID - Controlador");
+	    	TProducto pro = FactoriaSA.getInstance().getSAProducto().mostrarProductoID((int) objeto);
+	    	if(pro.getIdproyecto() == -1) {
+	    		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarProductoID, null);
+	    		gui.update(Eventos.MostrarProductoIDNoOK, null);
+	    	}
+	    	else {
+	        	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarProductoID, null);
+	        	gui.update(event,  pro);
+	        	gui.update(Eventos.VistaMostrarProductoID, null);
+	    	}
+	    	break;
+	    }
     }
 }
