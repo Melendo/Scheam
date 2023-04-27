@@ -140,7 +140,8 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 	@Override
 	public void update(int event, Object object) {
 		// TODO Auto-generated method stub
-		
+		if(event == Eventos.MainWindowProducto) setVisible(true);
+
 	}
 
 	@Override

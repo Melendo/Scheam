@@ -11,6 +11,12 @@ import Presentacion.Empleado.VistaModificarEmpleado;
 import Presentacion.Empleado.VistaMostrarEmpleadoID;
 import Presentacion.Equipo.MainWindowEquipo;
 import Presentacion.Equipo.VistaAltaEquipo;
+import Presentacion.Producto.MainWindowProducto;
+import Presentacion.Producto.VistaAltaProducto;
+import Presentacion.Producto.VistaBajaProducto;
+import Presentacion.Producto.VistaListarProductos;
+import Presentacion.Producto.VistaModificarProducto;
+import Presentacion.Producto.VistaMostrarProductoID;
 import Presentacion.VistaPrincipal.MainWindow;
 
 public class FactoriaVistasImp extends FactoriaVistas {
@@ -50,6 +56,28 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaAltaEquipo:
 			System.out.println("Entrando a VistaAltaEquipo - FactoriaVistasImp");
 			return new VistaAltaEquipo();
+		case Eventos.MainWindowProducto:// <----------------------------------------------------------------------------
+			System.out.println("Entrando a MainWindowProducto - FactoriaVistasImp");
+			return new MainWindowProducto();
+		case Eventos.VistaAltaProducto:
+			System.out.println("Entrando a VistaAltaProducto - FactoriaVistasImp");
+			return new VistaAltaProducto();
+		case Eventos.VistaBajaProducto:
+			System.out.println("Entrando a VistaBajaProducto - FactoriaVistasImp");
+			return new VistaBajaProducto();
+		case Eventos.VistaListarProducto:
+			System.out.println("Entrando a VistaListarProducto - FactoriaVistasImp");
+			return new VistaListarProductos();
+		case Eventos.VistaModificarProducto:
+			System.out.println("Entrando a ModificarProducto - FactoriaVistasImp");
+			return new VistaModificarProducto();
+		case Eventos.VistaFormMostrarProductoID:
+			System.out.println("Entrando a VistaFormMostrarProductoID - FactoriaVistasImp");
+			return new VistaMostrarProductoID();
+		case Eventos.VistaMostrarProductoID:
+			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
+			return new VistaMostrarProductoID();
+			
 		default:
 			return null;
 		}

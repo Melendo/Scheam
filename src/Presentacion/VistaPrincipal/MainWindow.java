@@ -111,6 +111,10 @@ public class MainWindow extends JFrame implements IGUI {
 		Image modproductoimg = productoimgicon.getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
 		productoButton.setIcon(new ImageIcon(modproductoimg));
 		//TODO actionlistener a mainwindowproducto
+		productoButton.addActionListener((e)->{		
+			Controlador.getInstance().update(Eventos.MainWindowProducto, null);
+			dispose();		
+		});
 		buttonPanel.add(productoButton);
 		
 		JButton facturaButton = new JButton("Factura y Carrito");
