@@ -71,16 +71,34 @@ public class DAOTarea implements IDAOTarea {
 		return 1;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#modify(TTarea tarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Integer modify(TTarea tarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Modify - DAOTarea");
+		try {
+			PreparedStatement ps;
+						
+			String sql = "UPDATE tareas set nombre = ?,  equipo = ?, producto = ?, terminada = ?, activo = ? where id_tarea = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, tarea.getNombre());
+			ps.setInt(2, tarea.getEquipo());
+			ps.setInt(3, tarea.getProducto());
+			ps.setBoolean(4, tarea.getTerminada());
+			ps.setBoolean(5, tarea.getActivo());
+			ps.setInt(6, tarea.getIdTarea());
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	/** 
