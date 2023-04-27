@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -29,7 +28,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Integer create(TEmpleado empleado) {
 		System.out.println("Intentando create - DAOEmpleado");
 		try {
-			Statement stmt = con.createStatement();
+			//Statement stmt = con.createStatement(); - NO HACE FALTA STATEMENT
 			PreparedStatement ps;
 			String sql = "INSERT INTO empleados (nombre, apellidos, dni, email, telefono,sueldo, activo) VALUES (?,?,?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
@@ -42,7 +41,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.setBoolean(7, true);
 
 			ps.executeUpdate();
-			stmt.close();
 			con.close();
 			System.out.println("Create Realizado - DAOEmpleado");
 
