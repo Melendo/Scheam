@@ -62,13 +62,59 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Integer delete(Integer idequipo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando Delete - DAOEquipo");
+		try {
+			Statement stmt = con.createStatement();
+			PreparedStatement ps;
+			String sql = "UPDATE equipos set activo = false where id_equipo = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idequipo);
+			ps.executeUpdate();
+			
+			ps.close();
+			stmt.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOEquipo");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer modify(TEquipo equipo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando Modify - DAOEquipo");
+		try {
+			PreparedStatement ps;
+						
+			String sql = "UPDATE equipo set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ?, activo = ? where id_empleado = ?";
+			ps = con.prepareStatement(sql);
+			
+			if (equipo instanceof TEquipoDesarrollo) {
+				sql = "UPDATE equipo set nombre = ?, tecnologia = ?, activo = ? WHERE id_equipo = ?";
+			}
+			
+			/*ps.setString(1, empleado.getNombre());
+			ps.setString(2, empleado.getApellidos());
+			ps.setString(3, empleado.getDNI());
+			ps.setString(4, empleado.getE_mail());
+			ps.setInt(5, empleado.getTlfn());
+			ps.setDouble(6, empleado.getSueldo());
+			ps.setBoolean(7, empleado.getActivo());
+			ps.setInt(8, empleado.getIdEmpleado());*/
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			
+			System.out.println("Modify Realizado - DAOEmpleado");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Set<TEquipo> readAll() {

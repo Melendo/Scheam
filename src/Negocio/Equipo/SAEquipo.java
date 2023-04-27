@@ -3,6 +3,7 @@ package Negocio.Equipo;
 
 import java.util.Set;
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Empleado.TEmpleado;
 
 public class SAEquipo implements ISAEquipo {
 
@@ -47,24 +48,55 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer modificarEquipo(TEquipo equipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(equipo.getIdEquipo());
+		if (equ.getIdEquipo() == -1 || !equ.getActivo()){
+		System.out.println("modificarEquipo no realizado (equipo no existe o esta inactivo)- SAEquipo");
+			return -1;
+		} else {
+			if (equipo.getNombre() != null  && FactoriaDAOImp.getInstance().getDaoEquipo().readByNombre(equipo.getNombre()).getNombre() != "-1"){
+				System.out.println("modificarEquipo no realizado (equipo tiene un Nombre coincidente)- SAEquipo");
+				return -2;
+			}
+			else {
+				if (equipo.getNombre() == null)
+					equipo.setNombre(equ.getNombre());
+				if (equipo.getActivo() == null)
+					equipo.setActivo(true);
+				
+				if (equipo instanceof TEquipoDesarrollo) {
+					if(((TEquipoDesarrollo) equipo).getTecnologia()== null) {
+						((TEquipoDesarrollo) equipo).setTecnologia(((TEquipoDesarrollo) equ).getTecnologia());
+					}
+				}
+				else {
+					if (((TEquipoDisenio) equipo).getCampoDisenio()== null) {
+						((TEquipoDisenio) equipo).setCampoDisenio(((TEquipoDisenio) equ).getCampoDisenio());
+					}
+				}
+			
+			}
+			System.out.println("modificarEquipo Realizado - SAEquipo");
+			return FactoriaDAOImp.getInstance().getDaoEquipo().modify(equipo);
+		}				
 	}
 
-	public Set listarEquipos() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TEquipo> listarEquipos() {
+		Set<TEquipo> lista = FactoriaDAOImp.getInstance().getDaoEquipo().readAll();
+		System.out.println("listarEquipo Realizado - SAEquipo");
+		return lista;
 	}
 
 	public TEquipo mostrarEquipoID(Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
+		if (equ.getIdEquipo() != -1 && equ.getActivo()){
+		System.out.println("mostrarEquipo Realizado - SAEquipo");
+			return equ;
+			}
+		else { 
+			equ.setIdEquipo(-1);
+			System.out.println("mostrarEquipo no Realizado - SAEquipo");
+			return equ;
+		}
 	}
 
 	public Integer anyadirIntegrante(Integer IDEmpleado, Integer IDEquipo) {
@@ -82,9 +114,13 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer IDEmpleado) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
+			System.out.println("ListarEquiposEmpleado no realizado (empleado no existe o esta inactivo)- SAEquipo");
+			return null;
+		}
+		Set<TEquipo> lista = FactoriaDAOImp.getInstance().getDaoEquipo().listarEquiposEmpleadoId(IDEmpleado);
+		System.out.println("listarEquiposEmpleadoId Realizado - SAEquipo");
+		return lista;
 	}
 }
