@@ -7,6 +7,7 @@ import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Cliente.TCliente;
+import Negocio.Empleado.TEmpleado;
 
 public class SACliente implements ISACliente {
 	
@@ -14,7 +15,7 @@ public class SACliente implements ISACliente {
 		System.out.println("Intentando altaEmpleado - SACliente");
 		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID());
 
-		if (cli.getID().equals("-1")) {
+		if (cli.getID().equals(-1)) {
 			System.out.println("altaCliente Realizado (creado) - SACliente");
 			return FactoriaDAOImp.getInstance().getDaoCliente().create(cliente);
 		} else {
@@ -32,17 +33,64 @@ public class SACliente implements ISACliente {
 	}
 
 	public Integer bajaCliente(Integer IDcliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando bajaCliente - SACliente");
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(IDcliente);
+
+		if (cli.getID() == -1) {
+			System.out.println("bajaCliente No Realizado (no exite) - SACliente");
+			return -1;
+		}
+		
+		if(cli.getActivo()) {
+			System.out.println("bajaCliente Realizado - SACliente");
+			return FactoriaDAOImp.getInstance().getDaoCliente().delete(IDcliente);
+		} else{
+			return -2;
+		}
 	}
 
 	public Integer modificarCliente(TCliente cliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID());
+		if (cli.getID() == -1 || !cli.getActivo()){
+		System.out.println("modificarCliente no realizado (cliente no existe o esta inactivo)- SACliente");
+			return -1;
+			} else {
+			if (cliente.getID() != null  && FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID()).getID() != -1){
+				System.out.println("modificarCliente no realizado (cliente tiene un ID coincidente)- SACliente");
+				return -2;
+				}
+			else {
+				if(cliente instanceof TDistribuidor) {
+					if(cliente.getID() == null)
+						cliente.setID(cli.getID());
+					if(cliente.getNombre() == null)
+						cliente.setNombre(cli.getNombre());
+					if(cliente.getEmail() == null)
+						cliente.setEmail(cli.getEmail());;
+					if(((TDistribuidor) cliente).getDireccion() == null)
+						((TDistribuidor) cliente).setDireccion(((TDistribuidor) cli).getDireccion());
+					if(((TDistribuidor) cliente).getEmail() == null)
+						((TDistribuidor) cliente).setEmail(((TDistribuidor) cli).getEmail());
+					if(cliente.getActivo() == null)
+						cliente.setActivo(cli.getActivo());;
+				} else {
+					if(cliente.getID() == null)
+						cliente.setID(cli.getID());
+					if(cliente.getNombre() == null)
+						cliente.setNombre(cli.getNombre());
+					if(cliente.getEmail() == null)
+						cliente.setEmail(cli.getEmail());;
+					if(((TParticular) cliente).getTelefono() == null)
+						((TParticular) cliente).setTelefono(((TParticular) cli).getTelefono());
+					if(((TParticular) cliente).getDNI() == null)
+						((TParticular) cliente).setDNI(((TParticular) cli).getDNI());
+					if(cliente.getActivo() == null)
+						cliente.setActivo(cli.getActivo());;
+				}
+				System.out.println("modificarEmpleado Realizado - SAEmpleado");
+				return FactoriaDAOImp.getInstance().getDaoCliente().modify(cliente);
+			}				
+		}
 	}
 
 	public TCliente mostrarClienteID(Integer IDcliente) {
