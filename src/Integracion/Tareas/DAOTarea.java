@@ -52,10 +52,23 @@ public class DAOTarea implements IDAOTarea {
 	}
 
 	public Integer delete(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Delete - DAOTarea");
+		try {
+			PreparedStatement ps;
+			String sql = "UPDATE tareas set activo = false where id_tarea = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idtarea);
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			System.out.println("Delete Realizado - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	/** 
