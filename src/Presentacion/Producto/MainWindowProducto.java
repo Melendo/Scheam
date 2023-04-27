@@ -71,7 +71,7 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		altabutton.setBackground(Color.WHITE);
 		altabutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //TODO
-				Controlador.getInstance().update(Eventos.VistaAltaEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaAltaProducto, null);
 				dispose();
 			}
 		});
