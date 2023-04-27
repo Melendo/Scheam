@@ -15,17 +15,35 @@ public class SAEquipo implements ISAEquipo {
 			System.out.println("altaEquipo Realizado (creado) - SAEquipo");
 			return FactoriaDAOImp.getInstance().getDaoEquipo().create(equipo);
 		} else {
+			if (equ.getActivo()) {
+				System.out.println("altaEquipo No Realizado (existe y activo) - SAEquipo");
+				return -1;
+			}else {
+				equipo.setActivo(true);
+				equipo.setIdEquipo(equ.getIdEquipo());
+				System.out.println("altaEquipo Realizado (reactivado) - SAEquipo");
+				FactoriaDAOImp.getInstance().getDaoEquipo().modify(equipo);
+				return 2;
 			}
-		
-		return null;
-		// end-user-code
+		}
 	}
 
 	public Integer bajaEquipo(Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		
+		System.out.println("Intentando bajaEquipo - SAEquipo");
+		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
+
+		if (equ.getIdEquipo() == -1) {
+			System.out.println("bajaEquipo No Realizado (no exite) - SAEquipo");
+			return -1;
+		}
+		
+		if(equ.getActivo()) {
+			System.out.println("bajaEquipo Realizado - SAEquipo");
+			return FactoriaDAOImp.getInstance().getDaoEquipo().delete(IDEquipo);
+		} else{
+			return -2;
+		}
 	}
 
 	public Integer modificarEquipo(TEquipo equipo) {

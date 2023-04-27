@@ -29,7 +29,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Integer create(TEmpleado empleado) {
 		System.out.println("Intentando create - DAOEmpleado");
 		try {
-			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			String sql = "INSERT INTO empleados (nombre, apellidos, dni, email, telefono,sueldo, activo) VALUES (?,?,?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
@@ -42,7 +41,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.setBoolean(7, true);
 
 			ps.executeUpdate();
-			stmt.close();
 			con.close();
 			System.out.println("Create Realizado - DAOEmpleado");
 
