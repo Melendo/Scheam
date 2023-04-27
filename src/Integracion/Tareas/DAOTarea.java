@@ -5,9 +5,11 @@ import Negocio.Tareas.TTarea;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 import Negocio.Producto.TProducto;
+import java.util.HashSet;
 
 public class DAOTarea implements IDAOTarea {
 
@@ -101,35 +103,79 @@ public class DAOTarea implements IDAOTarea {
 		return 1;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#readAll()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set readAll() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TTarea> readAll() {
+		System.out.println("Intentando readAll - DAOTarea");
+		Set<TTarea> result = new HashSet<TTarea>();
+		TTarea aux;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE activo");
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				aux = new TTarea();
+				aux.setIdTarea(rs.getInt("id_tarea"));
+				aux.setNombre(rs.getString("nombre"));
+				aux.setEquipo(rs.getInt("equipo"));
+				aux.setProducto(rs.getInt("producto"));
+				aux.setTerminada(rs.getBoolean("terminada"));
+				result.add(aux);
+				while (rs.next()) {
+					aux = new TTarea();
+					aux.setIdTarea(rs.getInt("id_tarea"));
+					aux.setNombre(rs.getString("nombre"));
+					aux.setEquipo(rs.getInt("equipo"));
+					aux.setProducto(rs.getInt("producto"));
+					aux.setTerminada(rs.getBoolean("terminada"));
+					result.add(aux);
+				}
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("Readall realizado - DAOTarea");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#readById(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
+	
 	public TTarea readById(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readByDNI - DAOTarea");
+		TTarea result = new TTarea();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE idTarea = ?");
+			ps.setInt(1, idtarea);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdTarea(idtarea);
+			else  {
+				result.setIdTarea(rs.getInt("id_tarea"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEquipo(rs.getInt("equipo"));
+				result.setProducto(rs.getInt("producto"));
+				result.setTerminada(rs.getBoolean("terminada"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("ReadByDNI realizado - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#listarIdEquipo(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Set listarIdEquipo(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -137,11 +183,7 @@ public class DAOTarea implements IDAOTarea {
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#listarIdProducto(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public TProducto listarIdProducto(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -149,11 +191,7 @@ public class DAOTarea implements IDAOTarea {
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#closeTask(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Integer closeTask(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
