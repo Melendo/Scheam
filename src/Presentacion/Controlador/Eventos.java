@@ -66,4 +66,36 @@ public class Eventos {
     public static final int VistaListarEquipo = 245;
     public static final int ListarEquipo = 246;
     
+	//////////////////////////////////////////////////////////
+	    
+	public static final int MainWindowProducto = 300;
+	
+	public static final int VistaAltaProducto = 310;
+	public static final int AltaProducto = 311;
+	public static final int AltaProductoOK = 312;
+	public static final int AltaProductoNoOK = 313;
+	public static final int AltaProductoOKReactivar = 314;
+	
+	public static final int VistaBajaProducto = 320;
+	public static final int BajaProducto = 321;
+	public static final int BajaProductoOK = 322;
+	public static final int BajaProductoNoOK = 323;
+	public static final int BajaProductoNoOK2 = 324;
+	
+	public static final int VistaModificarProducto = 330;
+	public static final int ModificarProducto = 331;
+	public static final int ModificarProductoOK = 332;
+	public static final int ModificarProductoNoOK = 333;
+	public static final int ModificarProductoNombreNoOK = 334;
+	
+	public static final int VistaFormMostrarProductoID = 340;
+	public static final int VistaMostrarProductoID = 241;
+	public static final int MostrarProductoID = 242;
+	public static final int MostrarProductoIDOK = 243;
+	public static final int MostrarProductoIDNoOK = 244;
+	
+	public static final int VistaListarProducto = 245;
+	public static final int ListarProducto = 246;
+
+    
 }
