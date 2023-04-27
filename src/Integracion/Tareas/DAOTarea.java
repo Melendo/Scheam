@@ -142,23 +142,40 @@ public class DAOTarea implements IDAOTarea {
 		return result;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#readById(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
+	
 	public TTarea readById(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando readByDNI - DAOTarea");
+		TTarea result = new TTarea();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE idTarea = ?");
+			ps.setInt(1, idtarea);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdTarea(idtarea);
+			else  {
+				result.setIdTarea(rs.getInt("id_tarea"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEquipo(rs.getInt("equipo"));
+				result.setProducto(rs.getInt("producto"));
+				result.setTerminada(rs.getBoolean("terminada"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("ReadByDNI realizado - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#listarIdEquipo(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Set listarIdEquipo(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -166,11 +183,7 @@ public class DAOTarea implements IDAOTarea {
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#listarIdProducto(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public TProducto listarIdProducto(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -178,11 +191,7 @@ public class DAOTarea implements IDAOTarea {
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IDAOTarea#closeTask(Integer idtarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Integer closeTask(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
