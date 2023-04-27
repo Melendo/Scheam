@@ -28,7 +28,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Integer create(TEmpleado empleado) {
 		System.out.println("Intentando create - DAOEmpleado");
 		try {
-			//Statement stmt = con.createStatement(); - NO HACE FALTA STATEMENT
 			PreparedStatement ps;
 			String sql = "INSERT INTO empleados (nombre, apellidos, dni, email, telefono,sueldo, activo) VALUES (?,?,?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
@@ -55,7 +54,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Integer delete(Integer idempleado) {
 		System.out.println("Intentando Delete - DAOEmpleado");
 		try {
-			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			String sql = "UPDATE empleados set activo = false where id_empleado = ?";
 			ps = con.prepareStatement(sql);
@@ -63,7 +61,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.executeUpdate();
 			
 			ps.close();
-			stmt.close();
 			con.close();
 			System.out.println("Delete Realizado - DAOEmpleado");
 
@@ -77,7 +74,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Integer modify(TEmpleado empleado) {
 		System.out.println("Intentando Modify - DAOEmpleado");
 		try {
-			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 						
 			String sql = "UPDATE empleados set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ?, activo = ? where id_empleado = ?";
@@ -94,7 +90,6 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.executeUpdate();
 			
 			ps.close();
-			stmt.close();
 			con.close();
 			
 			System.out.println("Modify Realizado - DAOEmpleado");
