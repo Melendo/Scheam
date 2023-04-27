@@ -18,6 +18,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Negocio.Equipo.TEquipo;
+import Negocio.Equipo.TEquipoDesarrollo;
+import Negocio.Equipo.TEquipoDisenio;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
@@ -33,6 +36,7 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 	private JTextField especializadatextfield;
 	
 	private boolean esDesarrollo = false;
+	private boolean cerrar = true;
 	
 	public VistaAltaEquipo() {
 		vAltaEquipo();
@@ -127,13 +131,25 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 		fieldspinner.setBounds(211, 34, 173, 20);
 		infopanel.add(fieldspinner);
 		
-		JLabel nombrelabel_1 = new JLabel("Nombre:");
-		nombrelabel_1.setBounds(114, 81, 56, 14);
-		infopanel.add(nombrelabel_1);
 	}
 	
 	private void ok() {
-		
+		TEquipo equipo;
+		if (esDesarrollo) {
+			equipo = new TEquipoDesarrollo();
+			equipo.setNombre(nombretextfield.getText());
+			((TEquipoDesarrollo) equipo).setTecnologia(especializadatextfield.getText());
+			
+		} else {
+			equipo = new TEquipoDisenio();
+			equipo.setNombre(nombretextfield.getText());
+			((TEquipoDisenio) equipo).setCampoDisenio(especializadatextfield.getText());
+		}
+		Controlador.getInstance().update(Eventos.AltaEquipo, equipo);
+		if (cerrar)
+			dispose();
+		else
+			cerrar = true;
 	}
 
 	@Override

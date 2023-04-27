@@ -4,6 +4,7 @@ package Presentacion.Controlador;
 import java.util.Set;
 
 import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TEquipo;
 import Negocio.Factorias.FactoriaSA;
 import Presentacion.IGUI;
 import Presentacion.Factorias.FactoriaVistas;
@@ -101,6 +102,13 @@ public class ControladorImp extends Controlador {
         	System.out.println("Entrando a VistaAltaEquipo - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
+        	break;
+        case Eventos.AltaEquipo:
+        	System.out.println("Entrando a AltaEquipo - Controlador");
+        	res = FactoriaSA.getInstance().getSAEquipo().altaEquipo((TEquipo) objeto);
+        	if (res == -1) gui.update(Eventos.AltaEquipoNoOK, null); 
+        	else if (res == 2) gui.update(Eventos.AltaEquipoOKReactivar, null);
+        	else gui.update(Eventos.AltaEquipoOK, null);
         	break;
         }
     }

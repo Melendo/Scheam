@@ -13,8 +13,9 @@ public class SAEquipo implements ISAEquipo {
 		
 		if (equ.getNombre().equals("-1")) {
 			System.out.println("altaEquipo Realizado (creado) - SAEquipo");
-			return FactoriaDAOImp.getInstance().getDaoEquipo().create(equ);
+			return FactoriaDAOImp.getInstance().getDaoEquipo().create(equipo);
 		} else {
+			}
 		
 		return null;
 		// end-user-code
