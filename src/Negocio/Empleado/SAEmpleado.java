@@ -50,11 +50,14 @@ public class SAEmpleado implements ISAEmpleado {
 	public Integer modificarEmpleado(TEmpleado empleado) {
 
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(empleado.getIdEmpleado());
-		if (emp.getIdEmpleado() == -1 || !emp.getActivo())
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
+		System.out.println("modificarEmpleado no realizado (empleado no existe o esta inactivo)- SAEmpleado");
 			return -1;
-		else {
-			if (empleado.getDNI() != null  && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1")
+			} else {
+			if (empleado.getDNI() != null  && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1"){
+				System.out.println("modificarEmpleado no realizado (empleado tiene un DNI coincidente)- SAEmpleado");
 				return -2;
+				}
 			else {
 					
 				if (empleado.getDNI() == null)
@@ -72,6 +75,7 @@ public class SAEmpleado implements ISAEmpleado {
 				if(empleado.getActivo() == null) {
 					empleado.setActivo(true);
 				}
+				System.out.println("modificarEmpleado Realizado - SAEmpleado");
 				return FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
 			}				
 		}
