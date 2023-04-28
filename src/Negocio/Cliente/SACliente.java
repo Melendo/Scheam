@@ -8,6 +8,7 @@ import java.util.Set;
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TEquipo;
 
 public class SACliente implements ISACliente {
 	
@@ -87,7 +88,7 @@ public class SACliente implements ISACliente {
 					if(cliente.getActivo() == null)
 						cliente.setActivo(cli.getActivo());;
 				}
-				System.out.println("modificarEmpleado Realizado - SAEmpleado");
+				System.out.println("modificarCliente Realizado - SACliente");
 				return FactoriaDAOImp.getInstance().getDaoCliente().modify(cliente);
 			}				
 		}
@@ -100,10 +101,9 @@ public class SACliente implements ISACliente {
 		// end-user-code
 	}
 
-	public Set mostrarClientes() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TCliente> mostrarClientes() {
+		Set<TCliente> lista = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClientes();
+		System.out.println("mostrarClientes Realizado - SACliente");
+		return lista;
 	}
 }
