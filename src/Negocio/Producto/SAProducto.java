@@ -25,6 +25,11 @@ public class SAProducto implements ISAProducto {
 				producto.setActivo(true);
 				producto.setIdproyecto(emp.getIdproyecto());
 				System.out.println("altaProducto Realizado (reactivado) - SAProducto");
+				
+				if(producto.getTerminado() == null) {
+					producto.setTerminado(false);
+				}
+				
 				FactoriaDAOImp.getInstance().getDaoProducto().modify(producto);
 				return 2;
 			}

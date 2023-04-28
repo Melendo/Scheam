@@ -84,7 +84,7 @@ public class DAOProducto implements IDAOProducto {
 
 	public Integer modify(TProducto producto) {
 		System.out.println("Intentando modify - DAOProducto");
-		try {
+		try {					
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_proyecto = ?";
@@ -98,7 +98,8 @@ public class DAOProducto implements IDAOProducto {
 			ps.setBoolean(6, producto.getTerminado()); //
 			ps.setBoolean(7, true); //activo
 			ps.setInt(8, producto.getStock());
-
+			ps.setInt(9, producto.getIdproyecto());
+			
 			ps.executeUpdate();
 			stmt.close();
 			con.close();
