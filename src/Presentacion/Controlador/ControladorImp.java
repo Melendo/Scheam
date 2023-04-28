@@ -202,6 +202,61 @@ public class ControladorImp extends Controlador {
 	    	else if (res == 2) gui.update(Eventos.AltaClienteOKReactivar, null);
 	    	else gui.update(Eventos.AltaClienteOK, null);
 	    	break;
+	    case Eventos.VistaBajaCliente:
+	    	System.out.println("Entrando a VistaBajaCliente - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.BajaCliente:
+	    	System.out.println("Entrando a BajaCliente - Controlador");
+	    	res = FactoriaSA.getInstance().getSACliente().bajaCliente((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.BajaClienteNoOK, null);
+	    	else if(res == -2) gui.update(Eventos.BajaClienteNoOK2, null);
+	    	else gui.update(Eventos.BajaClienteOK, objeto);
+	    	break;
+	    case Eventos.ListarCliente:
+	    	System.out.println("Entrando a ListarCliente - Controlador");
+	    	Set<TCliente> listaCl = FactoriaSA.getInstance().getSACliente().mostrarClientes();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarCliente, null);
+	    	gui.update(event, listaCl);
+	    	gui.update(Eventos.VistaListarCliente, null);
+	    	break;
+	    case Eventos.VistaModificarCliente:
+	    	System.out.println("Entrando a VistaModificarClientes - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.ModificarCliente:
+	    	System.out.println("Entrando a ModificarClientes - Controlador");
+	    	res = FactoriaSA.getInstance().getSACliente().modificarCliente((TCliente) objeto);
+	    	if (res == -1) gui.update(Eventos.ModificarClienteNoOK, null);
+	    	else if (res == -2) gui.update(Eventos.ModificarClienteNombreNoOK, null);
+	    	else if (res == -3) gui.update(Eventos.ModificarClienteActivoNoOK, null);
+	    	else gui.update(Eventos.ModificarClienteOK, null);
+	    	break;
+	    case Eventos.VistaFormMostrarClienteID:
+	    	System.out.println("Entrando a VistaFormMostrarClienteID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event,null);
+	    	break;
+	    case Eventos.VistaMostrarClienteID:
+	    	System.out.println("Entrando a VistaMostrarClienteID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.MostrarClienteID:
+	    	System.out.println("Entrando a MostrarClienteID - Controlador");
+	    	TCliente cli = FactoriaSA.getInstance().getSACliente().mostrarClienteID((int) objeto);
+	    	if(cli.getID() == -1) {
+	    		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarClienteID, null);
+	    		gui.update(Eventos.MostrarClienteIDNoOK, null);
+	    	}
+	    	else {
+	        	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarClienteID, null);
+	        	gui.update(event,  cli);
+	        	gui.update(Eventos.VistaMostrarClienteID, null);
+	    	}
+	    	break;
 	    }
     }
 }

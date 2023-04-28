@@ -116,7 +116,7 @@ public static final int MainWindowCliente = 400;
 	
 	public static final int VistaModificarCliente = 430;
 	public static final int ModificarCliente = 431;
-	public static final int ModificarClienteoOK = 432;
+	public static final int ModificarClienteOK = 432;
 	public static final int ModificarClienteNoOK = 433;
 	public static final int ModificarClienteNombreNoOK = 434;
 	public static final int ModificarClienteActivoNoOK = 435;
