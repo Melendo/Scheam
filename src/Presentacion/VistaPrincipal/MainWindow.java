@@ -62,7 +62,13 @@ public class MainWindow extends JFrame implements IGUI {
 		ImageIcon clienteimgicon = new ImageIcon(MainWindow.class.getResource("/icons/cliente.png"));
 		Image modclienteimg = clienteimgicon.getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
 		clienteButton.setIcon(new ImageIcon(modclienteimg));
-		//TODO actionlistener a mainwindowcliente
+		clienteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowCliente, null);	
+				dispose();
+			}			
+		});
 		buttonPanel.add(clienteButton);
 		
 		JButton empleadoButton = new JButton("Empleado");

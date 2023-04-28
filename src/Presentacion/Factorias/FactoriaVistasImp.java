@@ -1,6 +1,12 @@
 package Presentacion.Factorias;
 
 import Presentacion.IGUI;
+import Presentacion.Cliente.MainWindowCliente;
+import Presentacion.Cliente.VistaAltaCliente;
+import Presentacion.Cliente.VistaBajaCliente;
+import Presentacion.Cliente.VistaModificarCliente;
+import Presentacion.Cliente.VistaMostrarClienteID;
+import Presentacion.Cliente.VistaMostrarClientes;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.MainWindowEmpleado;
 import Presentacion.Empleado.VistaAltaEmpleado;
@@ -77,7 +83,27 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarProductoID:
 			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
 			return new VistaMostrarProductoID();
-			
+		case Eventos.MainWindowCliente:// <----------------------------------------------------------------------------
+			System.out.println("Entrando a MainWindowCliente - FactoriaVistasImp");
+			return new MainWindowCliente();
+		case Eventos.VistaAltaCliente:
+			System.out.println("Entrando a VistaAltaCliente - FactoriaVistasImp");
+			return new VistaAltaCliente();
+		case Eventos.VistaBajaCliente:
+			System.out.println("Entrando a VistaBajaCliente - FactoriaVistasImp");
+			return new VistaBajaCliente();
+		case Eventos.VistaListarCliente:
+			System.out.println("Entrando a VistaListarProducto - FactoriaVistasImp");
+			return new VistaMostrarClientes();
+		case Eventos.VistaModificarCliente:
+			System.out.println("Entrando a ModificarProducto - FactoriaVistasImp");
+			return new VistaModificarCliente();
+		case Eventos.VistaFormMostrarClienteID:
+			System.out.println("Entrando a VistaFormMostrarProductoID - FactoriaVistasImp");
+			return new VistaMostrarClienteID();
+		case Eventos.VistaMostrarClienteID:
+			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
+			return new VistaMostrarClienteID();	
 		default:
 			return null;
 		}

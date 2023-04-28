@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 
 
 public class VistaBajaCliente extends JFrame implements IGUI {
+	
+	public VistaBajaCliente() {
+		vBajaCliente();
+	}
+	
 	public void vBajaCliente() {
 		// begin-user-code
 		// TODO Auto-generated method stub

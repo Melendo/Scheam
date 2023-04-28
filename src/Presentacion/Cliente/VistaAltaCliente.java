@@ -8,23 +8,15 @@ import Presentacion.IGUI;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
-public class VistaAltaCliente extends JFrame implements IGUI, ActionListener {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void vAltaCliente() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
+public class VistaAltaCliente extends JFrame implements IGUI {
+
+	public VistaAltaCliente() {
+		vAltaCliente();
+	}
+	
+	public void vAltaCliente() {
+		return;
 	}
 
 	/** 
@@ -49,5 +41,11 @@ public class VistaAltaCliente extends JFrame implements IGUI, ActionListener {
 		// TODO Auto-generated method stub
 
 		// end-user-code
+	}
+
+	@Override
+	public void update(int event, Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 }
