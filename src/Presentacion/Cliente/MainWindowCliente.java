@@ -25,7 +25,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class MainWindowCliente extends JFrame implements ActionListener, IGUI {
+public class MainWindowCliente extends JFrame implements IGUI {
 
 	public MainWindowCliente() {
 		vMainWindowCliente();
