@@ -95,10 +95,16 @@ public class SACliente implements ISACliente {
 	}
 
 	public TCliente mostrarClienteID(Integer IDcliente) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(IDcliente);
+		if (cli.getID() != -1 && cli.getActivo()){
+		System.out.println("mostrarCliente Realizado - SACliente");
+			return cli;
+			}
+		else { 
+			cli.setID(-1);
+			System.out.println("mostrarCliente no Realizado - SACliente");
+			return cli;
+		}
 	}
 
 	public Set<TCliente> mostrarClientes() {
