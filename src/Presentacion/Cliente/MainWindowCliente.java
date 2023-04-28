@@ -133,12 +133,6 @@ public class MainWindowCliente extends JFrame implements ActionListener, IGUI {
 			}
 		});
 		buttonpanel.add(listidbutton);
-		
-		backbutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
 	}
 
 	@Override
