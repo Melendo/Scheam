@@ -56,35 +56,39 @@ public class SAProducto implements ISAProducto {
 
 	public Integer modificarProducto(TProducto producto) {
 		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(producto.getIdproyecto());
+		TProducto empxnombre = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre());
 		if (emp.getIdproyecto() == -1)
 			return -1;
 		else {
 			if(!emp.getActivo())
 				return -3;
 			else {
-				if (producto.getNombre() != null  && FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre()).getNombre() == FactoriaDAOImp.getInstance().getDaoProducto().readById(producto.getIdproyecto()).getNombre())
+				
+			if(empxnombre.getIdproyecto() != -1) {								
+				if (empxnombre.getIdproyecto() != producto.getIdproyecto())
 					return -2;
-				else {
-						
-					if (producto.getNombre() == null)
-						producto.setNombre(emp.getNombre());
-					if (producto.getFechalanzamiento() == null)
-						producto.setFechalanzamiento(emp.getFechalanzamiento());
-					if (producto.getPrecio() == null)
-						producto.setPrecio(emp.getPrecio());
-					if (producto.getGenero() == null)
-						producto.setGenero(emp.getGenero());
-					if (producto.getPEGI() == null)
-						producto.setPEGI(emp.getPEGI());
-					if (producto.getTerminado() == null)
-						producto.setTerminado(emp.getTerminado());
-					if (producto.getActivo() == null)
-						producto.setActivo(emp.getActivo());
-					if (producto.getStock() == null)
-						producto.setStock(emp.getStock());
+			}
 					
-					return FactoriaDAOImp.getInstance().getDaoProducto().modify(producto);
-				}
+				if (producto.getNombre() == null)
+					producto.setNombre(emp.getNombre());
+				if (producto.getFechalanzamiento() == null)
+					producto.setFechalanzamiento(emp.getFechalanzamiento());
+				if (producto.getPrecio() == null)
+					producto.setPrecio(emp.getPrecio());
+				if (producto.getGenero() == null)
+					producto.setGenero(emp.getGenero());
+				if (producto.getPEGI() == null)
+					producto.setPEGI(emp.getPEGI());
+				if (producto.getTerminado() == null)
+					producto.setTerminado(emp.getTerminado());
+				if (producto.getActivo() == null)
+					producto.setActivo(emp.getActivo());
+				if (producto.getStock() == null)
+					producto.setStock(emp.getStock());
+				
+				return FactoriaDAOImp.getInstance().getDaoProducto().modify(producto);
+			
+				
 			}				
 		}
 	}
