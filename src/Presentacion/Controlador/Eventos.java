@@ -87,6 +87,7 @@ public class Eventos {
 	public static final int ModificarProductoOK = 332;
 	public static final int ModificarProductoNoOK = 333;
 	public static final int ModificarProductoNombreNoOK = 334;
+	public static final int ModificarProductoActivoNoOK = 335;
 	
 	public static final int VistaFormMostrarProductoID = 340;
 	public static final int VistaMostrarProductoID = 241;

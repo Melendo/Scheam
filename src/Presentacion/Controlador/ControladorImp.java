@@ -158,6 +158,7 @@ public class ControladorImp extends Controlador {
 	    	res = FactoriaSA.getInstance().getSAProducto().modificarProducto((TProducto) objeto);
 	    	if (res == -1) gui.update(Eventos.ModificarProductoNoOK, null);
 	    	else if (res == -2) gui.update(Eventos.ModificarProductoNombreNoOK, null);
+	    	else if (res == -3) gui.update(Eventos.ModificarProductoActivoNoOK, null);
 	    	else gui.update(Eventos.ModificarProductoOK, null);
 	    	break;
 	    case Eventos.VistaFormMostrarProductoID:
