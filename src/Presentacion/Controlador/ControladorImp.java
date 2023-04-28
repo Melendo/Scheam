@@ -3,6 +3,7 @@ package Presentacion.Controlador;
 
 import java.util.Set;
 
+import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Factorias.FactoriaSA;
@@ -183,6 +184,23 @@ public class ControladorImp extends Controlador {
 	        	gui.update(event,  pro);
 	        	gui.update(Eventos.VistaMostrarProductoID, null);
 	    	}
+	    	break;
+	    case Eventos.MainWindowCliente:
+	    	System.out.println("Entrando a MainWindowClienteOpen - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.VistaAltaCliente:
+	    	System.out.println("Entrando a VistaAltaCliente - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.AltaCliente:
+	    	System.out.println("Entrando a AltaCliente - Controlador");
+	    	res = FactoriaSA.getInstance().getSACliente().altaCliente((TCliente) objeto);
+	    	if (res == -1) gui.update(Eventos.AltaClienteNoOK, null); 
+	    	else if (res == 2) gui.update(Eventos.AltaClienteOKReactivar, null);
+	    	else gui.update(Eventos.AltaClienteOK, null);
 	    	break;
 	    }
     }
