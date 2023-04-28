@@ -47,11 +47,7 @@ public class VistaAltaProducto extends JFrame implements IGUI, ActionListener {
 	public VistaAltaProducto() {
 		vAltaProducto();
 	}
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public void vAltaProducto() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Alta Producto");
@@ -133,6 +129,10 @@ public class VistaAltaProducto extends JFrame implements IGUI, ActionListener {
 		
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.setBounds(249, 188, 90, 23);
+		cancelbutton.addActionListener((e)->{
+			Controlador.getInstance().update(Eventos.MainWindowProducto, null);
+			dispose();
+		});
 		infopanel.add(cancelbutton);
 	}
 
