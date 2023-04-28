@@ -40,7 +40,7 @@ public class DAOProducto implements IDAOProducto {
 			ps.setDouble(3, producto.getPrecio());
 			ps.setString(4, producto.getGenero());
 			ps.setInt(5, producto.getPEGI());
-			ps.setBoolean(6, producto.getTerminado()); //
+			ps.setBoolean(6, false); //terminado
 			ps.setBoolean(7, true); //activo
 			ps.setInt(8, producto.getStock());
 

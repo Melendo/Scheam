@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import Negocio.Producto.TProducto;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Toolkit;
@@ -32,12 +35,12 @@ import java.awt.Dialog.ModalExclusionType;
 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class VistaAltaProducto extends JFrame implements IGUI, ActionListener {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField NoTF;
+	private JTextField FeTF;
+	private JTextField PrTF;
+	private JTextField GeTF;
+	private JTextField PeTF;
+	private JTextField StTF;
 	
 	private boolean cerrar = true;
 	
@@ -70,58 +73,62 @@ public class VistaAltaProducto extends JFrame implements IGUI, ActionListener {
 		nombrelabel.setBounds(75, 14, 56, 14);
 		infopanel.add(nombrelabel);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(153, 11, 215, 17);
-		infopanel.add(textField);
+		NoTF = new JTextField();
+		NoTF.setColumns(10);
+		NoTF.setBounds(153, 11, 215, 17);
+		infopanel.add(NoTF);
 		
-		JLabel apellidoslabel = new JLabel("Fecha de lanzamiento: ");
-		apellidoslabel.setBounds(10, 39, 111, 14);
-		infopanel.add(apellidoslabel);
+		JLabel fecchalabel = new JLabel("Fecha de lanzamiento: ");
+		fecchalabel.setBounds(10, 39, 111, 14);
+		infopanel.add(fecchalabel);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(153, 36, 215, 17);
-		infopanel.add(textField_1);
+		FeTF = new JTextField();
+		FeTF.setColumns(10);
+		FeTF.setBounds(153, 36, 215, 17);
+		infopanel.add(FeTF);
 		
-		JLabel dnilabel = new JLabel("Precio:");
-		dnilabel.setBounds(85, 66, 46, 14);
-		infopanel.add(dnilabel);
+		JLabel preciolabel = new JLabel("Precio:");
+		preciolabel.setBounds(85, 66, 46, 14);
+		infopanel.add(preciolabel);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(153, 63, 215, 17);
-		infopanel.add(textField_2);
+		PrTF = new JTextField();
+		PrTF.setColumns(10);
+		PrTF.setBounds(153, 63, 215, 17);
+		infopanel.add(PrTF);
 		
-		JLabel emaillabel = new JLabel("Genero:");
-		emaillabel.setBounds(75, 91, 46, 14);
-		infopanel.add(emaillabel);
+		JLabel generolabel = new JLabel("Genero:");
+		generolabel.setBounds(75, 91, 46, 14);
+		infopanel.add(generolabel);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(153, 91, 215, 17);
-		infopanel.add(textField_3);
+		GeTF = new JTextField();
+		GeTF.setColumns(10);
+		GeTF.setBounds(153, 91, 215, 17);
+		infopanel.add(GeTF);
 		
-		JLabel telefonolabel = new JLabel("PEGI:");
-		telefonolabel.setBounds(75, 119, 56, 14);
-		infopanel.add(telefonolabel);
+		JLabel pegilabel = new JLabel("PEGI:");
+		pegilabel.setBounds(85, 118, 56, 14);
+		infopanel.add(pegilabel);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(153, 116, 215, 17);
-		infopanel.add(textField_4);
+		PeTF = new JTextField();
+		PeTF.setColumns(10);
+		PeTF.setBounds(153, 116, 215, 17);
+		infopanel.add(PeTF);
 		
-		JLabel sueldolabel = new JLabel("Stock:");
-		sueldolabel.setBounds(85, 147, 46, 14);
-		infopanel.add(sueldolabel);
+		JLabel stocklabel = new JLabel("Stock:");
+		stocklabel.setBounds(85, 147, 46, 14);
+		infopanel.add(stocklabel);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(153, 144, 215, 17);
-		infopanel.add(textField_5);
+		StTF = new JTextField();
+		StTF.setColumns(10);
+		StTF.setBounds(153, 144, 215, 17);
+		infopanel.add(StTF);
 		
 		JButton okbutton = new JButton("Ok");
+		
 		okbutton.setBounds(142, 188, 90, 23);
+		okbutton.addActionListener((e)->{
+			ok();
+		});
 		infopanel.add(okbutton);
 		
 		JButton cancelbutton = new JButton("Cancelar");
@@ -129,11 +136,22 @@ public class VistaAltaProducto extends JFrame implements IGUI, ActionListener {
 		infopanel.add(cancelbutton);
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IGUI#update()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	private void ok() {
+		TProducto producto = new TProducto();
+		producto.setNombre(NoTF.getText());
+		producto.setFechalanzamiento(Integer.parseInt(FeTF.getText()));
+		producto.setPrecio(Double.parseDouble(PrTF.getText()));
+		producto.setGenero(GeTF.getText());
+		producto.setPEGI(Integer.parseInt(PeTF.getText()));
+		producto.setStock(Integer.parseInt(StTF.getText()));//activo y terminado en el DAO
+		
+		Controlador.getInstance().update(Eventos.AltaProducto, producto);
+		if (cerrar) 
+			dispose();
+		else
+			cerrar = true;
+	}
+
 	public void update() {
 		// begin-user-code
 		// TODO Auto-generated method stub
