@@ -105,34 +105,31 @@ public class DAOCliente implements IDAOCliente {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			
+			String sql = "UPDATE clientes set nombre = ?, email = ?, activo = ? where id_cliente = ?";
+			ps = con.prepareStatement(sql);
 			
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getEmail());
+			ps.setBoolean(3, cliente.getActivo());
+			ps.setInt(4, cliente.getID());
 			
 			if(cliente instanceof TDistribuidor) {
-				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
+				sql = "UPDATE distribuidores set direccion = ?, CIF = ? where id_cliente = ?";
 				ps = con.prepareStatement(sql);
-				TDistribuidor distribuidor = (TDistribuidor) cliente;
-				ps.setString(1, distribuidor.getNombre());
-				ps.setString(2, distribuidor.getEmail());
-				ps.setBoolean(3, distribuidor.getActivo());
-				ps.setString(4, distribuidor.getDireccion());
-				ps.setString(5, distribuidor.getCIF());
-				ps.setInt(8, distribuidor.getID());
+				ps.setString(1, ((TDistribuidor) cliente).getDireccion());
+				ps.setString(2, ((TDistribuidor) cliente).getCIF());
+				ps.setInt(3, cliente.getID());
 				ps.executeUpdate();
-				ps.close();
-			} else {
-				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
+				
+			} else if(cliente instanceof TParticular){
+				sql = "UPDATE particulares set DNI = ?, telefono = ? where id_empleado = ?";
 				ps = con.prepareStatement(sql);
-				TParticular particular = (TParticular) cliente;
-				ps.setString(1, particular.getNombre());
-				ps.setString(2, particular.getEmail());
-				ps.setBoolean(3, particular.getActivo());
-				ps.setString(4, particular.getDNI());
-				ps.setInt(5, particular.getTelefono());
-				ps.setInt(8, particular.getID());
+				ps.setString(1, ((TParticular) cliente).getDNI());
+				ps.setInt(2, ((TParticular) cliente).getTelefono());
+				ps.setInt(3, cliente.getID());
 				ps.executeUpdate();
-				ps.close();
 			}			
-			
+			ps.close();
 			stmt.close();
 			con.close();
 			
