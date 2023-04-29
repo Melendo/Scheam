@@ -39,7 +39,7 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 	private JTextField emailtextfield;
 	private JTextField DNItextfield;
 	
-	private boolean esDistribuidor = false;
+	private boolean esDistribuidor = true;
 	private boolean cerrar = true;
 	
 	public VistaAltaCliente() {
@@ -164,16 +164,24 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 				else
 					esDistribuidor = false;
 				
-					CIF.setVisible(esDistribuidor);
-					ciftextfield.setVisible(esDistribuidor);
-					direccion.setVisible(esDistribuidor);
-					direcciontextfield.setVisible(esDistribuidor);
-					telefonotextfield.setVisible(!esDistribuidor);
-					telefono.setVisible(!esDistribuidor);
-					DNI.setVisible(!esDistribuidor);
-					DNItextfield.setVisible(!esDistribuidor);
+				CIF.setVisible(esDistribuidor);
+				ciftextfield.setVisible(esDistribuidor);
+				direccion.setVisible(esDistribuidor);
+				direcciontextfield.setVisible(esDistribuidor);
+				telefonotextfield.setVisible(!esDistribuidor);
+				telefono.setVisible(!esDistribuidor);
+				DNI.setVisible(!esDistribuidor);
+				DNItextfield.setVisible(!esDistribuidor);
 			}
 		});
+		CIF.setVisible(esDistribuidor);
+		ciftextfield.setVisible(esDistribuidor);
+		direccion.setVisible(esDistribuidor);
+		direcciontextfield.setVisible(esDistribuidor);
+		telefonotextfield.setVisible(!esDistribuidor);
+		telefono.setVisible(!esDistribuidor);
+		DNI.setVisible(!esDistribuidor);
+		DNItextfield.setVisible(!esDistribuidor);
 		fieldspinner.setBounds(211, 34, 173, 20);
 		infopanel.add(fieldspinner);
 	}
