@@ -248,7 +248,7 @@ public class ControladorImp extends Controlador {
 	    	System.out.println("Entrando a ModificarClientes - Controlador");
 	    	res = FactoriaSA.getInstance().getSACliente().modificarCliente((TCliente) objeto);
 	    	if (res == -1) gui.update(Eventos.ModificarClienteNoOK, null);
-	    	else if (res == -2) gui.update(Eventos.ModificarClienteNombreNoOK, null);
+	    	else if (res == -2) gui.update(Eventos.ModificarClienteEmailNoOK, null);
 	    	else if (res == -3) gui.update(Eventos.ModificarClienteActivoNoOK, null);
 	    	else gui.update(Eventos.ModificarClienteOK, null);
 	    	break;

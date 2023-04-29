@@ -14,13 +14,8 @@ public class SACliente implements ISACliente {
 	
 	public Integer altaCliente(TCliente cliente) {
 		System.out.println("Intentando altaEmpleado - SACliente");
-		int i;
-		TCliente cli = new TCliente();
-		if(cliente instanceof TDistribuidor)
-			cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteCIF(((TDistribuidor) cliente).getCIF());
-		else if (cliente instanceof TParticular)
-			i = 1;
-		//TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID());
+
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteEmail(cliente.getEmail());
 
 		if (cli.getID().equals(-1)) {
 			System.out.println("altaCliente Realizado (creado) - SACliente");

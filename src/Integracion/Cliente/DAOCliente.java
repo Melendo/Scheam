@@ -46,6 +46,7 @@ public class DAOCliente implements IDAOCliente {
 			
 			sql = "select id_cliente from clientes where nombre = ?";
 			ps = (PreparedStatement) con.prepareStatement(sql);
+			ps.setString(1, cliente.getNombre());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -231,7 +232,7 @@ public class DAOCliente implements IDAOCliente {
 				rs = ps.executeQuery();
 				
 				if(!rs.next()) {
-					ps = con.prepareStatement("select * from particular where id_cliente = ?");
+					ps = con.prepareStatement("select * from particulares where id_cliente = ?");
 					ps.setInt(1, idcliente);
 					
 					rs = ps.executeQuery();
@@ -296,6 +297,75 @@ public class DAOCliente implements IDAOCliente {
 		return result;
 	}
 
+	public TCliente mostrarClienteEmail(String email) {
+		System.out.println("Intentando readByEmail - DAOCliente");
+		TCliente result = new TCliente();
+		try {
+			PreparedStatement ps = con.prepareStatement("select * from clientes where email = ?");
+			ps.setString(1, email);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next())
+				result.setID(-1);
+			else {
+				
+				result.setID(rs.getInt("id_cliente"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEmail(rs.getString("email"));
+				
+				ps = con.prepareStatement("select * from distribuidores where id_cliente = ?");
+				ps.setInt(1, rs.getInt("id_cliente"));
+				
+				rs = ps.executeQuery();
+				
+				if(!rs.next()) {
+					ps = con.prepareStatement("select * from particular where id_cliente = ?");
+					ps.setInt(1, rs.getInt("id_cliente"));
+					
+					rs = ps.executeQuery();
+					TParticular part = new TParticular(); 
+					
+					part.setID(result.getID());
+					part.setNombre(result.getNombre());
+					part.setActivo(true);
+					part.setDNI(rs.getString("DNI"));
+					part.setTelefono(rs.getInt("telefono"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyEmail realizado - DAOCliente");
+					return part;
+				} else {
+					TDistribuidor dist = new TDistribuidor(); 
+
+					dist.setID(result.getID());
+					dist.setNombre(result.getNombre());
+					dist.setActivo(true);
+					dist.setCIF(rs.getString("CIF"));
+					dist.setDireccion(rs.getString("direccion"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyEmail realizado - DAOCliente");
+					return dist;
+				}	
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("ReadybyID realizado - DAOCliente");
+		return result;
+	}
 
 public TCliente mostrarClienteCIF(String cifDistribuidor) {
 	System.out.println("Intentando readByCIF - DAOCliente");
