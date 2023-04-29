@@ -6,6 +6,7 @@ package Negocio.Tareas;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
 
 
@@ -85,18 +86,13 @@ public class SATarea implements ISATarea {
 	}
 
 
-	public Set listarTareas() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TTarea> listarTareas() {
+		Set<TTarea> lista = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
+		System.out.println("mostrarTareas Realizado - SATarea");
+		return lista;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISATarea#listarTareasEquipo(Integer IDEquipo)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Set listarTareasEquipo(Integer IDEquipo) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -122,10 +118,16 @@ public class SATarea implements ISATarea {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public TTarea mostrarTareaID(Integer IDTarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(IDTarea);
+		if (tar.getIdTarea() != -1 && tar.getActivo()){
+		System.out.println("mostrarTarea Realizado - SATarea");
+			return tar;
+			}
+		else { 
+			tar.setIdTarea(-1);
+			System.out.println("mostrarTarea no Realizado - SATarea");
+			return tar;
+		}
 	}
 
 	/** 
@@ -139,4 +141,13 @@ public class SATarea implements ISATarea {
 		return null;
 		// end-user-code
 	}
+
+
+	@Override
+	public Integer modificarTarea(Integer IDTarea) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
