@@ -292,9 +292,52 @@ public class DAOCliente implements IDAOCliente {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ReadybyDNI realizado - DAOCliente");
+		System.out.println("ReadybyID realizado - DAOCliente");
 		return result;
 	}
 
-	
+
+public TCliente mostrarClienteCIF(String cifDistribuidor) {
+	System.out.println("Intentando readByCIF - DAOCliente");
+	TCliente result = new TCliente();
+	try {
+		PreparedStatement ps = con.prepareStatement("select * from distribuidores where cif = ?");
+		ps.setString(1, cifDistribuidor);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (!rs.next())
+			result.setID(-1);
+		else {
+			
+			result.setID(rs.getInt("ID"));
+			((TDistribuidor) result).setDireccion(rs.getString("direccion"));
+			((TDistribuidor) result).setEmail(rs.getString("cif"));
+			
+			ps = con.prepareStatement("select * from clientes where id_cliente = ?");
+			ps.setInt(1, result.getID());
+			
+			rs = ps.executeQuery();
+			
+			TDistribuidor dist = new TDistribuidor();
+			
+			dist.setID(result.getID());
+			dist.setNombre(result.getNombre());
+			dist.setActivo(true);
+			dist.setCIF(rs.getString("CIF"));
+			dist.setDireccion(rs.getString("direccion"));
+		}
+		
+		rs.close();
+		ps.close();
+		con.close();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	System.out.println("ReadybyCIF realizado - DAOCliente");
+	return result;
+}
+
+
 }
