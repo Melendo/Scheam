@@ -34,28 +34,39 @@ public class DAOCliente implements IDAOCliente {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
+			String sql = "INSERT INTO clientes (nombre, email, activo) VALUES (?,?,?);";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getEmail());
+			ps.setBoolean(3, true);
+			
+			ps.executeUpdate();
+			
+			sql = "select id_cliente from clientes where nombre = ?";
+			ps = (PreparedStatement) con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			cliente.setID(rs.getInt(1));
+
+			rs.close();
+			
 			if(cliente instanceof TDistribuidor) {
-				String sql = "INSERT INTO clientes (nombre, email, activo, CIf, direccion) VALUES (?,?,?,?,?);";
+				sql = "INSERT INTO distribuidores (ID, CIf, direccion) VALUES (?,?,?);";
 				ps = con.prepareStatement(sql);
-				TDistribuidor distribuidor = (TDistribuidor) cliente;
-				ps.setString(1, distribuidor.getNombre());
-				ps.setString(2, distribuidor.getEmail());
-				ps.setBoolean(3, true);
-				ps.setString(4, distribuidor.getCIF());
-				ps.setString(5, distribuidor.getDireccion());
+				ps.setInt(1, cliente.getID());
+				ps.setString(2, ((TDistribuidor) cliente).getCIF());
+				ps.setString(3, ((TDistribuidor) cliente).getDireccion());
 				ps.executeUpdate();
-			} else {
-				String sql = "INSERT INTO clientes (nombre, email, activo, DNI, telefono) VALUES (?,?,?,?,?);";
+			} else if (cliente instanceof TParticular){
+				sql = "INSERT INTO particulares (ID, DNI, telefono) VALUES (?,?,?);";
 				ps = con.prepareStatement(sql);
-				TParticular particular = (TParticular) cliente;
-				ps.setString(1, particular.getNombre());
-				ps.setString(2, particular.getEmail());
-				ps.setBoolean(3, true);
-				ps.setString(4, particular.getDNI());
-				ps.setInt(5, particular.getTelefono());
+				ps.setInt(1, cliente.getID());
+				ps.setString(2, ((TParticular) cliente).getDNI());
+				ps.setInt(3, ((TParticular) cliente).getTelefono());
 				ps.executeUpdate();
 			}
-			
+			ps.close();
 			stmt.close();
 			con.close();
 			System.out.println("Create Realizado - DAOCliente");
@@ -93,6 +104,9 @@ public class DAOCliente implements IDAOCliente {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
+			
+			
+			
 			if(cliente instanceof TDistribuidor) {
 				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
 				ps = con.prepareStatement(sql);
