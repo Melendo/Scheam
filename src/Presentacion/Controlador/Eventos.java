@@ -102,6 +102,9 @@ public class Eventos {
 	
 	public static final int VistaCerrarProducto = 360;
 	public static final int CerrarProducto = 361;
+	public static final int CerrarProductoOK = 362;
+	public static final int CerrarProductoNoOK = 363;
+	public static final int CerrarProductoNoOK2 = 364;
 
     ////////////////////////////////////////////////////////////////////////
 	

@@ -191,6 +191,18 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarProductoID, null);
 	    	}
 	    	break;
+	    case Eventos.VistaCerrarProducto:
+	    	System.out.println("Entrando a VistaCerrarProducto - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.CerrarProducto:
+	    	System.out.println("Entrando a CerrarProducto - Controlador");
+	    	res = FactoriaSA.getInstance().getSAProducto().cerrarProducto((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.CerrarProductoNoOK, null);
+	    	else if(res == -2) gui.update(Eventos.CerrarProductoNoOK2, null);
+	    	else gui.update(Eventos.CerrarProductoOK, objeto);
+	    	break;
 	    case Eventos.MainWindowCliente:
 	    	System.out.println("Entrando a MainWindowClienteOpen - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
