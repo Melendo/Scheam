@@ -127,7 +127,7 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 		//METER DIRECCION SI ES DISTRIBUIDOR
 		JLabel direccion = new JLabel("Direccion: ");
 		direccion.setBounds(67, 140, 130, 14);
-		infopanel.add(CIF);
+		infopanel.add(direccion);
 		
 		direcciontextfield = new JTextField();
 		direcciontextfield.setBounds(183, 140, 215, 17);
