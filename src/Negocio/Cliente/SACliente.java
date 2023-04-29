@@ -14,6 +14,11 @@ public class SACliente implements ISACliente {
 	
 	public Integer altaCliente(TCliente cliente) {
 		System.out.println("Intentando altaEmpleado - SACliente");
+		int i;
+		if(cliente instanceof TDistribuidor)
+			i = 0;
+		else if (cliente instanceof TParticular)
+			i = 1;
 		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID());
 
 		if (cli.getID().equals(-1)) {
