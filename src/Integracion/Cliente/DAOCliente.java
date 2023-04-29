@@ -153,6 +153,7 @@ public class DAOCliente implements IDAOCliente {
 			if (!rs.next()) {
 				return result;
 			} else {
+				/*
 				aux = new TCliente();
 				if(aux instanceof TDistribuidor) {
 					TDistribuidor distribuidor = (TDistribuidor) aux;
@@ -197,7 +198,7 @@ public class DAOCliente implements IDAOCliente {
 				}
 				rs.close();
 				ps.close();
-				con.close();
+				con.close();*/
 			}
 			
 			System.out.println("Readall realizado - DAOCliente");
