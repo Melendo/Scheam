@@ -223,13 +223,85 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Integer anyadirIntegrante(Integer idempleado, Integer idequipo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("Intentando añadirIntegrante - DAOEquipo");
+		try {
+			PreparedStatement ps;
+						
+			String sql = "INSERT INTO pertenece (ID_equipo, ID_empleado, activo) VALUES (?,?,?);";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, idequipo);
+			ps.setInt(2, idempleado);
+			ps.setBoolean(3, true);
+
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			
+			System.out.println("añadirIntegrante Realizado - DAOEquipo");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	public Integer bajaIntegrante(Integer idempleado, Integer idequipo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando bajaIntegrante - DAOEquipo");
+		try {
+			PreparedStatement ps;
+						
+			String sql = "UPDATE pertenece set activo = false where ID_equipo = ? and ID_empleado = ?;";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, idequipo);
+			ps.setInt(2, idempleado);
+
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			
+			System.out.println("bajaIntegrante Realizado - DAOEquipo");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
+	}
+	
+	public boolean pertenece(Integer idempleado, Integer idequipo) {
+		
+		System.out.println("Intentando pertenece - DAOEquipo");
+		boolean found;
+		try {
+			
+			PreparedStatement ps;						
+			String sql = "select * from equipo where ID_equipo = ? and ID_empleado = ?;";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, idequipo);
+			ps.setInt(2, idempleado);
+
+			ResultSet rs = 	ps.executeQuery();
+			
+			if(rs.next()) found = true;			
+			else found = false;
+		
+			ps.close();
+			con.close();
+			
+			System.out.println("pertenece Realizado - DAOEquipo");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return found;
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado) {
