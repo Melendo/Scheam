@@ -4,6 +4,8 @@ import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
 import Negocio.Cliente.TParticular;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TEquipoDesarrollo;
+import Negocio.Equipo.TEquipoDisenio;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,28 +36,39 @@ public class DAOCliente implements IDAOCliente {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
+			String sql = "INSERT INTO clientes (nombre, email, activo) VALUES (?,?,?);";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getEmail());
+			ps.setBoolean(3, true);
+			
+			ps.executeUpdate();
+			
+			sql = "select id_cliente from clientes where nombre = ?";
+			ps = (PreparedStatement) con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			cliente.setID(rs.getInt(1));
+
+			rs.close();
+			
 			if(cliente instanceof TDistribuidor) {
-				String sql = "INSERT INTO clientes (nombre, email, activo, CIf, direccion) VALUES (?,?,?,?,?);";
+				sql = "INSERT INTO distribuidores (ID, CIf, direccion) VALUES (?,?,?);";
 				ps = con.prepareStatement(sql);
-				TDistribuidor distribuidor = (TDistribuidor) cliente;
-				ps.setString(1, distribuidor.getNombre());
-				ps.setString(2, distribuidor.getEmail());
-				ps.setBoolean(3, true);
-				ps.setString(4, distribuidor.getCIF());
-				ps.setString(5, distribuidor.getDireccion());
+				ps.setInt(1, cliente.getID());
+				ps.setString(2, ((TDistribuidor) cliente).getCIF());
+				ps.setString(3, ((TDistribuidor) cliente).getDireccion());
 				ps.executeUpdate();
-			} else {
-				String sql = "INSERT INTO clientes (nombre, email, activo, DNI, telefono) VALUES (?,?,?,?,?);";
+			} else if (cliente instanceof TParticular){
+				sql = "INSERT INTO particulares (ID, DNI, telefono) VALUES (?,?,?);";
 				ps = con.prepareStatement(sql);
-				TParticular particular = (TParticular) cliente;
-				ps.setString(1, particular.getNombre());
-				ps.setString(2, particular.getEmail());
-				ps.setBoolean(3, true);
-				ps.setString(4, particular.getDNI());
-				ps.setInt(5, particular.getTelefono());
+				ps.setInt(1, cliente.getID());
+				ps.setString(2, ((TParticular) cliente).getDNI());
+				ps.setInt(3, ((TParticular) cliente).getTelefono());
 				ps.executeUpdate();
 			}
-			
+			ps.close();
 			stmt.close();
 			con.close();
 			System.out.println("Create Realizado - DAOCliente");
@@ -93,32 +106,32 @@ public class DAOCliente implements IDAOCliente {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			if(cliente instanceof TDistribuidor) {
-				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, direccion = ?, CIF = ? where id_empleado = ?";
-				ps = con.prepareStatement(sql);
-				TDistribuidor distribuidor = (TDistribuidor) cliente;
-				ps.setString(1, distribuidor.getNombre());
-				ps.setString(2, distribuidor.getEmail());
-				ps.setBoolean(3, distribuidor.getActivo());
-				ps.setString(4, distribuidor.getDireccion());
-				ps.setString(5, distribuidor.getCIF());
-				ps.setInt(8, distribuidor.getID());
-				ps.executeUpdate();
-				ps.close();
-			} else {
-				String sql = "UPDATE clientes set nombre = ?,  email = ?, activo = ?, DNI = ?, telefono = ? where id_empleado = ?";
-				ps = con.prepareStatement(sql);
-				TParticular particular = (TParticular) cliente;
-				ps.setString(1, particular.getNombre());
-				ps.setString(2, particular.getEmail());
-				ps.setBoolean(3, particular.getActivo());
-				ps.setString(4, particular.getDNI());
-				ps.setInt(5, particular.getTelefono());
-				ps.setInt(8, particular.getID());
-				ps.executeUpdate();
-				ps.close();
-			}			
 			
+			String sql = "UPDATE clientes set nombre = ?, email = ?, activo = ? where id_cliente = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, cliente.getNombre());
+			ps.setString(2, cliente.getEmail());
+			ps.setBoolean(3, cliente.getActivo());
+			ps.setInt(4, cliente.getID());
+			
+			if(cliente instanceof TDistribuidor) {
+				sql = "UPDATE distribuidores set direccion = ?, CIF = ? where id_cliente = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, ((TDistribuidor) cliente).getDireccion());
+				ps.setString(2, ((TDistribuidor) cliente).getCIF());
+				ps.setInt(3, cliente.getID());
+				ps.executeUpdate();
+				
+			} else if(cliente instanceof TParticular){
+				sql = "UPDATE particulares set DNI = ?, telefono = ? where id_empleado = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, ((TParticular) cliente).getDNI());
+				ps.setInt(2, ((TParticular) cliente).getTelefono());
+				ps.setInt(3, cliente.getID());
+				ps.executeUpdate();
+			}			
+			ps.close();
 			stmt.close();
 			con.close();
 			
@@ -134,14 +147,13 @@ public class DAOCliente implements IDAOCliente {
 		System.out.println("Intentando readAll - DAOCliente");
 		Set<TCliente> result = new HashSet<TCliente>();
 		TCliente aux;
-		//TParticular particular;
-		//TDistribuidor distribuidor;
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE activo");
 			ResultSet rs = ps.executeQuery();
 			if (!rs.next()) {
 				return result;
 			} else {
+				/*
 				aux = new TCliente();
 				if(aux instanceof TDistribuidor) {
 					TDistribuidor distribuidor = (TDistribuidor) aux;
@@ -186,7 +198,7 @@ public class DAOCliente implements IDAOCliente {
 				}
 				rs.close();
 				ps.close();
-				con.close();
+				con.close();*/
 			}
 			
 			System.out.println("Readall realizado - DAOCliente");
@@ -200,7 +212,7 @@ public class DAOCliente implements IDAOCliente {
 		System.out.println("Intentando readByID - DAOCliente");
 		TCliente result = new TCliente();
 		try {
-			PreparedStatement ps = con.prepareStatement("select * from empleados where id_cliente = ?");
+			PreparedStatement ps = con.prepareStatement("select * from clientes where id_cliente = ?");
 			ps.setInt(1, idcliente);
 
 			ResultSet rs = ps.executeQuery();
@@ -208,6 +220,52 @@ public class DAOCliente implements IDAOCliente {
 			if (!rs.next())
 				result.setID(-1);
 			else {
+				
+				result.setID(rs.getInt("id_cliente"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEmail(rs.getString("email"));
+				
+				ps = con.prepareStatement("select * from distribuidores where id_cliente = ?");
+				ps.setInt(1, idcliente);
+				
+				rs = ps.executeQuery();
+				
+				if(!rs.next()) {
+					ps = con.prepareStatement("select * from particular where id_cliente = ?");
+					ps.setInt(1, idcliente);
+					
+					rs = ps.executeQuery();
+					TParticular part = new TParticular(); 
+					
+					part.setID(result.getID());
+					part.setNombre(result.getNombre());
+					part.setActivo(true);
+					part.setDNI(rs.getString("DNI"));
+					part.setTelefono(rs.getInt("telefono"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyID realizado - DAOCliente");
+					return part;
+				} else {
+					TDistribuidor dist = new TDistribuidor(); 
+
+					dist.setID(result.getID());
+					dist.setNombre(result.getNombre());
+					dist.setActivo(true);
+					dist.setCIF(rs.getString("CIF"));
+					dist.setDireccion(rs.getString("direccion"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyID realizado - DAOCliente");
+					return dist;
+				}
+				/*
 				if(result instanceof TDistribuidor) {
 					TDistribuidor distribuidor = (TDistribuidor) result;
 					distribuidor.setID(rs.getInt("id_cliente"));
@@ -224,7 +282,7 @@ public class DAOCliente implements IDAOCliente {
 					particular.setDNI(rs.getString("DNI"));
 					particular.setTelefono(rs.getInt("telefono"));
 					particular.setActivo(rs.getBoolean("activo"));
-				}				
+				}		*/		
 			}
 			
 			rs.close();
