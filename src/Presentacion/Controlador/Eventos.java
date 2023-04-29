@@ -129,4 +129,34 @@ public static final int MainWindowCliente = 400;
 	
 	public static final int VistaListarCliente = 445;
 	public static final int ListarCliente = 446;
+	
+    ////////////////////////////////////////////////////////////////////////
+	
+	public static final int VistaAltaTarea = 500;
+	public static final int AltaTarea = 511;
+	public static final int AltaTareaOK = 512;
+	public static final int AltaTareaNoOK = 513;
+	public static final int AltaTareaOKReactivar = 514;
+	
+	public static final int VistaBajaTarea = 520;
+	public static final int BajaTarea = 521;
+	public static final int BajaTareaOK = 522;
+	public static final int BajaTareaNoOK = 523;
+	public static final int BajaTareaNoOK2 = 524;
+	
+	public static final int VistaModificarTarea = 530;
+	public static final int ModificarTarea = 531;
+	public static final int ModificarTareaOK = 532;
+	public static final int ModificarTareaNoOK = 533;
+	public static final int ModificarTareaNombreNoOK = 534;
+	public static final int ModificarTareaActivoNoOK = 535;
+	
+	public static final int VistaFormMostrarTareasID = 540;
+	public static final int VistaMostrarTareasID = 541;
+	public static final int MostrarTareasID = 542;
+	public static final int MostrarTareasIDOK = 543;
+	public static final int MostrarTareasIDNoOK = 544;
+	
+	public static final int VistaListarTareas = 445;
+	public static final int ListarTareas = 446;
 }
