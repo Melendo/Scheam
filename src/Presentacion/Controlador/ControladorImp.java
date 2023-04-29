@@ -8,6 +8,7 @@ import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Producto.TProducto;
+import Negocio.Tareas.TTarea;
 import Presentacion.IGUI;
 import Presentacion.Factorias.FactoriaVistas;
 
@@ -257,6 +258,78 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarClienteID, null);
 	    	}
 	    	break;
+	    case Eventos.MainWindowTarea:
+	    	System.out.println("Entrando a MainWindowTareaOpen - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.VistaAltaTarea:
+	    	System.out.println("Entrando a VistaAltaTarea - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	        break;
+	    case Eventos.AltaTarea:
+	    	System.out.println("Entrando a AltaTarea - Controlador");
+	    	res = FactoriaSA.getInstance().getSATarea().altaTarea((TTarea) objeto);
+	    	if (res == -1) gui.update(Eventos.AltaTareaNoOK, null); 
+	    	else if (res == 2) gui.update(Eventos.AltaTareaOKReactivar, null);
+	    	else gui.update(Eventos.AltaTareaOK, null);
+	    	break;
+	    case Eventos.VistaBajaTarea:
+	    	System.out.println("Entrando a VistaBajaTarea - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.BajaTarea:
+	    	System.out.println("Entrando a BajaTarea - Controlador");
+	    	res = FactoriaSA.getInstance().getSATarea().bajaTarea((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.BajaTareaNoOK, null);
+	    	else if(res == -2) gui.update(Eventos.BajaTareaNoOK2, null);
+	    	else gui.update(Eventos.BajaTareaOK, objeto);
+	    	break;
+	    case Eventos.ListarTareas:
+	    	System.out.println("Entrando a ListarTarea - Controlador");
+	    	Set<TTarea> listaTar = FactoriaSA.getInstance().getSATarea().listarTareas();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareas, null);
+	    	gui.update(event, listaTar);
+	    	gui.update(Eventos.VistaListarTareas, null);
+	    	break;
+	    case Eventos.VistaModificarTarea:
+	    	System.out.println("Entrando a VistaModificarTareas - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.ModificarTarea:
+	    	System.out.println("Entrando a ModificarTareas - Controlador");
+	    	res = FactoriaSA.getInstance().getSATarea().modificarTarea((TTarea) objeto);
+	    	if (res == -1) gui.update(Eventos.ModificarTareaNoOK, null);
+	    	else if (res == -2) gui.update(Eventos.ModificarTareaNombreNoOK, null);
+	    	else if (res == -3) gui.update(Eventos.ModificarTareaActivoNoOK, null);
+	    	else gui.update(Eventos.ModificarTareaOK, null);
+	    	break;
+	    case Eventos.VistaFormMostrarTareasID:
+	    	System.out.println("Entrando a VistaFormMostrarClienteID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event,null);
+	    	break;
+	    case Eventos.VistaMostrarTareasID:
+	    	System.out.println("Entrando a VistaMostrarTareasID - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.MostrarTareasID:
+	    	System.out.println("Entrando a MostrarTareasID - Controlador");
+	    	TTarea tar = FactoriaSA.getInstance().getSATarea().mostrarTareaID((int) objeto);
+	    	if(tar.getIdTarea() == -1) {
+	    		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarTareasID, null);
+	    		gui.update(Eventos.MostrarTareasIDNoOK, null);
+	    	}
+	    	else {
+	        	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarTareasID, null);
+	        	gui.update(event,  tar);
+	        	gui.update(Eventos.VistaMostrarTareasID, null);
+	    	}
+	    	
 	    }
     }
 }
