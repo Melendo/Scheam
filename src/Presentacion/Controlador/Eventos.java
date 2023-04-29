@@ -132,7 +132,9 @@ public static final int MainWindowCliente = 400;
 	
     ////////////////////////////////////////////////////////////////////////
 	
-	public static final int VistaAltaTarea = 500;
+	public static final int MainWindowTarea = 500;
+	
+	public static final int VistaAltaTarea = 510;
 	public static final int AltaTarea = 511;
 	public static final int AltaTareaOK = 512;
 	public static final int AltaTareaNoOK = 513;
