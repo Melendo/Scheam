@@ -83,15 +83,19 @@ public class SAEmpleado implements ISAEmpleado {
 
 	public Set<TEmpleado> listarEmpleados() {
 		Set<TEmpleado> lista = FactoriaDAOImp.getInstance().getDaoEmpleado().readAll();
+		System.out.println("listarEmpleados Realizado - SAEmpleado");
 		return lista;
 	}
 
 	public TEmpleado mostrarEmpleadoID(Integer Id) {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(Id);
-		if (emp.getIdEmpleado() != -1 && emp.getActivo())
+		if (emp.getIdEmpleado() != -1 && emp.getActivo()) {
+			System.out.println("mostrarEmpleadoID Realizado - SAEmpleado");
 			return emp;
+		}
 		else { 
 			emp.setIdEmpleado(-1);
+			System.out.println("mostrarEmpleadoID no realizado (empleado no existe o no esta activo) - SAEmpleado");
 			return emp;
 		}
 	}
@@ -101,9 +105,11 @@ public class SAEmpleado implements ISAEmpleado {
 		Set<TEmpleado> lista;
 
 		if (daoeq.readByID(idEquipo).getIdEquipo() == -1) {
+			System.out.println("ListarEquiposEmpleado no realizado (equipo no existe o esta inactivo)- SAEmpleado");
 			return null;
 		} else {
 			lista = FactoriaDAOImp.getInstance().getDaoEmpleado().listarIdEquipo(idEquipo);
+			System.out.println("listarIntegrantesIdEquipo Realizado - SAEmpleado");
 			return lista;
 		}
 	}
