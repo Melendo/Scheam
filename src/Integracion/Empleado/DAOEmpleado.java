@@ -211,7 +211,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ReadybyDNI realizado - DAOEmpleado");
+		System.out.println("ReadybyId realizado - DAOEmpleado");
 		return result;
 	}
 
