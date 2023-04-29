@@ -34,7 +34,7 @@ public class VistaFormMostrarProductoID extends JFrame implements IGUI{
 
 	public void vFormMostrarProductoID() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Mostrar Empleado por ID");
+		setTitle("Mostrar Producto por ID");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormMostrarProductoID.class.getResource("/icons/generales/listar_uno-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
@@ -47,7 +47,7 @@ public class VistaFormMostrarProductoID extends JFrame implements IGUI{
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Buscar ID Empleado");
+		JLabel logo = new JLabel("      Buscar ID Producto");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
 		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormMostrarProductoID.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
