@@ -97,8 +97,11 @@ public class Eventos {
 	public static final int MostrarProductoIDOK = 343;
 	public static final int MostrarProductoIDNoOK = 344;
 	
-	public static final int VistaListarProducto = 345;
-	public static final int ListarProducto = 346;
+	public static final int VistaListarProducto = 350;
+	public static final int ListarProducto = 351;
+	
+	public static final int VistaCerrarProducto = 360;
+	public static final int CerrarProducto = 361;
 
     ////////////////////////////////////////////////////////////////////////
 	

@@ -63,6 +63,7 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		
 		JPanel buttonpanel = new JPanel();
 		getContentPane().add(buttonpanel, BorderLayout.CENTER);
+		buttonpanel.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton altabutton = new JButton("Alta producto");
 		altabutton.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -75,7 +76,7 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 				dispose();
 			}
 		});
-		buttonpanel.setLayout(new GridLayout(0, 3, 0, 0));
+		
 		buttonpanel.add(altabutton);
 		
 		JButton bajabutton = new JButton("Baja producto");
@@ -133,7 +134,19 @@ public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 		});
 		buttonpanel.add(listidbutton);
 
-
+		JButton cerrarbutton = new JButton("Cerrar producto"); 
+		cerrarbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/productos/cerrar_producto-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		cerrarbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		cerrarbutton.setHorizontalTextPosition(SwingConstants.CENTER);
+		cerrarbutton.setBackground(Color.WHITE);
+		cerrarbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaCerrarProducto, null);
+				dispose();
+			}
+		});
+		buttonpanel.add(cerrarbutton);
 		
 	}
 
