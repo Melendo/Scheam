@@ -1,37 +1,60 @@
-/**
- * 
- */
 package Presentacion.Producto;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+
+import Negocio.Empleado.TEmpleado;
+import Negocio.Producto.TProducto;
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
+
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.HashSet;
+import java.util.Set;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public class VistaMostrarProductoID extends JFrame implements IGUI, ActionListener {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
+	private JPanel contentPane;
+	private JTable table;
+	
+	private ProductosTableModel productosmodel;
+	
+	public VistaMostrarProductoID() {
+		vMostrarProductoID();
+	}
+	
 	public void vMostrarProductoID() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarProductos.class.getResource("/icons/producto.png")));
+		setTitle("Mostrar Producto por ID");
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowProducto, null);
+			}
+		});
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		productosmodel = new ProductosTableModel();
+		table = new JTable(productosmodel);
+		JScrollPane tablesp = new JScrollPane(table);
+		contentPane.add(tablesp, BorderLayout.CENTER);
+		
+		setVisible(false);
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IGUI#update()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void update() {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -39,15 +62,30 @@ public class VistaMostrarProductoID extends JFrame implements IGUI, ActionListen
 		// end-user-code
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ActionListener#actionPerformed(ActionEvent e)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void actionPerformed(ActionEvent e) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
 		// end-user-code
 	}
+
+	@Override
+	public void update(int event, Object object) {
+		switch(event) {
+		case Eventos.VistaMostrarProductoID:
+			setVisible(true);
+			break;
+		case Eventos.MostrarProductoID:
+			Set<TProducto> lista = new HashSet<>();
+			lista.add((TProducto) object);
+			productosmodel.setLista(lista);
+			productosmodel.fireTableStructureChanged();
+			break;
+		case Eventos.MostrarProductoIDOK:
+			JOptionPane.showMessageDialog(null, "Error. El producto no existe");
+			Controlador.getInstance().update(Eventos.VistaFormMostrarProductoID, null);
+			break;
+		}
+	}
+		
 }
