@@ -122,7 +122,7 @@ public class VistaBajaProducto extends JFrame implements IGUI, ActionListener {
 			cerrar = false;
 			break;
 		case Eventos.BajaProductoNoOK2:
-			JOptionPane.showMessageDialog(null, "Error al dar de Baja. Empleado ya dado de Baja");
+			JOptionPane.showMessageDialog(null, "Error al dar de Baja. Producto ya dado de Baja");
 			cerrar = false;
 			break;
 		}

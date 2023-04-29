@@ -21,6 +21,7 @@ import Presentacion.Equipo.VistaAltaEquipo;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
 import Presentacion.Producto.VistaBajaProducto;
+import Presentacion.Producto.VistaCerrarProducto;
 import Presentacion.Producto.VistaFormMostrarProductoID;
 import Presentacion.Producto.VistaListarProductos;
 import Presentacion.Producto.VistaModificarProducto;
@@ -88,6 +89,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarProductoID:
 			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
 			return new VistaMostrarProductoID();
+		case Eventos.VistaCerrarProducto:
+			System.out.println("Entrando a VistaCerrarProducto - FactoriaVistasImp");
+			return new VistaCerrarProducto();
 		case Eventos.MainWindowCliente:// <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowCliente - FactoriaVistasImp");
 			return new MainWindowCliente();

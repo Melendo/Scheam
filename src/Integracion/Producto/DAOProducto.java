@@ -200,7 +200,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE productos set activo = false where id_proyecto = ?";
+			String sql = "UPDATE productos set terminado = true where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idproducto);
 			ps.executeUpdate();

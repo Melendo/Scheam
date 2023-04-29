@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -123,7 +124,23 @@ public class VistaCerrarProducto extends JFrame implements IGUI, ActionListener 
 
 	@Override
 	public void update(int event, Object object) {
-		// TODO Auto-generated method stub
+		switch(event) {
+		case Eventos.VistaCerrarProducto:
+			setVisible(true);
+			break;
+		case Eventos.CerrarProductoOK:
+			JOptionPane.showMessageDialog(null, "Éxito cerrando el producto");
+			Controlador.getInstance().update(Eventos.MainWindowProducto, null);
+			break;
+		case Eventos.CerrarProductoNoOK:
+			JOptionPane.showMessageDialog(null, "Error al Cerrar el producto");
+			cerrar = false;
+			break;
+		case Eventos.CerrarProductoNoOK2:
+			JOptionPane.showMessageDialog(null, "Error al cerrar el producto. Producto ya cerrado");
+			cerrar = false;
+			break;
+		}
 		
 	}
 }
