@@ -126,12 +126,15 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer retirarIntegrante(Integer IDEmpleado, Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		if(FactoriaDAOImp.getInstance().getDaoEquipo().empleadoEstaEnEquipo(IDEmpleado, IDEquipo) == -1) {
+			System.out.println("retirarIntegrante no realizado (El empleado no esta en el equipo)- SAEquipo");
+			return -1;
+		}
+		else {
+			System.out.println("retirarIntegrante realizado - SAEquipo");
+			return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(IDEmpleado, IDEquipo);
+		}
 	}
-
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer IDEmpleado) {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
 		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
