@@ -100,10 +100,29 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer anyadirIntegrante(Integer IDEmpleado, Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		
+		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
+			System.out.println("AñadirIntegrante no realizado (empleado no existe o esta inactivo)- SAEquipo");
+			return -1;
+		}
+		else {
+			TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
+			if (equ.getIdEquipo() == -1 || !equ.getActivo()){
+				System.out.println("AñadirIntegrante no realizado (equipo no existe o esta inactivo)- SAEquipo");
+				return -1;
+			}
+			else {
+				if(FactoriaDAOImp.getInstance().getDaoEquipo().empleadoEstaEnEquipo(IDEmpleado, IDEquipo) == 1) {
+					System.out.println("AñadirIntegrante no realizado (El empleado ya esta en el equipo)- SAEquipo");
+					return -1;
+				}
+				else {
+					System.out.println("AñadirIntegrante realizado - SAEquipo");
+					return FactoriaDAOImp.getInstance().getDaoEquipo().anyadirIntegrante(IDEmpleado, IDEquipo);
+				}
+			}
+		}
 	}
 
 	public Integer retirarIntegrante(Integer IDEmpleado, Integer IDEquipo) {

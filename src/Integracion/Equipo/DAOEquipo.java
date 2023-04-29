@@ -167,5 +167,11 @@ public class DAOEquipo implements IDAOEquipo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Integer empleadoEstaEnEquipo(Integer idempleado, Integer idequipo) {
+		
+		return null;
+	}
 		
 }

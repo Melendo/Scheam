@@ -24,4 +24,6 @@ public interface IDAOEquipo {
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado);
 	
 	public TEquipo readByNombre(String nombre);
+	
+	public Integer empleadoEstaEnEquipo(Integer idempleado, Integer idequipo);
 }
