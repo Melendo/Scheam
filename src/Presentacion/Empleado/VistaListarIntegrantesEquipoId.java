@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Eventos;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
@@ -18,9 +19,13 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI, ActionListener {
+public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 	private JPanel contentPane;
 	private JTextField idtextfield;
+	
+	public VistaListarIntegrantesEquipoId() {
+		vListarIntegrantesEquipoId();
+	}
 	
 	public void vListarIntegrantesEquipoId() {
 		setMinimumSize(new Dimension(500, 360));
@@ -74,12 +79,12 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI, Acti
 		infopanel.add(cancelbutton);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		
-	}
-
 	@Override
 	public void update(int event, Object object) {
-		
+		switch(event) {
+		case Eventos.VistaListarIntegrantesEquipo:
+			setVisible(true);
+			break;
+		}
 	}
 }
