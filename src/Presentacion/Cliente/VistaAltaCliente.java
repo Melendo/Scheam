@@ -24,6 +24,8 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 	private JTextField nombretextfield;
 	private JTextField direcciontextfield;
 	private JTextField telefonotextfield;
+	private JTextField ciftextfield;
+	private JTextField emailtextfield;
 	
 	private boolean esDistribuidor = false;
 	private boolean cerrar = true;
@@ -41,12 +43,16 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 		if (esDistribuidor) {
 			cliente = new TDistribuidor();
 			cliente.setNombre(nombretextfield.getText());
+			cliente.setEmail(emailtextfield.getText());
 			((TDistribuidor) cliente).setDireccion(direcciontextfield.getText());
-			
+			((TDistribuidor) cliente).setCIF(ciftextfield.getText());
 		} else {
 			cliente = new TParticular();
 			cliente.setNombre(nombretextfield.getText());
-			//((TParticular) cliente).setTelefono(telefonotextfield.getText());
+			cliente.setEmail(emailtextfield.getText());
+			((TParticular) cliente).settelefono(Integer.parseInt(telefonotextfield.getText()));
+			((TParticular) cliente).setCIF(ciftextfield.getText());
+			
 		}
 		Controlador.getInstance().update(Eventos.AltaEquipo, cliente);
 		if (cerrar)
