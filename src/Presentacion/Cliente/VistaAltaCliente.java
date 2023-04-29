@@ -74,8 +74,9 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 		tipoCliente.setBounds(78, 37, 130, 14);
 		infopanel.add(tipoCliente);
 		
+		//METER NOMBRE
 		JLabel nombre = new JLabel("Nombre: ");
-		nombre.setBounds(67, 106, 130, 14);
+		nombre.setBounds(67, 79, 130, 14);
 		infopanel.add(nombre);
 		
 		nombretextfield = new JTextField();
@@ -83,48 +84,53 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 		infopanel.add(nombretextfield);
 		nombretextfield.setColumns(10);
 		
+		//METER EMAIL
 		JLabel Email = new JLabel("Email: ");
-		Email.setBounds(67, 106, 130, 14);
+		Email.setBounds(67, 100, 130, 14);
 		infopanel.add(Email);
 		
 		emailtextfield = new JTextField();
-		emailtextfield.setBounds(183, 104, 215, 17);
+		emailtextfield.setBounds(183, 100, 215, 17);
 		infopanel.add(emailtextfield);
 		emailtextfield.setColumns(10);
 		
+		//METER TELEFONO SI ES PARTICULAR
 		JLabel telefono = new JLabel("Telefono: ");
-		telefono.setBounds(67, 106, 130, 14);
+		telefono.setBounds(67, 120, 130, 14);
 		infopanel.add(telefono);
 		
 		telefonotextfield = new JTextField();
-		telefonotextfield.setBounds(183, 104, 215, 17);
+		telefonotextfield.setBounds(183, 120, 215, 17);
 		infopanel.add(telefonotextfield);
 		telefonotextfield.setColumns(10);
 		
+		//METER DNI SI ES PARTICULAR
 		JLabel DNI = new JLabel("DNI: ");
-		DNI.setBounds(67, 106, 130, 14);
+		DNI.setBounds(67, 140, 130, 14);
 		infopanel.add(DNI);
 		
 		DNItextfield = new JTextField();
-		DNItextfield.setBounds(183, 104, 215, 17);
+		DNItextfield.setBounds(183, 140, 215, 17);
 		infopanel.add(DNItextfield);
 		DNItextfield.setColumns(10);
 		
+		//METER CIF SI ES DISTRIBUIDOR
 		JLabel CIF = new JLabel("CIF: ");
-		CIF.setBounds(67, 106, 130, 14);
+		CIF.setBounds(67, 120, 130, 14);
 		infopanel.add(CIF);
 		
 		ciftextfield = new JTextField();
-		ciftextfield.setBounds(183, 104, 215, 17);
+		ciftextfield.setBounds(183, 120, 215, 17);
 		infopanel.add(ciftextfield);
 		ciftextfield.setColumns(10);
 		
+		//METER DIRECCION SI ES DISTRIBUIDOR
 		JLabel direccion = new JLabel("Direccion: ");
-		direccion.setBounds(67, 106, 130, 14);
+		direccion.setBounds(67, 140, 130, 14);
 		infopanel.add(CIF);
 		
 		direcciontextfield = new JTextField();
-		direcciontextfield.setBounds(183, 104, 215, 17);
+		direcciontextfield.setBounds(183, 140, 215, 17);
 		infopanel.add(direcciontextfield);
 		direcciontextfield.setColumns(10);
 		
