@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
+import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
@@ -108,27 +109,38 @@ public class DAOEquipo implements IDAOEquipo {
 		try {
 			PreparedStatement ps;
 						
-			String sql = "UPDATE equipo set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ?, activo = ? where id_empleado = ?";
+			String sql = "UPDATE equipo set nombre = ? where id_empleado = ?";
 			ps = con.prepareStatement(sql);
 			
-			if (equipo instanceof TEquipoDesarrollo) {
-				sql = "UPDATE equipo set nombre = ?, tecnologia = ?, activo = ? WHERE id_equipo = ?";
-			}
+			ps.setString(1, equipo.getNombre());
+			ps.setInt(8, equipo.getIdEquipo());
 			
-			/*ps.setString(1, empleado.getNombre());
-			ps.setString(2, empleado.getApellidos());
-			ps.setString(3, empleado.getDNI());
-			ps.setString(4, empleado.getE_mail());
-			ps.setInt(5, empleado.getTlfn());
-			ps.setDouble(6, empleado.getSueldo());
-			ps.setBoolean(7, empleado.getActivo());
-			ps.setInt(8, empleado.getIdEmpleado());*/
 			ps.executeUpdate();
+
+			
+			if (equipo instanceof TEquipoDesarrollo) {
+				sql = "UPDATE equipodesarrollo set tecnologia = ? WHERE id_equipo = ?";
+				ps = con.prepareStatement(sql);
+				
+				ps.setString(1, ((TEquipoDesarrollo) equipo).getTecnologia());
+				ps.setInt(2, equipo.getIdEquipo());
+				ps.executeUpdate();
+
+			}else if(equipo instanceof TEquipoDisenio) {
+				sql = "UPDATE equipodisenño set campo_diseño = ? WHERE id_equipo = ?";
+				ps = con.prepareStatement(sql);
+				
+				ps.setString(1, ((TEquipoDisenio) equipo).getCampoDisenio());
+				ps.setInt(2, equipo.getIdEquipo());
+				ps.executeUpdate();
+
+			}
+
 			
 			ps.close();
 			con.close();
 			
-			System.out.println("Modify Realizado - DAOEmpleado");
+			System.out.println("Modify Realizado - DAOEquipo");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,8 +155,71 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public TEquipo readByID(Integer idequipo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando readByID - DAOEquipo");
+		TEquipo result = new TEquipo();
+
+
+		
+		try {
+			PreparedStatement ps = con.prepareStatement("select * from equipo where id_empleado = ?");
+			ps.setInt(1, idequipo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next())
+				result.setIdEquipo(-1);
+			else {
+				
+				result.setIdEquipo(rs.getInt("id_equipo"));
+				result.setNombre(rs.getString("nombre"));
+				
+				ps = con.prepareStatement("select * from equipodesarrollo where id_empleado = ?");
+				ps.setInt(1, idequipo);
+				
+				rs = ps.executeQuery();
+				if(!rs.next()) {
+					ps = con.prepareStatement("select * from equipodiseño where id_empleado = ?");
+					ps.setInt(1, idequipo);
+					
+					rs = ps.executeQuery();
+					TEquipoDisenio eqdi = new TEquipoDisenio(); 
+
+					
+					eqdi.setIdEquipo(result.getIdEquipo());
+					eqdi.setNombre(result.getNombre());
+					eqdi.setActivo(true);
+					eqdi.setCampoDisenio(rs.getString("campo_diseño"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyID realizado - DAOEquipo");
+					return eqdi;
+				}else {
+					TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
+
+					eqde.setIdEquipo(result.getIdEquipo());
+					eqde.setNombre(result.getNombre());
+					eqde.setActivo(true);
+					eqde.setTecnologia(rs.getString("tecnologia"));
+					
+					rs.close();
+					ps.close();
+					con.close();
+					
+					System.out.println("ReadybyID realizado - DAOEquipo");
+					return eqde;
+				}
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("ReadybyID realizado - DAOEquipo");
+		return result;
 	}
 
 	public Integer anyadirIntegrante(Integer idempleado, Integer idequipo) {
@@ -164,8 +239,28 @@ public class DAOEquipo implements IDAOEquipo {
 
 	@Override
 	public TEquipo readByNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Intentando readByID - DAOEquipo");
+		TEquipo result = new TEquipo();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement("select * from equipo where nombre = ?");
+			ps.setString(1, nombre);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next())
+				result.setIdEquipo(-1);
+			else {
+				result.setIdEquipo(rs.getInt("id_quipo"));
+				result.setNombre(rs.getString("nombre"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			}catch(SQLException e) {
+				e.printStackTrace();
+				
+			}
+		return result;
 	}
 	
 	@Override
