@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -214,6 +215,18 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 		case Eventos.VistaAltaCliente:
 			setVisible(true);
 			break;
-		}
+		case Eventos.AltaClienteOK:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta");
+			Controlador.getInstance().update(Eventos.MainWindowCliente, null);
+			break;
+		case Eventos.AltaClienteNoOK:
+			JOptionPane.showMessageDialog(null, "Error dando de Alta");
+			cerrar = false;
+			break;
+		case Eventos.AltaClienteOKReactivar:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta. Se ha reactivado el Equipo.");
+			Controlador.getInstance().update(Eventos.MainWindowCliente, null);
+			break;
+		}		
 	}
 }
