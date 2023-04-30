@@ -222,7 +222,7 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 			break;
 		case Eventos.ModificarClienteOK:
 			JOptionPane.showMessageDialog(null, "Modificado con éxito");
-			Controlador.getInstance().update(Eventos.MainWindowProducto, null);
+			Controlador.getInstance().update(Eventos.MainWindowCliente, null);
 			break;
 		case Eventos.ModificarClienteEmailNoOK:
 			JOptionPane.showMessageDialog(null, "Modificado ha fallado: el email ya existe en la base de datos");
