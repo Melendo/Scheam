@@ -123,11 +123,12 @@ public class DAOCliente implements IDAOCliente {
 				
 			} else if(cliente instanceof TParticular){
 				sql = "UPDATE particulares set DNI = ?, telefono = ? where ID = ?";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, ((TParticular) cliente).getDNI());
-				ps.setInt(2, ((TParticular) cliente).getTelefono());
-				ps.setInt(3, cliente.getID());
-				ps.executeUpdate();
+				PreparedStatement ps1 = con.prepareStatement(sql);
+				ps1.setString(1, ((TParticular) cliente).getDNI());
+				ps1.setInt(2, ((TParticular) cliente).getTelefono());
+				ps1.setInt(3, cliente.getID());
+				ps1.executeUpdate();
+				ps1.close();
 			}			
 			ps.close();
 			con.close();
