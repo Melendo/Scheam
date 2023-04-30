@@ -112,6 +112,7 @@ public class DAOCliente implements IDAOCliente {
 			ps.setString(2, cliente.getEmail());
 			ps.setBoolean(3, cliente.getActivo());
 			ps.setInt(4, cliente.getID());
+			ps.executeUpdate();
 			
 			if(cliente instanceof TDistribuidor) {
 				sql = "UPDATE distribuidores set direccion = ?, CIF = ? where ID = ?";
@@ -128,7 +129,6 @@ public class DAOCliente implements IDAOCliente {
 				ps1.setInt(2, ((TParticular) cliente).getTelefono());
 				ps1.setInt(3, cliente.getID());
 				ps1.executeUpdate();
-				ps1.close();
 			}			
 			ps.close();
 			con.close();
