@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,7 +18,6 @@ import Negocio.Empleado.TEmpleado;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Factorias.FactoriaVistas;
 
 public class VistaMostrarEmpleadoID extends JFrame implements IGUI {
 	

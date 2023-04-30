@@ -153,6 +153,29 @@ public class ControladorImp extends Controlador {
         	else if (res == -2) gui.update(Eventos.ModificarEquipoNombreNoOK, null);
         	else gui.update(Eventos.ModificarEquipoOK, null);
         	break;
+        case Eventos.VistaFormMostrarEquipoID:
+        	System.out.println("Entrando a VistaFormMostrarEquipoID - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
+        case Eventos.VistaMostrarEquipoID:
+        	System.out.println("Entrando a VistaMostrarEquipoID - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
+        case Eventos.MostrarEquipoID:
+        	System.out.println("Entrando a MostrarEmpleadoID - Controlador");
+        	TEquipo equ = FactoriaSA.getInstance().getSAEquipo().mostrarEquipoID((int) objeto);
+        	if(equ.getIdEquipo() == -1) {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEquipoID, null);
+        		gui.update(Eventos.MostrarEquipoIDNoOK, null);
+        	}
+        	else {
+            	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarEquipoID, null);
+	        	gui.update(event,  equ);
+	        	gui.update(Eventos.VistaMostrarEquipoID, null);
+        	}
+        	break;
         	
         
         //PRODUCTO
