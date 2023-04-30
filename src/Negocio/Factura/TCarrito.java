@@ -42,4 +42,32 @@ public class TCarrito {
 			return -1;
 		}
 	}
+	
+	public int anyadirJuego(int id, int cantidad) {	
+		for (TLineaFactura s : set) {
+		    if(s.getIdProducto() == id) {
+		    	int cant = s.getCantidad() + cantidad;
+		    	s.setCantidad(cant);
+		    	return 1;
+		    }
+		}
+		return -1;
+	}
+	
+	public int eliminarJuego(int id, int cantidad) {	
+		for (TLineaFactura s : set) {
+		    if(s.getIdProducto() == id) {
+		    	
+		    	if(s.getCantidad()<cantidad) {
+		    		return -2;
+		    	}
+		    	else {
+		    		int cant = s.getCantidad() - cantidad;
+		    		s.setCantidad(cant);
+		    		return 1;
+		    	}
+		    }
+		}
+		return -1;
+	}
 }
