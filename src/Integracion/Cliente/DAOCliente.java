@@ -4,6 +4,7 @@ import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
 import Negocio.Cliente.TParticular;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
 
@@ -34,7 +35,7 @@ public class DAOCliente implements IDAOCliente {
 	public Integer create(TCliente cliente) {
 		System.out.println("Intentando create - DAOCliente");
 		try {
-			Statement stmt = con.createStatement();
+			//Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			String sql = "INSERT INTO clientes (nombre, email, activo) VALUES (?,?,?);";
 			ps = con.prepareStatement(sql);
@@ -44,39 +45,36 @@ public class DAOCliente implements IDAOCliente {
 			
 			ps.executeUpdate();
 			
-			sql = "select id_cliente from clientes where nombre = ?";
-			ps = (PreparedStatement) con.prepareStatement(sql);
-			ps.setString(1, cliente.getNombre());
+			ps.close();
 			
-			ResultSet rs = ps.executeQuery();
-			
-			cliente.setID(rs.getInt(1));
-
-			rs.close();
+			cliente.setID(mostrarClienteEmail(cliente.getEmail()).getID());
 			
 			if(cliente instanceof TDistribuidor) {
-				sql = "INSERT INTO distribuidores (ID, CIf, direccion) VALUES (?,?,?);";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, cliente.getID());
-				ps.setString(2, ((TDistribuidor) cliente).getCIF());
-				ps.setString(3, ((TDistribuidor) cliente).getDireccion());
-				ps.executeUpdate();
+				PreparedStatement ps1;
+				sql = "INSERT INTO distribuidores (ID, CIF, direccion) VALUES (?,?,?);";
+				ps1 = con.prepareStatement(sql);
+				ps1.setInt(1, cliente.getID());
+				ps1.setString(2, ((TDistribuidor) cliente).getCIF());
+				ps1.setString(3, ((TDistribuidor) cliente).getDireccion());
+				ps1.executeUpdate();
+				ps1.close();
 			} else if (cliente instanceof TParticular){
+				PreparedStatement ps2;
 				sql = "INSERT INTO particulares (ID, DNI, telefono) VALUES (?,?,?);";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, cliente.getID());
-				ps.setString(2, ((TParticular) cliente).getDNI());
-				ps.setInt(3, ((TParticular) cliente).getTelefono());
-				ps.executeUpdate();
+				ps2 = con.prepareStatement(sql);
+				ps2.setInt(1, cliente.getID());
+				ps2.setString(2, ((TParticular) cliente).getDNI());
+				ps2.setInt(3, ((TParticular) cliente).getTelefono());
+				ps2.executeUpdate();
+				ps2.close();
 			}
-			ps.close();
-			stmt.close();
 			con.close();
-			System.out.println("Create Realizado - DAOCliente");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
 		}
+		System.out.println("Create Realizado - DAOCliente");
 		return 1;
 	}
 
@@ -266,26 +264,7 @@ public class DAOCliente implements IDAOCliente {
 					System.out.println("ReadybyID realizado - DAOCliente");
 					return dist;
 				}
-				/*
-				if(result instanceof TDistribuidor) {
-					TDistribuidor distribuidor = (TDistribuidor) result;
-					distribuidor.setID(rs.getInt("id_cliente"));
-					distribuidor.setNombre(rs.getString("nombre"));
-					distribuidor.setEmail(rs.getString("email"));
-					distribuidor.setCIF(rs.getString("CIF"));
-					distribuidor.setDireccion(rs.getString("direccion"));
-					distribuidor.setActivo(rs.getBoolean("activo"));
-				} else {
-					TParticular particular = (TParticular) result;
-					particular.setID(rs.getInt("id_cliente"));
-					particular.setNombre(rs.getString("nombre"));
-					particular.setEmail(rs.getString("email"));
-					particular.setDNI(rs.getString("DNI"));
-					particular.setTelefono(rs.getInt("telefono"));
-					particular.setActivo(rs.getBoolean("activo"));
-				}		*/		
-			}
-			
+			}			
 			rs.close();
 			ps.close();
 			con.close();
@@ -298,64 +277,62 @@ public class DAOCliente implements IDAOCliente {
 	}
 
 	public TCliente mostrarClienteEmail(String email) {
-		System.out.println("Intentando readByEmail - DAOCliente");
+		System.out.println("Intentando readByEmail - DAOEquipo");
 		TCliente result = new TCliente();
+		
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from clientes where email = ?");
 			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				//result.setEmail("-1");
+				result.setID(-1);
+			} else {
+				result.setID(rs.getInt("id_cliente"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEmail(rs.getString("email"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+		}catch(SQLException e) {
+				e.printStackTrace();
+				
+		}
+		return result;
+	}
+
+	public TCliente mostrarClienteCIF(String cifDistribuidor) {
+		System.out.println("Intentando readByCIF - DAOCliente");
+		TCliente result = new TCliente();
+		try {
+			PreparedStatement ps = con.prepareStatement("select * from distribuidores where cif = ?");
+			ps.setString(1, cifDistribuidor);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (!rs.next())
-				result.setID(-1);
+			result.setID(-1);
 			else {
-				
-				result.setID(rs.getInt("id_cliente"));
-				result.setNombre(rs.getString("nombre"));
-				result.setEmail(rs.getString("email"));
-				
-				ps = con.prepareStatement("select * from distribuidores where id_cliente = ?");
-				ps.setInt(1, rs.getInt("id_cliente"));
-				
-				rs = ps.executeQuery();
-				
-				if(!rs.next()) {
-					ps = con.prepareStatement("select * from particular where id_cliente = ?");
-					ps.setInt(1, rs.getInt("id_cliente"));
-					
-					rs = ps.executeQuery();
-					TParticular part = new TParticular(); 
-					
-					part.setID(result.getID());
-					part.setNombre(result.getNombre());
-					part.setActivo(true);
-					part.setDNI(rs.getString("DNI"));
-					part.setTelefono(rs.getInt("telefono"));
-					
-					rs.close();
-					ps.close();
-					con.close();
-					
-					System.out.println("ReadybyEmail realizado - DAOCliente");
-					return part;
-				} else {
-					TDistribuidor dist = new TDistribuidor(); 
-
-					dist.setID(result.getID());
-					dist.setNombre(result.getNombre());
-					dist.setActivo(true);
-					dist.setCIF(rs.getString("CIF"));
-					dist.setDireccion(rs.getString("direccion"));
-					
-					rs.close();
-					ps.close();
-					con.close();
-					
-					System.out.println("ReadybyEmail realizado - DAOCliente");
-					return dist;
-				}	
-			}
 			
+				result.setID(rs.getInt("ID"));
+				((TDistribuidor) result).setDireccion(rs.getString("direccion"));
+				((TDistribuidor) result).setEmail(rs.getString("cif"));
+			
+				ps = con.prepareStatement("select * from clientes where id_cliente = ?");
+				ps.setInt(1, result.getID());
+			
+				rs = ps.executeQuery();
+			
+				TDistribuidor dist = new TDistribuidor();
+			
+				dist.setID(result.getID());
+				dist.setNombre(result.getNombre());
+				dist.setActivo(true);
+				dist.setCIF(rs.getString("CIF"));
+				dist.setDireccion(rs.getString("direccion"));
+			}
+		
 			rs.close();
 			ps.close();
 			con.close();
@@ -363,51 +340,7 @@ public class DAOCliente implements IDAOCliente {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ReadybyID realizado - DAOCliente");
+		System.out.println("ReadybyCIF realizado - DAOCliente");
 		return result;
 	}
-
-public TCliente mostrarClienteCIF(String cifDistribuidor) {
-	System.out.println("Intentando readByCIF - DAOCliente");
-	TCliente result = new TCliente();
-	try {
-		PreparedStatement ps = con.prepareStatement("select * from distribuidores where cif = ?");
-		ps.setString(1, cifDistribuidor);
-
-		ResultSet rs = ps.executeQuery();
-
-		if (!rs.next())
-			result.setID(-1);
-		else {
-			
-			result.setID(rs.getInt("ID"));
-			((TDistribuidor) result).setDireccion(rs.getString("direccion"));
-			((TDistribuidor) result).setEmail(rs.getString("cif"));
-			
-			ps = con.prepareStatement("select * from clientes where id_cliente = ?");
-			ps.setInt(1, result.getID());
-			
-			rs = ps.executeQuery();
-			
-			TDistribuidor dist = new TDistribuidor();
-			
-			dist.setID(result.getID());
-			dist.setNombre(result.getNombre());
-			dist.setActivo(true);
-			dist.setCIF(rs.getString("CIF"));
-			dist.setDireccion(rs.getString("direccion"));
-		}
-		
-		rs.close();
-		ps.close();
-		con.close();
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	System.out.println("ReadybyCIF realizado - DAOCliente");
-	return result;
-}
-
-
 }

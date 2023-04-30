@@ -199,7 +199,7 @@ public class VistaAltaCliente extends JFrame implements IGUI {
 			cliente.setNombre(nombretextfield.getText());
 			cliente.setEmail(emailtextfield.getText());
 			((TParticular) cliente).setTelefono(Integer.parseInt(telefonotextfield.getText()));
-			((TParticular) cliente).setDNI(ciftextfield.getText());
+			((TParticular) cliente).setDNI(DNItextfield.getText());
 		}
 		Controlador.getInstance().update(Eventos.AltaCliente, cliente);
 		if (cerrar)
