@@ -223,12 +223,60 @@ public class DAOCliente implements IDAOCliente {
 				result.setID(rs.getInt("id_cliente"));
 				result.setNombre(rs.getString("nombre"));
 				result.setEmail(rs.getString("email"));
+				result.setActivo(rs.getBoolean("activo"));
 				
+				/*
 				ps = con.prepareStatement("select * from distribuidores where id_cliente = ?");
 				ps.setInt(1, idcliente);
 				
-				rs = ps.executeQuery();
+				rs = ps.executeQuery();*/
 				
+				try {
+					ps = con.prepareStatement("select * from distribuidores where ID = ?");
+					ps.setInt(1, idcliente);
+					
+					rs = ps.executeQuery();
+					
+					if(!rs.next()) {
+						try {
+							ps = con.prepareStatement("select * from particulares where ID = ?");
+							ps.setInt(1, idcliente);
+							
+							rs = ps.executeQuery();
+							TParticular part = new TParticular(); 
+							
+							part.setID(result.getID());
+							part.setNombre(result.getNombre());
+							part.setActivo(result.getActivo());
+							part.setTelefono(rs.getInt("telefono"));
+							part.setDNI(rs.getString("DNI"));
+							
+							result = part;
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}
+					}else {
+						TDistribuidor dist = new TDistribuidor(); 
+						
+						dist.setID(result.getID());
+						dist.setNombre(result.getNombre());
+						dist.setActivo(result.getActivo());
+						dist.setCIF(rs.getString("CIF"));
+						dist.setDireccion(rs.getString("direccion"));
+						
+						result = dist;
+					}
+					
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+				
+			/*
 				if(!rs.next()) {
 					ps = con.prepareStatement("select * from particulares where id_cliente = ?");
 					ps.setInt(1, idcliente);
@@ -268,7 +316,7 @@ public class DAOCliente implements IDAOCliente {
 			rs.close();
 			ps.close();
 			con.close();
-
+*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
