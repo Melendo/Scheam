@@ -35,8 +35,12 @@ public class VistaModificarProducto extends JFrame implements IGUI, ActionListen
 	
 	private boolean cerrar = true;
 	
-	public VistaModificarProducto() {
+	public VistaModificarProducto() {		
+		vModificarProducto();
 		
+	}
+
+	public void vModificarProducto() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Modificar Producto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaModificarEmpleado.class.getResource("/icons/generales/modificacion-removebg-preview.png")));
@@ -140,22 +144,24 @@ public class VistaModificarProducto extends JFrame implements IGUI, ActionListen
 		
 		cancelbutton.setBounds(248, 205, 90, 23);
 		infopanel.add(cancelbutton);
-		
-	}
-
-	public void vModificarProducto() {
-		
 	}
 	
 	public void ok() {
 		TProducto producto = new TProducto();
 
+		if(!NoTF.getText().equals(""))
 		producto.setNombre(NoTF.getText());
+		if(!FeTF.getText().equals(""))
 		producto.setFechalanzamiento(Integer.parseInt(FeTF.getText()));
+		if(!PrTF.getText().equals(""))
 		producto.setPrecio(Double.parseDouble(PrTF.getText()));
+		if(!GeTF.getText().equals(""))
 		producto.setGenero(GeTF.getText());
+		if(!PeTF.getText().equals(""))
 		producto.setPEGI(Integer.parseInt(PeTF.getText()));
+		if(!StTF.getText().equals(""))
 		producto.setStock(Integer.parseInt(StTF.getText()));//terminado en el DAO
+		if(!IdTF.getText().equals(""))
 		producto.setIdproyecto(Integer.parseInt(IdTF.getText()));
 		
 		
