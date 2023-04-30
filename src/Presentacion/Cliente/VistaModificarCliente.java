@@ -49,7 +49,7 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 	
 	public void vModificarCliente() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Modificar Producto");
+		setTitle("Modificar cliente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaModificarEmpleado.class.getResource("/icons/generales/modificacion-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
@@ -174,7 +174,7 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 		
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener((e)->{
-				Controlador.getInstance().update(Eventos.MainWindowProducto, e);				
+				Controlador.getInstance().update(Eventos.MainWindowCliente, e);				
 				dispose();
 			});
 		
