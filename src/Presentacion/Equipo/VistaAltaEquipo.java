@@ -46,7 +46,7 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 	public void vAltaEquipo() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Alta Equipo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAltaEmpleado.class.getResource("/icons/generales/alta-removebg-preview.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAltaEquipo.class.getResource("/icons/generales/alta-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -60,7 +60,7 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 		
 		JLabel logo = new JLabel("      Alta Equipo");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaAltaEmpleado.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaAltaEquipo.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
@@ -70,6 +70,11 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 		JLabel tipoequipolabel = new JLabel("Elige el tipo de equipo:");
 		tipoequipolabel.setBounds(78, 37, 130, 14);
 		infopanel.add(tipoequipolabel);
+		
+		
+		JLabel nombrelabel = new JLabel("Nombre:");
+		nombrelabel.setBounds(122, 79, 130, 15);
+		infopanel.add(nombrelabel);
 		
 		nombretextfield = new JTextField();
 		nombretextfield.setBounds(183, 79, 215, 17);
@@ -164,12 +169,12 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 			Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
 			break;
 		case Eventos.AltaEquipoNoOK:
-			JOptionPane.showMessageDialog(null, "Errir dando de Alta");
+			JOptionPane.showMessageDialog(null, "Error dando de Alta");
 			cerrar = false;
 			break;
 		case Eventos.AltaEquipoOKReactivar:
 			JOptionPane.showMessageDialog(null, "Éxito dando de Alta. Se ha reactivado el Equipo.");
-			cerrar = false;
+			Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
 			break;
 		}
 	}
