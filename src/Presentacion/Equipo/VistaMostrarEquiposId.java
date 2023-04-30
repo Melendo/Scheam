@@ -49,8 +49,7 @@ public class VistaMostrarEquiposId extends JFrame implements IGUI {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
+		contentPane.setLayout(new BorderLayout(0, 0));		
 		
 		setVisible(false);	
 	}
@@ -82,12 +81,13 @@ public class VistaMostrarEquiposId extends JFrame implements IGUI {
 				lista.add((TEquipoDesarrollo) object);
 				equipoDesmodel.setLista(lista);
 				equipoDesmodel.fireTableStructureChanged();
+
 			}else {
 				 initTableDis();
 				 Set<TEquipoDisenio> lista = new HashSet<TEquipoDisenio>();
 					lista.add((TEquipoDisenio) object);
 					equipoDismodel.setLista(lista);
-					equipoDismodel.fireTableStructureChanged();
+					equipoDismodel.fireTableStructureChanged();					
 			}
 			
 			break;

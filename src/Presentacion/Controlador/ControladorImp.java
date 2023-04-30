@@ -106,6 +106,12 @@ public class ControladorImp extends Controlador {
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
+        case Eventos.ListarIntegrantesEquipo:
+        	System.out.println("Entrando a ListarIntegrantesEquipo - Controlador");
+        	Set<TEmpleado> list = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo((Integer) objeto);
+        	if (!list.isEmpty()) gui.update(Eventos.ListarIntegrantesEquipoOK, null);
+        	else gui.update(Eventos.ListarIntegrantesEquipoNoOK, objeto);
+        	break;
         	
         //EQUIPO
         case Eventos.MainWindowEquipo:

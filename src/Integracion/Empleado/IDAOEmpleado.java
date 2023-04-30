@@ -64,5 +64,5 @@ public interface IDAOEmpleado {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set listarIdEquipo(Integer idempleado);
+	public Set<TEmpleado> listarIdEquipo(Integer idequipo);
 }

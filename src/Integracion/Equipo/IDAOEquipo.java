@@ -2,6 +2,8 @@
 package Integracion.Equipo;
 
 import Negocio.Equipo.TEquipo;
+import Negocio.Equipo.TEquipoDesarrollo;
+import Negocio.Equipo.TEquipoDisenio;
 
 import java.util.Set;
 
@@ -13,7 +15,9 @@ public interface IDAOEquipo {
 
 	public Integer modify(TEquipo equipo);
 
-	public Set<TEquipo> readAll();
+	public Set<TEquipoDesarrollo> readAllDes();
+	
+	public Set<TEquipoDisenio> readAllDis();
 
 	public TEquipo readByID(Integer idequipo);
 

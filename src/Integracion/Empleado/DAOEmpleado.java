@@ -215,8 +215,46 @@ public class DAOEmpleado implements IDAOEmpleado {
 		return result;
 	}
 
-	public Set<TEmpleado> listarIdEquipo(Integer idempleado) {
-		// TODO Cuando acabe equipo
-		return null;
+	public Set<TEmpleado> listarIdEquipo(Integer idequipo) {
+		System.out.println("Intentando listarIdEquipo - DAOEmpleado");
+		Set<TEmpleado> result = new HashSet<TEmpleado>();
+		TEmpleado aux;
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE id_equipo = ?");
+			ps.setInt(1, idequipo);
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				while(rs.next()) {
+					PreparedStatement ps1 = con.prepareStatement("SELECT * FROM empleados WHERE id_empleado = ?");
+					
+					ps1.setInt(1, rs.getInt("id_empleado"));
+					ResultSet rs1 =  ps1.executeQuery();
+					aux = new TEmpleado();
+					aux.setIdEmpleado(rs1.getInt("id_empleado"));
+					aux.setNombre(rs1.getString("nombre"));
+					aux.setApellidos(rs1.getString("apellidos"));
+					aux.setDNI(rs1.getString("DNI"));
+					aux.setE_mail(rs1.getString("email"));
+					aux.setTlfn(rs1.getInt("telefono"));
+					aux.setSueldo(rs1.getDouble("sueldo"));
+					result.add(aux);
+					
+					ps1.close();
+					rs1.close();
+				}
+							
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("Readall realizado - DAOEmpleado");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

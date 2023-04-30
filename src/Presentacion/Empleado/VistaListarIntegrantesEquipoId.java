@@ -5,11 +5,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Presentacion.IGUI;
+import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 
 import java.awt.event.ActionListener;
@@ -22,6 +24,9 @@ import java.awt.event.ActionEvent;
 public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 	private JPanel contentPane;
 	private JTextField idtextfield;
+	
+	boolean cerrar = true;
+	
 	
 	public VistaListarIntegrantesEquipoId() {
 		vListarIntegrantesEquipoId();
@@ -63,7 +68,8 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 		JButton okbutton = new JButton("Ok");
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				ok();
+				dispose();
 			}
 		});
 		okbutton.setBounds(143, 144, 90, 23);
@@ -79,11 +85,26 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 		infopanel.add(cancelbutton);
 	}
 
+	private void ok() {
+		Integer id_equipo = Integer.parseInt(idtextfield.getText());
+		Controlador.getInstance().update(Eventos.ListarIntegrantesEquipo, id_equipo);
+		if (cerrar) 
+			dispose();
+		 else 
+			cerrar = true;
+	}
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
 		case Eventos.VistaListarIntegrantesEquipo:
 			setVisible(true);
+			break;
+		case Eventos.ListarIntegrantesEquipoOK:
+			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+			break;
+		case Eventos.ListarIntegrantesEquipoNoOK:
+			JOptionPane.showMessageDialog(null, "El id_equipo no existe o el equipo está vacio");			
+			Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
 			break;
 		}
 	}
