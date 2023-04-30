@@ -97,7 +97,7 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		modbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaModificarEquipo, null);
 				dispose();
 			}
 		});

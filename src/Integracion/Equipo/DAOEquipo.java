@@ -110,11 +110,12 @@ public class DAOEquipo implements IDAOEquipo {
 		try {
 			PreparedStatement ps;
 						
-			String sql = "UPDATE equipo set nombre = ? where id_empleado = ?";
+			String sql = "UPDATE equipo set nombre = ?, activo = ? where id_equipo = ?";
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, equipo.getNombre());
-			ps.setInt(8, equipo.getIdEquipo());
+			ps.setBoolean(2, equipo.getActivo());
+			ps.setInt(3, equipo.getIdEquipo());
 			
 			ps.executeUpdate();
 
@@ -128,7 +129,7 @@ public class DAOEquipo implements IDAOEquipo {
 				ps.executeUpdate();
 
 			}else if(equipo instanceof TEquipoDisenio) {
-				sql = "UPDATE equipodisenño set campo_diseño = ? WHERE id_equipo = ?";
+				sql = "UPDATE equipodisenyo set campo_disenyo = ? WHERE id_equipo = ?";
 				ps = con.prepareStatement(sql);
 				
 				ps.setString(1, ((TEquipoDisenio) equipo).getCampoDisenio());
@@ -183,6 +184,7 @@ public class DAOEquipo implements IDAOEquipo {
 							ps.setInt(1, idequipo);
 							
 							rs = ps.executeQuery();
+							
 							TEquipoDisenio eqdi = new TEquipoDisenio(); 
 							
 							eqdi.setIdEquipo(result.getIdEquipo());

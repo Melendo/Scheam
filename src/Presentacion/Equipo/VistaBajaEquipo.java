@@ -111,7 +111,7 @@ public class VistaBajaEquipo extends JFrame implements IGUI{
 			cerrar = false;
 			break;
 		case Eventos.BajaEquipoNoOK2:
-			JOptionPane.showMessageDialog(null, "Error al dar de Baja. Empleado ya dado de Baja");
+			JOptionPane.showMessageDialog(null, "Error al dar de Baja. Equipo ya dado de Baja");
 			cerrar = false;
 			break;
 		}

@@ -137,6 +137,21 @@ public class ControladorImp extends Controlador {
         	else if(res == -2) gui.update(Eventos.BajaEquipoNoOK2, null);
         	else gui.update(Eventos.BajaEquipoOK, objeto);
         	break;
+        	
+        case Eventos.VistaModificarEquipo:
+        	System.out.println("Entrando a VistaModificarEquipo - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);        	    	
+        	break;
+        
+        case Eventos.ModificarEquipo:
+        	System.out.println("Entrando a ModificarEquipo - Controlador");
+        	res = FactoriaSA.getInstance().getSAEquipo().modificarEquipo((TEquipo) objeto);
+        	if (res == -1) gui.update(Eventos.ModificarEquipoNoOK, null);
+        	else if (res == -2) gui.update(Eventos.ModificarEquipoNombreNoOK, null);
+        	else gui.update(Eventos.ModificarEquipoOK, null);
+        	break;
+        	
         
         //PRODUCTO
 	    case Eventos.MainWindowProducto:
