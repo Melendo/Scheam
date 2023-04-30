@@ -5,7 +5,6 @@ package Integracion.Factura;
 
 import Negocio.Factura.TFactura;
 import java.util.Set;
-import Negocio.Cliente.TCliente;
 
 public class DAOFactura implements IDAOFactura {
 
@@ -34,8 +33,8 @@ public class DAOFactura implements IDAOFactura {
 		return null;
 	}
 
-	public TCliente listarIDCliente(Integer idcliente) {
-
+	public Set<TFactura> listarIDCliente(Integer idcliente) {
+		
 		return null;
 	}
 }

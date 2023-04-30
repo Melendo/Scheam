@@ -23,6 +23,10 @@ public class TFactura {
 	public Integer getIdFactura() {
 		return IDFactura;
 	}
+	
+	public void setIdFactura(int id) {
+		this.IDFactura = id;
+	}
 
 	public Integer getImporte() {
 		return Importe;

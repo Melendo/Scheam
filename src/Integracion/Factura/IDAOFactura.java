@@ -65,5 +65,5 @@ public interface IDAOFactura {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TCliente listarIDCliente(Integer idcliente);
+	public Set<TFactura> listarIDCliente(Integer idcliente);
 }
