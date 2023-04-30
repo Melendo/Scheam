@@ -14,6 +14,8 @@ import Presentacion.Factorias.FactoriaVistas;
 
 public class ControladorImp extends Controlador {
 	
+	//SAFACTURA
+	
 	private IGUI gui;
 
     public void update(int event, Object objeto) {
