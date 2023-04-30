@@ -1,4 +1,4 @@
-package Presentacion.Producto;
+package Presentacion.Tareas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.swing.table.AbstractTableModel;
 
-import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 public class TareasTableModel extends AbstractTableModel{
 
