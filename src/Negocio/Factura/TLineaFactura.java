@@ -45,5 +45,6 @@ public class TLineaFactura {
 		this.idProducto = idProd;
 		this.cantidad = cant;
 		this.precio = prec;
+		this.idFactura = null;
 	}
 }
