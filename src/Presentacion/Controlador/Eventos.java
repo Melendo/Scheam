@@ -174,6 +174,12 @@ public static final int MainWindowCliente = 400;
 	public static final int MostrarTareasIDOK = 543;
 	public static final int MostrarTareasIDNoOK = 544;
 	
-	public static final int VistaListarTareas = 545;
-	public static final int ListarTareas = 546;
+	public static final int VistaListarTareas = 550;
+	public static final int ListarTareas = 551;
+	
+	public static final int VistaCerrarTarea = 560;
+	public static final int CerrarTarea = 561;
+	public static final int CerrarTareaOK = 562;
+	public static final int CerrarTareaNoOK = 563;
+	public static final int CerrarTareaNoOK2 = 564;
 }
