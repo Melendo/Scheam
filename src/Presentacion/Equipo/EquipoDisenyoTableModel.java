@@ -12,7 +12,7 @@ public class EquipoDisenyoTableModel extends AbstractTableModel{
 	
 	private static final long serialVersionUID = 1L;
 	
-	String[] header = {"ID", "Nombre", "Tecnologia"};
+	String[] header = {"ID", "Nombre", "Campo"};
 	List<TEquipoDisenio> equiposDis;
 	
 	public EquipoDisenyoTableModel () {
