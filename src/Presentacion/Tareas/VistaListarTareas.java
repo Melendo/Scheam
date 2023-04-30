@@ -4,49 +4,70 @@
 package Presentacion.Tareas;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+
+
+import Negocio.Tareas.TTarea;
 import Presentacion.IGUI;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
-public class VistaListarTareas extends JFrame implements IGUI, ActionListener {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void vListarTareas() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+import Presentacion.Controlador.Controlador;
+import Presentacion.Controlador.Eventos;
 
-		// end-user-code
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Set;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
+
+public class VistaListarTareas extends JFrame implements IGUI{
+
+	private JPanel contentPane;
+	private JTable table;
+	
+	private TareasTableModel tareasmodel;
+		
+	public VistaListarTareas() {
+		vListarTarea();
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see IGUI#update()
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void update() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void vListarTarea() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareas.class.getResource("/icons/tarea.png")));
+		setTitle("Listado Tareas");
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowTarea, null);
+				dispose();
+			}
+		});
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		tareasmodel = new TareasTableModel();
+		table = new JTable(tareasmodel);
+		JScrollPane tablesp = new JScrollPane(table);
+		contentPane.add(tablesp, BorderLayout.CENTER);
+		
+	
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ActionListener#actionPerformed(ActionEvent e)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void actionPerformed(ActionEvent e) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	@SuppressWarnings("unchecked")
+	@Override
+	public void update(int event, Object object) {
+		switch (event) {
+		case Eventos.VistaListarTareas:
+			setVisible(true);
+			break;
+		case Eventos.ListarTareas:
+			tareasmodel.setLista((Set<TTarea>) object);
+			tareasmodel.fireTableStructureChanged();
+			break;
+		}
 	}
+	
 }
