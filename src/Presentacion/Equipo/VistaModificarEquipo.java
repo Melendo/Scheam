@@ -39,7 +39,7 @@ public class VistaModificarEquipo extends JFrame implements IGUI {
 
 	
 	private boolean cerrar = true;
-	private boolean esDesarrollo = true;
+	private boolean esDesarrollo = false;
 	
 	public VistaModificarEquipo() {
 		vModificarEquipo();

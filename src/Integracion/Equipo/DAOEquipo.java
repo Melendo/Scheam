@@ -121,21 +121,23 @@ public class DAOEquipo implements IDAOEquipo {
 
 			
 			if (equipo instanceof TEquipoDesarrollo) {
-				sql = "UPDATE equipodesarrollo set tecnologia = ? WHERE id_equipo = ?";
+				sql = "UPDATE equipodesarrollo set TECNOLOGIA = ? WHERE id_equipo = ?";
 				ps = con.prepareStatement(sql);
 				
 				ps.setString(1, ((TEquipoDesarrollo) equipo).getTecnologia());
 				ps.setInt(2, equipo.getIdEquipo());
 				ps.executeUpdate();
 
-			}else if(equipo instanceof TEquipoDisenio) {
-				sql = "UPDATE equipodisenyo set campo_disenyo = ? WHERE id_equipo = ?";
-				ps = con.prepareStatement(sql);
+				ps.close();
+			}else {
+				sql = "UPDATE equipodisenyo set CAMPO = ? WHERE id_equipo = ?";
+				PreparedStatement ps1 = con.prepareStatement(sql);
 				
-				ps.setString(1, ((TEquipoDisenio) equipo).getCampoDisenio());
-				ps.setInt(2, equipo.getIdEquipo());
-				ps.executeUpdate();
-
+				ps1.setString(1, ((TEquipoDisenio) equipo).getCampoDisenio());
+				ps1.setInt(2, equipo.getIdEquipo());
+				ps1.executeUpdate();
+				
+				ps1.close();
 			}
 
 			
@@ -173,34 +175,53 @@ public class DAOEquipo implements IDAOEquipo {
 				result.setNombre(rs.getString("nombre"));
 				result.setActivo(rs.getBoolean("activo"));
 				
-				ps = con.prepareStatement("select * from equipodesarrollo where ID_EQUIPO = ?");
-				ps.setInt(1, idequipo);
+				rs.close();
+				ps.close();
 				
-				rs = ps.executeQuery();
-				if(!rs.next()) {
-					ps = con.prepareStatement("select * from equipodisenyo where ID_EQUIPO = ?");
+				ps = con.prepareStatement("select tecnologia from equipodesarrollo where ID_EQUIPO = ?");
+				ps.setInt(1, idequipo);				
+				ResultSet rs1 = ps.executeQuery();
+				
+				if(!rs1.next()) {
+					rs1.close();
+					ps.close();
+					
+					ps = con.prepareStatement("select campo from equipodisenyo where ID_EQUIPO = ?");
 					ps.setInt(1, idequipo);
 					
-					rs = ps.executeQuery();
-					
+					ResultSet rs2 = ps.executeQuery();
+					if(!rs2.next()) {
+						result.setIdEquipo(-1);
+					}else {
 					TEquipoDisenio eqdi = new TEquipoDisenio(); 
 					
 					eqdi.setIdEquipo(result.getIdEquipo());
 					eqdi.setNombre(result.getNombre());
 					eqdi.setActivo(result.getActivo());
-					eqdi.setCampoDisenio(rs.getString("CAMPO_DISENYO"));
+					eqdi.setCampoDisenio(rs2.getString("CAMPO"));
 					
-					result = eqdi;
+					rs2.close();
+					ps.close();
+					con.close();
+					
+					return eqdi;
+					}
 				}else {
 					TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
 					
 					eqde.setIdEquipo(result.getIdEquipo());
 					eqde.setNombre(result.getNombre());
 					eqde.setActivo(result.getActivo());
-					eqde.setTecnologia(rs.getString("TECNOLOGIA"));
+					eqde.setTecnologia(rs1.getString("TECNOLOGIA"));
 					
-					result = eqde;
+					rs1.close();
+					rs.close();
+					ps.close();
+					con.close();
+										
+					return eqde;
 				}
+				
 			}
 			
 			rs.close();
