@@ -35,42 +35,43 @@ public class DAOEquipo implements IDAOEquipo {
 		System.out.println("Intentando create - DAOEquipo");
 		try {
 			PreparedStatement ps;
-			String sql = "INSERT INTO equipos (nombre, activo) VALUES (?,?);";
+			String sql = "INSERT INTO equipo (nombre, activo) VALUES (?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, equipo.getNombre());
 			ps.setBoolean(2, true);
 			
 			ps.executeUpdate();
 			
-			sql = "select id_equipo from equipo where nombre = ?";
-			ps = (PreparedStatement) con.prepareStatement(sql);
-
-			ResultSet rs = ps.executeQuery();
-			
-			equipo.setIdEquipo(rs.getInt(1));
-
-			rs.close();
+			ps.close();
+						
+			equipo.setIdEquipo(readByNombre(equipo.getNombre()).getIdEquipo());
 						
 			if(equipo instanceof TEquipoDesarrollo){
-				sql = "INSERT INTO equipodesarrollo (id_equipo, nombre, tecnologia) VALUES (?,?,?);";
-				ps = con.prepareStatement(sql);
+				PreparedStatement ps1;
+
+				sql = "INSERT INTO equipodesarrollo (ID_EQUIPO, TECNOLOGIA) VALUES (?,?);";
+				ps1 = con.prepareStatement(sql);
 				
-				ps.setInt(1, equipo.getIdEquipo());
-				ps.setString(2, equipo.getNombre());
-				ps.setString(3, ((TEquipoDesarrollo) equipo).getTecnologia());
+				ps1.setInt(1, equipo.getIdEquipo());
+				ps1.setString(2, ((TEquipoDesarrollo) equipo).getTecnologia());
 				
-				ps.executeUpdate();
+				ps1.executeUpdate();
+				
+				ps1.close();
+				
 			} else if (equipo instanceof TEquipoDisenio) {
-				sql = "INSERT INTO equipodiseño (id_equipo, nombre, campo_disenio) VALUES (?,?,?);";
-				ps = con.prepareStatement(sql);
 				
-				ps.setInt(1, equipo.getIdEquipo());
-				ps.setString(2, equipo.getNombre());				
-				ps.setString(3, ((TEquipoDisenio) equipo).getCampoDisenio());
+				PreparedStatement ps2;
+				sql = "INSERT INTO equipodisenyo (ID_EQUIPO, CAMPO_DISEnyO) VALUES (?,?);";
+				ps2 = con.prepareStatement(sql);
 				
-				ps.executeUpdate();
+				ps2.setInt(1, equipo.getIdEquipo());
+				ps2.setString(2, ((TEquipoDisenio) equipo).getCampoDisenio());
+				
+				ps2.executeUpdate();
+				
+				ps2.close();
 			}
-			ps.close();
 			con.close();	
 
 		}catch (SQLException e) {
@@ -87,7 +88,7 @@ public class DAOEquipo implements IDAOEquipo {
 		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
-			String sql = "UPDATE equipos set activo = false where id_equipo = ?";
+			String sql = "UPDATE equipo set activo = false where id_equipo = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idequipo);
 			ps.executeUpdate();
@@ -156,69 +157,67 @@ public class DAOEquipo implements IDAOEquipo {
 
 	public TEquipo readByID(Integer idequipo) {
 		System.out.println("Intentando readByID - DAOEquipo");
-		TEquipo result = new TEquipo();
-
-
+		TEquipo result = new TEquipoDesarrollo();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement("select * from equipo where id_empleado = ?");
+			PreparedStatement ps = con.prepareStatement("select * from equipo where id_equipo = ?");
 			ps.setInt(1, idequipo);
 			
 			ResultSet rs = ps.executeQuery();
 			
-			if (!rs.next())
+			if (!rs.next()) {
 				result.setIdEquipo(-1);
-			else {
-				
+			}else {
 				result.setIdEquipo(rs.getInt("id_equipo"));
 				result.setNombre(rs.getString("nombre"));
+				result.setActivo(rs.getBoolean("activo"));
 				
-				ps = con.prepareStatement("select * from equipodesarrollo where id_empleado = ?");
-				ps.setInt(1, idequipo);
-				
-				rs = ps.executeQuery();
-				if(!rs.next()) {
-					ps = con.prepareStatement("select * from equipodiseño where id_empleado = ?");
+				try {
+					ps = con.prepareStatement("select * from equipodesarrollo where ID_EQUIPO = ?");
 					ps.setInt(1, idequipo);
 					
 					rs = ps.executeQuery();
-					TEquipoDisenio eqdi = new TEquipoDisenio(); 
-
-					
-					eqdi.setIdEquipo(result.getIdEquipo());
-					eqdi.setNombre(result.getNombre());
-					eqdi.setActivo(true);
-					eqdi.setCampoDisenio(rs.getString("campo_diseño"));
-					
-					rs.close();
-					ps.close();
-					con.close();
-					
-					System.out.println("ReadybyID realizado - DAOEquipo");
-					return eqdi;
-				}else {
-					TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
-
-					eqde.setIdEquipo(result.getIdEquipo());
-					eqde.setNombre(result.getNombre());
-					eqde.setActivo(true);
-					eqde.setTecnologia(rs.getString("tecnologia"));
-					
-					rs.close();
-					ps.close();
-					con.close();
-					
-					System.out.println("ReadybyID realizado - DAOEquipo");
-					return eqde;
+					if(!rs.next()) {
+						try {
+							ps = con.prepareStatement("select * from equipodisenyo where ID_EQUIPO = ?");
+							ps.setInt(1, idequipo);
+							
+							rs = ps.executeQuery();
+							TEquipoDisenio eqdi = new TEquipoDisenio(); 
+							
+							eqdi.setIdEquipo(result.getIdEquipo());
+							eqdi.setNombre(result.getNombre());
+							eqdi.setActivo(result.getActivo());
+							eqdi.setCampoDisenio(rs.getString("CAMPO_DISENYO"));
+							
+							result = eqdi;
+						
+						}catch(SQLException e) {
+							e.printStackTrace();
+						}
+					}else {
+						TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
+						
+						eqde.setIdEquipo(result.getIdEquipo());
+						eqde.setNombre(result.getNombre());
+						eqde.setActivo(result.getActivo());
+						eqde.setTecnologia(rs.getString("TECNOLOGIA"));
+						
+						result = eqde;
+					}
+				}catch(SQLException e) {
+					e.printStackTrace();
 				}
 			}
 			
-			
+			rs.close();
+			ps.close();
+			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ReadybyID realizado - DAOEquipo");
+		System.out.println("ReadybyID realizado (error) - DAOEquipo");
 		return result;
 	}
 
@@ -321,9 +320,9 @@ public class DAOEquipo implements IDAOEquipo {
 			ResultSet rs = ps.executeQuery();
 			
 			if (!rs.next())
-				result.setIdEquipo(-1);
+				result.setNombre("-1");
 			else {
-				result.setIdEquipo(rs.getInt("id_quipo"));
+				result.setIdEquipo(rs.getInt("id_equipo"));
 				result.setNombre(rs.getString("nombre"));
 				result.setActivo(rs.getBoolean("activo"));
 			}

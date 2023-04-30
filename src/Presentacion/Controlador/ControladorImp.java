@@ -20,11 +20,14 @@ public class ControladorImp extends Controlador {
     	int res;
     	
         switch (event){
+        //MAIN WINDOW
         case Eventos.MainWindow:
         	System.out.println("Entrando a MainWindowOpen - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
+        	
+        //EMPLEADO
         case Eventos.MainWindowEmpleado:
         	System.out.println("Entrando a MainWindowEmpleadoOpen - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -101,6 +104,8 @@ public class ControladorImp extends Controlador {
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
+        	
+        //EQUIPO
         case Eventos.MainWindowEquipo:
         	System.out.println("Entrando a MainWindowEquipo - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -118,7 +123,22 @@ public class ControladorImp extends Controlador {
         	else if (res == 2) gui.update(Eventos.AltaEquipoOKReactivar, null);
         	else gui.update(Eventos.AltaEquipoOK, null);
         	break;
-        //TODO
+        	
+        case Eventos.VistaBajaEquipo:     	
+        	System.out.println("Entrando a VistaBajaEquipo - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);        	    	
+        	break;
+        
+        case Eventos.BajaEquipo:
+        	System.out.println("Entrando a BajaEquipo - Controlador");
+        	res = FactoriaSA.getInstance().getSAEquipo().bajaEquipo((Integer) objeto);
+        	if (res == -1) gui.update(Eventos.BajaEquipoNoOK, null);
+        	else if(res == -2) gui.update(Eventos.BajaEquipoNoOK2, null);
+        	else gui.update(Eventos.BajaEquipoOK, objeto);
+        	break;
+        
+        //PRODUCTO
 	    case Eventos.MainWindowProducto:
 	    	System.out.println("Entrando a MainWindowProductoOpen - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -203,6 +223,9 @@ public class ControladorImp extends Controlador {
 	    	else if(res == -2) gui.update(Eventos.CerrarProductoNoOK2, null);
 	    	else gui.update(Eventos.CerrarProductoOK, objeto);
 	    	break;
+	    	
+	    	
+	    //CLIENTE
 	    case Eventos.MainWindowCliente:
 	    	System.out.println("Entrando a MainWindowClienteOpen - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -275,6 +298,8 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarClienteID, null);
 	    	}
 	    	break;
+	    	
+	    //TAREA
 	    case Eventos.MainWindowTarea:
 	    	System.out.println("Entrando a MainWindowTareaOpen - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);

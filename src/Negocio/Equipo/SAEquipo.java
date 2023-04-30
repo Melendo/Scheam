@@ -39,11 +39,12 @@ public class SAEquipo implements ISAEquipo {
 			return -1;
 		}
 		
-		if(equ.getActivo()) {
+		if(!equ.getActivo()) {
+			System.out.println("bajaEquipo No Realizado (ya dado de baja) - SAEquipo");
+			return -2;
+		} else{
 			System.out.println("bajaEquipo Realizado - SAEquipo");
 			return FactoriaDAOImp.getInstance().getDaoEquipo().delete(IDEquipo);
-		} else{
-			return -2;
 		}
 	}
 

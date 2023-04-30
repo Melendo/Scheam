@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -157,6 +158,18 @@ public class VistaAltaEquipo extends JFrame implements IGUI {
 		switch(event) {
 		case Eventos.VistaAltaEquipo:
 			setVisible(true);
+			break;
+		case Eventos.AltaEquipoOK:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta");
+			Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
+			break;
+		case Eventos.AltaEquipoNoOK:
+			JOptionPane.showMessageDialog(null, "Errir dando de Alta");
+			cerrar = false;
+			break;
+		case Eventos.AltaEquipoOKReactivar:
+			JOptionPane.showMessageDialog(null, "Éxito dando de Alta. Se ha reactivado el Equipo.");
+			cerrar = false;
 			break;
 		}
 	}
