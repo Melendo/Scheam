@@ -5,30 +5,21 @@ package Negocio.Factura;
 
 import java.util.Set;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author 34601
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public class TCarrito {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set Pairs;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set getPairs() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	private Set LineasFactura;
+	
+	private int idCliente;
+
+	public Set getLineasFactura() {
+		return LineasFactura;
+	}
+	
+	public int getIdCliente() {
+		return idCliente;
+	}
+	
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 }

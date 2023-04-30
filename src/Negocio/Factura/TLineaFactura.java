@@ -3,89 +3,45 @@
  */
 package Negocio.Factura;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author 34601
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class TLineaFactura {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object idFactura;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object idProducto;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object cantidad;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getIdFactura() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	private int idFactura;
 
-		// end-user-code
+	private int idProducto;
+	
+	private int cantidad;
+	
+	private double precio;
+
+	public int getIdFactura() {		
+		return idFactura;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getIdProducto() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public int getIdProducto() {
+		return idProducto;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getCantidad() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public int getCantidad() {
+		return cantidad;
+	}
+	
+	public double getPrecio() {
+		return precio;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void setIdProducto() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void setIdProducto(int id) {
+		idProducto = id;
+	}
+	
+	public void setIdFactura(int id) {
+		idFactura = id;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void setCantidad() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void setCantidad(int cant) {
+		cantidad = cant;
+	}
+	
+	public void setPrecio(double prec) {
+		precio = prec;
 	}
 }
