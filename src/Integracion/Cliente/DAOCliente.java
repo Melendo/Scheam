@@ -129,6 +129,7 @@ public class DAOCliente implements IDAOCliente {
 				ps1.setInt(2, ((TParticular) cliente).getTelefono());
 				ps1.setInt(3, cliente.getID());
 				ps1.executeUpdate();
+				ps1.close();
 			}			
 			ps.close();
 			con.close();
