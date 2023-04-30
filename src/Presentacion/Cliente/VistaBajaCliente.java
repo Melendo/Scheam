@@ -102,7 +102,6 @@ public class VistaBajaCliente extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.BajaClienteOK:
-			
 			JOptionPane.showMessageDialog(null, "Éxito dando de Baja");
 			Controlador.getInstance().update(Eventos.MainWindowCliente, null);
 			break;

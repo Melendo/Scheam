@@ -8,12 +8,15 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Cliente.TCliente;
+import Negocio.Cliente.TDistribuidor;
+import Negocio.Cliente.TParticular;
+import Negocio.Equipo.TEquipoDesarrollo;
+import Negocio.Equipo.TEquipoDisenio;
 import Negocio.Producto.TProducto;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Producto.ProductosTableModel;
-import Presentacion.Producto.VistaListarProductos;
+import Presentacion.Empleado.VistaListarEmpleado;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -30,13 +33,15 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 	private JTable table;
 	
 	private ClientesTableModel clientesmodel;
+	private DistribuidorModel disModel;
+	private ParticularModel parModel;
 	
 	public VistaMostrarClienteID() {
 		vVistaMostrarClienteID();
 	}	
 	
 	public void vVistaMostrarClienteID() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaMostrarClientes.class.getResource("/icons/cliente.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarEmpleado.class.getResource("/icons/empleado.png")));
 		setTitle("Mostrar Cliente por ID");
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -49,12 +54,22 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		clientesmodel = new ClientesTableModel();
-		table = new JTable(clientesmodel);
-		JScrollPane tablesp = new JScrollPane(table);
-		contentPane.add(tablesp, BorderLayout.CENTER);
 		
-		setVisible(false);
+		setVisible(false);	
+	}
+	
+	public void TableDis() {
+		disModel = new DistribuidorModel();
+		table = new JTable(disModel);
+		JScrollPane tabledis = new JScrollPane(table);
+		contentPane.add(tabledis, BorderLayout.CENTER);
+	}
+	
+	public void TablePar() {
+		parModel = new ParticularModel();
+		table = new JTable(parModel);
+		JScrollPane tablepar = new JScrollPane(table);
+		contentPane.add(tablepar, BorderLayout.CENTER);
 	}
 
 	@Override
@@ -64,12 +79,21 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.MostrarClienteID:
-			Set<TCliente> lista = new HashSet<>();
-			lista.add((TCliente) object);
-			clientesmodel.setLista(lista);
-			clientesmodel.fireTableStructureChanged();
+			if(object instanceof TDistribuidor) {
+				TableDis();
+				Set<TDistribuidor> lista = new HashSet<TDistribuidor>();
+				lista.add((TDistribuidor) object);
+				disModel.setLista(lista);
+				disModel.fireTableStructureChanged();
+			}else {
+				TablePar();
+				 Set<TParticular> lista = new HashSet<TParticular>();
+					lista.add((TParticular) object);
+					parModel.setLista(lista);
+					parModel.fireTableStructureChanged();
+			}
 			break;
-		case Eventos.MostrarClienteIDOK:
+		case Eventos.MostrarClienteIDNoOK:
 			JOptionPane.showMessageDialog(null, "Error. El cliente no existe");
 			Controlador.getInstance().update(Eventos.VistaFormMostrarClienteID, null);
 			break;

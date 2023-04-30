@@ -123,11 +123,12 @@ public class DAOCliente implements IDAOCliente {
 				
 			} else if(cliente instanceof TParticular){
 				sql = "UPDATE particulares set DNI = ?, telefono = ? where ID = ?";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, ((TParticular) cliente).getDNI());
-				ps.setInt(2, ((TParticular) cliente).getTelefono());
-				ps.setInt(3, cliente.getID());
-				ps.executeUpdate();
+				PreparedStatement ps1 = con.prepareStatement(sql);
+				ps1.setString(1, ((TParticular) cliente).getDNI());
+				ps1.setInt(2, ((TParticular) cliente).getTelefono());
+				ps1.setInt(3, cliente.getID());
+				ps1.executeUpdate();
+				ps1.close();
 			}			
 			ps.close();
 			con.close();
@@ -147,10 +148,10 @@ public class DAOCliente implements IDAOCliente {
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE activo");
 			ResultSet rs = ps.executeQuery();
+			
 			if (!rs.next()) {
 				return result;
 			} else {
-				/*
 				aux = new TCliente();
 				if(aux instanceof TDistribuidor) {
 					TDistribuidor distribuidor = (TDistribuidor) aux;
@@ -195,7 +196,7 @@ public class DAOCliente implements IDAOCliente {
 				}
 				rs.close();
 				ps.close();
-				con.close();*/
+				con.close();
 			}
 			
 			System.out.println("Readall realizado - DAOCliente");
@@ -284,7 +285,6 @@ public class DAOCliente implements IDAOCliente {
 			ResultSet rs = ps.executeQuery();
 			
 			if (!rs.next()) {
-				//result.setEmail("-1");
 				result.setID(-1);
 			} else {
 				result.setID(rs.getInt("id_cliente"));
@@ -296,48 +296,6 @@ public class DAOCliente implements IDAOCliente {
 				e.printStackTrace();
 				
 		}
-		return result;
-	}
-
-	public TCliente mostrarClienteCIF(String cifDistribuidor) {
-		System.out.println("Intentando readByCIF - DAOCliente");
-		TCliente result = new TCliente();
-		try {
-			PreparedStatement ps = con.prepareStatement("select * from distribuidores where cif = ?");
-			ps.setString(1, cifDistribuidor);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (!rs.next())
-			result.setID(-1);
-			else {
-			
-				result.setID(rs.getInt("ID"));
-				((TDistribuidor) result).setDireccion(rs.getString("direccion"));
-				((TDistribuidor) result).setEmail(rs.getString("cif"));
-			
-				ps = con.prepareStatement("select * from clientes where id_cliente = ?");
-				ps.setInt(1, result.getID());
-			
-				rs = ps.executeQuery();
-			
-				TDistribuidor dist = new TDistribuidor();
-			
-				dist.setID(result.getID());
-				dist.setNombre(result.getNombre());
-				dist.setActivo(true);
-				dist.setCIF(rs.getString("CIF"));
-				dist.setDireccion(rs.getString("direccion"));
-			}
-		
-			rs.close();
-			ps.close();
-			con.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println("ReadybyCIF realizado - DAOCliente");
 		return result;
 	}
 }

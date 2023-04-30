@@ -4,6 +4,7 @@ import Presentacion.IGUI;
 import Presentacion.Cliente.MainWindowCliente;
 import Presentacion.Cliente.VistaAltaCliente;
 import Presentacion.Cliente.VistaBajaCliente;
+import Presentacion.Cliente.VistaFormMostrarClienteID;
 import Presentacion.Cliente.VistaModificarCliente;
 import Presentacion.Cliente.VistaMostrarClienteID;
 import Presentacion.Cliente.VistaMostrarClientes;
@@ -125,7 +126,7 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			return new VistaModificarCliente();
 		case Eventos.VistaFormMostrarClienteID:
 			System.out.println("Entrando a VistaFormMostrarProductoID - FactoriaVistasImp");
-			return new VistaMostrarClienteID();
+			return new VistaFormMostrarClienteID();
 		case Eventos.VistaMostrarClienteID:
 			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
 			return new VistaMostrarClienteID();	
