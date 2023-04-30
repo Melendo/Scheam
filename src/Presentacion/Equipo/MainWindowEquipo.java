@@ -125,7 +125,7 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		listidbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
+				Controlador.getInstance().update(Eventos.VistaFormMostrarEquipoID, null);
 				dispose();
 			}
 		});
