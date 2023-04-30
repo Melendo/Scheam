@@ -6,9 +6,7 @@ package Negocio.Factura;
 import java.util.Set;
 
 import Integracion.Cliente.DAOCliente;
-import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.Empleado.TEmpleado;
 import Negocio.Producto.TProducto;
 
 public class SAFactura implements ISAFactura {
@@ -33,7 +31,7 @@ public class SAFactura implements ISAFactura {
 			return null;
 		} else {
 			lista = FactoriaDAOImp.getInstance().getDaoFactura().listarIDCliente(IDCliente);
-			System.out.println("listarIntegrantesIdEquipo Realizado - SAEmpleado");
+			System.out.println("listarFacturasIDCliente - SAFactura");
 			return lista;
 		}
 	}
@@ -95,6 +93,17 @@ public class SAFactura implements ISAFactura {
 	}
 
 	public TFactura cerrarCarrito() {
+		
+		if(carrito.comprobarStock() == -1) {
+			System.out.println("No se ha cerrado el carrito por falta de Stock - SAFactura");
+			return null;
+		}
+		if(carrito.reducirStock() == -1) {
+			System.out.println("Ha habido un error al reducir el stock con la bd - SAFactura");
+		}
+		
+		TFactura factura = new TFactura(carrito.getIdCliente(), carrito.getLineasFactura(), carrito.calcularImporte());
+		
 		
 		return null;
 	}

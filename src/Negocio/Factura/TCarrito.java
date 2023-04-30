@@ -6,6 +6,9 @@ package Negocio.Factura;
 import java.util.HashSet;
 import java.util.Set;
 
+import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Producto.TProducto;
+
 public class TCarrito {
 
 	private Set<TLineaFactura> set;
@@ -70,4 +73,44 @@ public class TCarrito {
 		}
 		return -1;
 	}
+	
+	public int comprobarStock() {
+		
+		for (TLineaFactura s : set) {
+			TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(s.getIdProducto());
+		   if(s.getCantidad()>prd.getStock()) {
+			   return -1;
+		   }
+		}
+		
+		return 1;
+	}
+	
+	public int reducirStock() {
+		
+		int stk;
+		for (TLineaFactura s : set) {
+			TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(s.getIdProducto());
+			stk = prd.getStock() - s.getCantidad();
+			prd.setStock(stk);
+			if(FactoriaDAOImp.getInstance().getDaoProducto().modify(prd) == -1) {
+				return -1;
+			}
+		}
+		
+		return 1;
+	
+	}
+	
+	public double calcularImporte() {
+		double imp = 0, aux;
+		
+		for (TLineaFactura s : set) {
+			aux = s.getPrecio() * s.getCantidad();
+			imp += aux;
+		}
+		
+		return imp;
+	}
+	
 }
