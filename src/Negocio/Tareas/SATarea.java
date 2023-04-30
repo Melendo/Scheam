@@ -6,8 +6,7 @@ package Negocio.Tareas;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.Cliente.TCliente;
-import Negocio.Empleado.TEmpleado;
+import java.util.HashSet;
 
 
 public class SATarea implements ISATarea {
@@ -93,30 +92,32 @@ public class SATarea implements ISATarea {
 	}
 
 
-	public Set listarTareasEquipo(Integer IDEquipo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
+	    Set<TTarea> lista = new HashSet<>();
+	    Set<TTarea> allTareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
+	    
+	    for (TTarea tarea : allTareas) {
+	        if (tarea.getEquipo() == IDEquipo && tarea.getActivo()) {
+	            lista.add(tarea);
+	        }
+	    }
+	    
+	    System.out.println("mostrarTareasEquipo Realizado - SATarea");
+	    return lista;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISATarea#listarTareasProducto(Integer IDProducto)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Set listarTareasProducto(Integer IDProducto) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
+	    Set<TTarea> lista = new HashSet<>();
+	    Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
+	    for (TTarea tarea : tareas) {
+	        if (tarea.getProducto() == IDProducto && tarea.getActivo()) {
+	            lista.add(tarea);
+	        }
+	    }
+	    System.out.println("listarTareasProducto Realizado - SATarea");
+	    return lista;
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISATarea#mostrarTareaID(Integer IDTarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public TTarea mostrarTareaID(Integer IDTarea) {
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(IDTarea);
 		if (tar.getIdTarea() != -1 && tar.getActivo()){
@@ -130,24 +131,33 @@ public class SATarea implements ISATarea {
 		}
 	}
 
-	/** 
-	* (non-Javadoc)
-	* @see ISATarea#cerrarTarea(Integer IDTarea)
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
 	public Integer cerrarTarea(Integer IDTarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	    System.out.println("Intentando cerrarTarea - SATarea");
+	    TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(IDTarea);
+
+	    if (tar.getIdTarea() == -1) {
+	        System.out.println("cerrarTarea No Realizado (no existe) - SATarea");
+	        return -1;
+	    }
+
+	    if (tar.getTerminada()) {
+	        System.out.println("cerrarTarea No Realizado (ya estaba cerrada) - SATarea");
+	        return -2;
+	    }
+
+	    tar.setTerminada(true);
+	    int res = FactoriaDAOImp.getInstance().getDaoTarea().modify(tar);
+
+	    if (res == 1) {
+	        System.out.println("cerrarTarea Realizado - SATarea");
+	        return 1;
+	    } else {
+	        System.out.println("cerrarTarea No Realizado - SATarea");
+	        return -3;
+	    }
 	}
 
-
-	@Override
-	public Integer modificarTarea(Integer IDTarea) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

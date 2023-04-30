@@ -58,37 +58,28 @@ public class SACliente implements ISACliente {
 		System.out.println("modificarCliente no realizado (cliente no existe o esta inactivo)- SACliente");
 			return -1;
 			} else {
-			if (cliente.getID() != null  && FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID()).getID() != -1){
-				System.out.println("modificarCliente no realizado (cliente tiene un ID coincidente)- SACliente");
+			if (cliente.getID() != null  && FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteEmail(cliente.getEmail()).getID() != -1){ // mostrarClienteEmail(cliente.getID()).getID() != -
+				System.out.println("modificarCliente no realizado (cliente tiene un ID o Email coincidente)- SACliente");
 				return -2;
 				}
 			else {
+				if(cliente.getEmail() == null)
+					cliente.setEmail(cli.getEmail());;
+				if(cliente.getNombre() == null)
+					cliente.setNombre(cli.getNombre());
+				if(cliente.getActivo() == null)
+					cliente.setActivo(cli.getActivo());
+				
 				if(cliente instanceof TDistribuidor) {
-					if(cliente.getID() == null)
-						cliente.setID(cli.getID());
-					if(cliente.getNombre() == null)
-						cliente.setNombre(cli.getNombre());
-					if(cliente.getEmail() == null)
-						cliente.setEmail(cli.getEmail());;
 					if(((TDistribuidor) cliente).getDireccion() == null)
 						((TDistribuidor) cliente).setDireccion(((TDistribuidor) cli).getDireccion());
 					if(((TDistribuidor) cliente).getEmail() == null)
 						((TDistribuidor) cliente).setEmail(((TDistribuidor) cli).getEmail());
-					if(cliente.getActivo() == null)
-						cliente.setActivo(cli.getActivo());;
 				} else {
-					if(cliente.getID() == null)
-						cliente.setID(cli.getID());
-					if(cliente.getNombre() == null)
-						cliente.setNombre(cli.getNombre());
-					if(cliente.getEmail() == null)
-						cliente.setEmail(cli.getEmail());;
 					if(((TParticular) cliente).getTelefono() == null)
 						((TParticular) cliente).setTelefono(((TParticular) cli).getTelefono());
 					if(((TParticular) cliente).getDNI() == null)
 						((TParticular) cliente).setDNI(((TParticular) cli).getDNI());
-					if(cliente.getActivo() == null)
-						cliente.setActivo(cli.getActivo());;
 				}
 				System.out.println("modificarCliente Realizado - SACliente");
 				return FactoriaDAOImp.getInstance().getDaoCliente().modify(cliente);

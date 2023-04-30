@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Empleado.MainWindowEmpleado;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
@@ -25,7 +24,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class MainWindowTarea extends JFrame implements ActionListener, IGUI {
+public class MainWindowTarea extends JFrame implements IGUI {
 	
 	public MainWindowTarea() {		
 		vMainWindowTarea();	

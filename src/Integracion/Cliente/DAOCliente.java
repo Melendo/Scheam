@@ -103,7 +103,6 @@ public class DAOCliente implements IDAOCliente {
 	public Integer modify(TCliente cliente) {
 		System.out.println("Intentando Modify - DAOCliente");
 		try {
-			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			
 			String sql = "UPDATE clientes set nombre = ?, email = ?, activo = ? where id_cliente = ?";
@@ -115,7 +114,7 @@ public class DAOCliente implements IDAOCliente {
 			ps.setInt(4, cliente.getID());
 			
 			if(cliente instanceof TDistribuidor) {
-				sql = "UPDATE distribuidores set direccion = ?, CIF = ? where id_cliente = ?";
+				sql = "UPDATE distribuidores set direccion = ?, CIF = ? where ID = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, ((TDistribuidor) cliente).getDireccion());
 				ps.setString(2, ((TDistribuidor) cliente).getCIF());
@@ -123,7 +122,7 @@ public class DAOCliente implements IDAOCliente {
 				ps.executeUpdate();
 				
 			} else if(cliente instanceof TParticular){
-				sql = "UPDATE particulares set DNI = ?, telefono = ? where id_empleado = ?";
+				sql = "UPDATE particulares set DNI = ?, telefono = ? where ID = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, ((TParticular) cliente).getDNI());
 				ps.setInt(2, ((TParticular) cliente).getTelefono());
@@ -131,7 +130,6 @@ public class DAOCliente implements IDAOCliente {
 				ps.executeUpdate();
 			}			
 			ps.close();
-			stmt.close();
 			con.close();
 			
 			System.out.println("Modify Realizado - DAOCliente");

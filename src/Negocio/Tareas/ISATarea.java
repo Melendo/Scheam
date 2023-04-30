@@ -14,16 +14,16 @@ public interface ISATarea {
 	public Integer bajaTarea(Integer IDTarea);
 
 
-	public Integer modificarTarea(Integer IDTarea);
+	public Integer modificarTarea(TTarea tarea);
 
 
-	public Set listarTareas();
+	public Set<TTarea> listarTareas();
 
 
-	public Set listarTareasEquipo(Integer IDEquipo);
+	public Set<TTarea> listarTareasEquipo(Integer IDEquipo);
 
 
-	public Set listarTareasProducto(Integer IDProducto);
+	public Set<TTarea> listarTareasProducto(Integer IDProducto);
 
 
 	public TTarea mostrarTareaID(Integer IDTarea);
