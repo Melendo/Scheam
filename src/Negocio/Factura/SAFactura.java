@@ -92,7 +92,7 @@ public class SAFactura implements ISAFactura {
 		}
 	}
 
-	public TFactura cerrarCarrito() {
+	public Integer cerrarCarrito() {
 		
 		if(carrito.comprobarStock() == -1) {
 			System.out.println("No se ha cerrado el carrito por falta de Stock - SAFactura");
@@ -103,8 +103,11 @@ public class SAFactura implements ISAFactura {
 		}
 		
 		TFactura factura = new TFactura(carrito.getIdCliente(), carrito.getLineasFactura(), carrito.calcularImporte());
-		
-		
-		return null;
+		if(FactoriaDAOImp.getInstance().getDaoFactura().create(factura) == 1) {
+			System.out.println("Se ha cerrado el carrito correctamete - SAFactura");
+			return 1;
+		}
+		System.out.println("No se ha cerrado el carrito correctamete - SAFactura");
+		return -1;
 	}
 }
