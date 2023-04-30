@@ -6,6 +6,7 @@ public class TCliente {
 	private String email;
 	private String nombre;
 	private Boolean activo;
+	private Boolean distribuidor = false;
 	
 	public Integer getID() {
 		return ID;
@@ -37,6 +38,10 @@ public class TCliente {
 	
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
+	}
+	
+	public Boolean getTipo() {
+		return distribuidor;
 	}
 
 	
