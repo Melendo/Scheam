@@ -6,8 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerListModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
@@ -37,6 +41,7 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 	private JTextField DnTF;
 	
 	private boolean cerrar = true;
+	private boolean esDistribuidor = true;
 	
 	public VistaModificarCliente() {
 		vModificarCliente();
@@ -67,69 +72,97 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 		infopanel.setLayout(null);
 		
 		JLabel nombrelabel = new JLabel("Nombre: ");
-		nombrelabel.setBounds(75, 14, 56, 14);
+		nombrelabel.setBounds(100, 34, 56, 14);
 		infopanel.add(nombrelabel);
 		
 		NoTF = new JTextField();
 		NoTF.setColumns(10);
-		NoTF.setBounds(153, 11, 215, 17);
+		NoTF.setBounds(153, 34, 215, 17);
 		infopanel.add(NoTF);
 		
-		JLabel fecchalabel = new JLabel("Email: ");
-		fecchalabel.setBounds(10, 39, 111, 14);
-		infopanel.add(fecchalabel);
+		JLabel emaillabel = new JLabel("Email: ");
+		emaillabel.setBounds(110, 54, 111, 14);
+		infopanel.add(emaillabel);
 		
 		EmTF = new JTextField();
 		EmTF.setColumns(10);
-		EmTF.setBounds(153, 36, 215, 17);
+		EmTF.setBounds(153, 54, 215, 17);
 		infopanel.add(EmTF);
 		
-		JLabel preciolabel = new JLabel("Precio:");
-		preciolabel.setBounds(85, 66, 46, 14);
-		infopanel.add(preciolabel);
+		JLabel tipoLabel = new JLabel("Tipo: ");
+		tipoLabel.setBounds(115, 10, 111, 14);
+		infopanel.add(tipoLabel);
 		
-		/*
-		PrTF = new JTextField();
-		PrTF.setColumns(10);
-		PrTF.setBounds(153, 63, 215, 17);
-		infopanel.add(PrTF);
+		JLabel ciflabel = new JLabel("CIF: ");
+		ciflabel.setBounds(110, 74, 111, 14);
+		infopanel.add(ciflabel);
 		
-		JLabel generolabel = new JLabel("Genero:");
-		generolabel.setBounds(75, 91, 46, 14);
-		infopanel.add(generolabel);
+		CiTF = new JTextField();
+		CiTF.setColumns(10);
+		CiTF.setBounds(153, 74, 215, 17);
+		infopanel.add(CiTF);
 		
-		GeTF = new JTextField();
-		GeTF.setColumns(10);
-		GeTF.setBounds(153, 91, 215, 17);
-		infopanel.add(GeTF);
+		JLabel telefonolabel = new JLabel("telefono: ");
+		telefonolabel.setBounds(96, 94, 111, 14);
+		infopanel.add(telefonolabel);
 		
-		JLabel pegilabel = new JLabel("PEGI:");
-		pegilabel.setBounds(85, 118, 56, 14);
-		infopanel.add(pegilabel);
+		TeTF = new JTextField();
+		TeTF.setColumns(10);
+		TeTF.setBounds(153, 94, 215, 17);
+		infopanel.add(TeTF);
 		
-		PeTF = new JTextField();
-		PeTF.setColumns(10);
-		PeTF.setBounds(153, 116, 215, 17);
-		infopanel.add(PeTF);
+		JLabel dnilabel = new JLabel("DNI: ");
+		dnilabel.setBounds(110, 74, 111, 14);
+		infopanel.add(dnilabel);
 		
-		JLabel stocklabel = new JLabel("Stock:");
-		stocklabel.setBounds(85, 147, 46, 14);
-		infopanel.add(stocklabel);
+		DnTF = new JTextField();
+		DnTF.setColumns(10);
+		DnTF.setBounds(153, 74, 215, 17);
+		infopanel.add(DnTF);
 		
-		StTF = new JTextField();
-		StTF.setColumns(10);
-		StTF.setBounds(153, 144, 215, 17);
-		infopanel.add(StTF);
+		JLabel direccionlabel = new JLabel("Direccion: ");
+		direccionlabel.setBounds(90, 94, 111, 14);
+		infopanel.add(direccionlabel);
 		
-		JLabel idlabel = new JLabel("ID:");
-		idlabel.setBounds(102, 172, 29, 14);
+		DiTF = new JTextField();
+		DiTF.setColumns(10);
+		DiTF.setBounds(153, 94, 215, 17);
+		infopanel.add(DiTF);
+		
+		JLabel idlabel = new JLabel("ID: ");
+		idlabel.setBounds(110, 114, 111, 14);
 		infopanel.add(idlabel);
 		
 		IdTF = new JTextField();
 		IdTF.setColumns(10);
-		IdTF.setBounds(153, 172, 215, 17);
+		IdTF.setBounds(153, 114, 215, 17);
 		infopanel.add(IdTF);
-		*/
+		
+		JSpinner fieldspinner = new JSpinner();
+		fieldspinner.setModel(new SpinnerListModel(new String[] {"Distribuidor", "Particular"}));
+		fieldspinner.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				System.out.println("Tipo de cliente: " + fieldspinner.getValue().toString());
+				if (fieldspinner.getValue().toString().equals("Distribuidor"))
+					esDistribuidor = true;
+				else
+					esDistribuidor = false;
+				
+				ciflabel.setVisible(esDistribuidor);
+				CiTF.setVisible(esDistribuidor);
+				telefonolabel.setVisible(!esDistribuidor);
+				TeTF.setVisible(!esDistribuidor);
+				dnilabel.setVisible(!esDistribuidor);
+				DnTF.setVisible(!esDistribuidor);
+				direccionlabel.setVisible(esDistribuidor);
+				DiTF.setVisible(esDistribuidor);
+			}
+		});
+		fieldspinner.setBounds(153, 10, 215, 20);
+		infopanel.add(fieldspinner);
+		
+		
 		JButton okbutton = new JButton("Ok");
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +180,15 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 		
 		cancelbutton.setBounds(248, 205, 90, 23);
 		infopanel.add(cancelbutton);
+		
+		ciflabel.setVisible(esDistribuidor);
+		CiTF.setVisible(esDistribuidor);
+		telefonolabel.setVisible(!esDistribuidor);
+		TeTF.setVisible(!esDistribuidor);
+		dnilabel.setVisible(!esDistribuidor);
+		DnTF.setVisible(!esDistribuidor);
+		direccionlabel.setVisible(esDistribuidor);
+		DiTF.setVisible(esDistribuidor);
 	}
 	
 	public void ok() {
