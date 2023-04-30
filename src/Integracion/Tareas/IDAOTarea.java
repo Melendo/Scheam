@@ -5,7 +5,6 @@ package Integracion.Tareas;
 
 import Negocio.Tareas.TTarea;
 import java.util.Set;
-import Negocio.Producto.TProducto;
 
 public interface IDAOTarea {
 
@@ -18,17 +17,18 @@ public interface IDAOTarea {
 	public Integer modify(TTarea tarea);
 
 
-	public Set readAll();
+	public Set<TTarea> readAll();
 
 
 	public TTarea readById(Integer idtarea);
 
 
-	public Set listarIdEquipo(Integer idtarea);
+	public Set<TTarea> listarIdEquipo(Integer idEquipo);
 
 
-	public TProducto listarIdProducto(Integer idtarea);
+	//public TProducto listarIdProducto(Integer idtarea);
 
+	public Set<TTarea> listarIdProducto(Integer idProducto);
 
 	public Integer closeTask(Integer idtarea);
 }

@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
-import Negocio.Producto.TProducto;
 import java.util.HashSet;
 
 public class DAOTarea implements IDAOTarea {
@@ -176,26 +175,93 @@ public class DAOTarea implements IDAOTarea {
 	}
 
 
-	public Set listarIdEquipo(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	public Set<TTarea> listarIdEquipo(Integer idEquipo) {
+	    System.out.println("Intentando listar tareas por equipo - DAOTarea");
+	    Set<TTarea> result = new HashSet<>();
+	    try {
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE equipo = ?");
+	        ps.setInt(1, idEquipo);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            TTarea tarea = new TTarea();
+	            tarea.setIdTarea(rs.getInt("id_tarea"));
+	            tarea.setNombre(rs.getString("nombre"));
+	            tarea.setEquipo(rs.getInt("equipo"));
+	            tarea.setProducto(rs.getInt("producto"));
+	            tarea.setTerminada(rs.getBoolean("terminada"));
+	            tarea.setActivo(rs.getBoolean("activo"));
+	            result.add(tarea);
+	        }
+
+	        rs.close();
+	        ps.close();
+	        con.close();
+	        System.out.println("Listado de tareas por equipo realizado - DAOTarea");
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return result;
 	}
 
-
-	public TProducto listarIdProducto(Integer idtarea) {
+	/*public TProducto listarIdProducto(Integer idtarea) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
 		// end-user-code
+	}*/
+	
+	public Set<TTarea> listarIdProducto(Integer idProducto) {
+	    System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
+	    Set<TTarea> result = new HashSet<>();
+	    try {
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE producto = ?");
+	        ps.setInt(1, idProducto);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            TTarea tarea = new TTarea();
+	            tarea.setIdTarea(rs.getInt("id_tarea"));
+	            tarea.setNombre(rs.getString("nombre"));
+	            tarea.setEquipo(rs.getInt("equipo"));
+	            tarea.setProducto(rs.getInt("producto"));
+	            tarea.setTerminada(rs.getBoolean("terminada"));
+	            tarea.setActivo(rs.getBoolean("activo"));
+	            result.add(tarea);
+	        }
+
+	        rs.close();
+	        ps.close();
+	        con.close();
+	        System.out.println("Listado de tareas por ID de producto realizado - DAOTarea");
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return result;
 	}
 
 
 	public Integer closeTask(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		System.out.println("Intentando Cerrar Tarea - DAOTarea");
+		try {
+			PreparedStatement ps;
+			String sql = "UPDATE tareas set terminada = true where id_tarea = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idtarea);
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			System.out.println("Tarea Cerrada - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 }
