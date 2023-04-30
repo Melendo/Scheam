@@ -173,42 +173,33 @@ public class DAOEquipo implements IDAOEquipo {
 				result.setNombre(rs.getString("nombre"));
 				result.setActivo(rs.getBoolean("activo"));
 				
-				try {
-					ps = con.prepareStatement("select * from equipodesarrollo where ID_EQUIPO = ?");
+				ps = con.prepareStatement("select * from equipodesarrollo where ID_EQUIPO = ?");
+				ps.setInt(1, idequipo);
+				
+				rs = ps.executeQuery();
+				if(!rs.next()) {
+					ps = con.prepareStatement("select * from equipodisenyo where ID_EQUIPO = ?");
 					ps.setInt(1, idequipo);
 					
 					rs = ps.executeQuery();
-					if(!rs.next()) {
-						try {
-							ps = con.prepareStatement("select * from equipodisenyo where ID_EQUIPO = ?");
-							ps.setInt(1, idequipo);
-							
-							rs = ps.executeQuery();
-							
-							TEquipoDisenio eqdi = new TEquipoDisenio(); 
-							
-							eqdi.setIdEquipo(result.getIdEquipo());
-							eqdi.setNombre(result.getNombre());
-							eqdi.setActivo(result.getActivo());
-							eqdi.setCampoDisenio(rs.getString("CAMPO_DISENYO"));
-							
-							result = eqdi;
-						
-						}catch(SQLException e) {
-							e.printStackTrace();
-						}
-					}else {
-						TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
-						
-						eqde.setIdEquipo(result.getIdEquipo());
-						eqde.setNombre(result.getNombre());
-						eqde.setActivo(result.getActivo());
-						eqde.setTecnologia(rs.getString("TECNOLOGIA"));
-						
-						result = eqde;
-					}
-				}catch(SQLException e) {
-					e.printStackTrace();
+					
+					TEquipoDisenio eqdi = new TEquipoDisenio(); 
+					
+					eqdi.setIdEquipo(result.getIdEquipo());
+					eqdi.setNombre(result.getNombre());
+					eqdi.setActivo(result.getActivo());
+					eqdi.setCampoDisenio(rs.getString("CAMPO_DISENYO"));
+					
+					result = eqdi;
+				}else {
+					TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
+					
+					eqde.setIdEquipo(result.getIdEquipo());
+					eqde.setNombre(result.getNombre());
+					eqde.setActivo(result.getActivo());
+					eqde.setTecnologia(rs.getString("TECNOLOGIA"));
+					
+					result = eqde;
 				}
 			}
 			
