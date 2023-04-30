@@ -20,5 +20,5 @@ public interface ISAFactura {
 
 	public Integer eliminarProductodeCarrito(Integer IDProducto, Integer cantidad);
 
-	public TFactura cerrarCarrito();
+	public Integer cerrarCarrito();
 }
