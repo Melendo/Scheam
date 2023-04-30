@@ -205,7 +205,7 @@ public class VistaModificarCliente extends JFrame implements IGUI {
 			cliente.setNombre(NoTF.getText());
 			cliente.setEmail(EmTF.getText());
 			((TParticular) cliente).setDNI(DnTF.getText());
-			((TParticular) cliente).setTelefono(Integer.parseInt(DiTF.getText()));
+			((TParticular) cliente).setTelefono(Integer.parseInt(TeTF.getText()));
 		}
 		Controlador.getInstance().update(Eventos.ModificarCliente, cliente);
 		if (cerrar) 
