@@ -7,27 +7,25 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Cliente.TCliente;
-import Negocio.Producto.TProducto;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.VistaListarEmpleado;
-import Presentacion.Producto.ProductosTableModel;
 
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Set;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 
 public class VistaMostrarClientes extends JFrame implements IGUI {
 	
 	private JPanel contentPane;
-	private JTable table;
+	private JTable table1;
+	private JTable table2;
 	
-	private ClientesTableModel clientesmodel;
+	private ClientesTableModel distribuidoresmodel;
+	private ClientesTableModel particularesmodel;
 	
 	public VistaMostrarClientes() {
 		vMostrarClientes();
@@ -48,12 +46,23 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		clientesmodel = new ClientesTableModel();
-		table = new JTable(clientesmodel);
-		JScrollPane tablesp = new JScrollPane(table);
-		contentPane.add(tablesp, BorderLayout.CENTER);
+		distribuidoresmodel = new ClientesTableModel(true);
+		table1 = new JTable(distribuidoresmodel);
+		JScrollPane tabldis = new JScrollPane(table1);
+		contentPane.add(tabldis);
+		/*
+		JPanel tabla2 = new JPanel();
+		tabla2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(tabla2);
+		tabla2.setLayout(new BorderLayout(0, 0));*/
+		
+		particularesmodel = new ClientesTableModel(false);
+		table2 = new JTable(particularesmodel);
+		JScrollPane tablpar = new JScrollPane(table2);
+		contentPane.add(tablpar);
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(int event, Object object) {
 		switch (event) {
@@ -61,8 +70,8 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.ListarCliente:
-			clientesmodel.setLista((Set<TCliente>) object);
-			clientesmodel.fireTableStructureChanged();
+			distribuidoresmodel.setLista((Set<TCliente>) object);
+			distribuidoresmodel.fireTableStructureChanged();
 			break;
 		}
 	}
