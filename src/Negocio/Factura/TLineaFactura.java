@@ -28,10 +28,6 @@ public class TLineaFactura {
 	public double getPrecio() {
 		return precio;
 	}
-
-	public void setIdProducto(int id) {
-		idProducto = id;
-	}
 	
 	public void setIdFactura(int id) {
 		idFactura = id;
@@ -43,5 +39,11 @@ public class TLineaFactura {
 	
 	public void setPrecio(double prec) {
 		precio = prec;
+	}
+	
+	public TLineaFactura(int idProd, int cant, double prec) {
+		this.idProducto = idProd;
+		this.cantidad = cant;
+		this.precio = prec;
 	}
 }

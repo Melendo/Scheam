@@ -18,7 +18,7 @@ public class TFactura {
 
 	private Integer IDCliente;
 
-	private Set Lineas;
+	private Set<TLineaFactura> set;
 
 	public Integer getIdFactura() {
 		return IDFactura;
