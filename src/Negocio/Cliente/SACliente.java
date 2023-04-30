@@ -17,7 +17,7 @@ public class SACliente implements ISACliente {
 
 		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteEmail(cliente.getEmail());
 
-		if (cli.getID().equals(-1)) {
+		if (cli.getID() == -1) { //cli.getID().equals(-1)
 			System.out.println("altaCliente Realizado (creado) - SACliente");
 			return FactoriaDAOImp.getInstance().getDaoCliente().create(cliente);
 		} else {
@@ -47,6 +47,7 @@ public class SACliente implements ISACliente {
 			System.out.println("bajaCliente Realizado - SACliente");
 			return FactoriaDAOImp.getInstance().getDaoCliente().delete(IDcliente);
 		} else{
+			System.out.println("bajaCliente No Realizado (ya dado de baja) - SACliente");
 			return -2;
 		}
 	}
