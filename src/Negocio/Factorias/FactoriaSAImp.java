@@ -39,7 +39,6 @@ public class FactoriaSAImp extends FactoriaSA {
 
 	@Override
 	public SATarea getSATarea() {
-		// TODO Auto-generated method stub
 		return new SATarea();
 	}
 

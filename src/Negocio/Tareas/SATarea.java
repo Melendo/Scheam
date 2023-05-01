@@ -16,7 +16,7 @@ public class SATarea implements ISATarea {
 		System.out.println("Intentando altaEmpleado - SATarea");
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
 
-		if (tar.getIdTarea().equals("-1")) {
+		if (tar.getIdTarea() == -1) {
 			System.out.println("altaTareaRealizado (creado) - SATarea");
 			return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
 		} else {

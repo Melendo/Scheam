@@ -7,14 +7,17 @@ import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 import Negocio.Tareas.TTarea;
+import Presentacion.Controlador.Controlador;
 public class TareasTableModel extends AbstractTableModel{
 
 	String[] header = {"ID", "Nombre", "Equipo", "Producto", "Terminada"};
 	List<TTarea> tareas;
+
 	
 	public TareasTableModel() {
 		tareas = new ArrayList<>();
 	}
+	
 	
 	@Override
 	public String getColumnName(int column) {

@@ -417,6 +417,42 @@ public class ControladorImp extends Controlador {
 	        	gui.update(event,  tar);
 	        	gui.update(Eventos.VistaMostrarTareasID, null);
 	    	}
+	    case Eventos.VistaCerrarTarea:
+	    	System.out.println("Entrando a VistaCerrarTarea - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	    case Eventos.CerrarTarea:
+	    	System.out.println("Entrando a CerrarTarea - Controlador");
+	    	res = FactoriaSA.getInstance().getSATarea().cerrarTarea((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.CerrarTareaNoOK, null);
+	    	else if(res == -2) gui.update(Eventos.CerrarTareaNoOK2, null);
+	    	else gui.update(Eventos.CerrarTareaOK, objeto);
+	    	break;
+	     case Eventos.VistaListarTareasEquipoId:
+	        	System.out.println("Entrando a VistaListarTareasEquipoId - Controlador");
+	        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	        	gui.update(event, null);
+	        	break;
+	     case Eventos.ListarTareasEquipoId:
+	        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
+	        	Set<TTarea> listaequipo = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
+	        	if (!listaequipo.isEmpty()) gui.update(Eventos.ListarTareasEquipoIdOK, null);
+	        	else gui.update(Eventos.ListarTareasEquipoIdNoOK, objeto);
+	        	break;	
+	     case Eventos.VistaListarTareasProductoId:
+	        	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
+	        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	        	gui.update(event, null);
+	        	break;
+	     case Eventos.ListarTareasProductoId:
+	        	System.out.println("Entrando a ListarTareasProductoId - Controlador");
+	        	Set<TTarea> listaproducto = FactoriaSA.getInstance().getSATarea().listarTareasProducto((Integer) objeto);
+	        	if (!listaproducto.isEmpty()) gui.update(Eventos.ListarTareasProductoIdOK, null);
+	        	else gui.update(Eventos.ListarTareasProductoIdNoOK, objeto);
+	        	break;	
+	    	
+	    	
 	    	
 	    }
     }
