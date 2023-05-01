@@ -23,7 +23,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 
-public class VistaListarTareasEquipoId extends JFrame implements IGUI {
+public class VistaFormListarTareasEquipoId extends JFrame implements IGUI {
 
 	private JPanel contentPane;
 	private JTextField idtextfield;
@@ -31,14 +31,14 @@ public class VistaListarTareasEquipoId extends JFrame implements IGUI {
 	boolean cerrar = true;
 	
 	
-	public VistaListarTareasEquipoId() {
+	public VistaFormListarTareasEquipoId() {
 		vListarTareasEquipoId();
 	}
 	
 	public void vListarTareasEquipoId() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Mostrar Tareas Equipo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -52,7 +52,7 @@ public class VistaListarTareasEquipoId extends JFrame implements IGUI {
 		
 		JLabel logo = new JLabel("      Mostrar Tareas Equipo");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
