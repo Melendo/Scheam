@@ -78,7 +78,7 @@ public class DAOTarea implements IDAOTarea {
 		try {
 			PreparedStatement ps;
 						
-			String sql = "UPDATE tareas set nombre = ?,  equipo = ?, producto = ?, terminada = ?, activo = ? where id_tarea = ?";
+			String sql = "UPDATE tarea set nombre = ?,  equipo = ?, producto = ?, terminada = ?, activo = ? where id_tarea = ?";
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, tarea.getNombre());
