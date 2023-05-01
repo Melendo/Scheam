@@ -11,6 +11,7 @@ import java.util.Set;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
+import Negocio.Equipo.TVinculacion;
 	
 
 public class DAOEquipo implements IDAOEquipo {	
@@ -219,10 +220,8 @@ public class DAOEquipo implements IDAOEquipo {
 					con.close();
 										
 					return eqde;
-				}
-				
-			}
-			
+				}				
+			}		
 			rs.close();
 			ps.close();
 			con.close();
@@ -234,7 +233,7 @@ public class DAOEquipo implements IDAOEquipo {
 		return result;
 	}
 
-	public Integer anyadirIntegrante(Integer idempleado, Integer idequipo) {
+	public Integer anyadirIntegrante(TVinculacion pert) {
 		
 		System.out.println("Intentando añadirIntegrante - DAOEquipo");
 		try {
@@ -243,9 +242,9 @@ public class DAOEquipo implements IDAOEquipo {
 			String sql = "INSERT INTO pertenece (ID_equipo, ID_empleado, activo) VALUES (?,?,?);";
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, idequipo);
-			ps.setInt(2, idempleado);
-			ps.setBoolean(3, true);
+			ps.setInt(1, pert.getId_1());
+			ps.setInt(2, pert.getId_2());
+			ps.setBoolean(3, pert.isActivo());
 
 			ps.executeUpdate();
 			
@@ -261,7 +260,7 @@ public class DAOEquipo implements IDAOEquipo {
 		return 1;
 	}
 
-	public Integer bajaIntegrante(Integer idempleado, Integer idequipo) {
+	public Integer bajaIntegrante(TVinculacion pert) {
 		System.out.println("Intentando bajaIntegrante - DAOEquipo");
 		try {
 			PreparedStatement ps;
@@ -269,8 +268,8 @@ public class DAOEquipo implements IDAOEquipo {
 			String sql = "UPDATE pertenece set activo = false where ID_equipo = ? and ID_empleado = ?;";
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, idequipo);
-			ps.setInt(2, idempleado);
+			ps.setInt(1, pert.getId_1());
+			ps.setInt(2, pert.getId_2());
 
 			ps.executeUpdate();
 			
@@ -345,12 +344,6 @@ public class DAOEquipo implements IDAOEquipo {
 				
 			}
 		return result;
-	}
-	
-	@Override
-	public Integer empleadoEstaEnEquipo(Integer idempleado, Integer idequipo) {
-		
-		return null;
 	}
 		
 }

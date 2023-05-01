@@ -24,6 +24,7 @@ import Presentacion.Equipo.VistaBajaEquipo;
 import Presentacion.Equipo.VistaFormMostrarEquipoId;
 import Presentacion.Equipo.VistaModificarEquipo;
 import Presentacion.Equipo.VistaMostrarEquiposId;
+import Presentacion.Factura.MainWindowFactura;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
 import Presentacion.Producto.VistaBajaProducto;
@@ -36,6 +37,7 @@ import Presentacion.Tareas.MainWindowTarea;
 import Presentacion.Tareas.VistaAltaTarea;
 import Presentacion.Tareas.VistaBajaTarea;
 import Presentacion.Tareas.VistaCerrarTarea;
+import Presentacion.Tareas.VistaFormMostrarTareasID;
 import Presentacion.Tareas.VistaListarTareas;
 import Presentacion.Tareas.VistaListarTareasEquipoId;
 import Presentacion.Tareas.VistaListarTareasProductoId;
@@ -157,7 +159,7 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			return new VistaModificarTarea();
 		case Eventos.VistaFormMostrarTareasID:
 			System.out.println("Entrando a VistaFormMostrarTareasID - FactoriaVistasImp");
-			return null;
+			return new VistaFormMostrarTareasID();
 		case Eventos.VistaMostrarTareasID:
 			System.out.println("Entrando a VistaMostrarTareasID - FactoriaVistasImp");
 			return new VistaMostrarTareasID();
@@ -172,7 +174,12 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			return new VistaListarTareasEquipoId();
 		case Eventos.VistaListarTareasProductoId:
 			System.out.println("Entrando a VistaListarTareasProductoId - FactoriaVistasImp");
-			return new VistaListarTareasProductoId();		default:
+			return new VistaListarTareasProductoId();
+		case Eventos.MainWindowFactura: // <------------------------------------------------------------------------------
+			System.out.println("Entrando a MainWindowFactura - FactoriaVistasImp");
+			return new MainWindowFactura();
+
+		default:
 			return null;
 		}
 	}

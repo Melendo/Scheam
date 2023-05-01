@@ -20,7 +20,6 @@ public class Eventos {
     public static final int BajaEmpleadoNoOK = 123;
     public static final int BajaEmpleadoNoOK2 = 124;
     public static final int BajaEmpleadoNoOK3 = 125;
-
     
     public static final int VistaFormMostrarEmpleadoID = 130;
     public static final int VistaMostrarEmpleadoID = 131;
@@ -41,8 +40,6 @@ public class Eventos {
     public static final int VistaListarIntegrantesEquipo = 161;
     public static final int ListarIntegrantesEquipo = 162;
     public static final int ListarIntegrantesEquipoNoOk = 163;
-  
-
     
     //////////////////////////////////////////////////////////
     
@@ -74,6 +71,14 @@ public class Eventos {
     
     public static final int VistaListarEquipo = 245;
     public static final int ListarEquipo = 246;
+    
+    public static final int VistaAnyadirIntegrante = 250;
+    public static final int AnyadirIntegrante = 251;
+    public static final int AnyadirIntegranteOk = 252;
+    public static final int AnyadirIntegranteNoOk = 253;
+    public static final int AnyadirIntegranteNoOk2 = 254;
+    public static final int AnyadirIntegranteNoOk3 = 255;
+    public static final int AnyadirIntegranteNoOk4 = 256;
     
 	//////////////////////////////////////////////////////////
 	    
@@ -192,4 +197,8 @@ public class Eventos {
 	public static final int ListarTareasProductoId = 581;
 	public static final int ListarTareasProductoIdOK = 582;
 	public static final int ListarTareasProductoIdNoOK = 583;
+	
+	////////////////////////////////////////////////////////////////////////////
+	
+	public static final int MainWindowFactura = 600;
 }

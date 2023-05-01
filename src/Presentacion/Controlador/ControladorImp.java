@@ -194,7 +194,14 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEquipoID, null);
         	}
         	break;
-        	
+        case Eventos.VistaAnyadirIntegrante:
+        	System.out.println("Entrando a VistaAnyadirIntegrante - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
+        case Eventos.AnyadirIntegrante:	
+        	System.out.println("Entrando a AnyadirIntegrante - Controlador");
+        	//res = FactoriaSA.getInstance().getSAEquipo()
         
         //PRODUCTO
 	    case Eventos.MainWindowProducto:
@@ -465,8 +472,13 @@ public class ControladorImp extends Controlador {
         	else gui.update(Eventos.ListarTareasProductoIdNoOK, objeto);
         	break;	
 	    	
-	    	
-	    	
+	    //FACTURA
+        	
+	     case Eventos.MainWindowFactura:
+	    	System.out.println("Entrando a MainWindowFactura - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
 	    }
     }
 }
