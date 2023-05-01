@@ -26,7 +26,7 @@ public class SAFactura implements ISAFactura {
 		return 1;
 	}
 
-	public Set listarFacturasIDCliente(Integer IDCliente) {
+	public Set<TFactura> listarFacturasIDCliente(Integer IDCliente) {
 		DAOCliente daocln = FactoriaDAOImp.getInstance().getDaoCliente();
 		Set<TFactura> lista;
 

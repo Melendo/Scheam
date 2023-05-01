@@ -6,7 +6,6 @@ package Integracion.Factura;
 import java.sql.Connection;
 import java.sql.Date;
 
-import Negocio.Empleado.TEmpleado;
 import Negocio.Factura.TFactura;
 
 import java.sql.DriverManager;
