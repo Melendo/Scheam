@@ -35,6 +35,10 @@ public class SAFactura implements ISAFactura {
 	}
 
 	public Integer eliminarCarrito() {
+		if(carrito == null){
+			System.out.println("Necesitas abrir un carrito pendejo");
+			return -2;
+		}
 		carrito = null;
 		return 1;
 	}
@@ -67,6 +71,11 @@ public class SAFactura implements ISAFactura {
 	}
 
 	public Integer anyadirProductoaCarrito(Integer IDProducto, Integer cantidad) {
+		
+		if(carrito == null){
+			System.out.println("Necesitas abrir un carrito pendejo");
+			return -2;
+		}
 		
 		System.out.println("Intentando anyadirProductoCarrito - SAFactura");
 		TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
@@ -101,6 +110,10 @@ public class SAFactura implements ISAFactura {
 
 	public Integer eliminarProductodeCarrito(Integer IDProducto, Integer cantidad) {
 		
+		if(carrito == null){
+			System.out.println("Necesitas abrir un carrito pendejo");
+			return -2;
+		}
 		System.out.println("Intentando eliminarProductoCarrito - SAFactura");
 		TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
 		
@@ -135,6 +148,10 @@ public class SAFactura implements ISAFactura {
 
 	public Integer cerrarCarrito() {
 		
+		if(carrito == null){
+			System.out.println("Necesitas abrir un carrito pendejo");
+			return -2;
+		}
 		Set<TLineaFactura> set = carrito.getLineasFactura();
 		
 		//Si el carrito esta vacio no lo cierra
@@ -192,6 +209,14 @@ public class SAFactura implements ISAFactura {
 	}
 	
 	public Set<TLineaFactura> mostrarCarrito(){
+		if(carrito == null){
+			System.out.println("Necesitas abrir un carrito pendejo");
+			return null;
+		}
+		else if(carrito.getLineasFactura().isEmpty()) {
+			System.out.println("Tu carrito esta vacio");
+			return null;
+		}
 		return carrito.getLineasFactura();
 	}
 	
