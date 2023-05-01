@@ -3,6 +3,7 @@
  */
 package Negocio.Factura;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import Integracion.Cliente.DAOCliente;
@@ -10,10 +11,12 @@ import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Producto.TProducto;
 
 public class SAFactura implements ISAFactura {
-	TCarrito carrito;
+	TCarrito carrito = null;
 
 	public Integer crearCarrito(Integer IDCliente) {
-		carrito = new TCarrito(IDCliente);
+		Set<TLineaFactura> set = new HashSet();
+		carrito.setLineasFactura(set);
+		carrito.setIdCliente(IDCliente);
 		return 1;
 	}
 
@@ -59,7 +62,10 @@ public class SAFactura implements ISAFactura {
 		}
 		else {
 			if(carrito.anyadirJuego(IDProducto, cantidad) == -1) {
-				TLineaFactura lf = new TLineaFactura(IDProducto, cantidad, prd.getPrecio());
+				TLineaFactura lf = null;
+				lf.setIdProducto(IDProducto);
+				lf.setCantidad(cantidad);
+				lf.setPrecio(prd.getPrecio());
 				carrito.addElement(lf);
 			}
 			System.out.println("Se ha añadido el producto al carrito - SAFactura");
@@ -67,7 +73,6 @@ public class SAFactura implements ISAFactura {
 		}
 		
 	}
-
 
 	public Integer eliminarProductodeCarrito(Integer IDProducto, Integer cantidad) {
 		
@@ -103,6 +108,9 @@ public class SAFactura implements ISAFactura {
 		}
 		
 		TFactura factura = new TFactura(carrito.getIdCliente(), carrito.getLineasFactura(), carrito.calcularImporte());
+		factura.setIDCliente(carrito.getIdCliente());
+		factura.setLineas(carrito.getLineasFactura());
+		factura.setImporte(carrito.calcularImporte());
 		if(FactoriaDAOImp.getInstance().getDaoFactura().create(factura) == 1) {
 			System.out.println("Se ha cerrado el carrito correctamete - SAFactura");
 			return 1;

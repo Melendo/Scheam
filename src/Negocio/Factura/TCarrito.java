@@ -19,13 +19,16 @@ public class TCarrito {
 		return set;
 	}
 	
+	public void setLineasFactura(Set<TLineaFactura> lf) {
+		set = lf;
+	}
+	
 	public int getIdCliente() {
 		return idCliente;
 	}
 	
-	public TCarrito( int IDCliente) {
-		this.idCliente = IDCliente;
-		set = new HashSet<>();
+	public void setIdCliente(int id) {
+		this.idCliente= id;
 	}
 	
 	public int addElement (TLineaFactura lf) {

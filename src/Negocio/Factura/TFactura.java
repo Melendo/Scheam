@@ -34,36 +34,44 @@ public class TFactura {
 	public void setIdFactura(int id) {
 		this.IDFactura = id;
 	}
+	
+	public Boolean isActivo() {
+		return Activo;
+	}
+	
+	public void setActivo(Boolean activo) {
+		Activo = activo;
+	}
 
 	public Double getImporte() {
 		return Importe;
+	}
+	
+	public void setImporte(Double importe) {
+		Importe = importe;
 	}
 
 	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setActivo(Boolean activo) {
-		Activo = activo;
-	}
-
-	public void setImporte(Double importe) {
-		Importe = importe;
-	}
-
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	public Boolean isActivo() {
-		return Activo;
-	}
-
-	public Integer getIDClienteFactura() {
+	public Integer getIDCliente() {
 		return IDCliente;
 	}
 
-	public void setIDClienteFactura(Integer IDClienteFactura) {
+	public void setIDCliente(Integer IDClienteFactura) {
 		IDCliente = IDClienteFactura;
+	}
+	
+	public Set<TLineaFactura> getLineas(){
+		return set;
+	}
+	
+	public void setLineas(Set<TLineaFactura> lf) {
+		set = lf;
 	}
 }

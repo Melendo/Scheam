@@ -16,34 +16,32 @@ public class TLineaFactura {
 	public int getIdFactura() {		
 		return idFactura;
 	}
+	
+	public void setIdFactura(int id) {
+		idFactura = id;
+	}
 
 	public int getIdProducto() {
 		return idProducto;
+	}
+	
+	public void setIdProducto(int id) {
+		idProducto = id;
 	}
 
 	public int getCantidad() {
 		return cantidad;
 	}
 	
-	public double getPrecio() {
-		return precio;
-	}
-	
-	public void setIdFactura(int id) {
-		idFactura = id;
-	}
-
 	public void setCantidad(int cant) {
 		cantidad = cant;
 	}
 	
-	public void setPrecio(double prec) {
-		precio = prec;
+	public double getPrecio() {
+		return precio;
 	}
 	
-	public TLineaFactura(int idProd, int cant, double prec) {
-		this.idProducto = idProd;
-		this.cantidad = cant;
-		this.precio = prec;
+	public void setPrecio(double prec) {
+		precio = prec;
 	}
 }
