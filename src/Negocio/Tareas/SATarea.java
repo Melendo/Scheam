@@ -6,6 +6,8 @@ package Negocio.Tareas;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Producto.TProducto;
+
 import java.util.HashSet;
 
 
@@ -14,24 +16,9 @@ public class SATarea implements ISATarea {
 	public Integer altaTarea(TTarea tarea) {
 		
 		System.out.println("Intentando altaEmpleado - SATarea");
-		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
-
-		if (tar.getIdTarea() == -1) {
-			System.out.println("altaTareaRealizado (creado) - SATarea");
-			return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
-		} else {
-			if (tar.getActivo()) {
-				System.out.println("altaTarea No Realizado (existe y activo) - SATarea");
-				return -1;
-			} else {
-				tarea.setActivo(true);
-				tarea.setIdTarea(tar.getIdTarea());
-				System.out.println("altaTarea Realizado (reactivado) - SATarea");
-				FactoriaDAOImp.getInstance().getDaoTarea().modify(tarea);
-				return 2;
-			}
+		System.out.println("altaTareaRealizado (creado) - SATarea");
+		return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
 		}
-	}
 
 
 	public Integer bajaTarea(Integer IDTarea) {
@@ -55,15 +42,17 @@ public class SATarea implements ISATarea {
 	public Integer modificarTarea(TTarea tarea) {
 		
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
+		TTarea tareaxnombre = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
 		if (tar.getIdTarea() == -1 || !tar.getActivo()){
-		System.out.println("modificarTarea no realizado (tarea no existe o esta inactivo)- SATarea");
-			return -1;
-			} else {
-			if (tarea.getIdTarea() != null  && FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea()).getIdTarea() != -1){
-				System.out.println("modificarTarea no realizado (tarea tiene un ID coincidente)- SATarea");
-				return -2;
+			System.out.println("modificarTarea no realizado (tarea no existe o esta inactiva)- SATarea");
+				return -1;
 				}
-			else {
+		else {
+				
+			if(tareaxnombre.getIdTarea() != -1) {								
+				if (tareaxnombre.getIdTarea() != tarea.getIdTarea())
+					return -2;
+			}
 					
 				if (tarea.getIdTarea() == null)
 					tarea.setIdTarea(tar.getIdTarea());
@@ -82,7 +71,7 @@ public class SATarea implements ISATarea {
 				return FactoriaDAOImp.getInstance().getDaoTarea().modify(tarea);
 			}				
 		}
-	}
+	
 
 
 	public Set<TTarea> listarTareas() {
