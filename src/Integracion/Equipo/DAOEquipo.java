@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import Negocio.TVinculacion;
-import Negocio.Cliente.TCliente;
-import Negocio.Cliente.TDistribuidor;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
@@ -198,10 +196,10 @@ public class DAOEquipo implements IDAOEquipo {
 					auxEDes.setNombre(rs.getString("NOMBRE"));
 					auxEDes.setTecnologia(rs.getString("TECNOLOGIA"));
 					result.add(auxEDes);
-				} else if (iddis.contains(rs.getInt("id_cliente"))) {
+				} else if (iddis.contains(rs.getInt("ID_EQUIPO"))) {
 					TEquipoDisenio auxEDis = new TEquipoDisenio();
 					auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
-					auxEDis.setNombre(rs.getString("nombre"));
+					auxEDis.setNombre(rs.getString("NOMBRE"));
 					auxEDis.setCampoDisenio(rs.getString("TECNOLOGIA"));
 					result.add(auxEDis);
 				}
@@ -213,10 +211,10 @@ public class DAOEquipo implements IDAOEquipo {
 						auxEDes.setNombre(rs.getString("NOMBRE"));
 						auxEDes.setTecnologia(rs.getString("TECNOLOGIA"));
 						result.add(auxEDes);
-					} else if (iddis.contains(rs.getInt("id_cliente"))) {
+					} else if (iddis.contains(rs.getInt("ID_EQUIPO"))) {
 						TEquipoDisenio auxEDis = new TEquipoDisenio();
 						auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
-						auxEDis.setNombre(rs.getString("nombre"));
+						auxEDis.setNombre(rs.getString("NOMBRE"));
 						auxEDis.setCampoDisenio(rs.getString("TECNOLOGIA"));
 						result.add(auxEDis);
 					}
