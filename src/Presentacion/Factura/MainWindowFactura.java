@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -70,7 +71,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		crearcarritobutton.setBackground(Color.WHITE);
 		crearcarritobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.CerrarCarrito, null);
+				Controlador.getInstance().update(Eventos.VistaCrearCarrito, null);
 				dispose();
 			}
 		});
@@ -80,7 +81,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		JButton cerrarcarritobutton = new JButton("Cerrar Carrito");
 		cerrarcarritobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaBajaEmpleado, null);
+				Controlador.getInstance().update(Eventos.CerrarCarrito, null);
 				dispose();
 			}
 		});
@@ -98,7 +99,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		eliminarcarritobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				Controlador.getInstance().update(Eventos.EliminarCarrito, null);
 				dispose();
 			}
 		});
@@ -183,6 +184,14 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		case Eventos.MainWindowFactura:
 			setVisible(true);
 			break;
+		case Eventos.CerrarCarritoOK:
+			JOptionPane.showMessageDialog(null, "Éxito cerrando carrito");
+			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+			break; 
+		case Eventos.CerrarCarritoNoOK:
+			JOptionPane.showMessageDialog(null, "Error cerrando carrito");
+			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+			break; 
 		}
 	}
 }

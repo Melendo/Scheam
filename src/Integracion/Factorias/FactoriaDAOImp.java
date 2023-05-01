@@ -25,14 +25,12 @@ public class FactoriaDAOImp extends FactoriaDAO {
 
 	@Override
 	public DAOCliente getDaoCliente() {
-		// TODO Auto-generated method stub
 		return new DAOCliente();
 	}
 
 	@Override
 	public DAOFactura getDaoFactura() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DAOFactura();
 	}
 
 	@Override

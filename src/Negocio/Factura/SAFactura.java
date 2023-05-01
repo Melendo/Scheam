@@ -14,12 +14,17 @@ import Negocio.Producto.TProducto;
 import Negocio.Cliente.TCliente;
 
 public class SAFactura implements ISAFactura {
-	TCarrito carrito ;
+	TCarrito carrito = null;
 
 	public Integer crearCarrito(Integer IDCliente) {
+		if(carrito != null){
+			System.out.println("No se ha podido crear el carrito(ya hay otro creado) - SAFactura");
+			return -1;
+		}
 		TCliente cliente = FactoriaDAOImp.getInstance().getDaoCliente().readByID(IDCliente);
 		if(cliente.getID() == -1){
 			System.out.println("No se ha podido crear el carrito(el cliente no exite) - SAFactura");
+			return -1;
 		}
 		Set<TLineaFactura> set = new HashSet<TLineaFactura>();
 		carrito = new TCarrito();
@@ -131,6 +136,13 @@ public class SAFactura implements ISAFactura {
 	public Integer cerrarCarrito() {
 		
 		Set<TLineaFactura> set = carrito.getLineasFactura();
+		
+		//Si el carrito esta vacio no lo cierra
+		if(set.isEmpty()){
+			System.out.println("No se ha cerrado el carrito por que esta vacio - SAFactura");
+			return -1;
+		}
+		
 		TProducto prd = null;
 		Integer stk;
 		

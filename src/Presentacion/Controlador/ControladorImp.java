@@ -496,14 +496,16 @@ public class ControladorImp extends Controlador {
 	    	break;
 	     case Eventos.CrearCarrito:
 		    System.out.println("Entrando a CrearCarrito - Controlador"); 
-	    	res = FactoriaSA.getInstance().getSAFactura().crearCarrito((Integer) objeto);
-	    	if (res == -1) gui.update(Eventos.CerrarTareaNoOK, null);
+	    	res = safactura.crearCarrito((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.CrearCarritoNoOk, null);
 	    	else gui.update(Eventos.CrearCarritoOk, null);
 	    	break;
 	     case Eventos.CerrarCarrito:
 	    	System.out.println("Entrando a CerrarCarrito - Controlador"); 
-	    	res = FactoriaSA.getInstance().getSAFactura().cerrarCarrito();
-	    	if (res == -1) gui.update(Eventos, objeto);
+	    	res = safactura.cerrarCarrito();
+	    	if (res == -1) gui.update(Eventos.CerrarCarritoNoOK, null);
+	    	else gui.update(Eventos.CerrarCarritoOK, null);
+	    	
 	    }
     }
 }

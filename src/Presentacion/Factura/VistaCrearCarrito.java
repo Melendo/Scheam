@@ -69,7 +69,6 @@ public class VistaCrearCarrito extends JFrame implements IGUI {
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ok();
-				dispose();
 			}
 		});
 		okbutton.setBounds(143, 144, 90, 23);
@@ -78,7 +77,7 @@ public class VistaCrearCarrito extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+				Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 				dispose();
 			}
 		});

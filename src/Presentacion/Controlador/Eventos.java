@@ -211,4 +211,6 @@ public class Eventos {
 	public static final int CerrarCarrito = 621;
 	public static final int CerrarCarritoOK = 622;
 	public static final int CerrarCarritoNoOK = 623;
+	
+	public static final int EliminarCarrito = 630;
 }
