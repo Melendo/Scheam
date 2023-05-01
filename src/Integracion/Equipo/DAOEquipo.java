@@ -19,14 +19,14 @@ public class DAOEquipo implements IDAOEquipo {
 	Connection con;
 
 	public DAOEquipo() {
-		System.out.println("Intentando Conexión - DAOEmpleado");
+		System.out.println("Intentando Conexión - DAOEquipo");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scheam", "root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Conexión Realizada - DAOEmpleado");
+		System.out.println("Conexión Realizada - DAOEquipo");
 	}
 
 	@Override
