@@ -26,6 +26,7 @@ import Presentacion.Equipo.VistaFormMostrarEquipoId;
 import Presentacion.Equipo.VistaModificarEquipo;
 import Presentacion.Equipo.VistaMostrarEquiposId;
 import Presentacion.Factura.MainWindowFactura;
+import Presentacion.Factura.VistaCrearCarrito;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
 import Presentacion.Producto.VistaBajaProducto;
@@ -182,7 +183,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.MainWindowFactura: // <------------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowFactura - FactoriaVistasImp");
 			return new MainWindowFactura();
-
+		case Eventos.VistaCrearCarrito:
+			System.out.println("Entrando a VistaCrearCarrito - FactoriaVistasImp");
+			return new VistaCrearCarrito();
 		default:
 			return null;
 		}

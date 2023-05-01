@@ -8,6 +8,7 @@ import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TVinculacion;
 import Negocio.Factorias.FactoriaSA;
+import Negocio.Factura.SAFactura;
 import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 import Presentacion.IGUI;
@@ -18,6 +19,8 @@ public class ControladorImp extends Controlador {
 	//SAFACTURA
 	
 	private IGUI gui;
+	
+	private SAFactura safactura = FactoriaSA.getInstance().getSAFactura();
 
     public void update(int event, Object objeto) {
     	int res;
@@ -203,9 +206,9 @@ public class ControladorImp extends Controlador {
         case Eventos.AnyadirIntegrante:	
         	System.out.println("Entrando a AnyadirIntegrante - Controlador");
         	res = FactoriaSA.getInstance().getSAEquipo().anyadirIntegrante((TVinculacion) objeto);
-        	if(res==-1) gui.update(Eventos.AnyadirIntegranteNoOk, null);
+        	if(res==-1) gui.update(Eventos.AnyadirIntegranteNoOk3, null);
         	else if(res==-2) gui.update(Eventos.AnyadirIntegranteNoOk2, null);
-        	else if(res==-3) gui.update(Eventos.AnyadirIntegranteNoOk3, null);
+        	else if(res==-3) gui.update(Eventos.AnyadirIntegranteNoOk4, null);
         	else  gui.update(Eventos.AnyadirIntegranteOk, null);
 			break;
 
@@ -486,6 +489,21 @@ public class ControladorImp extends Controlador {
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
 	    	gui.update(event, null);
 	    	break;
+	     case Eventos.VistaCrearCarrito:
+	    	System.out.println("Entrando a VistaCrearCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.CrearCarrito:
+		    System.out.println("Entrando a CrearCarrito - Controlador"); 
+	    	res = FactoriaSA.getInstance().getSAFactura().crearCarrito((Integer) objeto);
+	    	if (res == -1) gui.update(Eventos.CerrarTareaNoOK, null);
+	    	else gui.update(Eventos.CrearCarritoOk, null);
+	    	break;
+	     case Eventos.CerrarCarrito:
+	    	System.out.println("Entrando a CerrarCarrito - Controlador"); 
+	    	res = FactoriaSA.getInstance().getSAFactura().cerrarCarrito();
+	    	if (res == -1) gui.update(Eventos, objeto);
 	    }
     }
 }

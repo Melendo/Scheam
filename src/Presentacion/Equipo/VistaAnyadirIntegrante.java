@@ -17,17 +17,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Negocio.Equipo.TVinculacion;
+
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 
 public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	
-
 	private JPanel contentPane;
 	private JTextField idequipotextfield;
 	private JTextField idempleadotextfield;
-
 	
 	private boolean cerrar = true;
 	
@@ -98,8 +98,11 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	}
 	
 	private void ok() {
-		Integer id_equipo = Integer.parseInt(idequipotextfield.getText());
-		Controlador.getInstance().update(Eventos.AnyadirIntegrante, id_equipo);
+		TVinculacion tvin = new TVinculacion();
+		tvin.setId_1(Integer.parseInt(idequipotextfield.getText()));
+		tvin.setId_2(Integer.parseInt(idempleadotextfield.getText()));
+		tvin.setActivo(true);
+		Controlador.getInstance().update(Eventos.AnyadirIntegrante, tvin);
 		if (cerrar) 
 			dispose();
 		 else 
@@ -125,8 +128,7 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 		case Eventos.AnyadirIntegranteNoOk2:
 			JOptionPane.showMessageDialog(null, "Error al Anyadir. Equipo no existe");
 			cerrar = false;
-			break;
-			
+			break;			
 		case Eventos.AnyadirIntegranteNoOk3:
 			JOptionPane.showMessageDialog(null, "Error al Anyadir. Empleado no existe");
 			cerrar = false;

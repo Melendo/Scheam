@@ -201,4 +201,14 @@ public class Eventos {
 	////////////////////////////////////////////////////////////////////////////
 	
 	public static final int MainWindowFactura = 600;
+	
+	public static final int VistaCrearCarrito = 610;
+	public static final int CrearCarrito = 611;
+	public static final int CrearCarritoOk = 612;
+	public static final int CrearCarritoNoOk = 613;
+	
+	public static final int VistaCerrarCarrito = 620;
+	public static final int CerrarCarrito = 621;
+	public static final int CerrarCarritoOK = 622;
+	public static final int CerrarCarritoNoOK = 623;
 }

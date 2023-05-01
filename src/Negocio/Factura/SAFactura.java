@@ -11,15 +11,21 @@ import java.sql.Date;
 import Integracion.Cliente.DAOCliente;
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Producto.TProducto;
+import Negocio.Cliente.TCliente;
 
 public class SAFactura implements ISAFactura {
 	TCarrito carrito ;
 
 	public Integer crearCarrito(Integer IDCliente) {
+		TCliente cliente = FactoriaDAOImp.getInstance().getDaoCliente().readByID(IDCliente);
+		if(cliente.getID() == -1){
+			System.out.println("No se ha podido crear el carrito(el cliente no exite) - SAFactura");
+		}
 		Set<TLineaFactura> set = new HashSet<TLineaFactura>();
 		carrito = new TCarrito();
 		carrito.setLineasFactura(set);
 		carrito.setIdCliente(IDCliente);
+		System.out.println("Se ha creado el carrito - SAFactura");
 		return 1;
 	}
 
@@ -57,11 +63,11 @@ public class SAFactura implements ISAFactura {
 
 	public Integer anyadirProductoaCarrito(Integer IDProducto, Integer cantidad) {
 		
-		System.out.println("Intentando añadirProductoCarrito - SAFactura");
+		System.out.println("Intentando anyadirProductoCarrito - SAFactura");
 		TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
 		
 		if(prd.getIdproyecto() == -1 || !prd.getActivo()) {
-			System.out.println("No se ha podido añadir el producto al carrito (no existe o esta desactivado) - SAFactura");
+			System.out.println("No se ha podido anyadir el producto al carrito (no existe o esta desactivado) - SAFactura");
 			return -1;
 		}
 		else {
@@ -163,6 +169,7 @@ public class SAFactura implements ISAFactura {
 		factura.setLineas(carrito.getLineasFactura());
 		factura.setImporte(imp);
 		factura.setFecha(sqlDate);
+		carrito = null;
 		
 		if(FactoriaDAOImp.getInstance().getDaoFactura().create(factura) == 1) {
 			System.out.println("Se ha cerrado el carrito correctamete - SAFactura");
@@ -171,4 +178,9 @@ public class SAFactura implements ISAFactura {
 		System.out.println("No se ha cerrado el carrito correctamete - SAFactura");
 		return -1;
 	}
+	
+	public Set<TLineaFactura> mostrarCarrito(){
+		return carrito.getLineasFactura();
+	}
+	
 }

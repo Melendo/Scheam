@@ -70,7 +70,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		crearcarritobutton.setBackground(Color.WHITE);
 		crearcarritobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaAltaEmpleado, null);
+				Controlador.getInstance().update(Eventos.CerrarCarrito, null);
 				dispose();
 			}
 		});
@@ -103,6 +103,20 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			}
 		});
 		buttonpanel.add(eliminarcarritobutton);
+		
+		JButton mostrarcarritobutton = new JButton("Mostrar Carrito");
+		mostrarcarritobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
+		mostrarcarritobutton.setHorizontalTextPosition(SwingConstants.CENTER);
+		mostrarcarritobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		mostrarcarritobutton.setBackground(Color.WHITE);
+		mostrarcarritobutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				dispose();
+			}
+		});
+		buttonpanel.add(mostrarcarritobutton);
 		
 		JButton aniadirproductobutton = new JButton("Añadir Producto a Carrito");
 		aniadirproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/factura/añadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
