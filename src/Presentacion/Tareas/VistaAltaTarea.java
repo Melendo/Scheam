@@ -63,30 +63,30 @@ public class VistaAltaTarea extends JFrame implements IGUI{
 		infopanel.setLayout(null);
 		
 		JLabel nombrelabel = new JLabel("Nombre:");
-		nombrelabel.setBounds(75, 14, 56, 14);
+		nombrelabel.setBounds(76, 56, 56, 14);
 		infopanel.add(nombrelabel);
 		
 		nombretextfield = new JTextField();
-		nombretextfield.setBounds(153, 11, 215, 17);
+		nombretextfield.setBounds(154, 53, 215, 17);
 		infopanel.add(nombretextfield);
 		nombretextfield.setColumns(10);
 		
 		JLabel equipolabel = new JLabel("Equipo: ");
-		equipolabel.setBounds(74, 39, 69, 14);
+		equipolabel.setBounds(76, 81, 69, 14);
 		infopanel.add(equipolabel);
 		
 		equipotextfield = new JTextField();
 		equipotextfield.setColumns(10);
-		equipotextfield.setBounds(153, 36, 215, 17);
+		equipotextfield.setBounds(154, 78, 215, 17);
 		infopanel.add(equipotextfield);
 		
 		JLabel productolabel = new JLabel("Producto:");
-		productolabel.setBounds(98, 66, 33, 14);
+		productolabel.setBounds(76, 108, 56, 14);
 		infopanel.add(productolabel);
 		
 		productotextfield = new JTextField();
 		productotextfield.setColumns(10);
-		productotextfield.setBounds(153, 144, 215, 17);
+		productotextfield.setBounds(154, 106, 215, 17);
 		infopanel.add(productotextfield);
 		
 		JButton okbutton = new JButton("Ok");
