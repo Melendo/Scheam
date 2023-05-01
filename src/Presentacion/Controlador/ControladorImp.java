@@ -2,6 +2,7 @@
 package Presentacion.Controlador;
 
 import java.util.Set;
+import java.util.List;
 
 import Negocio.TVinculacion;
 import Negocio.Cliente.TCliente;
@@ -9,6 +10,7 @@ import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Factura.SAFactura;
+import Negocio.Factura.TLineaFactura;
 import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 import Presentacion.IGUI;
@@ -516,7 +518,27 @@ public class ControladorImp extends Controlador {
 	    	res = safactura.cerrarCarrito();
 	    	if (res == -1) gui.update(Eventos.CerrarCarritoNoOK, null);
 	    	else gui.update(Eventos.CerrarCarritoOK, null);
-	    	
+	    	break;
+	     case Eventos.VistaAnyadirProductoCarrito:
+	    	System.out.println("Entrando a VistaAñadirProductoCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.AnyadirProductoCarrito:
+		    System.out.println("Entrando a AñadirProductoCarrito - Controlador");
+		    List<Integer> pair = (List<Integer>) objeto;
+		    res = safactura.anyadirProductoaCarrito(pair.get(0), pair.get(1));
+		    if (res == -1) gui.update(Eventos.AnyadirProductoCarritoNoOk, null);
+		    else gui.update(Eventos.AnyadirProductoCarritoOk, objeto);
+		    break;
+	     case Eventos.MostrarCarrito:
+			System.out.println("Entrando a MostrarCarrito - Controlador");
+	    	Set<TLineaFactura> listafact = safactura.mostrarCarrito();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarCarrito, null);
+	    	gui.update(event, listafact);
+	    	gui.update(Eventos.VistaMostrarCarrito, null);
+	     case Eventos.VistaEliminarProductoCarrito:
+	    	 
 	    }
     }
 }

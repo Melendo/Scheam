@@ -97,7 +97,7 @@ public class SAFactura implements ISAFactura {
 			    }
 			  
 			}
-			TLineaFactura lf = null;
+			TLineaFactura lf = new TLineaFactura();
 			lf.setIdProducto(IDProducto);
 			lf.setCantidad(cantidad);
 			lf.setPrecio(prd.getPrecio());
