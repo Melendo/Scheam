@@ -37,7 +37,7 @@ public class DAOTarea implements IDAOTarea {
 			ps.setString(1, tarea.getNombre());
 			ps.setInt(2, tarea.getEquipo());
 			ps.setInt(3, tarea.getProducto());
-			ps.setBoolean(4, tarea.getTerminada());
+			ps.setBoolean(4, false);
 			ps.setBoolean(5, true);
 
 			ps.executeUpdate();
