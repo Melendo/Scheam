@@ -1,7 +1,6 @@
-/**
- * 
- */
+
 package Presentacion.Tareas;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +22,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class VistaListarTareasProductoId extends JFrame implements IGUI {
+
+public class VistaListarTareasEquipoId extends JFrame implements IGUI {
 
 	private JPanel contentPane;
 	private JTextField idtextfield;
@@ -31,14 +31,14 @@ public class VistaListarTareasProductoId extends JFrame implements IGUI {
 	boolean cerrar = true;
 	
 	
-	public VistaListarTareasProductoId() {
-		vListarTareasProductoId();
+	public VistaListarTareasEquipoId() {
+		vListarTareasEquipoId();
 	}
 	
-	public void vListarTareasProductoId() {
+	public void vListarTareasEquipoId() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Mostrar Tareas Producto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareasProductoId.class.getResource("/icons/tareas/listar_tareas_producto-removebg-preview.png")));
+		setTitle("Mostrar Tareas Equipo");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -50,9 +50,9 @@ public class VistaListarTareasProductoId extends JFrame implements IGUI {
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Mostrar Tareas Producto");
+		JLabel logo = new JLabel("      Mostrar Tareas Equipo");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaListarTareasProductoId.class.getResource("/icons/tareas/listar_tareas_producto-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaListarTareasEquipoId.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
@@ -89,8 +89,8 @@ public class VistaListarTareasProductoId extends JFrame implements IGUI {
 	}
 
 	private void ok() {
-		Integer id_producto = Integer.parseInt(idtextfield.getText());
-		Controlador.getInstance().update(Eventos.ListarTareasProductoId, id_producto);
+		Integer id_equipo = Integer.parseInt(idtextfield.getText());
+		Controlador.getInstance().update(Eventos.ListarTareasEquipoId, id_equipo);
 		if (cerrar) 
 			dispose();
 		 else 
@@ -99,14 +99,14 @@ public class VistaListarTareasProductoId extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaListarTareasProductoId:
+		case Eventos.VistaListarTareasEquipoId:
 			setVisible(true);
 			break;
-		case Eventos.ListarTareasProductoId:
+		case Eventos.ListarTareasEquipoId:
 			Controlador.getInstance().update(Eventos.MainWindowTarea, null);
 			break;
-		case Eventos.ListarTareasProductoIdNoOK:
-			JOptionPane.showMessageDialog(null, "El id_producto no existe o el producto no tiene tareas");			
+		case Eventos.ListarTareasEquipoIdNoOK:
+			JOptionPane.showMessageDialog(null, "El id_equipo no existe o el equipo no tiene tareas");			
 			Controlador.getInstance().update(Eventos.VistaFormMostrarTareasID, null);
 			break;
 		}

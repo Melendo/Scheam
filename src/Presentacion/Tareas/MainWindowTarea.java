@@ -132,7 +132,51 @@ public class MainWindowTarea extends JFrame implements IGUI {
 				dispose();
 			}
 		});
+		
 		buttonpanel.add(listidbutton);
+		
+		JButton cerrarbutton = new JButton("Cerrar Tarea"); 
+		cerrarbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/cerrar_tarea-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		cerrarbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		cerrarbutton.setHorizontalTextPosition(SwingConstants.CENTER);
+		cerrarbutton.setBackground(Color.WHITE);
+		cerrarbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaCerrarTarea, null);
+				dispose();
+			}
+		});
+		buttonpanel.add(cerrarbutton);
+		
+		JButton listequipobutton = new JButton("Listado de tareas de equipo"); 
+		listequipobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listequipobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		listequipobutton.setHorizontalTextPosition(SwingConstants.CENTER);
+		listequipobutton.setBackground(Color.WHITE);
+		listequipobutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaListarTareasEquipoId, null);
+				dispose();
+			}
+		});
+		buttonpanel.add(listequipobutton);
+		
+		JButton listproductobutton = new JButton("Listado de tareas de producto"); 
+		listproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_producto-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listproductobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		listproductobutton.setHorizontalTextPosition(SwingConstants.CENTER);
+		listproductobutton.setBackground(Color.WHITE);
+		listproductobutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.VistaListarTareasProductoId, null);
+				dispose();
+			}
+		});
+		buttonpanel.add(listproductobutton);
+
 
 		
 		

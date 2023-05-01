@@ -179,4 +179,14 @@ public static final int MainWindowCliente = 400;
 	public static final int CerrarTareaOK = 562;
 	public static final int CerrarTareaNoOK = 563;
 	public static final int CerrarTareaNoOK2 = 564;
+	
+	public static final int VistaListarTareasEquipoId = 570;
+	public static final int ListarTareasEquipoId = 571;
+	public static final int ListarTareasEquipoIdOK = 572;
+	public static final int ListarTareasEquipoIdNoOK = 573;
+	
+	public static final int VistaListarTareasProductoId = 580;
+	public static final int ListarTareasProductoId = 581;
+	public static final int ListarTareasProductoIdOK = 582;
+	public static final int ListarTareasProductoIdNoOK = 583;
 }

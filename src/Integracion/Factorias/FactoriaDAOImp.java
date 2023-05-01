@@ -42,8 +42,7 @@ public class FactoriaDAOImp extends FactoriaDAO {
 
 	@Override
 	public DAOTarea getDaoTarea() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DAOTarea();
 	}
 	
 	
