@@ -6,6 +6,7 @@ import java.util.Set;
 import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
+import Negocio.Equipo.TVinculacion;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
@@ -201,7 +202,13 @@ public class ControladorImp extends Controlador {
         	break;
         case Eventos.AnyadirIntegrante:	
         	System.out.println("Entrando a AnyadirIntegrante - Controlador");
-        	//res = FactoriaSA.getInstance().getSAEquipo()
+        	res = FactoriaSA.getInstance().getSAEquipo().anyadirIntegrante((TVinculacion) objeto);
+        	if(res==-1) gui.update(Eventos.AnyadirIntegranteNoOk, null);
+        	else if(res==-2) gui.update(Eventos.AnyadirIntegranteNoOk2, null);
+        	else if(res==-3) gui.update(Eventos.AnyadirIntegranteNoOk3, null);
+        	else  gui.update(Eventos.AnyadirIntegranteOk, null);
+			break;
+
         
         //PRODUCTO
 	    case Eventos.MainWindowProducto:

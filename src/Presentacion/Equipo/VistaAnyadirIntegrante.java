@@ -25,7 +25,9 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	
 
 	private JPanel contentPane;
-	private JTextField idtextfield;
+	private JTextField idequipotextfield;
+	private JTextField idempleadotextfield;
+
 	
 	private boolean cerrar = true;
 	
@@ -36,7 +38,7 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	public void vAnyadirIntegrante() {
 		setMinimumSize(new Dimension(500, 360));
 		setTitle("Anyadir integrante a Equipo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAnyadirIntegrante.class.getResource("/icons/generales/baja-removebg-preview.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAnyadirIntegrante.class.getResource("/icons/generales/alta-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -48,23 +50,32 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Anyadir integrante a Equipo");
+		JLabel logo = new JLabel("    Anyadir integrante a Equipo");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaAnyadirIntegrante.class.getResource("/icons/generales/baja-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaAnyadirIntegrante.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
 		contentPane.add(infopanel, BorderLayout.CENTER);
 		infopanel.setLayout(null);
 		
-		JLabel idlabel = new JLabel("ID:");
-		idlabel.setBounds(111, 94, 37, 14);
-		infopanel.add(idlabel);
+		JLabel idequipolabel = new JLabel("ID Equipo:");
+		idequipolabel.setBounds(88, 74, 299, 14);
+		infopanel.add(idequipolabel);
 		
-		idtextfield = new JTextField();
-		idtextfield.setBounds(158, 92, 215, 17);
-		infopanel.add(idtextfield);
-		idtextfield.setColumns(10);
+		idequipotextfield = new JTextField();
+		idequipotextfield.setBounds(158, 72, 215, 17);
+		infopanel.add(idequipotextfield);
+		idequipotextfield.setColumns(10);
+		
+		JLabel idempleadolabel = new JLabel("ID Empleado:");
+		idempleadolabel.setBounds(73, 100, 64, 14);
+		infopanel.add(idempleadolabel);
+		
+		idempleadotextfield = new JTextField();
+		idempleadotextfield.setBounds(158, 102, 215, 17);
+		infopanel.add(idempleadotextfield);
+		idempleadotextfield.setColumns(10);
 		
 		JButton okbutton = new JButton("Ok");
 		okbutton.addActionListener(new ActionListener() {
@@ -87,8 +98,8 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	}
 	
 	private void ok() {
-		Integer id_equipo = Integer.parseInt(idtextfield.getText());
-		Controlador.getInstance().update(Eventos.VistaAnyadirIntegrante, id_equipo);
+		Integer id_equipo = Integer.parseInt(idequipotextfield.getText());
+		Controlador.getInstance().update(Eventos.AnyadirIntegrante, id_equipo);
 		if (cerrar) 
 			dispose();
 		 else 
@@ -100,7 +111,7 @@ public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaBajaEquipo:
+		case Eventos.VistaAnyadirIntegrante:
 			setVisible(true);
 			break;			
 		case Eventos.AnyadirIntegranteOk:

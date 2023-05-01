@@ -68,7 +68,7 @@ public class TFactura {
 	public void setLineas(Set<TLineaFactura> lf) {
 		set = lf;
 	}
-	public int addElement (TLineaFactura lf) {
+	public Integer addElement (TLineaFactura lf) {
 		if(set.add(lf)) {
 			return 1;
 		}
@@ -77,7 +77,7 @@ public class TFactura {
 		}
 	}
 	
-	public int removeElement (TLineaFactura lf) {
+	public Integer removeElement (TLineaFactura lf) {
 		if(set.remove(lf)) {
 			return 1;
 		}

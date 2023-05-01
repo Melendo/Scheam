@@ -150,7 +150,8 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		addintegrantebutton.setBackground(Color.WHITE);
 		addintegrantebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Controlador.getInstance().update(Eventos.VistaAnyadirIntegrante, null);
+				dispose();
 			}
 		});
 		buttonpanel.add(addintegrantebutton);

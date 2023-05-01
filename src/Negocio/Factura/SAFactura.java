@@ -126,7 +126,7 @@ public class SAFactura implements ISAFactura {
 		
 		Set<TLineaFactura> set = carrito.getLineasFactura();
 		TProducto prd = null;
-		int stk;
+		Integer stk;
 		
 		//Comprobamos que haya stock para todos los productos del carrito
 		for (TLineaFactura s : set) {

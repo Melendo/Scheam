@@ -5,15 +5,15 @@ package Negocio.Factura;
 
 public class TLineaFactura {
 
-	private int idFactura;
+	private Integer idFactura;
 
-	private int idProducto;
+	private Integer idProducto;
 	
-	private int cantidad;
+	private Integer cantidad;
 	
-	private double precio;
+	private Double precio;
 
-	public int getIdFactura() {		
+	public Integer getIdFactura() {		
 		return idFactura;
 	}
 	
@@ -21,7 +21,7 @@ public class TLineaFactura {
 		idFactura = id;
 	}
 
-	public int getIdProducto() {
+	public Integer getIdProducto() {
 		return idProducto;
 	}
 	
@@ -29,7 +29,7 @@ public class TLineaFactura {
 		idProducto = id;
 	}
 
-	public int getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
 	
@@ -37,7 +37,7 @@ public class TLineaFactura {
 		cantidad = cant;
 	}
 	
-	public double getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 	

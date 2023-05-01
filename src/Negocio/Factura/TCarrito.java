@@ -10,7 +10,7 @@ public class TCarrito {
 
 	private Set<TLineaFactura> set;
 	
-	private int idCliente;
+	private Integer idCliente;
 
 	public Set getLineasFactura() {
 		return set;
@@ -20,7 +20,7 @@ public class TCarrito {
 		set = lf;
 	}
 	
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 	
@@ -28,7 +28,7 @@ public class TCarrito {
 		this.idCliente= id;
 	}
 	
-	public int addElement (TLineaFactura lf) {
+	public Integer addElement (TLineaFactura lf) {
 		if(set.add(lf)) {
 			return 1;
 		}
@@ -37,7 +37,7 @@ public class TCarrito {
 		}
 	}
 	
-	public int removeElement (TLineaFactura lf) {
+	public Integer removeElement (TLineaFactura lf) {
 		if(set.remove(lf)) {
 			return 1;
 		}
