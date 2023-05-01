@@ -101,6 +101,11 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEmpleadoID, null);
         	}
         	break;
+        case Eventos.VistaFormListarInegrantesEquipoId:
+        	System.out.println("Entrando a VistaFormListarInegrantesEquipoId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
         case Eventos.VistaListarIntegrantesEquipo:
         	System.out.println("Entrando a VistaListarIntegrantesEquipo - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -109,8 +114,8 @@ public class ControladorImp extends Controlador {
         case Eventos.ListarIntegrantesEquipo:
         	System.out.println("Entrando a ListarIntegrantesEquipo - Controlador");
         	Set<TEmpleado> list = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo((Integer) objeto);
-        	if (!list.isEmpty()) gui.update(Eventos.ListarIntegrantesEquipoOK, null);
-        	else gui.update(Eventos.ListarIntegrantesEquipoNoOK, objeto);
+        	gui.update(event, list);
+        	gui.update(Eventos.ListarIntegrantesEquipo, null);
         	break;
         	
         //EQUIPO

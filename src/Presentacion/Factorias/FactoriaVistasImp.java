@@ -12,6 +12,7 @@ import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.MainWindowEmpleado;
 import Presentacion.Empleado.VistaAltaEmpleado;
 import Presentacion.Empleado.VistaBajaEmpleado;
+import Presentacion.Empleado.VistaFormListarInegrantesEquipoId;
 import Presentacion.Empleado.VistaFormMostrarEmpleadoID;
 import Presentacion.Empleado.VistaListarEmpleado;
 import Presentacion.Empleado.VistaListarIntegrantesEquipoId;
@@ -64,6 +65,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarEmpleadoID:
 			System.out.println("Entrando a VistaMostrarEmpleadoID - FactoriaVistasImp");
 			return new VistaMostrarEmpleadoID();
+		case Eventos.VistaFormListarInegrantesEquipoId:
+			System.out.println("Entrando a VistaFormListarInegrantesEquipoId - FactoriaVistasImp");
+			return new VistaFormListarInegrantesEquipoId();
 		case Eventos.VistaListarIntegrantesEquipo:
 			System.out.println("Entrando a VistaListarIntegrantesEquipo - FactoriaVistasImp");
 			return new VistaListarIntegrantesEquipoId();
