@@ -22,7 +22,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Conexión Realizada - DAOEmpleado");
+		System.out.println("Conexion Realizada - DAOEmpleado");
 	}
 
 	public Integer create(TEmpleado empleado) {
@@ -279,4 +279,45 @@ public class DAOEmpleado implements IDAOEmpleado {
 		}
 		return result;
 	}
+	
+	public boolean pertenece(int id_empleado){
+		System.out.println("Intentando pertenece - DAOEmpleado");
+		boolean found = false;
+		try {
+			PreparedStatement ps;
+			String sql = "select * from pertenece where id_empleado = ? and activo = true;";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, id_empleado);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()){
+				found = true;
+			}else{
+				found = false;
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Terminado pertenece - DAOEmpleado");
+		return found;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

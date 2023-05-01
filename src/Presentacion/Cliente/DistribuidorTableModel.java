@@ -9,14 +9,14 @@ import javax.swing.table.AbstractTableModel;
 import Negocio.Cliente.TDistribuidor;
 import Negocio.Equipo.TEquipoDesarrollo;
 
-public class DistribuidorModel extends AbstractTableModel{
+public class DistribuidorTableModel extends AbstractTableModel{
 
 	private static final long serialVersionUID = 1L;
 	
 	String[] header = {"ID", "Nombre", "Email", "CIF", "Direccion"};
 	List<TDistribuidor> distribuidores;
 	
-	public DistribuidorModel() {
+	public DistribuidorTableModel() {
 		distribuidores = new ArrayList<TDistribuidor>();
 	}
 	

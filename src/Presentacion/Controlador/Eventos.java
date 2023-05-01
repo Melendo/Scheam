@@ -19,6 +19,8 @@ public class Eventos {
     public static final int BajaEmpleadoOK = 122;
     public static final int BajaEmpleadoNoOK = 123;
     public static final int BajaEmpleadoNoOK2 = 124;
+    public static final int BajaEmpleadoNoOK3 = 125;
+
     
     public static final int VistaFormMostrarEmpleadoID = 130;
     public static final int VistaMostrarEmpleadoID = 131;

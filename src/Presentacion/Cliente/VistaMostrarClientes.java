@@ -7,6 +7,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import Negocio.Cliente.TCliente;
+import Negocio.Cliente.TDistribuidor;
+import Negocio.Cliente.TParticular;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
@@ -15,8 +17,13 @@ import Presentacion.Empleado.VistaListarEmpleado;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Set;
+import java.util.HashSet;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
+import javax.swing.JTabbedPane;
+import javax.swing.JSplitPane;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 
 public class VistaMostrarClientes extends JFrame implements IGUI {
 	
@@ -24,10 +31,11 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 	private JTable table1;
 	private JTable table2;
 	
-	private ClientesTableModel distribuidoresmodel;
-	private ClientesTableModel particularesmodel;
+	private DistribuidorTableModel distribuidoresmodel;
+	private ParticularTableModel particularesmodel;
 	
 	public VistaMostrarClientes() {
+		setMinimumSize(new Dimension(670, 250));
 		vMostrarClientes();
 	}
 	
@@ -40,26 +48,22 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 				dispose();
 			}
 		});
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 671, 304);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new GridLayout(0, 2, 0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		distribuidoresmodel = new ClientesTableModel(true);
-		table1 = new JTable(distribuidoresmodel);
-		JScrollPane tabldis = new JScrollPane(table1);
-		contentPane.add(tabldis);
-		/*
-		JPanel tabla2 = new JPanel();
-		tabla2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(tabla2);
-		tabla2.setLayout(new BorderLayout(0, 0));*/
-		
-		particularesmodel = new ClientesTableModel(false);
+		particularesmodel = new ParticularTableModel();
 		table2 = new JTable(particularesmodel);
 		JScrollPane tablpar = new JScrollPane(table2);
 		contentPane.add(tablpar);
+		
+		distribuidoresmodel = new DistribuidorTableModel();
+		table1 = new JTable(distribuidoresmodel);
+		JScrollPane tabldis = new JScrollPane(table1);
+		contentPane.add(tabldis);
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -70,8 +74,23 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.ListarCliente:
-			distribuidoresmodel.setLista((Set<TCliente>) object);
+			Set<TDistribuidor> listadist = new HashSet<TDistribuidor>();
+			Set<TParticular> listapart = new HashSet<TParticular>();
+			Set<TCliente> lista = (Set<TCliente>) object;
+			
+			for (TCliente cl : lista) {
+				if (cl instanceof TDistribuidor) {
+					listadist.add((TDistribuidor) cl);
+				} else if (cl instanceof TParticular) {
+					listapart.add((TParticular) cl);
+				}
+			}
+			
+			distribuidoresmodel.setLista(listadist);
 			distribuidoresmodel.fireTableStructureChanged();
+			
+			particularesmodel.setLista(listapart);
+			particularesmodel.fireTableStructureChanged();
 			break;
 		}
 	}

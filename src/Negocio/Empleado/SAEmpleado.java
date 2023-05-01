@@ -38,12 +38,16 @@ public class SAEmpleado implements ISAEmpleado {
 			System.out.println("bajaEmpleado No Realizado (no exite) - SAEmpleado");
 			return -1;
 		}
-		
-		if(emp.getActivo()) {
-			System.out.println("bajaEmpleado Realizado - SAEmpleado");
-			return FactoriaDAOImp.getInstance().getDaoEmpleado().delete(id);
-		} else{
-			return -2;
+		if(!FactoriaDAOImp.getInstance().getDaoEmpleado().pertenece(id)){
+			if(emp.getActivo()) {
+				System.out.println("bajaEmpleado Realizado - SAEmpleado");
+				return FactoriaDAOImp.getInstance().getDaoEmpleado().delete(id);
+			} else{
+				return -2;
+			}
+		}
+		else{
+			return -3;
 		}
 	}
 

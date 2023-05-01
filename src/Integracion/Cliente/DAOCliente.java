@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 public class DAOCliente implements IDAOCliente {
 
@@ -145,54 +147,76 @@ public class DAOCliente implements IDAOCliente {
 	public Set<TCliente> readAll() {
 		System.out.println("Intentando readAll - DAOCliente");
 		Set<TCliente> result = new HashSet<TCliente>();
-		TCliente aux;
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE activo");
+			PreparedStatement psdist = con.prepareStatement("SELECT * FROM distribuidores");
+			PreparedStatement pspart = con.prepareStatement("SELECT * FROM particulares");
 			ResultSet rs = ps.executeQuery();
+			ResultSet rsdist = psdist.executeQuery();
+			ResultSet rspart = pspart.executeQuery();
+			List<Integer> iddist = new ArrayList<Integer>();
+			List<TDistribuidor> dist = new ArrayList<TDistribuidor>();
+			List<Integer> idpart = new ArrayList<Integer>();
+			List<TParticular> part = new ArrayList<TParticular>();
+
+			while (rsdist.next()) { //getting all ids in distribuidores table
+				iddist.add(rsdist.getInt("ID"));
+				TDistribuidor distaux = new TDistribuidor();
+				distaux.setID(rsdist.getInt("ID"));
+				distaux.setCIF(rsdist.getString("CIF"));
+				distaux.setDireccion(rsdist.getString("direccion"));
+				dist.add(distaux);
+			}
+			
+			while (rspart.next()) { //getting all ids in particulares table
+				idpart.add(rspart.getInt("ID"));
+				TParticular partaux = new TParticular();
+				partaux.setID(rspart.getInt("ID"));
+				partaux.setDNI(rspart.getString("DNI"));
+				partaux.setTelefono(rspart.getInt("telefono"));
+				part.add(partaux);
+			}
+			
 			
 			if (!rs.next()) {
 				return result;
 			} else {
-				aux = new TCliente();
-				if(aux instanceof TDistribuidor) {
-					TDistribuidor distribuidor = (TDistribuidor) aux;
-					distribuidor = new TDistribuidor();
-					distribuidor.setID(rs.getInt("id_cliente"));
-					distribuidor.setNombre(rs.getString("nombre"));
-					distribuidor.setEmail("email");
-					distribuidor.setCIF(rs.getString("CIF"));
-					distribuidor.setDireccion(rs.getString("direccion"));;
-					result.add(distribuidor);
-				} else {
-					TParticular particular = (TParticular) aux;
-					particular = new TParticular();
-					particular.setID(rs.getInt("id_cliente"));
-					particular.setNombre(rs.getString("nombre"));
-					particular.setEmail("email");
-					particular.setDNI(rs.getString("DNI"));
-					particular.setTelefono(rs.getInt("telefono"));;
-					result.add(particular);
+				
+				if (iddist.contains(rs.getInt("id_cliente"))) {
+					TDistribuidor auxdist = new TDistribuidor();
+					auxdist.setID(rs.getInt("id_cliente"));
+					auxdist.setNombre(rs.getString("nombre"));
+					auxdist.setEmail("email");
+					auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
+					auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+					result.add(auxdist);
+				} else if (idpart.contains(rs.getInt("id_cliente"))) {
+					TParticular auxpart = new TParticular();
+					auxpart.setID(rs.getInt("id_cliente"));
+					auxpart.setNombre(rs.getString("nombre"));
+					auxpart.setEmail("email");
+					auxpart.setDNI(part.get(idpart.indexOf(auxpart.getID())).getDNI());
+					auxpart.setTelefono(part.get(idpart.indexOf(auxpart.getID())).getTelefono());
+					result.add(auxpart);
 				}
+				
 				while (rs.next()) {
-					aux = new TCliente();
-					if(aux instanceof TDistribuidor) {
-						TDistribuidor distribuidor = (TDistribuidor) aux;
-						distribuidor = new TDistribuidor();
-						distribuidor.setID(rs.getInt("id_cliente"));
-						distribuidor.setNombre(rs.getString("nombre"));
-						distribuidor.setEmail("email");
-						distribuidor.setCIF(rs.getString("CIF"));
-						distribuidor.setDireccion(rs.getString("direccion"));;
-						result.add(distribuidor);
-					} else {
-						TParticular particular = (TParticular) aux;
-						particular = new TParticular();
-						particular.setID(rs.getInt("id_cliente"));
-						particular.setNombre(rs.getString("nombre"));
-						particular.setEmail("email");
-						particular.setDNI(rs.getString("DNI"));
-						particular.setTelefono(rs.getInt("telefono"));;
-						result.add(particular);
+					if (iddist.contains(rs.getInt("id_cliente"))) {
+						TDistribuidor auxdist = new TDistribuidor();
+						auxdist.setID(rs.getInt("id_cliente"));
+						auxdist.setNombre(rs.getString("nombre"));
+						auxdist.setEmail("email");
+						auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
+						auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+						result.add(auxdist);
+					} else if (idpart.contains(rs.getInt("id_cliente"))) {
+						TParticular auxpart = new TParticular();
+						auxpart.setID(rs.getInt("id_cliente"));
+						auxpart.setNombre(rs.getString("nombre"));
+						auxpart.setEmail("email");
+						auxpart.setDNI(part.get(idpart.indexOf(auxpart.getID())).getDNI());
+						auxpart.setTelefono(part.get(idpart.indexOf(auxpart.getID())).getTelefono());
+						result.add(auxpart);
 					}
 				}
 				rs.close();

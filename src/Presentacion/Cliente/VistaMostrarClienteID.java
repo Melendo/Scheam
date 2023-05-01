@@ -32,9 +32,8 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 	private JPanel contentPane;
 	private JTable table;
 	
-	private ClientesTableModel clientesmodel;
-	private DistribuidorModel disModel;
-	private ParticularModel parModel;
+	private DistribuidorTableModel disModel;
+	private ParticularTableModel parModel;
 	
 	public VistaMostrarClienteID() {
 		vVistaMostrarClienteID();
@@ -59,14 +58,14 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 	}
 	
 	public void TableDis() {
-		disModel = new DistribuidorModel();
+		disModel = new DistribuidorTableModel();
 		table = new JTable(disModel);
 		JScrollPane tabledis = new JScrollPane(table);
 		contentPane.add(tabledis, BorderLayout.CENTER);
 	}
 	
 	public void TablePar() {
-		parModel = new ParticularModel();
+		parModel = new ParticularTableModel();
 		table = new JTable(parModel);
 		JScrollPane tablepar = new JScrollPane(table);
 		contentPane.add(tablepar, BorderLayout.CENTER);
@@ -87,10 +86,10 @@ public class VistaMostrarClienteID extends JFrame implements IGUI {
 				disModel.fireTableStructureChanged();
 			}else {
 				TablePar();
-				 Set<TParticular> lista = new HashSet<TParticular>();
-					lista.add((TParticular) object);
-					parModel.setLista(lista);
-					parModel.fireTableStructureChanged();
+				Set<TParticular> lista = new HashSet<TParticular>();
+				lista.add((TParticular) object);
+				parModel.setLista(lista);
+				parModel.fireTableStructureChanged();
 			}
 			break;
 		case Eventos.MostrarClienteIDNoOK:

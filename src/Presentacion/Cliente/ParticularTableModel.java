@@ -8,12 +8,12 @@ import javax.swing.table.AbstractTableModel;
 
 import Negocio.Cliente.TParticular;
 
-public class ParticularModel extends AbstractTableModel{
+public class ParticularTableModel extends AbstractTableModel{
 
 	String[] header = {"ID", "Nombre", "Email", "DNI", "telefono"};
 	List<TParticular> particulares;
 	
-	public ParticularModel() {
+	public ParticularTableModel() {
 		particulares = new ArrayList<TParticular>();
 	}
 	

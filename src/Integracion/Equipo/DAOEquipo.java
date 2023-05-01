@@ -8,18 +8,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
-import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
-
+	
 
 public class DAOEquipo implements IDAOEquipo {	
 	
 	Connection con;
 
 	public DAOEquipo() {
-		System.out.println("Intentando Conexión - DAOEquipo");
+		System.out.println("Intentando Conexion - DAOEquipo");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scheam", "root", "");

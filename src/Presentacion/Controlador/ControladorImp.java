@@ -57,6 +57,7 @@ public class ControladorImp extends Controlador {
         	res = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado((Integer) objeto);
         	if (res == -1) gui.update(Eventos.BajaEmpleadoNoOK, null);
         	else if(res == -2) gui.update(Eventos.BajaEmpleadoNoOK2, null);
+        	else if(res == -3) gui.update(Eventos.BajaEmpleadoNoOK3, null);
         	else gui.update(Eventos.BajaEmpleadoOK, objeto);
         	break;
         case Eventos.ListarEmpleado:
