@@ -200,6 +200,13 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEquipoID, null);
         	}
         	break;
+        case Eventos.ListarEquipos:
+	    	System.out.println("Entrando a ListarEquipos - Controlador");
+	    	Set<TEquipo> listaEq = FactoriaSA.getInstance().getSAEquipo().listarEquipos();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquipos, null);
+	    	gui.update(event, listaEq);
+	    	gui.update(Eventos.VistaListarEquipos, null);
+	    	break;
         case Eventos.VistaAnyadirIntegrante:
         	System.out.println("Entrando a VistaAnyadirIntegrante - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -520,12 +527,12 @@ public class ControladorImp extends Controlador {
 	    	else gui.update(Eventos.CerrarCarritoOK, null);
 	    	break;
 	     case Eventos.VistaAnyadirProductoCarrito:
-	    	System.out.println("Entrando a VistaAñadirProductoCarrito - Controlador");
+	    	System.out.println("Entrando a VistaAï¿½adirProductoCarrito - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
 	    	gui.update(event, null);
 	    	break;
 	     case Eventos.AnyadirProductoCarrito:
-		    System.out.println("Entrando a AñadirProductoCarrito - Controlador");
+		    System.out.println("Entrando a Aï¿½adirProductoCarrito - Controlador");
 		    List<Integer> pair = (List<Integer>) objeto;
 		    res = safactura.anyadirProductoaCarrito(pair.get(0), pair.get(1));
 		    if (res == -1) gui.update(Eventos.AnyadirProductoCarritoNoOk, null);

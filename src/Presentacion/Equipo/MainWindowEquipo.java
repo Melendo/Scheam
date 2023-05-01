@@ -111,7 +111,7 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		listallbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.ListarEquipo, null);
+				Controlador.getInstance().update(Eventos.ListarEquipos, null);
 				dispose();
 			}
 		});

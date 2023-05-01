@@ -69,8 +69,8 @@ public class Eventos {
     public static final int MostrarEquipoIDOK = 243;
     public static final int MostrarEquipoIDNoOK = 244;
     
-    public static final int VistaListarEquipo = 245;
-    public static final int ListarEquipo = 246;
+    public static final int VistaListarEquipos = 245;
+    public static final int ListarEquipos = 246;
     
     public static final int VistaAnyadirIntegrante = 250;
     public static final int AnyadirIntegrante = 251;
