@@ -113,7 +113,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		mostrarcarritobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
+				Controlador.getInstance().update(Eventos.MostrarCarrito, null);
 				dispose();
 			}
 		});
@@ -127,7 +127,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		aniadirproductobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.ListarEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaAnyadirProductoCarrito, null);
 				dispose();
 			}
 		});
@@ -141,7 +141,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		quitarproductobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
+				Controlador.getInstance().update(Eventos.VistaEliminarProductoCarrito, null);
 				dispose();
 			}
 		});

@@ -220,4 +220,19 @@ public class Eventos {
 	public static final int CerrarCarritoNoOK = 623;
 	
 	public static final int EliminarCarrito = 630;
+	
+	public static final int VistaAnyadirProductoCarrito = 640;
+	public static final int AnyadirProductoCarrito = 641;
+	public static final int AnyadirProductoCarritoOk = 642;
+	public static final int AnyadirProductoCarritoNoOk = 643;
+	
+	public static final int VistaEliminarProductoCarrito = 650;
+	public static final int EliminarProductoCarrito = 651;
+	public static final int EliminarProductoCarritoOk = 652;
+	public static final int EliminarProductoCarritoNoOk = 653;
+	
+	public static final int VistaMostrarCarrito = 660;
+	public static final int MostrarCarrito = 661;
+	public static final int MostrarCarritoNoOk = 662;
+	
 }

@@ -12,7 +12,7 @@ public class TCarrito {
 	
 	private Integer idCliente;
 
-	public Set getLineasFactura() {
+	public Set<TLineaFactura> getLineasFactura() {
 		return set;
 	}
 	
