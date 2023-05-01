@@ -132,7 +132,13 @@ public class MainWindow extends JFrame implements IGUI {
 		ImageIcon facturaimgicon = new ImageIcon(MainWindow.class.getResource("/icons/factura.png"));
 		Image modfacturaimg = facturaimgicon.getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
 		facturaButton.setIcon(new ImageIcon(modfacturaimg));
-		//TODO actionlistener a mainwindowfactura
+		facturaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+				dispose();
+			}
+		});
 		buttonPanel.add(facturaButton);
 		
 		JButton tareasButton = new JButton("Tareas");
