@@ -20,12 +20,6 @@ public class TFactura {
 
 	private Set<TLineaFactura> set;
 	
-	public TFactura( int idcliente, Set<TLineaFactura> lineas, Double importe) {
-		this.IDCliente = idcliente;
-		this.set = lineas;
-		this.Importe = importe;
-		this.Activo = true;
-	}
 
 	public Integer getIdFactura() {
 		return IDFactura;

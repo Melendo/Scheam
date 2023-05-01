@@ -53,6 +53,7 @@ public class SAFactura implements ISAFactura {
 	}
 
 	public Integer anyadirProductoaCarrito(Integer IDProducto, Integer cantidad) {
+		
 		System.out.println("Intentando añadirProductoCarrito - SAFactura");
 		TProducto prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
 		
@@ -61,18 +62,28 @@ public class SAFactura implements ISAFactura {
 			return -1;
 		}
 		else {
-			if(carrito.anyadirJuego(IDProducto, cantidad) == -1) {
-				TLineaFactura lf = null;
-				lf.setIdProducto(IDProducto);
-				lf.setCantidad(cantidad);
-				lf.setPrecio(prd.getPrecio());
-				carrito.addElement(lf);
+			Set<TLineaFactura> set = carrito.getLineasFactura();
+			
+			for (TLineaFactura s : set) {
+			    if(s.getIdProducto() == IDProducto) {
+			    	int cant = s.getCantidad() + cantidad;
+			    	s.setCantidad(cant);
+			    	carrito.setLineasFactura(set);
+			    	System.out.println("Se ha aumentado el num de productos en el pedido - SAFactura");
+					return 1;
+			    }
+			  
 			}
-			System.out.println("Se ha añadido el producto al carrito - SAFactura");
+			TLineaFactura lf = null;
+			lf.setIdProducto(IDProducto);
+			lf.setCantidad(cantidad);
+			lf.setPrecio(prd.getPrecio());
+			carrito.addElement(lf);
+			System.out.println("Se ha añadido el numero de productos al carrito - SAFactura");
 			return 1;
+			}
+			
 		}
-		
-	}
 
 	public Integer eliminarProductodeCarrito(Integer IDProducto, Integer cantidad) {
 		
@@ -84,33 +95,69 @@ public class SAFactura implements ISAFactura {
 			return -1;
 		}
 		else {
-			int n = carrito.eliminarJuego(IDProducto, cantidad);
-			if(n == -1) {
-				System.out.println("No se ha eliminado el producto del carrito (no esta en el carrito) - SAFactura");
-				return -1;
-			}else if(n == -2) {
-				System.out.println("No se ha eliminado el producto del carrito (la cantidad a eliminar es mayor que la cantidad en el carrito) - SAFactura");
-				return 1;
+			
+			Set<TLineaFactura> set = carrito.getLineasFactura();
+			
+			for (TLineaFactura s : set) {
+			    if(s.getIdProducto() == IDProducto) {
+			    	
+			    	if(s.getCantidad()<cantidad) {
+			    		System.out.println("No se ha eliminado el producto del carrito (la cantidad a eliminar es mayor que la cantidad en el carrito) - SAFactura");
+			    		return -1;
+			    	}
+			    	else {
+			    		int cant = s.getCantidad() - cantidad;
+			    		s.setCantidad(cant);
+			    		carrito.setLineasFactura(set);
+			    		System.out.println("Se ha eliminado correctamente el numero de productos - SAFactura");
+			    		return 1;
+			    	}
+			    }
 			}
-			System.out.println("Se ha añadido el producto - SAFactura");
-			return 1;
+			System.out.println("No se ha eliminado el producto del carrito (no esta en el carrito) - SAFactura");
+			return -1;
 		}
 	}
 
 	public Integer cerrarCarrito() {
 		
-		if(carrito.comprobarStock() == -1) {
-			System.out.println("No se ha cerrado el carrito por falta de Stock - SAFactura");
-			return null;
+		Set<TLineaFactura> set = carrito.getLineasFactura();
+		TProducto prd = null;
+		int stk;
+		
+		//Comprobamos que haya stock para todos los productos del carrito
+		for (TLineaFactura s : set) {
+			prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(s.getIdProducto());
+			if(s.getCantidad()>prd.getStock()) {
+				System.out.println("No se ha cerrado el carrito por falta de Stock - SAFactura");
+				return -1;
+			}
 		}
-		if(carrito.reducirStock() == -1) {
-			System.out.println("Ha habido un error al reducir el stock con la bd - SAFactura");
+	
+		//Reducimos el stock de todos los productos del carrito
+		for (TLineaFactura s : set) {
+			prd = FactoriaDAOImp.getInstance().getDaoProducto().readById(s.getIdProducto());
+			stk = prd.getStock() - s.getCantidad();
+			prd.setStock(stk);
+			if(FactoriaDAOImp.getInstance().getDaoProducto().modify(prd) == -1) {
+				System.out.println("Ha habido un error al reducir el stock con la bd - SAFactura");
+				return -1;
+			}
 		}
 		
-		TFactura factura = new TFactura(carrito.getIdCliente(), carrito.getLineasFactura(), carrito.calcularImporte());
+		//Creamos la factura
+		double imp = 0, aux;
+		
+		for (TLineaFactura s : set) {
+			aux = s.getPrecio() * s.getCantidad();
+			imp += aux;
+		}
+		
+		TFactura factura = null;
 		factura.setIDCliente(carrito.getIdCliente());
 		factura.setLineas(carrito.getLineasFactura());
-		factura.setImporte(carrito.calcularImporte());
+		factura.setImporte(imp);
+		
 		if(FactoriaDAOImp.getInstance().getDaoFactura().create(factura) == 1) {
 			System.out.println("Se ha cerrado el carrito correctamete - SAFactura");
 			return 1;
