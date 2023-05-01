@@ -76,7 +76,7 @@ public class VistaListarTareasEquipoId extends JFrame implements IGUI {
 			tareasmodel.setLista((Set<TTarea>) object);
 			tareasmodel.fireTableStructureChanged();
 			break;
-		case Eventos.ListarTareasEquipoNoOk:
+		case Eventos.ListarTareasEquipoIdNoOK:
 			JOptionPane.showMessageDialog(null, "Error. La Tarea no existe");
 			Controlador.getInstance().update(Eventos.VistaFormListarTareasEquipoId, null);
 			break; 
