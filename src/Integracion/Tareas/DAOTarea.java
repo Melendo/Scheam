@@ -107,7 +107,7 @@ public class DAOTarea implements IDAOTarea {
 		Set<TTarea> result = new HashSet<TTarea>();
 		TTarea aux;
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE activo");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE activo");
 			ResultSet rs = ps.executeQuery();
 			
 			if (!rs.next()) {
