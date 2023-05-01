@@ -11,10 +11,11 @@ import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Producto.TProducto;
 
 public class SAFactura implements ISAFactura {
-	TCarrito carrito = null;
+	TCarrito carrito ;
 
 	public Integer crearCarrito(Integer IDCliente) {
-		Set<TLineaFactura> set = new HashSet();
+		Set<TLineaFactura> set = new HashSet<TLineaFactura>();
+		carrito = new TCarrito();
 		carrito.setLineasFactura(set);
 		carrito.setIdCliente(IDCliente);
 		return 1;
@@ -33,7 +34,7 @@ public class SAFactura implements ISAFactura {
 			System.out.println("listarFacturasIDCliente no realizado (equipo no existe o esta inactivo)- SAFactura");
 			return null;
 		} else {
-			lista = FactoriaDAOImp.getInstance().getDaoFactura().listarIDCliente(IDCliente);
+			lista = FactoriaDAOImp.getInstance().getDaoFactura().listarFacturasIDCliente(IDCliente);
 			System.out.println("listarFacturasIDCliente - SAFactura");
 			return lista;
 		}
@@ -153,7 +154,7 @@ public class SAFactura implements ISAFactura {
 			imp += aux;
 		}
 		
-		TFactura factura = null;
+		TFactura factura = new TFactura();
 		factura.setIDCliente(carrito.getIdCliente());
 		factura.setLineas(carrito.getLineasFactura());
 		factura.setImporte(imp);
