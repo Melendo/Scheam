@@ -56,7 +56,7 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando Delete - DAOTarea");
 		try {
 			PreparedStatement ps;
-			String sql = "UPDATE tareas set activo = false where id_tarea = ?";
+			String sql = "UPDATE tarea set activo = false where id_tarea = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idtarea);
 			ps.executeUpdate();
@@ -147,7 +147,7 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando readByDNI - DAOTarea");
 		TTarea result = new TTarea();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE idTarea = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE id_tarea = ?");
 			ps.setInt(1, idtarea);
 
 			ResultSet rs = ps.executeQuery();
