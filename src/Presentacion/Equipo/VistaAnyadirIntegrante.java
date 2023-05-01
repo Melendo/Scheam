@@ -20,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Empleado.VistaBajaEmpleado;
 
 public class VistaAnyadirIntegrante extends JFrame implements IGUI {
 	

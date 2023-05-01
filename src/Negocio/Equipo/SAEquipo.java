@@ -100,42 +100,43 @@ public class SAEquipo implements ISAEquipo {
 		}
 	}
 
-	public Integer anyadirIntegrante(Integer IDEmpleado, Integer IDEquipo) {
+	public Integer anyadirIntegrante(TVinculacion pert) {
 		
-		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
+		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(pert.getId_2());
 		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
 			System.out.println("AñadirIntegrante no realizado (empleado no existe o esta inactivo)- SAEquipo");
 			return -1;
 		}
 		else {
-			TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
+			TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(pert.getId_1());
 			if (equ.getIdEquipo() == -1 || !equ.getActivo()){
 				System.out.println("AñadirIntegrante no realizado (equipo no existe o esta inactivo)- SAEquipo");
 				return -2;
 			}
 			else {
-				if(FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(IDEmpleado, IDEquipo)) {
+				if(FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1())) {
 					System.out.println("AñadirIntegrante no realizado (El empleado ya esta en el equipo)- SAEquipo");
 					return -3;
 				}
 				else {
 					System.out.println("AñadirIntegrante realizado - SAEquipo");
-					return FactoriaDAOImp.getInstance().getDaoEquipo().anyadirIntegrante(IDEmpleado, IDEquipo);
+					return FactoriaDAOImp.getInstance().getDaoEquipo().anyadirIntegrante(pert);
 				}
 			}
 		}
 	}
 
-	public Integer retirarIntegrante(Integer IDEmpleado, Integer IDEquipo) {
-		if(!FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(IDEmpleado, IDEquipo)) {
+	public Integer retirarIntegrante(TVinculacion pert) {
+		if(!FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1())) {
 			System.out.println("retirarIntegrante no realizado (El empleado no esta en el equipo)- SAEquipo");
 			return -1;
 		}
 		else {
 			System.out.println("retirarIntegrante realizado - SAEquipo");
-			return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(IDEmpleado, IDEquipo);
+			return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(pert);
 		}
 	}
+	
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer IDEmpleado) {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
 		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){

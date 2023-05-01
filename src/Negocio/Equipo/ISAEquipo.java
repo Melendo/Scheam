@@ -15,9 +15,9 @@ public interface ISAEquipo {
 
 	public TEquipo mostrarEquipoID(Integer IDEquipo);
 
-	public Integer anyadirIntegrante(Integer IDEmpleado, Integer IDEquipo);
+	public Integer anyadirIntegrante(TVinculacion pert);
 
-	public Integer retirarIntegrante(Integer IDEmpleado, Integer IDEquipo);
+	public Integer retirarIntegrante(TVinculacion pert);
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer IDEmpleado);
 }
