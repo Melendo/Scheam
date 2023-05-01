@@ -14,7 +14,6 @@ import java.util.Set;
 import Negocio.TVinculacion;
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
-import Negocio.Cliente.TEquipoDisenio;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
