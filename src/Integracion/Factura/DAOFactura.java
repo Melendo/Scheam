@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.Date;
 
 import Negocio.Factura.TFactura;
+import Negocio.Factura.TLineaFactura;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,6 +43,23 @@ public class DAOFactura implements IDAOFactura {
 			ps.setBoolean(4, true);
 
 			ps.executeUpdate();
+			ps.close();
+			
+			Set<TLineaFactura> set = factura.getLineas();
+			
+			PreparedStatement ps1;
+			sql= "INSERT INTO contiene (idproducto, idfactura, cantidad, preciopp) VALUES (?,?,?,?);";
+			ps1 = con.prepareStatement(sql);
+			TFactura fct = getLastCreated();
+			for (TLineaFactura s : set) {
+				ps1.setInt(1, fct.getIdFactura());
+				ps1.setInt(2, factura.getIDCliente());
+				ps1.setInt(3, s.getCantidad());
+				ps1.setDouble(4, s.getPrecio());
+				ps1.executeUpdate();
+			    }
+			ps.close();
+			    
 			con.close();
 			System.out.println("Create Realizado tabla factura- DAOFactura");
 
@@ -160,6 +178,33 @@ public class DAOFactura implements IDAOFactura {
 			
 			rs.close();
 			ps.close();
+			
+			PreparedStatement ps1 = con.prepareStatement("select * from contiene where idfactura = ?");
+			ps.setInt(1, idfactura);
+
+			ResultSet rs1 = ps1.executeQuery();
+			TLineaFactura aux;
+
+			if (!rs1.next()) {
+				return result;
+			} else {
+				aux = new TLineaFactura();
+				aux.setIdFactura(rs1.getInt("idfactura"));
+				aux.setIdProducto(rs1.getInt("idproducto"));
+				aux.setCantidad(rs1.getInt("cantidad"));
+				aux.setPrecio(rs1.getDouble("preciopp"));
+				result.addElement(aux);
+				while (rs.next()) {
+					aux = new TLineaFactura();
+					aux.setIdFactura(rs1.getInt("idfactura"));
+					aux.setIdProducto(rs1.getInt("idproducto"));
+					aux.setCantidad(rs1.getInt("cantidad"));
+					aux.setPrecio(rs1.getDouble("preciopp"));
+					result.addElement(aux);
+				}
+			}
+			rs1.close();
+			ps1.close();
 			con.close();
 
 		} catch (SQLException e) {
