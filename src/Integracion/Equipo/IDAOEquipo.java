@@ -25,5 +25,5 @@ public interface IDAOEquipo {
 	
 	public TEquipo readByNombre(String nombre);
 	
-	public Integer empleadoEstaEnEquipo(Integer idempleado, Integer idequipo);
+	public boolean pertenece(Integer idempleado, Integer idequipo);
 }

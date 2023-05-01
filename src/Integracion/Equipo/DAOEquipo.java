@@ -219,10 +219,8 @@ public class DAOEquipo implements IDAOEquipo {
 					con.close();
 										
 					return eqde;
-				}
-				
-			}
-			
+				}				
+			}		
 			rs.close();
 			ps.close();
 			con.close();
@@ -345,12 +343,6 @@ public class DAOEquipo implements IDAOEquipo {
 				
 			}
 		return result;
-	}
-	
-	@Override
-	public Integer empleadoEstaEnEquipo(Integer idempleado, Integer idequipo) {
-		
-		return null;
 	}
 		
 }
