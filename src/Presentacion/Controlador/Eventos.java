@@ -75,6 +75,20 @@ public class Eventos {
     public static final int VistaListarEquipo = 245;
     public static final int ListarEquipo = 246;
     
+    public static final int VistaAnyadirIntegrante = 250;
+    public static final int AnyadirIntegrante = 251;
+    public static final int AnyadirIntegranteOk = 252;
+    public static final int AnyadirIntegranteNoOk = 253;
+    public static final int AnyadirIntegranteNoOk2 = 254;
+    public static final int AnyadirIntegranteNoOk3 = 255;
+    public static final int AnyadirIntegranteNoOk4 = 256;
+
+
+
+
+
+    
+    
 	//////////////////////////////////////////////////////////
 	    
 	public static final int MainWindowProducto = 300;
