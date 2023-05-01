@@ -134,13 +134,19 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer retirarIntegrante(TVinculacion pert) {
-		if(FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1()).getId_1() == -1) {
+		TVinculacion tvin = new TVinculacion();
+		tvin = FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1());
+		if(tvin.getId_1() == -1) {
 			System.out.println("retirarIntegrante no realizado (El empleado no esta en el equipo)- SAEquipo");
 			return -1;
 		}
 		else {
-			System.out.println("retirarIntegrante realizado - SAEquipo");
-			return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(pert);
+			if(tvin.isActivo()) {
+				System.out.println("retirarIntegrante realizado - SAEquipo");
+				return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(pert);
+			}else {
+				return -1;
+			}
 		}
 	}
 	

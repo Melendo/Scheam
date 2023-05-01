@@ -329,7 +329,7 @@ public class DAOEquipo implements IDAOEquipo {
 			}
 			else{
 				tvin.setId_1(rs.getInt("id_equipo"));
-				tvin.setId_1(rs.getInt("id_empleado"));
+				tvin.setId_2(rs.getInt("id_empleado"));
 				tvin.setActivo(rs.getBoolean("activo"));
 			}
 			ps.close();

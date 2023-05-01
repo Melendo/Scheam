@@ -163,7 +163,8 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		removeintegrantebutton.setBackground(Color.WHITE);
 		removeintegrantebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Controlador.getInstance().update(Eventos.VistaRetirarIntegrante, null);
+				dispose();
 			}
 		});
 		buttonpanel.add(removeintegrantebutton);

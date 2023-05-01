@@ -80,6 +80,11 @@ public class Eventos {
     public static final int AnyadirIntegranteNoOk3 = 255;
     public static final int AnyadirIntegranteNoOk4 = 256;
     
+    public static final int VistaRetirarIntegrante = 260;
+    public static final int RetirarIntegrante = 261;
+    public static final int RetirarIntegranteOk = 262;   
+    public static final int RetirarIntegranteNoOk = 263;
+    
 	//////////////////////////////////////////////////////////
 	    
 	public static final int MainWindowProducto = 300;

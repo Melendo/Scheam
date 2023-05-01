@@ -211,6 +211,17 @@ public class ControladorImp extends Controlador {
         	else if(res==-3) gui.update(Eventos.AnyadirIntegranteNoOk4, null);
         	else  gui.update(Eventos.AnyadirIntegranteOk, null);
 			break;
+        case Eventos.VistaRetirarIntegrante:
+        	System.out.println("Entrando a VistaRetirarIntegrante - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
+        case Eventos.RetirarIntegrante:
+        	System.out.println("Entrando a RetirarIntegrante - Controlador");
+        	res = FactoriaSA.getInstance().getSAEquipo().retirarIntegrante((TVinculacion) objeto);
+        	if(res==-1) gui.update(Eventos.RetirarIntegranteNoOk, null);
+        	else  gui.update(Eventos.RetirarIntegranteOk, null);
+			break;
 
         
         //PRODUCTO
