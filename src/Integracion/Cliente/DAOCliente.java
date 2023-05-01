@@ -177,11 +177,9 @@ public class DAOCliente implements IDAOCliente {
 				part.add(partaux);
 			}
 			
-			
 			if (!rs.next()) {
 				return result;
 			} else {
-				
 				if (iddist.contains(rs.getInt("id_cliente"))) {
 					TDistribuidor auxdist = new TDistribuidor();
 					auxdist.setID(rs.getInt("id_cliente"));
@@ -223,7 +221,6 @@ public class DAOCliente implements IDAOCliente {
 				ps.close();
 				con.close();
 			}
-			
 			System.out.println("Readall realizado - DAOCliente");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -243,12 +240,10 @@ public class DAOCliente implements IDAOCliente {
 			if (!rs.next())
 				result.setID(-1);
 			else {
-				
 				result.setID(rs.getInt("id_cliente"));
 				result.setNombre(rs.getString("nombre"));
 				result.setEmail(rs.getString("email"));
 				result.setActivo(rs.getBoolean("activo"));
-		
 				try {
 					ps = con.prepareStatement("select * from distribuidores where ID = ?");
 					ps.setInt(1, idcliente);
