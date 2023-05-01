@@ -115,7 +115,7 @@ public class Eventos {
 
     ////////////////////////////////////////////////////////////////////////
 	
-public static final int MainWindowCliente = 400;
+	public static final int MainWindowCliente = 400;
 	
 	public static final int VistaAltaCliente = 410;
 	public static final int AltaCliente = 411;

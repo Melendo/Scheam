@@ -32,6 +32,15 @@ import Presentacion.Producto.VistaFormMostrarProductoID;
 import Presentacion.Producto.VistaListarProductos;
 import Presentacion.Producto.VistaModificarProducto;
 import Presentacion.Producto.VistaMostrarProductoID;
+import Presentacion.Tareas.MainWindowTarea;
+import Presentacion.Tareas.VistaAltaTarea;
+import Presentacion.Tareas.VistaBajaTarea;
+import Presentacion.Tareas.VistaCerrarTarea;
+import Presentacion.Tareas.VistaListarTareas;
+import Presentacion.Tareas.VistaListarTareasEquipoId;
+import Presentacion.Tareas.VistaListarTareasProductoId;
+import Presentacion.Tareas.VistaModificarTarea;
+import Presentacion.Tareas.VistaMostrarTareasID;
 import Presentacion.VistaPrincipal.MainWindow;
 
 public class FactoriaVistasImp extends FactoriaVistas {
@@ -134,7 +143,36 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarClienteID:
 			System.out.println("Entrando a VistaMostrarProductoID - FactoriaVistasImp");
 			return new VistaMostrarClienteID();	
-		default:
+		case Eventos.MainWindowTarea:
+			System.out.println("Entrando a MainWindowTarea - FactoriaVistasImp");
+			return new MainWindowTarea();
+		case Eventos.VistaAltaTarea:
+			System.out.println("Entrando a VistaAltaTarea - FactoriaVistasImp");
+			return new VistaAltaTarea();
+		case Eventos.VistaBajaTarea:
+			System.out.println("Entrando a VistaBajaTarea - FactoriaVistasImp");
+			return new VistaBajaTarea();
+		case Eventos.VistaModificarTarea:
+			System.out.println("Entrando a VistaModificarTarea - FactoriaVistasImp");
+			return new VistaModificarTarea();
+		case Eventos.VistaFormMostrarTareasID:
+			System.out.println("Entrando a VistaFormMostrarTareasID - FactoriaVistasImp");
+			return null;
+		case Eventos.VistaMostrarTareasID:
+			System.out.println("Entrando a VistaMostrarTareasID - FactoriaVistasImp");
+			return new VistaMostrarTareasID();
+		case Eventos.VistaListarTareas:
+			System.out.println("Entrando a VistaListarTareas - FactoriaVistasImp");
+			return new VistaListarTareas();
+		case Eventos.VistaCerrarTarea:
+			System.out.println("Entrando a VistaCerrarTarea - FactoriaVistasImp");
+			return new VistaCerrarTarea();
+		case Eventos.VistaListarTareasEquipoId:
+			System.out.println("Entrando a VistaListarTareasEquipoId - FactoriaVistasImp");
+			return new VistaListarTareasEquipoId();
+		case Eventos.VistaListarTareasProductoId:
+			System.out.println("Entrando a VistaListarTareasProductoId - FactoriaVistasImp");
+			return new VistaListarTareasProductoId();		default:
 			return null;
 		}
 	}

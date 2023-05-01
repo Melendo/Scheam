@@ -68,7 +68,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		JButton altabutton = new JButton("Alta Tarea");
 		altabutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		altabutton.setHorizontalTextPosition(SwingConstants.CENTER);
-		altabutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		altabutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/alta-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		altabutton.setBackground(Color.WHITE);
 		altabutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //TODO
@@ -88,12 +88,12 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		});
 		bajabutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		bajabutton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		bajabutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/baja-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		bajabutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/baja-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		bajabutton.setBackground(Color.WHITE);
 		buttonpanel.add(bajabutton);
 		
 		JButton modbutton = new JButton("Modificar Tarea");
-		modbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/modificacion-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		modbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/modificacion-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		modbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		modbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		modbutton.setBackground(Color.WHITE);
@@ -107,7 +107,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		buttonpanel.add(modbutton);
 		
 		JButton listallbutton = new JButton("Listado de todas las tareas");
-		listallbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listallbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		listallbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listallbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listallbutton.setBackground(Color.WHITE);
@@ -121,7 +121,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		buttonpanel.add(listallbutton);
 		
 		JButton listidbutton = new JButton("Listado de tarea por ID"); 
-		listidbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listidbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		listidbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listidbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listidbutton.setBackground(Color.WHITE);
@@ -136,7 +136,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		buttonpanel.add(listidbutton);
 		
 		JButton cerrarbutton = new JButton("Cerrar Tarea"); 
-		cerrarbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/cerrar_tarea-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		cerrarbutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/cerrar_tarea-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		cerrarbutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		cerrarbutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		cerrarbutton.setBackground(Color.WHITE);
@@ -150,7 +150,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		buttonpanel.add(cerrarbutton);
 		
 		JButton listequipobutton = new JButton("Listado de tareas de equipo"); 
-		listequipobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listequipobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_equipo-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		listequipobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listequipobutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listequipobutton.setBackground(Color.WHITE);
@@ -164,7 +164,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		buttonpanel.add(listequipobutton);
 		
 		JButton listproductobutton = new JButton("Listado de tareas de producto"); 
-		listproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_producto-removebg-preview.png")).getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH)));
+		listproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowTarea.class.getResource("/icons/tareas/listar_tareas_producto-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		listproductobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		listproductobutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		listproductobutton.setBackground(Color.WHITE);
@@ -176,10 +176,6 @@ public class MainWindowTarea extends JFrame implements IGUI {
 			}
 		});
 		buttonpanel.add(listproductobutton);
-
-
-		
-		
 		
 	}
 
