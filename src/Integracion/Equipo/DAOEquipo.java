@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
+import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
-import Negocio.Equipo.TVinculacion;
 	
 
 public class DAOEquipo implements IDAOEquipo {	

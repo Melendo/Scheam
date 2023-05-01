@@ -3,6 +3,7 @@ package Negocio.Equipo;
 
 import java.util.Set;
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.TVinculacion;
 import Negocio.Empleado.TEmpleado;
 
 public class SAEquipo implements ISAEquipo {
