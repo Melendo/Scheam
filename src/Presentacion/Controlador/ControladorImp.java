@@ -537,8 +537,19 @@ public class ControladorImp extends Controlador {
 	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarCarrito, null);
 	    	gui.update(event, listafact);
 	    	gui.update(Eventos.VistaMostrarCarrito, null);
+	    	break;
 	     case Eventos.VistaEliminarProductoCarrito:
-	    	 
+	    	System.out.println("Entrando a VistaEliminarProductoCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.EliminarProductoCarrito:
+		    System.out.println("Entrando a EliminarProductocarrito - Controlador");
+		    List<Integer> pair2 = (List<Integer>) objeto;
+		    res = safactura.eliminarProductodeCarrito(pair2.get(0), pair2.get(1));
+		    if (res == -1) gui.update(Eventos.EliminarProductoCarritoNoOk, null);
+		    else gui.update(Eventos.EliminarProductoCarritoOk, objeto);
+		    break;
 	    }
     }
 }

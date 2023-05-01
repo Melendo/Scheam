@@ -29,6 +29,7 @@ import Presentacion.Equipo.VistaRetirarIntegrante;
 import Presentacion.Factura.MainWindowFactura;
 import Presentacion.Factura.VistaAnyadirProductoCarrito;
 import Presentacion.Factura.VistaCrearCarrito;
+import Presentacion.Factura.VistaEliminarProductoCarrito;
 import Presentacion.Factura.VistaMostrarCarrito;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
@@ -198,6 +199,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarCarrito:
 			System.out.println("Entrando a MostrarCarrito - FactoriaVistasImp");
 			return new VistaMostrarCarrito();
+		case Eventos.VistaEliminarProductoCarrito:
+			System.out.println("Entrando a EliminarProductoCarrito - FactoriaVistasImp");
+			return new VistaEliminarProductoCarrito();
 		default:
 			return null;
 		}

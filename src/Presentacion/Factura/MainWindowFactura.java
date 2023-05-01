@@ -82,7 +82,6 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		cerrarcarritobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.CerrarCarrito, null);
-				dispose();
 			}
 		});
 		cerrarcarritobutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -100,7 +99,6 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.EliminarCarrito, null);
-				dispose();
 			}
 		});
 		buttonpanel.add(eliminarcarritobutton);
