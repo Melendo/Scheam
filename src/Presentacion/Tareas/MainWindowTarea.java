@@ -128,7 +128,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		listidbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaMostrarTareasID, null);
+				Controlador.getInstance().update(Eventos.VistaFormMostrarTareasID, null);
 				dispose();
 			}
 		});
