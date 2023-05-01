@@ -186,7 +186,7 @@ public class DAOCliente implements IDAOCliente {
 					auxdist.setNombre(rs.getString("nombre"));
 					auxdist.setEmail("email");
 					auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
-					auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+					auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());
 					result.add(auxdist);
 				} else if (idpart.contains(rs.getInt("id_cliente"))) {
 					TParticular auxpart = new TParticular();
@@ -205,7 +205,7 @@ public class DAOCliente implements IDAOCliente {
 						auxdist.setNombre(rs.getString("nombre"));
 						auxdist.setEmail("email");
 						auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
-						auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+						auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());
 						result.add(auxdist);
 					} else if (idpart.contains(rs.getInt("id_cliente"))) {
 						TParticular auxpart = new TParticular();
