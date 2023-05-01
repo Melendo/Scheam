@@ -15,7 +15,7 @@ public class SACliente implements ISACliente {
 	public Integer altaCliente(TCliente cliente) {
 		System.out.println("Intentando altaEmpleado - SACliente");
 
-		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteEmail(cliente.getEmail());
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().readByEmail(cliente.getEmail());
 
 		if (cli.getID() == -1) { //cli.getID().equals(-1)
 			System.out.println("altaCliente Realizado (creado) - SACliente");
@@ -36,7 +36,7 @@ public class SACliente implements ISACliente {
 
 	public Integer bajaCliente(Integer IDcliente) {
 		System.out.println("Intentando bajaCliente - SACliente");
-		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(IDcliente);
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().readByID(IDcliente);
 
 		if (cli.getID() == -1) {
 			System.out.println("bajaCliente No Realizado (no exite) - SACliente");
@@ -53,12 +53,12 @@ public class SACliente implements ISACliente {
 	}
 
 	public Integer modificarCliente(TCliente cliente) {
-		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(cliente.getID());
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().readByID(cliente.getID());
 		if (cli.getID() == -1 || !cli.getActivo()){
 		System.out.println("modificarCliente no realizado (cliente no existe o esta inactivo)- SACliente");
 			return -1;
 			} else {
-			if (cliente.getID() != null  && FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteEmail(cliente.getEmail()).getID() != -1){ // mostrarClienteEmail(cliente.getID()).getID() != -
+			if (cliente.getID() != null  && FactoriaDAOImp.getInstance().getDaoCliente().readByEmail(cliente.getEmail()).getID() != -1){ // mostrarClienteEmail(cliente.getID()).getID() != -
 				System.out.println("modificarCliente no realizado (cliente tiene un ID o Email coincidente)- SACliente");
 				return -2;
 				}
@@ -88,7 +88,7 @@ public class SACliente implements ISACliente {
 	}
 
 	public TCliente mostrarClienteID(Integer IDcliente) {
-		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClienteID(IDcliente);
+		TCliente cli = FactoriaDAOImp.getInstance().getDaoCliente().readByID(IDcliente);
 		if (cli.getID() != -1 && cli.getActivo()){
 		System.out.println("mostrarCliente Realizado - SACliente");
 			return cli;
@@ -101,7 +101,7 @@ public class SACliente implements ISACliente {
 	}
 
 	public Set<TCliente> mostrarClientes() {
-		Set<TCliente> lista = FactoriaDAOImp.getInstance().getDaoCliente().mostrarClientes();
+		Set<TCliente> lista = FactoriaDAOImp.getInstance().getDaoCliente().readAll();
 		System.out.println("mostrarClientes Realizado - SACliente");
 		return lista;
 	}

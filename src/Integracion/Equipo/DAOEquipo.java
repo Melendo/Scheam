@@ -153,13 +153,8 @@ public class DAOEquipo implements IDAOEquipo {
 		return 1;
 	}
 
-	public Set<TEquipoDesarrollo> readAllDes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Set<TEquipoDisenio> readAllDis() {
-		// TODO Auto-generated method stub
+	public Set<TEquipo> readAll() {
+		
 		return null;
 	}
 

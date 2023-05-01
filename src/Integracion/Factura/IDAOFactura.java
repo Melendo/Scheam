@@ -21,4 +21,6 @@ public interface IDAOFactura {
 	public TFactura readById(Integer idfactura);
 
 	public Set<TFactura> listarFacturasIDCliente(Integer idcliente);
+	
+	public TFactura getLastCreated();
 }

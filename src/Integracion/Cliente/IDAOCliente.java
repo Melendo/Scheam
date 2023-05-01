@@ -14,7 +14,7 @@ public interface IDAOCliente {
 	
 	public Integer modify(TCliente cliente);
 	
-	public Set<TCliente> mostrarClientes();
+	public Set<TCliente> readAll();
 
-	public TCliente mostrarClienteID(Integer idcliente);
+	public TCliente readByID(Integer idcliente);
 }

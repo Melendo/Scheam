@@ -250,7 +250,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 						if(!rs1.next()) {
 							//return result;
 							System.out.println("Intentando listarIdEquipo - DAOEmpleado");
-						}else {
+						} else {
 							TEmpleado aux = new TEmpleado();
 							
 							aux.setActivo(rs1.getBoolean("activo"));
@@ -271,7 +271,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 				rs.close();
 				ps.close();
 				con.close();
-				System.out.println("Readall realizado - DAOEmpleado");
+				System.out.println("listarIdEquipo realizado - DAOEmpleado");
 			}
 			
 		} catch (SQLException e) {

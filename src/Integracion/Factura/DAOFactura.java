@@ -37,7 +37,7 @@ public class DAOFactura implements IDAOFactura {
 			String sql = "INSERT INTO factura (idcliente, fecha, importe, activo) VALUES (?,?,?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, factura.getIDCliente());
-			ps.setDate(2, (Date) factura.getFecha());
+			ps.setDate(2, factura.getFecha());
 			ps.setDouble(3, factura.getImporte());
 			ps.setBoolean(4, true);
 
@@ -81,7 +81,7 @@ public class DAOFactura implements IDAOFactura {
 			ps = con.prepareStatement(sql);
 			
 			ps.setInt(1, factura.getIDCliente());
-			ps.setDate(2, (Date) factura.getFecha());
+			ps.setDate(2, factura.getFecha());
 			ps.setDouble(3, factura.getImporte());
 			ps.setBoolean(4, factura.isActivo());
 			ps.setInt(5, factura.getIdFactura());
@@ -115,14 +115,14 @@ public class DAOFactura implements IDAOFactura {
 				aux = new TFactura();
 				aux.setIdFactura(rs.getInt("idfactura"));
 				aux.setIDCliente(rs.getInt("idcliente"));
-				aux.setFecha((Date) rs.getDate("fecha"));
+				aux.setFecha( rs.getDate("fecha"));
 				aux.setImporte(rs.getDouble("importe"));
 				result.add(aux);
 				while (rs.next()) {
 					aux = new TFactura();
 					aux.setIdFactura(rs.getInt("idfactura"));
 					aux.setIDCliente(rs.getInt("idcliente"));
-					aux.setFecha((Date) rs.getDate("fecha"));
+					aux.setFecha( rs.getDate("fecha"));
 					aux.setImporte(rs.getDouble("importe"));
 					result.add(aux);
 				}
@@ -153,7 +153,7 @@ public class DAOFactura implements IDAOFactura {
 			else {
 				result.setIdFactura(rs.getInt("idfactura"));
 				result.setIDCliente(rs.getInt("idcliente"));
-				result.setFecha((Date) rs.getDate("fecha"));
+				result.setFecha(rs.getDate("fecha"));
 				result.setImporte(rs.getDouble("importe"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
@@ -171,6 +171,94 @@ public class DAOFactura implements IDAOFactura {
 
 	public Set<TFactura> listarFacturasIDCliente(Integer idcliente) {
 		
-		return null;
+		System.out.println("Intentando listarFacturasIDCliente - DAOFactura");
+		Set<TFactura> result = new HashSet<TFactura>();
+		int ids[] = new int[100];
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM factura WHERE idcliente = ?");
+			ps.setInt(1, idcliente);
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				int j = 0;
+				if(rs.getBoolean("activo")) {
+					ids[j] = rs.getInt("idfactura");
+					j++;
+				}
+				while(rs.next()) {
+					if(rs.getBoolean("activo")) {
+						ids[j] = rs.getInt("idfactura");
+						j++;					}	
+				}
+				
+				if(j != 0) {
+					
+					for(int i = 0; i < j; i++) {
+						
+						PreparedStatement ps1 = con.prepareStatement("SELECT * FROM factura WHERE idfactura = ?");
+						
+						ps1.setInt(1, ids[i]);
+						ResultSet rs1 =  ps1.executeQuery();
+						
+						if(!rs1.next()) {
+							//return result;
+							System.out.println("Intentando listarFacturasIDCliente - DAOFactura");
+						}else {
+							TFactura aux = new TFactura();
+							
+							aux.setActivo(rs1.getBoolean("activo"));
+							if(aux.isActivo()) {
+								aux.setIdFactura(rs.getInt("idfactura"));
+								aux.setIDCliente(rs.getInt("idcliente"));
+								aux.setFecha(rs.getDate("fecha"));
+								aux.setImporte(rs.getDouble("importe"));
+								
+								result.add(aux);
+							}
+						}
+					}										
+				}							
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("listarFacturasIDCliente realizado - DAOFactura");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public TFactura getLastCreated(){
+		
+		System.out.println("Intentando getLastCreated - DAOFactura");
+		TFactura result = new TFactura();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM facturas ORDER BY fecha DESC LIMIT 1 ");
+			
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next())
+				result.setIdFactura(-1);
+			else {
+				result.setIdFactura(rs.getInt("idfactura"));
+				result.setIDCliente(rs.getInt("idcliente"));
+				result.setFecha(rs.getDate("fecha"));
+				result.setImporte(rs.getDouble("importe"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("getLastCreated realizado - DAOFactura");
+		return result;
 	}
 }

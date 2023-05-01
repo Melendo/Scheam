@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -51,6 +52,7 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
@@ -61,6 +63,10 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 			empleadosmodel.setLista((Set<TEmpleado>) object);
 			empleadosmodel.fireTableStructureChanged();
 			break;
+		case Eventos.ListarIntegrantesEquipoNoOk:
+			JOptionPane.showMessageDialog(null, "Error. El empleado no existe");
+			Controlador.getInstance().update(Eventos.VistaFormListarIntegrantesEquipoId, null);
+			break; 
 		}
 	}
 }

@@ -47,7 +47,7 @@ public class DAOCliente implements IDAOCliente {
 			
 			ps.close();
 			
-			cliente.setID(mostrarClienteEmail(cliente.getEmail()).getID());
+			cliente.setID(readByEmail(cliente.getEmail()).getID());
 			
 			if(cliente instanceof TDistribuidor) {
 				PreparedStatement ps1;
@@ -142,7 +142,7 @@ public class DAOCliente implements IDAOCliente {
 		return 1;
 	}
 
-	public Set<TCliente> mostrarClientes() {
+	public Set<TCliente> readAll() {
 		System.out.println("Intentando readAll - DAOCliente");
 		Set<TCliente> result = new HashSet<TCliente>();
 		TCliente aux;
@@ -207,7 +207,7 @@ public class DAOCliente implements IDAOCliente {
 		return result;
 	}
 
-	public TCliente mostrarClienteID(Integer idcliente) {
+	public TCliente readByID(Integer idcliente) {
 		System.out.println("Intentando readByID - DAOCliente");
 		TCliente result = new TCliente();
 		try {
@@ -275,7 +275,7 @@ public class DAOCliente implements IDAOCliente {
 		return result;
 	}
 
-	public TCliente mostrarClienteEmail(String email) {
+	public TCliente readByEmail(String email) {
 		System.out.println("Intentando readByEmail - DAOEquipo");
 		TCliente result = new TCliente();
 		

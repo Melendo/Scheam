@@ -98,7 +98,7 @@ public class VistaFormListarInegrantesEquipoId extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaFormListarInegrantesEquipoId:
+		case Eventos.VistaFormListarIntegrantesEquipoId:
 			setVisible(true);
 			break;
 		case Eventos.MostrarEmpleadoIDNoOK:

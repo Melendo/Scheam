@@ -140,7 +140,7 @@ public class MainWindowEmpleado extends JFrame implements IGUI {
 		listintegrequipobutton.setBackground(Color.WHITE);
 		listintegrequipobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormListarInegrantesEquipoId, null);
+				Controlador.getInstance().update(Eventos.VistaFormListarIntegrantesEquipoId, null);
 				dispose();
 			}
 		});

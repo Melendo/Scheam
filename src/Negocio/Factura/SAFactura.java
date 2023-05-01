@@ -5,6 +5,8 @@ package Negocio.Factura;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Calendar;
+import java.sql.Date;
 
 import Integracion.Cliente.DAOCliente;
 import Integracion.Factorias.FactoriaDAOImp;
@@ -30,7 +32,7 @@ public class SAFactura implements ISAFactura {
 		DAOCliente daocln = FactoriaDAOImp.getInstance().getDaoCliente();
 		Set<TFactura> lista;
 
-		if (daocln.mostrarClienteID(IDCliente).getID() == -1) {
+		if (daocln.readByID(IDCliente).getID() == -1) {
 			System.out.println("listarFacturasIDCliente no realizado (equipo no existe o esta inactivo)- SAFactura");
 			return null;
 		} else {
@@ -80,7 +82,7 @@ public class SAFactura implements ISAFactura {
 			lf.setCantidad(cantidad);
 			lf.setPrecio(prd.getPrecio());
 			carrito.addElement(lf);
-			System.out.println("Se ha añadido el numero de productos al carrito - SAFactura");
+			System.out.println("Se ha anyadido el numero de productos al carrito - SAFactura");
 			return 1;
 			}
 			
@@ -153,11 +155,14 @@ public class SAFactura implements ISAFactura {
 			aux = s.getPrecio() * s.getCantidad();
 			imp += aux;
 		}
+		Calendar calendar = Calendar.getInstance();
+		Date sqlDate = new Date((calendar.getTime()).getTime());
 		
 		TFactura factura = new TFactura();
 		factura.setIDCliente(carrito.getIdCliente());
 		factura.setLineas(carrito.getLineasFactura());
 		factura.setImporte(imp);
+		factura.setFecha(sqlDate);
 		
 		if(FactoriaDAOImp.getInstance().getDaoFactura().create(factura) == 1) {
 			System.out.println("Se ha cerrado el carrito correctamete - SAFactura");

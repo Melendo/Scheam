@@ -35,9 +35,10 @@ public class Eventos {
     public static final int VistaListarEmpleado = 150;
     public static final int ListarEmpleado = 151;
     
-    public static final int VistaFormListarInegrantesEquipoId = 160;
+    public static final int VistaFormListarIntegrantesEquipoId = 160;
     public static final int VistaListarIntegrantesEquipo = 161;
     public static final int ListarIntegrantesEquipo = 162;
+    public static final int ListarIntegrantesEquipoNoOk = 163;
   
 
     

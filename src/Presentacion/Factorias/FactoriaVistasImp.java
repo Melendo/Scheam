@@ -65,13 +65,13 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarEmpleadoID:
 			System.out.println("Entrando a VistaMostrarEmpleadoID - FactoriaVistasImp");
 			return new VistaMostrarEmpleadoID();
-		case Eventos.VistaFormListarInegrantesEquipoId:
+		case Eventos.VistaFormListarIntegrantesEquipoId:
 			System.out.println("Entrando a VistaFormListarInegrantesEquipoId - FactoriaVistasImp");
 			return new VistaFormListarInegrantesEquipoId();
 		case Eventos.VistaListarIntegrantesEquipo:
 			System.out.println("Entrando a VistaListarIntegrantesEquipo - FactoriaVistasImp");
 			return new VistaListarIntegrantesEquipoId();
-		case Eventos.MainWindowEquipo:
+		case Eventos.MainWindowEquipo: // <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowEquipo - FactoriaVistasImp");
 			return new MainWindowEquipo();
 		case Eventos.VistaAltaEquipo:
@@ -89,7 +89,7 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarEquipoID:
 			System.out.println("Entrando a VistaMostrarEquipoID - FactoriaVistasImp");
 			return new VistaMostrarEquiposId();		
-		case Eventos.MainWindowProducto:// <----------------------------------------------------------------------------
+		case Eventos.MainWindowProducto: // <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowProducto - FactoriaVistasImp");
 			return new MainWindowProducto();
 		case Eventos.VistaAltaProducto:

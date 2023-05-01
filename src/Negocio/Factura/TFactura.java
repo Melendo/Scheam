@@ -3,7 +3,7 @@
  */
 package Negocio.Factura;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 
 public class TFactura {

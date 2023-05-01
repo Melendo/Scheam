@@ -144,7 +144,7 @@ public class MainWindow extends JFrame implements IGUI {
 		ImageIcon tareasimgicon = new ImageIcon(MainWindow.class.getResource("/icons/tarea.png"));
 		Image modtareasimg = tareasimgicon.getImage().getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
 		tareasButton.setIcon(new ImageIcon(modtareasimg));
-		equipoButton.addActionListener(new ActionListener() {
+		tareasButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.MainWindowTarea, null);
