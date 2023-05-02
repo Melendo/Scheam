@@ -16,8 +16,40 @@ public class SATarea implements ISATarea {
 	public Integer altaTarea(TTarea tarea) {
 		
 		System.out.println("Intentando altaEmpleado - SATarea");
-		System.out.println("altaTareaRealizado (creado) - SATarea");
-		return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
+		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
+		
+		if (tarea.getIdTarea() == -1) {
+			System.out.println("altaTarea Realizado (creado) - SATarea");
+			return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
+		}
+		else {
+			
+			if (tarea.getProducto() == null) {
+				
+				System.out.println("altaTarea No Realizado (producto no existe) - SATarea");
+				return -1;
+			}
+			
+			if (tarea.getEquipo() == null) {
+				System.out.println("altaTarea No Realizado (equipo no existe) - SATarea");
+				return -1;
+			}
+			if (tarea.getActivo()) {
+				System.out.println("altaTarea No Realizado (existe y activo) - SATarea");
+				return -1;
+			} else {
+				tarea.setActivo(true);
+				tarea.setIdTarea(tar.getIdTarea());
+				System.out.println("altaTarea Realizado (reactivado) - SATarea");
+				
+				if(tarea.getTerminada() == null) {
+					tarea.setTerminada(false);
+				}
+				FactoriaDAOImp.getInstance().getDaoTarea().modify(tarea);
+				return 2;
+			}
+			
+		}
 		}
 
 	public Integer bajaTarea(Integer IDTarea) {
