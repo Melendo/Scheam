@@ -91,7 +91,7 @@ public class SATarea implements ISATarea {
 	    Set<TTarea> lista = new HashSet<>();
 	    Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
 	    for (TTarea tarea : tareas) {
-	        if (tarea.getProducto() == IDProducto && tarea.getActivo()) {
+	        if (tarea.getProducto() == IDProducto) {
 	            lista.add(tarea);
 	        }
 	    }

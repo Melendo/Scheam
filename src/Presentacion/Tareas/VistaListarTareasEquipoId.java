@@ -62,7 +62,7 @@ public class VistaListarTareasEquipoId extends JFrame implements IGUI {
 		table = new JTable(tareasmodel);
 		JScrollPane tablesp = new JScrollPane(table);
 		contentPane.add(tablesp, BorderLayout.CENTER);
-		
+
 	}
 	
 	@SuppressWarnings("unchecked")

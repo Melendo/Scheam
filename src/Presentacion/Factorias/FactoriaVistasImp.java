@@ -46,6 +46,7 @@ import Presentacion.Tareas.VistaBajaTarea;
 import Presentacion.Tareas.VistaCerrarTarea;
 import Presentacion.Tareas.VistaFormMostrarTareasID;
 import Presentacion.Tareas.VistaListarTareas;
+import Presentacion.Tareas.VistaListarTareasEquipoId;
 import Presentacion.Tareas.VistaFormListarTareasEquipoId;
 import Presentacion.Tareas.VistaListarTareasProductoId;
 import Presentacion.Tareas.VistaModificarTarea;
@@ -190,7 +191,7 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			return new VistaFormListarTareasEquipoId();
 		case Eventos.VistaListarTareasEquipoId:
 			System.out.println("Entrando a VistaListarTareasEquipoId - FactoriaVistasImp");
-			return new VistaFormListarTareasEquipoId();
+			return new VistaListarTareasEquipoId();
 		case Eventos.VistaListarTareasProductoId:
 			System.out.println("Entrando a VistaListarTareasProductoId - FactoriaVistasImp");
 			return new VistaListarTareasProductoId();

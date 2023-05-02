@@ -90,7 +90,7 @@ public class VistaFormListarTareasEquipoId extends JFrame implements IGUI {
 	}
 
 	private void ok() {
-		Integer id_equipo = Integer.parseInt(idtextfield.getText());
+		int id_equipo = Integer.parseInt(idtextfield.getText());
 		Controlador.getInstance().update(Eventos.ListarTareasEquipoId, id_equipo);
 		if (cerrar) 
 			dispose();
