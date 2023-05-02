@@ -286,7 +286,7 @@ public class DAOFactura implements IDAOFactura {
 		System.out.println("Intentando getLastCreated - DAOFactura");
 		TFactura result = new TFactura();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM factura ORDER BY fecha DESC LIMIT 1 ");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM factura ORDER BY fecha DESC, idfactura DESC LIMIT 1 ");
 
 			ResultSet rs = ps.executeQuery();
 
