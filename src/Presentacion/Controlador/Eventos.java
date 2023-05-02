@@ -57,6 +57,7 @@ public class Eventos {
     public static final int BajaEquipoNoOK = 223;
     public static final int BajaEquipoNoOK2 = 224;
 	public static final int BajaEquipoNoOK3 = 225;
+	public static final int BajaEquipoNoOK4 = 226;
     
     public static final int VistaModificarEquipo = 230;
     public static final int ModificarEquipo = 231;
@@ -106,6 +107,7 @@ public class Eventos {
 	public static final int BajaProductoOK = 322;
 	public static final int BajaProductoNoOK = 323;
 	public static final int BajaProductoNoOK2 = 324;
+	public static final int BajaProductoNoOK3 = 325;
 	
 	public static final int VistaModificarProducto = 330;
 	public static final int ModificarProducto = 331;
@@ -128,6 +130,7 @@ public class Eventos {
 	public static final int CerrarProductoOK = 362;
 	public static final int CerrarProductoNoOK = 363;
 	public static final int CerrarProductoNoOK2 = 364;
+	public static final int CerrarProductoNoOK3 = 365;
 
     ////////////////////////////////////////////////////////////////////////
 	

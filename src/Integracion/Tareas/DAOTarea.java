@@ -1,5 +1,6 @@
 package Integracion.Tareas;
 
+import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 
 import java.sql.Connection;
@@ -175,7 +176,7 @@ public class DAOTarea implements IDAOTarea {
 	    System.out.println("Intentando listar tareas por equipo - DAOTarea");
 	    Set<TTarea> result = new HashSet<>();
 	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ?");
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ? and activo = true");
 	        ps.setInt(1, idEquipo);
 
 	        ResultSet rs = ps.executeQuery();
@@ -213,7 +214,7 @@ public class DAOTarea implements IDAOTarea {
 	    System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
 	    Set<TTarea> result = new HashSet<>();
 	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ?");
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ? and activo = true");
 	        ps.setInt(1, idProducto);
 
 	        ResultSet rs = ps.executeQuery();
@@ -258,5 +259,40 @@ public class DAOTarea implements IDAOTarea {
 			return -1;
 		}
 		return 1;
+	}
+	
+	public TTarea readByNombre(String nombre) {
+		System.out.println("Intentando readByNombre - DAOTarea");
+		TTarea result = new TTarea();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE nombre = ?");
+			ps.setString(1, nombre);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) 
+				result.setIdTarea(-1);
+			else  {
+				result.setIdTarea(rs.getInt("id_tarea"));
+				result.setNombre(rs.getString("nombre"));
+				result.setEquipo(rs.getInt("equipo"));
+				result.setProducto(rs.getInt("producto"));
+				result.setTerminada(rs.getBoolean("terminada"));
+				result.setActivo(rs.getBoolean("activo"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+			if (result.getIdTarea() == -1)
+				System.out.println("readByNombre realizado (no encontró nombre) - DAOTarea");
+			else
+				System.out.println("readByNombre realizado (encontró nombre) - DAOTarea");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

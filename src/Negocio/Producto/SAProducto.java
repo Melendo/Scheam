@@ -6,6 +6,7 @@ import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
 import Integracion.Producto.DAOProducto;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Tareas.TTarea;
 
 public class SAProducto implements ISAProducto {
 
@@ -36,21 +37,28 @@ public class SAProducto implements ISAProducto {
 		}
 	}
 
-	public Integer bajaProducto(Integer IDProducto) {
+	public Integer bajaProducto(Integer IDProducto) { // cambiar
 		
 		System.out.println("Intentando bajaProducto - SAProducto");
 		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
-
-		if (emp.getIdproyecto() == -1) {
-			System.out.println("bajaProducto No Realizado (no exite) - SAProducto");
-			return -1;
-		}
-		
-		if(emp.getActivo()) {
-			System.out.println("bajaProducto Realizado - SAProducto");
-			return FactoriaDAOImp.getInstance().getDaoProducto().delete(IDProducto);
-		} else{
-			return -2;
+		Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
+		if(tareas.isEmpty()) {
+			if(emp.getIdproyecto() == -1) {
+				System.out.println("bajaProducto No Realizado (no exite) - SAProducto");
+				return -1;
+			}
+			
+			if(emp.getActivo()) {
+				System.out.println("bajaProducto Realizado - SAProducto");
+				return FactoriaDAOImp.getInstance().getDaoProducto().delete(IDProducto);
+			} else{
+				System.out.println("bajaProducto Realizado (ya desactiva) - SAProducto");
+				return -2;
+			}
+			
+		}else {
+			System.out.println("bajaProducto No Realizado (en tarea activa) - SAProducto");
+			return -3;
 		}
 	}
 
@@ -108,18 +116,25 @@ public class SAProducto implements ISAProducto {
 		}
 	}
 
-	public Integer cerrarProducto(Integer IDProducto) {
+	public Integer cerrarProducto(Integer IDProducto) { // cambiar
 		System.out.println("Intentando cerrarProducto - SAProducto");
 		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
-		if (emp.getIdproyecto() == -1) {
-			System.out.println("cerrarProducto No Realizado (no exite) - SAProducto");
-			return -1;
-			}
-		if (!emp.getActivo()) {
-			System.out.println("cerrarProducto No Realizado (ya cerrado) - SAProducto");
-			return 2;
+		Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
+			if(tareas.isEmpty()) {
+			
+				if (emp.getIdproyecto() == -1) {
+					System.out.println("cerrarProducto No Realizado (no exite) - SAProducto");
+					return -1;
+					}
+				if (!emp.getActivo()) {
+					System.out.println("cerrarProducto No Realizado (ya cerrado) - SAProducto");
+					return 2;
+				}
+				
+				return FactoriaDAOImp.getInstance().getDaoProducto().cerrarProducto(IDProducto);
+		}else {
+			System.out.println("cerrarProducto No Realizado (en tarea activa) - SAProducto");
+			return -3;
 		}
-		
-		return FactoriaDAOImp.getInstance().getDaoProducto().cerrarProducto(IDProducto);
 	}
 }

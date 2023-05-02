@@ -140,6 +140,10 @@ public class VistaCerrarProducto extends JFrame implements IGUI, ActionListener 
 			JOptionPane.showMessageDialog(null, "Error al cerrar el producto. Producto ya cerrado");
 			cerrar = false;
 			break;
+		case Eventos.CerrarProductoNoOK3:
+			JOptionPane.showMessageDialog(null, "Error al cerrar el producto. Producto con tarea pendiente");
+			cerrar = false;
+			break;
 		}
 		
 	}
