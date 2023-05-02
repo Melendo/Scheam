@@ -83,6 +83,7 @@ public class VistaMostrarFacturaID extends JFrame implements IGUI {
 			facturamodel.fireTableStructureChanged();
 			lineasmodel.setLista(factura.getLineas());
 			lineasmodel.fireTableStructureChanged();
+			break;
 		case Eventos.MostrarFacturaIDNoOK:
 			JOptionPane.showMessageDialog(null, "Error. La factura no existe");
 			Controlador.getInstance().update(Eventos.VistaFormMostrarFacturaID, null);

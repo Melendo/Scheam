@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+import Integracion.Factorias.FactoriaDAO;
+
 public class DAOFactura implements IDAOFactura {
 	
 	Connection con;
@@ -35,7 +37,7 @@ public class DAOFactura implements IDAOFactura {
 		System.out.println("Intentando create - DAOFactura");
 		try {
 			PreparedStatement ps;
-			String sql = "INSERT INTO factura (fecha, importe, activo, idcliente) VALUES (?,?,?);";
+			String sql = "INSERT INTO factura (fecha, importe, activo, idcliente) VALUES (?,?,?,?);";
 			ps = con.prepareStatement(sql);
 			ps.setDate(1, factura.getFecha());
 			ps.setDouble(2, factura.getImporte());
@@ -50,14 +52,14 @@ public class DAOFactura implements IDAOFactura {
 			PreparedStatement ps1;
 			sql= "INSERT INTO contiene (idproducto, idfactura, cantidad, preciopp) VALUES (?,?,?,?);";
 			ps1 = con.prepareStatement(sql);
-			TFactura fct = getLastCreated();
+			TFactura fct = FactoriaDAO.getInstance().getDaoFactura().getLastCreated();
 			for (TLineaFactura s : set) {
-				ps1.setInt(1, fct.getIdFactura());
-				ps1.setInt(2, factura.getIDCliente());
+				ps1.setInt(1, s.getIdProducto());
+				ps1.setInt(2, fct.getIdFactura());
 				ps1.setInt(3, s.getCantidad());
 				ps1.setDouble(4, s.getPrecio());
 				ps1.executeUpdate();
-			    }
+			}
 			ps.close();
 			    
 			con.close();
@@ -160,6 +162,7 @@ public class DAOFactura implements IDAOFactura {
 	public TFactura readById(Integer idfactura) {
 		System.out.println("Intentando readByID - DAOFactura");
 		TFactura result = new TFactura();
+		Set<TLineaFactura> set = new HashSet<TLineaFactura>();
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from factura where idfactura = ?");
 			ps.setInt(1, idfactura);
@@ -186,6 +189,7 @@ public class DAOFactura implements IDAOFactura {
 			TLineaFactura aux;
 
 			if (!rs1.next()) {
+				result.setLineas(null);
 				return result;
 			} else {
 				aux = new TLineaFactura();
@@ -193,16 +197,17 @@ public class DAOFactura implements IDAOFactura {
 				aux.setIdProducto(rs1.getInt("idproducto"));
 				aux.setCantidad(rs1.getInt("cantidad"));
 				aux.setPrecio(rs1.getDouble("preciopp"));
-				result.addElement(aux);
-				while (rs.next()) {
+				set.add(aux);
+				while (rs1.next()) {
 					aux = new TLineaFactura();
 					aux.setIdFactura(rs1.getInt("idfactura"));
 					aux.setIdProducto(rs1.getInt("idproducto"));
 					aux.setCantidad(rs1.getInt("cantidad"));
 					aux.setPrecio(rs1.getDouble("preciopp"));
-					result.addElement(aux);
+					set.add(aux);
 				}
 			}
+			result.setLineas(set);
 			rs1.close();
 			ps1.close();
 			con.close();
@@ -283,7 +288,7 @@ public class DAOFactura implements IDAOFactura {
 		System.out.println("Intentando getLastCreated - DAOFactura");
 		TFactura result = new TFactura();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM facturas ORDER BY fecha DESC LIMIT 1 ");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM factura ORDER BY fecha DESC LIMIT 1 ");
 			
 			ResultSet rs = ps.executeQuery();
 
