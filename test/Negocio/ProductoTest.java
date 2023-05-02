@@ -12,68 +12,8 @@ import junit.framework.TestCase;
 
 public class ProductoTest extends TestCase{
 	
-	public ProductoTest() {
-		/*
-		TProducto producto = new TProducto();
-		producto.setActivo(true);
-		producto.setFechalanzamiento(17102003);
-		producto.setGenero("Aventura");
-		producto.setIdproyecto(null);
-		producto.setNombre("TestNormal");
-		producto.setPEGI(18);
-		producto.setPrecio(15.98);
-		producto.setStock(3);
-		producto.setTerminado(false);
-		FactoriaSA.getInstance().getSAProducto().altaProducto(producto);
-		producto = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre());
-		
-		TProducto producto2 = new TProducto();
-		producto2.setActivo(true);
-		producto2.setFechalanzamiento(17102003);
-		producto2.setGenero("Aventura");
-		producto2.setIdproyecto(null);
-		producto2.setNombre("TestBaja");
-		producto2.setPEGI(18);
-		producto2.setPrecio(15.98);
-		producto2.setStock(3);
-		producto2.setTerminado(false);
-		FactoriaSA.getInstance().getSAProducto().altaProducto(producto2);
-		producto2 = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto2.getNombre());
-		FactoriaSA.getInstance().getSAProducto().bajaProducto(producto2.getIdproyecto());
-		
-		TProducto producto3 = new TProducto();
-		producto3.setActivo(true);
-		producto3.setFechalanzamiento(17102003);
-		producto3.setGenero("Aventura");
-		producto3.setIdproyecto(null);
-		producto3.setNombre("TestCerrar");
-		producto3.setPEGI(18);
-		producto3.setPrecio(15.98);
-		producto3.setStock(3);
-		producto3.setTerminado(false);
-		FactoriaSA.getInstance().getSAProducto().altaProducto(producto3);
-		producto3 = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto3.getNombre());
-		FactoriaSA.getInstance().getSAProducto().cerrarProducto(producto3.getIdproyecto());
-		
-		TProducto producto4 = new TProducto();
-		producto4.setActivo(true);
-		producto4.setFechalanzamiento(17102003);
-		producto4.setGenero("Aventura");
-		producto4.setIdproyecto(null);
-		producto4.setNombre("TestConTarea");
-		producto4.setPEGI(18);
-		producto4.setPrecio(15.98);
-		producto4.setStock(3);
-		producto4.setTerminado(false);
-		FactoriaSA.getInstance().getSAProducto().altaProducto(producto3);
-		producto4 = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto4.getNombre());
-		*/
-		
-		
+	public ProductoTest() {	
 	}
-	
-	
-	
 	
 	public void testAltaProducto() {
 		TProducto producto = new TProducto();
@@ -184,8 +124,7 @@ public class ProductoTest extends TestCase{
 		resultado = FactoriaSA.getInstance().getSAProducto().modificarProducto(producto);
 		assertEquals("no activo", -3, resultado);
 		//-------------
-		 
-		 
+		 	 
 		TProducto producto2 = new TProducto();
 		producto2.setActivo(true);
 		producto2.setFechalanzamiento(17102003);
@@ -301,7 +240,7 @@ public class ProductoTest extends TestCase{
         TEquipoDesarrollo equipo = new TEquipoDesarrollo();
         equipo.setActivo(null);
         equipo.setIdEquipo(null);
-        equipo.setNombre("EPrueba");
+        equipo.setNombre("EPrueba2");
         equipo.setTecnologia("iuuh");
 
         FactoriaSA.getInstance().getSAEquipo().altaEquipo(equipo);
@@ -313,7 +252,7 @@ public class ProductoTest extends TestCase{
         tarea.setActivo(true);
         tarea.setEquipo(equipoAux.getIdEquipo());
         tarea.setIdTarea(null);
-        tarea.setNombre("TPrueba");
+        tarea.setNombre("TPrueba2");
         tarea.setProducto(producto.getIdproyecto());
         tarea.setTerminada(false);
         
