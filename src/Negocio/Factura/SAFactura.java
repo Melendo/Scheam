@@ -64,6 +64,7 @@ public class SAFactura implements ISAFactura {
 			return fct;
 		}
 		else { 
+			fct = new TFactura();
 			fct.setIdFactura(-1);;
 			System.out.println("mostrarFacturaID no realizado (factura no existe o no esta activa) - SAFactura");
 			return fct;
