@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 public class ClienteTest extends TestCase {
 
 	public void testAltaCliente() {
-		// Cliente Distribuidor
+		// CLIENTE Distribuidor
 		TDistribuidor distribuidor = new TDistribuidor();
 
 		distribuidor.setNombre("PruebaDis");
@@ -46,7 +46,7 @@ public class ClienteTest extends TestCase {
 
 		tCl1 = FactoriaDAO.getInstance().getDaoCliente().readByEmail(particular.getEmail());
 		FactoriaDAO.getInstance().getDaoCliente().delete(tCl1.getID());
-		
+
 		int resultadoAPar2 = FactoriaSA.getInstance().getSACliente().altaCliente((TParticular) particular);
 		assertEquals("El cliente se ha dado de alta. Reactivado", 2, resultadoAPar2);
 
@@ -54,5 +54,52 @@ public class ClienteTest extends TestCase {
 		assertEquals("El cliente NO se ha dado de alta. Ya existe", -1, resultadoAPar3);
 
 	}
-	
+
+	public void testBajaProducto() {
+
+		// Cliente Distribuidor
+		TDistribuidor distribuidor = new TDistribuidor();
+
+		distribuidor.setNombre("PruebaDis");
+		distribuidor.setEmail("PruebaEmail");
+		distribuidor.setCIF("PruebaCIF");
+		distribuidor.setDireccion("PruebaDireccion");
+
+		FactoriaSA.getInstance().getSACliente().altaCliente((TDistribuidor) distribuidor);
+
+		TCliente testCliente = new TDistribuidor();
+		testCliente = FactoriaDAO.getInstance().getDaoCliente().readByEmail(distribuidor.getEmail());
+		
+		int resultadoADis = FactoriaDAO.getInstance().getDaoCliente().delete(testCliente.getID());
+		assertEquals("bajaCliente Realizado - SACliente", 1, resultadoADis);
+		
+		resultadoADis = FactoriaDAO.getInstance().getDaoCliente().delete(testCliente.getID());
+		assertEquals("bajaCliente ya desactivado", -2, resultadoADis);
+
+		resultadoADis = FactoriaDAO.getInstance().getDaoCliente().delete(100000);
+		assertEquals("no existe", -1, resultadoADis);
+		
+		// CLIENTE PARTICULAR
+		TParticular particular = new TParticular();
+
+		particular.setNombre("PruebaDis");
+		particular.setEmail("PruebaEmail");
+		particular.setDNI("PruebaDNI");
+		particular.setTelefono(123456789);
+
+		FactoriaSA.getInstance().getSACliente().altaCliente((TParticular) particular);
+
+		TCliente testClientePar = new TDistribuidor();
+		testClientePar = FactoriaDAO.getInstance().getDaoCliente().readByEmail(particular.getEmail());
+		
+		int resultadoAPar = FactoriaDAO.getInstance().getDaoCliente().delete(testClientePar.getID());
+		assertEquals("bajaCliente Realizado - SACliente", 1, resultadoAPar);
+		
+		resultadoAPar = FactoriaDAO.getInstance().getDaoCliente().delete(testClientePar.getID());
+		assertEquals("bajaCliente ya desactivado", -2, resultadoAPar);
+
+		resultadoAPar = FactoriaDAO.getInstance().getDaoCliente().delete(100000);
+		assertEquals("no existe", -1, resultadoAPar);
+	}
+
 }
