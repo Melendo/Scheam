@@ -6,6 +6,7 @@ package Negocio.Tareas;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Equipo.TEquipo;
 import Negocio.Producto.TProducto;
 
 import java.util.HashSet;
@@ -17,24 +18,29 @@ public class SATarea implements ISATarea {
 		
 		System.out.println("Intentando altaEmpleado - SATarea");
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+		TProducto prod = FactoriaDAOImp.getInstance().getDaoProducto().readById(tarea.getProducto());
+		TEquipo equip = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(tarea.getEquipo());
 		
+
+		if (prod.getIdproyecto() == -1) {
+			
+			System.out.println("altaTarea No Realizado (producto no existe) - SATarea");
+			return -1;
+		}
+		
+		if (equip.getIdEquipo() == -1) {
+			System.out.println("altaTarea No Realizado (equipo no existe) - SATarea");
+			return -1;
+		}
 		
 		if (tar.getIdTarea() == -1) {
 			System.out.println("altaTarea Realizado (creado) - SATarea");
 			return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
 		}
+		
+		
 		else {
 			
-			if (tar.getProducto() == null) {
-				
-				System.out.println("altaTarea No Realizado (producto no existe) - SATarea");
-				return -1;
-			}
-			
-			if (tar.getEquipo() == null) {
-				System.out.println("altaTarea No Realizado (equipo no existe) - SATarea");
-				return -1;
-			}
 			if (tar.getActivo()) {
 				System.out.println("altaTarea No Realizado (existe y activo) - SATarea");
 				return -1;
