@@ -163,6 +163,7 @@ public class ControladorImp extends Controlador {
         	if (res == -1) gui.update(Eventos.BajaEquipoNoOK, null);
         	else if(res == -2) gui.update(Eventos.BajaEquipoNoOK2, null);
         	else if(res == -3) gui.update(Eventos.BajaEquipoNoOK3, null);
+        	else if(res == -4) gui.update(Eventos.BajaEquipoNoOK4, null);
         	else gui.update(Eventos.BajaEquipoOK, objeto);
         	break;
         	
@@ -284,6 +285,7 @@ public class ControladorImp extends Controlador {
 	    	res = FactoriaSA.getInstance().getSAProducto().bajaProducto((Integer) objeto);
 	    	if (res == -1) gui.update(Eventos.BajaProductoNoOK, null);
 	    	else if(res == -2) gui.update(Eventos.BajaProductoNoOK2, null);
+	    	else if(res == -3)	gui.update(Eventos.BajaProductoNoOK3, null);
 	    	else gui.update(Eventos.BajaProductoOK, objeto);
 	    	break;
 	    case Eventos.ListarProducto:
@@ -339,6 +341,7 @@ public class ControladorImp extends Controlador {
 	    	res = FactoriaSA.getInstance().getSAProducto().cerrarProducto((Integer) objeto);
 	    	if (res == -1) gui.update(Eventos.CerrarProductoNoOK, null);
 	    	else if(res == -2) gui.update(Eventos.CerrarProductoNoOK2, null);
+	    	else if(res == -3) gui.update(Eventos.CerrarProductoNoOK3, null);
 	    	else gui.update(Eventos.CerrarProductoOK, objeto);
 	    	break;
 	    	
