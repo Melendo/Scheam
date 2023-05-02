@@ -15,6 +15,7 @@ import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
+import Negocio.Factura.TFactura;
 	
 
 public class DAOEquipo implements IDAOEquipo {	
@@ -416,8 +417,48 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("Intentando listarEquiposEmpleadoId - DAOEquipo");
+		Set<TEquipo> result = new HashSet<TEquipo>();
+		int ids[] = new int[100];
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE idempleado = ?");
+			ps.setInt(1, idempleado);
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				int j = 0;
+				if(rs.getBoolean("activo")) {
+					ids[j] = rs.getInt("idequipo");
+					j++;
+				}
+				while(rs.next()) {
+					if(rs.getBoolean("activo")) {
+						ids[j] = rs.getInt("idequipo");
+						j++;					}	
+				}
+				
+				if(j != 0) {
+					TEquipo aux = new TEquipo();
+					for(int i = 0; i < j; i++) {
+						
+						aux = readByID(ids[i]);	
+						result.add(aux);
+							
+						}
+					}										
+				}							
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("listarEquiposEmpleadoId realizado - DAOEquipo");
+			} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
