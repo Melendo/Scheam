@@ -52,8 +52,10 @@ public class SAProducto implements ISAProducto {
 				System.out.println("bajaProducto Realizado - SAProducto");
 				return FactoriaDAOImp.getInstance().getDaoProducto().delete(IDProducto);
 			} else{
+				System.out.println("bajaProducto Realizado (ya desactiva) - SAProducto");
 				return -2;
 			}
+			
 		}else {
 			System.out.println("bajaProducto No Realizado (en tarea activa) - SAProducto");
 			return -3;
