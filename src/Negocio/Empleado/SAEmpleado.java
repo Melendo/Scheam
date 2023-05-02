@@ -46,7 +46,7 @@ public class SAEmpleado implements ISAEmpleado {
 				return -2;
 			}
 		}
-		else{
+		else {
 			return -3;
 		}
 	}
