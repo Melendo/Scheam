@@ -10,6 +10,10 @@ import Negocio.Empleado.TEmpleado;
 
 public class EmpleadosTableModel extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"ID", "Nombre", "Apellidos", "DNI", "Email", "Telefono", "Sueldo"};
 	List<TEmpleado> empleados;
 	

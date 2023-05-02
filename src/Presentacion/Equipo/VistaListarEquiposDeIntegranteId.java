@@ -21,10 +21,13 @@ import Negocio.Equipo.TEquipoDisenio;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Empleado.VistaListarEmpleado;
 
 public class VistaListarEquiposDeIntegranteId extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table1;
 	private JTable table2;
@@ -72,7 +75,7 @@ public class VistaListarEquiposDeIntegranteId extends JFrame implements IGUI {
 		case Eventos.ListarEquiposDeIntegranteId:
 			Set<TEquipoDesarrollo> listades = new HashSet<TEquipoDesarrollo>();
 			Set<TEquipoDisenio> listadis = new HashSet<TEquipoDisenio>();
-			Set<TEquipo> lista = (Set<TEquipo>) object;
+			@SuppressWarnings("unchecked") Set<TEquipo> lista = (Set<TEquipo>) object;
 			
 			for (TEquipo cl : lista) {
 				if (cl instanceof TEquipoDesarrollo) {

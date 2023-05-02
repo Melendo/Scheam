@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 
 public class VistaFormMostrarFacturaID extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField idtextfield;
 	

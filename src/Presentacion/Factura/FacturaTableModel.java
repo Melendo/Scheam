@@ -1,17 +1,19 @@
 package Presentacion.Factura;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Negocio.Empleado.TEmpleado;
 import Negocio.Factura.TFactura;
-import Negocio.Factura.TLineaFactura;
 
 public class FacturaTableModel extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"ID", "ID_Cliente", "Fecha", "Importe"};
 	List<TFactura> facturas;
 	

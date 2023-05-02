@@ -1,18 +1,16 @@
 package Negocio;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAO;
 import Negocio.Cliente.TCliente;
-import Negocio.Cliente.TDistribuidor;
 import Negocio.Cliente.TParticular;
 import Negocio.Factorias.FactoriaSA;
+import Negocio.Factura.SAFactura;
 import Negocio.Factura.TFactura;
 import Negocio.Factura.TLineaFactura;
 import Negocio.Producto.TProducto;
-import Negocio.Factura.SAFactura;
 import junit.framework.TestCase;
 
 public class FacturaTest extends TestCase{

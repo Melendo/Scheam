@@ -26,6 +26,10 @@ import java.awt.event.ActionEvent;
 
 public class VistaModificarEmpleado extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField nombretextfield;
 	private JTextField apellidostextfield;

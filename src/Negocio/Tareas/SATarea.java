@@ -5,9 +5,7 @@ package Negocio.Tareas;
 
 import java.util.Set;
 
-import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
-import Integracion.Producto.DAOProducto;
 import Negocio.Equipo.TEquipo;
 import Negocio.Producto.TProducto;
 

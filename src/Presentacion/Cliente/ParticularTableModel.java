@@ -10,6 +10,10 @@ import Negocio.Cliente.TParticular;
 
 public class ParticularTableModel extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"ID", "Nombre", "Email", "DNI", "telefono"};
 	List<TParticular> particulares;
 	

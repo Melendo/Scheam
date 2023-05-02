@@ -23,6 +23,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 public class VistaCrearCarrito extends JFrame implements IGUI {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public VistaCrearCarrito() {
 		vCrearCarrito();
 	}
@@ -101,7 +106,7 @@ public class VistaCrearCarrito extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.CrearCarritoOk:
-			JOptionPane.showMessageDialog(null, "Éxito abriendo carrito");
+			JOptionPane.showMessageDialog(null, "ï¿½xito abriendo carrito");
 			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 			break;
 		case Eventos.CrearCarritoNoOk:

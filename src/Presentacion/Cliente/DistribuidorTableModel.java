@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 import Negocio.Cliente.TDistribuidor;
-import Negocio.Equipo.TEquipoDesarrollo;
 
 public class DistribuidorTableModel extends AbstractTableModel{
 

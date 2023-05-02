@@ -25,6 +25,10 @@ import Negocio.Empleado.TEmpleado;
 
 public class VistaAltaEmpleado extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField nombretextfield;
 	private JTextField apellidostextfield;

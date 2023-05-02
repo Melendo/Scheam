@@ -24,6 +24,11 @@ import java.awt.event.ActionEvent;
 
 public class MainWindowCliente extends JFrame implements IGUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindowCliente() {
 		vMainWindowCliente();
 	}

@@ -15,19 +15,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
-import Negocio.Equipo.TEquipo;
-
 import Presentacion.IGUI;
-import Presentacion.Cliente.DistribuidorTableModel;
-import Presentacion.Cliente.ParticularTableModel;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.VistaListarEmpleado;
 
 public class VistaListarEquipos extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table1;
 	private JTable table2;
@@ -76,7 +77,7 @@ public class VistaListarEquipos extends JFrame implements IGUI {
 		case Eventos.ListarEquipos:
 			Set<TEquipoDesarrollo> listades = new HashSet<TEquipoDesarrollo>();
 			Set<TEquipoDisenio> listadis = new HashSet<TEquipoDisenio>();
-			Set<TEquipo> lista = (Set<TEquipo>) object;
+			@SuppressWarnings("unchecked") Set<TEquipo> lista = (Set<TEquipo>) object;
 			
 			for (TEquipo cl : lista) {
 				if (cl instanceof TEquipoDesarrollo) {

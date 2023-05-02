@@ -25,6 +25,11 @@ import java.awt.event.ActionEvent;
 
 public class MainWindowProducto extends JFrame implements ActionListener, IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindowProducto() {		
 		vMainWindowProducto();	
 	}

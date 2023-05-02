@@ -25,6 +25,10 @@ import java.awt.event.ActionEvent;
 
 public class VistaListarProductos extends JFrame implements IGUI, ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	

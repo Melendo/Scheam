@@ -25,6 +25,10 @@ import Presentacion.Empleado.VistaListarEmpleado;
 
 public class VistaMostrarEquiposId extends JFrame implements IGUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	

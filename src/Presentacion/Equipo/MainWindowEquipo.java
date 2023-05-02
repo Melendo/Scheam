@@ -24,6 +24,11 @@ import Presentacion.Empleado.MainWindowEmpleado;
 
 public class MainWindowEquipo extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindowEquipo() {
 		vMainWindowEquipo();
 	}

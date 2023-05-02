@@ -2,11 +2,8 @@ package Negocio;
 
 import java.util.Set;
 
-import Integracion.Factorias.FactoriaDAO;
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.Empleado.TEmpleado;
 import Negocio.Factorias.FactoriaSA;
-import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 import junit.framework.TestCase;
 

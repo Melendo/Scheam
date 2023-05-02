@@ -19,10 +19,13 @@ import javax.swing.border.EmptyBorder;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
-import Presentacion.Empleado.VistaFormMostrarEmpleadoID;
 
 public class VistaFormMostrarEquipoId extends JFrame implements IGUI{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField idtextfield;
 	

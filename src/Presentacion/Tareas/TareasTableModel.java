@@ -7,9 +7,12 @@ import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 import Negocio.Tareas.TTarea;
-import Presentacion.Controlador.Controlador;
 public class TareasTableModel extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"ID", "Nombre", "Equipo", "Producto", "Terminada"};
 	List<TTarea> tareas;
 

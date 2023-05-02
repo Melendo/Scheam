@@ -24,6 +24,10 @@ import Presentacion.Controlador.Eventos;
 
 public class VistaRetirarIntegrante extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField idequipotextfield;
 	private JTextField idempleadotextfield;

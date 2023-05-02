@@ -22,6 +22,10 @@ import Presentacion.Controlador.Eventos;
 
 public class VistaFormListarEquiposDeIntegranteId extends JFrame implements IGUI{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField idtextfield;
 	

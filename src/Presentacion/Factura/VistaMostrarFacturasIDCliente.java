@@ -1,7 +1,7 @@
 
 package Presentacion.Factura;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -19,10 +19,13 @@ import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.VistaListarEmpleado;
-import java.awt.BorderLayout;
 
 public class VistaMostrarFacturasIDCliente extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	
@@ -61,7 +64,7 @@ public class VistaMostrarFacturasIDCliente extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.MostrarFacturasIDCliente:
-			Set<TFactura> lista = (Set<TFactura>) object;
+			@SuppressWarnings("unchecked") Set<TFactura> lista = (Set<TFactura>) object;
 			facturamodel.setLista(lista);
 			facturamodel.fireTableStructureChanged();
 			break;

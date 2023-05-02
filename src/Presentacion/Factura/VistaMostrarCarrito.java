@@ -2,9 +2,6 @@ package Presentacion.Factura;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JFrame;
@@ -14,14 +11,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import Negocio.Empleado.TEmpleado;
 import Negocio.Factura.TLineaFactura;
 import Presentacion.IGUI;
-import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 
 public class VistaMostrarCarrito extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	
@@ -49,6 +48,7 @@ public class VistaMostrarCarrito extends JFrame implements IGUI {
 		setVisible(false);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
@@ -60,7 +60,7 @@ public class VistaMostrarCarrito extends JFrame implements IGUI {
 			facturamodel.fireTableStructureChanged();
 			break;
 		case Eventos.MostrarCarritoNoOk:
-			JOptionPane.showMessageDialog(null, "Error. Carrito no está abierto");
+			JOptionPane.showMessageDialog(null, "Error. Carrito no estï¿½ abierto");
 			break;
 		case Eventos.NecesitasCarrito:
 			JOptionPane.showMessageDialog(null, "Necesitas un Carrito abierto para hacer esto.");

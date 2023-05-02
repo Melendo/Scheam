@@ -26,6 +26,10 @@ import java.awt.event.ActionEvent;
 
 public class VistaEliminarProductoCarrito extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField productotextfield;
 	private JTextField cantidadtextfield;
@@ -118,7 +122,7 @@ public class VistaEliminarProductoCarrito extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.EliminarProductoCarritoOk:
-			JOptionPane.showMessageDialog(null, "Éxito eliminando producto");
+			JOptionPane.showMessageDialog(null, "ï¿½xito eliminando producto");
 			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 			break;
 		case Eventos.EliminarProductoCarritoNoOk:

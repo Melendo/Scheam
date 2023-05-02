@@ -26,6 +26,13 @@ import java.awt.event.ActionEvent;
 
 public class MainWindowTarea extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
 	public MainWindowTarea() {		
 		vMainWindowTarea();	
 	}

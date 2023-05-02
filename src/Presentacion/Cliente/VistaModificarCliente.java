@@ -1,5 +1,12 @@
 package Presentacion.Cliente;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,21 +23,17 @@ import javax.swing.event.ChangeListener;
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
 import Negocio.Cliente.TParticular;
-import Negocio.Producto.TProducto;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.VistaModificarEmpleado;
 
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-
 public class VistaModificarCliente extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField NoTF;
 	private JTextField DiTF;

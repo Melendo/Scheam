@@ -5,9 +5,6 @@ import java.util.Set;
 import Integracion.Factorias.FactoriaDAO;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Factorias.FactoriaSA;
-import Negocio.Equipo.TEquipoDesarrollo;
-import Negocio.Equipo.TVinculacion;
-
 import junit.framework.TestCase;
 
 public class EmpleadoTest extends TestCase {
@@ -22,7 +19,7 @@ public class EmpleadoTest extends TestCase {
         TEmpleado empleado = new TEmpleado();
         empleado.setDNI("12345678A");
         empleado.setNombre("Juan");
-        empleado.setApellidos("Pérez");
+        empleado.setApellidos("Pï¿½rez");
         empleado.setE_mail("juan@ucm.es");
         empleado.setTlfn(123456789);
         empleado.setSueldo(1500.0);
@@ -34,7 +31,7 @@ public class EmpleadoTest extends TestCase {
         TEmpleado empleadoDNIRepetido = new TEmpleado();
         empleadoDNIRepetido.setDNI("12345678A");
         empleadoDNIRepetido.setNombre("Pedro");
-        empleadoDNIRepetido.setApellidos("García");
+        empleadoDNIRepetido.setApellidos("Garcï¿½a");
         empleadoDNIRepetido.setE_mail("pedro@ucm.es");
         empleadoDNIRepetido.setTlfn(987654321);
         empleadoDNIRepetido.setSueldo(2000.0);
@@ -45,13 +42,13 @@ public class EmpleadoTest extends TestCase {
     public void testBajaEmpleado() {
     	TEmpleado emp = FactoriaDAO.getInstance().getDaoEmpleado().readByDNI("12345678A");
         int resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(emp.getIdEmpleado());
-        assertEquals("Baja realizada con éxito", 1, resultado);
+        assertEquals("Baja realizada con ï¿½xito", 1, resultado);
         
         resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(99999);
         assertEquals("No existe el empleado", -1, resultado);
         
         resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(emp.getIdEmpleado());
-        assertEquals("El empleado ya está dado de baja", -2, resultado);
+        assertEquals("El empleado ya estï¿½ dado de baja", -2, resultado);
     }
     
     public void testModificarEmpleado() {
@@ -80,7 +77,7 @@ public class EmpleadoTest extends TestCase {
     	TEmpleado empleado2 = new TEmpleado();
         empleado2.setDNI("22222222P");
         empleado2.setNombre("Alicia");
-        empleado2.setApellidos("Gómez");
+        empleado2.setApellidos("Gï¿½mez");
         empleado2.setE_mail("alicia@ucm.es");
         empleado2.setTlfn(123456789);
         empleado2.setSueldo(1500.0);
@@ -101,7 +98,7 @@ public class EmpleadoTest extends TestCase {
     	TEmpleado result = FactoriaSA.getInstance().getSAEmpleado().mostrarEmpleadoID(id);
     	assertEquals("El empleado se muestra: DNI correcto", result.getDNI(), "12345678A");
     	assertEquals("El empleado se muestra: Nombre correcto", result.getNombre(), "Juan");
-    	assertEquals("El empleado se muestra: Apellido correcto", result.getApellidos(), "Pérez");
+    	assertEquals("El empleado se muestra: Apellido correcto", result.getApellidos(), "Pï¿½rez");
     	assertEquals("El empleado se muestra: E-mail correcto", result.getE_mail(), "juan@ucm.es");
     	
     	result = FactoriaSA.getInstance().getSAEmpleado().mostrarEmpleadoID(9999);

@@ -12,6 +12,10 @@ import Negocio.Producto.TProducto;
 
 public class ProductosTableModel extends AbstractTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"ID", "Nombre", "FechaLanzamiento", "Precio", "Genero", "PEGI", "Terminado", "Stock"};
 	List<TProducto> productos;
 	

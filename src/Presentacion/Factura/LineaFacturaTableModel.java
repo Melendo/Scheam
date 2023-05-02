@@ -1,16 +1,19 @@
 package Presentacion.Factura;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Negocio.Empleado.TEmpleado;
 import Negocio.Factura.TLineaFactura;
 
 public class LineaFacturaTableModel extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String[] header = {"Producto", "Cantidad", "Precio"};
 	List<TLineaFactura> lineas;
 	

@@ -1,5 +1,13 @@
 package Presentacion.Cliente;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,19 +22,12 @@ import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 import Presentacion.Empleado.VistaListarEmpleado;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Set;
-import java.util.HashSet;
-import java.awt.BorderLayout;
-import java.awt.Toolkit;
-import javax.swing.JTabbedPane;
-import javax.swing.JSplitPane;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-
 public class VistaMostrarClientes extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table1;
 	private JTable table2;

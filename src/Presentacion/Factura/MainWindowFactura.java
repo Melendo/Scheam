@@ -26,6 +26,11 @@ import Presentacion.Empleado.MainWindowEmpleado;
 
 public class MainWindowFactura extends JFrame implements IGUI {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindowFactura() {
 		vMainWindowFactura();
 	}
@@ -116,7 +121,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		});
 		buttonpanel.add(mostrarcarritobutton);
 		
-		JButton aniadirproductobutton = new JButton("Añadir Producto a Carrito");
+		JButton aniadirproductobutton = new JButton("Aï¿½adir Producto a Carrito");
 		aniadirproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/factura/aniadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		aniadirproductobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		aniadirproductobutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -182,7 +187,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.CerrarCarritoOK:
-			JOptionPane.showMessageDialog(null, "Éxito cerrando carrito");
+			JOptionPane.showMessageDialog(null, "ï¿½xito cerrando carrito");
 			break; 
 		case Eventos.CerrarCarritoNoOK:
 			JOptionPane.showMessageDialog(null, "Error cerrando carrito");
@@ -191,7 +196,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			JOptionPane.showMessageDialog(null, "Necesitas un Carrito abierto para hacer esto.");
 			break;
 		case Eventos.EliminarCarritoOk:
-			JOptionPane.showMessageDialog(null, "Éxito eliminando carrito");
+			JOptionPane.showMessageDialog(null, "ï¿½xito eliminando carrito");
 			break; 
 		}
 	}

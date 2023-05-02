@@ -24,6 +24,10 @@ import java.awt.Toolkit;
 
 public class VistaListarTareas extends JFrame implements IGUI{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	

@@ -31,6 +31,10 @@ import Presentacion.Empleado.VistaModificarEmpleado;
 
 public class VistaModificarEquipo extends JFrame implements IGUI {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField nombre;
 	private JTextField IdEquipo;
