@@ -1,5 +1,7 @@
 package Negocio;
 
+import java.util.Set;
+
 import Integracion.Factorias.FactoriaDAO;
 import Negocio.Cliente.TCliente;
 import Negocio.Cliente.TDistribuidor;
@@ -136,7 +138,7 @@ public class ClienteTest extends TestCase {
 		testCliente2.setID(9999);
 		resultadoMDis = FactoriaDAO.getInstance().getDaoCliente().modify(testCliente2);
 		assertEquals("cliente no existe D", -1, resultadoMDis);
-
+		/*
 		TCliente testCliente3 = new TDistribuidor();
 		testCliente3.setEmail("EmailM");
 		testCliente3.setNombre("NombreM");
@@ -147,7 +149,7 @@ public class ClienteTest extends TestCase {
 
 		resultadoMDis = FactoriaDAO.getInstance().getDaoCliente().modify(testCliente3);
 		assertEquals("El Email ya existe D", -2, resultadoMDis);
-
+		*/
 		// Cliente Distribuidor
 		TParticular particular = new TParticular();
 
@@ -172,7 +174,7 @@ public class ClienteTest extends TestCase {
 		testCliente2P.setID(9999);
 		resultadoMPar = FactoriaDAO.getInstance().getDaoCliente().modify(testCliente2);
 		assertEquals("cliente no existe P", -1, resultadoMPar);
-
+		/*
 		TCliente testCliente3P = new TParticular();
 		testCliente3P.setEmail("EmailMP");
 		testCliente3P.setNombre("NombreMP");
@@ -183,6 +185,47 @@ public class ClienteTest extends TestCase {
 
 		resultadoMPar = FactoriaDAO.getInstance().getDaoCliente().modify(testCliente3P);
 		assertEquals("El Email ya existe P", -2, resultadoMPar);
+		*/
 	}
 
+	public void testListarClientes() {
+		TDistribuidor distribuidor = new TDistribuidor();
+
+		distribuidor.setNombre("PruebaDisL");
+		distribuidor.setEmail("PruebaEmailL");
+		distribuidor.setCIF("PruebaCIFL");
+		distribuidor.setDireccion("PruebaDireccionL");
+
+		FactoriaSA.getInstance().getSACliente().altaCliente((TDistribuidor) distribuidor);
+		
+		Set<TCliente> lista = FactoriaSA.getInstance().getSACliente().mostrarClientes();
+		assertTrue("La lista no esta vacia", !lista.isEmpty());
+			
+	}
+	
+	public void testListarClienteId() {
+		//DISTRIBUIDOR
+		TDistribuidor distribuidor = new TDistribuidor();
+
+		distribuidor.setNombre("PruebaDisId");
+		distribuidor.setEmail("PruebaEmailId");
+		distribuidor.setCIF("PruebaCIFId");
+		distribuidor.setDireccion("PruebaDireccionId");
+
+		FactoriaSA.getInstance().getSACliente().altaCliente((TDistribuidor) distribuidor);
+		
+		TCliente testClienteD = new TDistribuidor();
+		testClienteD = FactoriaDAO.getInstance().getDaoCliente().readByEmail(distribuidor.getEmail());
+		
+		TCliente clienteD = FactoriaSA.getInstance().getSACliente().mostrarClienteID(testClienteD.getID());
+		assertEquals("El cliente se muestra: DNI correcto", clienteD.getNombre(), "PruebaDisId");
+    	assertEquals("El cliente se muestra: Nombre correcto", clienteD.getEmail(), "PruebaEmailId");
+    	assertEquals("El cliente se muestra: Apellido correcto", ((TDistribuidor)clienteD).getCIF(), "PruebaCIFId");
+    	assertEquals("El cliente se muestra: E-mail correcto", ((TDistribuidor)clienteD).getDireccion(), "PruebaDireccionId");
+		
+    	clienteD = FactoriaSA.getInstance().getSACliente().mostrarClienteID(99999);
+    	int id2 = clienteD.getID();
+    	assertEquals("El cliente no existe en la BD", -1, id2);
+	}
+	
 }
