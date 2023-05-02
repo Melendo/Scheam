@@ -122,7 +122,7 @@ public class SAProducto implements ISAProducto {
 				System.out.println("cerrarProducto No Realizado (no exite) - SAProducto");
 				return -1;
 			}
-			if (!emp.getActivo()) {
+			if (emp.getTerminado()) {
 				System.out.println("cerrarProducto No Realizado (ya cerrado) - SAProducto");
 				return -2;
 			}
