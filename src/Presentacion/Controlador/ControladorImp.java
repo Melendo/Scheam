@@ -603,7 +603,7 @@ public class ControladorImp extends Controlador {
         	TFactura fact = safactura.mostrarFacturaID((int) objeto);
         	if(fact.getIdFactura() == -1) {
         		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturaID, null);
-        		gui.update(Eventos.MostrarFacturaID, null);
+        		gui.update(Eventos.MostrarFacturaIDNoOK, null);
         	}
         	else {
             	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturaID, null);
@@ -611,7 +611,28 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarFacturaID, null);
         	}
         	break;
-	    	
+	     case Eventos.VistaFormMostrarFacturasIDCliente:
+	    	 System.out.println("Entrando a VistaFormMostrarFacturasIDCliente - Controlador");
+	    	 gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	 gui.update(event, null);
+	    	 break;
+	     case Eventos.VistaMostrarFacturasIDCliente:
+	    	 System.out.println("Entrando a VistaMostrarFacturasIDCliente - Controlador");
+	    	 gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	 gui.update(event, null);
+	    	 break;
+	     case Eventos.MostrarFacturasIDCliente:
+	    	 System.out.println("Entrando a MostrarFacturasIDCliente - Controlador");
+        	Set<TFactura> list2 = safactura.listarFacturasIDCliente((int) objeto);
+        	if (list2 == null) {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturasIDCliente, null);
+        		gui.update(Eventos.MostrarFacturasIDClienteNoOk, null);
+        	} else {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturasIDCliente, null);
+        		gui.update(event, list2);
+        		gui.update(Eventos.VistaMostrarFacturasIDCliente, null);
+        	}
+        	break;
 	    }
     }
 }

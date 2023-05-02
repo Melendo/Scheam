@@ -242,5 +242,9 @@ public class Eventos {
     public static final int MostrarFacturaID = 672;
     public static final int MostrarFacturaIDOK = 674;
     public static final int MostrarFacturaIDNoOK = 675;
-	
+
+	public static final int VistaFormMostrarFacturasIDCliente = 680;
+	public static final int VistaMostrarFacturasIDCliente = 681;
+	public static final int MostrarFacturasIDCliente = 682;
+	public static final int MostrarFacturasIDClienteNoOk = 683;
 }

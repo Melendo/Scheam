@@ -34,8 +34,8 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 
 	public void vFormMostrarEmpleadoID() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Mostrar Factura por ID");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_uno-removebg-preview.png")));
+		setTitle("Mostrar Facturas por ID de Cliente");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_todos-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -47,9 +47,9 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Buscar ID Factura");
+		JLabel logo = new JLabel("      Buscar ID Cliente para Facturas");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
@@ -88,8 +88,8 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 	
 	
 	private void ok() {
-		int idfactura = Integer.parseInt(idtextfield.getText());
-		Controlador.getInstance().update(Eventos.MostrarFacturaID, idfactura);
+		int idcliente = Integer.parseInt(idtextfield.getText());
+		Controlador.getInstance().update(Eventos.MostrarFacturasIDCliente, idcliente);
 		if (cerrar)
 			dispose();
 		else
@@ -99,11 +99,11 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaFormMostrarFacturaID:
+		case Eventos.VistaFormMostrarFacturasIDCliente:
 			setVisible(true);
 			break;
-		case Eventos.MostrarFacturaIDNoOK:
-			JOptionPane.showMessageDialog(null, "Error. La factura no existe");
+		case Eventos.MostrarFacturasIDClienteNoOk:
+			JOptionPane.showMessageDialog(null, "Error. El cliente no existe");
 			cerrar = false;
 			break;
 		}

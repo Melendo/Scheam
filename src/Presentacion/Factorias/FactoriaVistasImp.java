@@ -32,8 +32,10 @@ import Presentacion.Factura.VistaAnyadirProductoCarrito;
 import Presentacion.Factura.VistaCrearCarrito;
 import Presentacion.Factura.VistaEliminarProductoCarrito;
 import Presentacion.Factura.VistaFormMostrarFacturaID;
+import Presentacion.Factura.VistaFormMostrarFacturasIDCliente;
 import Presentacion.Factura.VistaMostrarCarrito;
 import Presentacion.Factura.VistaMostrarFacturaID;
+import Presentacion.Factura.VistaMostrarFacturasIDCliente;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
 import Presentacion.Producto.VistaBajaProducto;
@@ -222,6 +224,12 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarFacturaID:
 			System.out.println("Entrando a VistaMostrarFacturaID - FactoriaVistasImp");
 			return new VistaMostrarFacturaID();
+		case Eventos.VistaFormMostrarFacturasIDCliente:
+			System.out.println("Entrando a VistaFormMostrarFacturaIDCliente - FactoriaVistasImp");
+			return new VistaFormMostrarFacturasIDCliente();
+		case Eventos.VistaMostrarFacturasIDCliente:
+			System.out.println("Entrando a VistaMostrarFacturaIDCliente - FactoriaVistasImp");
+			return new VistaMostrarFacturasIDCliente();
 		default:
 			return null;
 		}

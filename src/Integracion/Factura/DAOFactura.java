@@ -249,19 +249,20 @@ public class DAOFactura implements IDAOFactura {
 						if(!rs1.next()) {
 							//return result;
 							System.out.println("Intentando listarFacturasIDCliente - DAOFactura");
-						}else {
+						} else {
 							TFactura aux = new TFactura();
 							
 							aux.setActivo(rs1.getBoolean("activo"));
 							if(aux.isActivo()) {
-								aux.setIdFactura(rs.getInt("idfactura"));
-								aux.setIDCliente(rs.getInt("idcliente"));
-								aux.setFecha(rs.getDate("fecha"));
-								aux.setImporte(rs.getDouble("importe"));
+								aux.setIdFactura(rs1.getInt("idfactura"));
+								aux.setIDCliente(rs1.getInt("idcliente"));
+								aux.setFecha(rs1.getDate("fecha"));
+								aux.setImporte(rs1.getDouble("importe"));
 								
 								result.add(aux);
 							}
 						}
+						rs1.close();
 					}										
 				}							
 				rs.close();
