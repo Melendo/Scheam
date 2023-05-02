@@ -33,14 +33,8 @@ public class VistaMostrarCarrito extends JFrame implements IGUI {
 	}
 	
 	public void vMostrarEmpleadoID() {
-		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaMostrarCarrito.class.getResource("/icons/factura.png")));
 		setTitle("Mostrar Carrito");
-		this.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				Controlador.getInstance().update(Eventos.MainWindowFactura, null);
-			}
-		});
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,8 +61,10 @@ public class VistaMostrarCarrito extends JFrame implements IGUI {
 			break;
 		case Eventos.MostrarCarritoNoOk:
 			JOptionPane.showMessageDialog(null, "Error. Carrito no está abierto");
-			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 			break;
+		case Eventos.NecesitasCarrito:
+			JOptionPane.showMessageDialog(null, "Necesitas un Carrito abierto para hacer esto.");
+			break; 
 		}
 	}
 

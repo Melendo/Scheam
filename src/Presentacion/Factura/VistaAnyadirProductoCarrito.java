@@ -126,6 +126,10 @@ public class VistaAnyadirProductoCarrito extends JFrame implements IGUI {
 			JOptionPane.showMessageDialog(null, "Error añadiendo producto");
 			cerrar = false;
 			break;
+		case Eventos.NecesitasCarrito:
+			JOptionPane.showMessageDialog(null, "Necesitas un Carrito abierto para hacer esto.");
+			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+			break; 
 		}
 	}
 }

@@ -180,7 +180,7 @@ public class DAOFactura implements IDAOFactura {
 			ps.close();
 			
 			PreparedStatement ps1 = con.prepareStatement("select * from contiene where idfactura = ?");
-			ps.setInt(1, idfactura);
+			ps1.setInt(1, idfactura);
 
 			ResultSet rs1 = ps1.executeQuery();
 			TLineaFactura aux;

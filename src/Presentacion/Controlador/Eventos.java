@@ -208,6 +208,7 @@ public class Eventos {
 	////////////////////////////////////////////////////////////////////////////
 	
 	public static final int MainWindowFactura = 600;
+	public static final int NecesitasCarrito = 601;
 	
 	public static final int VistaCrearCarrito = 610;
 	public static final int CrearCarrito = 611;
@@ -220,6 +221,7 @@ public class Eventos {
 	public static final int CerrarCarritoNoOK = 623;
 	
 	public static final int EliminarCarrito = 630;
+	public static final int EliminarCarritoOk = 631;
 	
 	public static final int VistaAnyadirProductoCarrito = 640;
 	public static final int AnyadirProductoCarrito = 641;
@@ -234,5 +236,11 @@ public class Eventos {
 	public static final int VistaMostrarCarrito = 660;
 	public static final int MostrarCarrito = 661;
 	public static final int MostrarCarritoNoOk = 662;
+	
+    public static final int VistaFormMostrarFacturaID = 670;
+    public static final int VistaMostrarFacturaID = 671;
+    public static final int MostrarFacturaID = 672;
+    public static final int MostrarFacturaIDOK = 674;
+    public static final int MostrarFacturaIDNoOK = 675;
 	
 }
