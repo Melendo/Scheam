@@ -42,10 +42,10 @@ public class VistaListarEquipos extends JFrame implements IGUI {
 
 	public void vListarEquipos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarEmpleado.class.getResource("/icons/cliente.png")));
-		setTitle("Listado clientes");
+		setTitle("Listado equipos");
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				Controlador.getInstance().update(Eventos.MainWindowCliente, null);
+				Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
 				dispose();
 			}
 		});
@@ -70,10 +70,10 @@ public class VistaListarEquipos extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch (event) {
-		case Eventos.VistaListarCliente:
+		case Eventos.VistaListarEquipos:
 			setVisible(true);
 			break;
-		case Eventos.ListarCliente:
+		case Eventos.ListarEquipos:
 			Set<TEquipoDesarrollo> listades = new HashSet<TEquipoDesarrollo>();
 			Set<TEquipoDisenio> listadis = new HashSet<TEquipoDisenio>();
 			Set<TEquipo> lista = (Set<TEquipo>) object;

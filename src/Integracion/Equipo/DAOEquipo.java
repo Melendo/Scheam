@@ -172,7 +172,7 @@ public class DAOEquipo implements IDAOEquipo {
 			List<TEquipoDisenio> eDis = new ArrayList<TEquipoDisenio>();
 
 			while (rsdes.next()) { //getting all ids in EquipoDesarrollo table
-				iddes.add(rsdes.getInt("ID"));
+				iddes.add(rsdes.getInt("ID_EQUIPO"));
 				TEquipoDesarrollo eDesAux = new TEquipoDesarrollo();
 				eDesAux.setIdEquipo(rsdes.getInt("ID_EQUIPO"));
 				eDesAux.setTecnologia(rsdes.getString("TECNOLOGIA"));
@@ -180,10 +180,10 @@ public class DAOEquipo implements IDAOEquipo {
 			}
 			
 			while (rsdis.next()) { //getting all ids in EquipoDisenio table
-				iddis.add(rsdis.getInt("ID"));
+				iddis.add(rsdis.getInt("ID_EQUIPO"));
 				TEquipoDisenio eDisAux = new TEquipoDisenio();
 				eDisAux.setIdEquipo(rsdis.getInt("ID_EQUIPO"));
-				eDisAux.setCampoDisenio(rsdes.getString("CAMPO_DISENYO"));
+				eDisAux.setCampoDisenio(rsdis.getString("CAMPO"));
 				eDis.add(eDisAux);
 			}
 			
@@ -194,28 +194,28 @@ public class DAOEquipo implements IDAOEquipo {
 					TEquipoDesarrollo auxEDes = new TEquipoDesarrollo();
 					auxEDes.setIdEquipo(rs.getInt("ID_EQUIPO"));
 					auxEDes.setNombre(rs.getString("NOMBRE"));
-					auxEDes.setTecnologia(rs.getString("TECNOLOGIA"));
+					auxEDes.setTecnologia(eDes.get(iddes.indexOf(auxEDes.getIdEquipo())).getTecnologia());
 					result.add(auxEDes);
 				} else if (iddis.contains(rs.getInt("ID_EQUIPO"))) {
 					TEquipoDisenio auxEDis = new TEquipoDisenio();
 					auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
 					auxEDis.setNombre(rs.getString("NOMBRE"));
-					auxEDis.setCampoDisenio(rs.getString("TECNOLOGIA"));
+					auxEDis.setCampoDisenio(eDis.get(iddis.indexOf(auxEDis.getIdEquipo())).getCampoDisenio());
 					result.add(auxEDis);
 				}
 				
 				while (rs.next()) {
-					if (iddes.contains(rs.getInt("id_cliente"))) {
+					if (iddes.contains(rs.getInt("id_equipo"))) {
 						TEquipoDesarrollo auxEDes = new TEquipoDesarrollo();
 						auxEDes.setIdEquipo(rs.getInt("ID_EQUIPO"));
 						auxEDes.setNombre(rs.getString("NOMBRE"));
-						auxEDes.setTecnologia(rs.getString("TECNOLOGIA"));
+						auxEDes.setTecnologia(eDes.get(iddes.indexOf(auxEDes.getIdEquipo())).getTecnologia());
 						result.add(auxEDes);
-					} else if (iddis.contains(rs.getInt("ID_EQUIPO"))) {
+					} else if (iddis.contains(rs.getInt("id_equipo"))) {
 						TEquipoDisenio auxEDis = new TEquipoDisenio();
 						auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
 						auxEDis.setNombre(rs.getString("NOMBRE"));
-						auxEDis.setCampoDisenio(rs.getString("TECNOLOGIA"));
+						auxEDis.setCampoDisenio(eDis.get(iddis.indexOf(auxEDis.getIdEquipo())).getCampoDisenio());
 						result.add(auxEDis);
 					}
 				}

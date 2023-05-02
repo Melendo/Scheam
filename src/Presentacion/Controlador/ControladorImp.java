@@ -200,6 +200,13 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEquipoID, null);
         	}
         	break;
+        case Eventos.ListarEquipos:
+	    	System.out.println("Entrando a ListarEquipos - Controlador");
+	    	Set<TEquipo> listaEq = FactoriaSA.getInstance().getSAEquipo().listarEquipos();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquipos, null);
+	    	gui.update(event, listaEq);
+	    	gui.update(Eventos.VistaListarEquipos, null);
+	    	break;
         case Eventos.VistaAnyadirIntegrante:
         	System.out.println("Entrando a VistaAnyadirIntegrante - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -472,29 +479,50 @@ public class ControladorImp extends Controlador {
 	    	else if(res == -2) gui.update(Eventos.CerrarTareaNoOK2, null);
 	    	else gui.update(Eventos.CerrarTareaOK, objeto);
 	    	break;
+	    case Eventos.VistaFormListarTareasEquipoId:
+        	System.out.println("Entrando a VistaFormListarTareasEquipoId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
 	     case Eventos.VistaListarTareasEquipoId:
         	System.out.println("Entrando a VistaListarTareasEquipoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
 	     case Eventos.ListarTareasEquipoId:
-        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
-        	Set<TTarea> listaequipo = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
-        	if (!listaequipo.isEmpty()) gui.update(Eventos.ListarTareasEquipoIdOK, null);
-        	else gui.update(Eventos.ListarTareasEquipoIdNoOK, objeto);
-        	break;	
-	     case Eventos.VistaListarTareasProductoId:
-        	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
+	        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
+	        	Set<TTarea> listat = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
+	        	if (listat == null) {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(Eventos.ListarTareasEquipoIdNoOK, null);
+	        	} else {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(event, listat);
+	        		gui.update(Eventos.VistaListarTareasEquipoId, null);
+	        	}
+	        	break;
+	     case Eventos.VistaFormListarTareasProductoId:
+        	System.out.println("Entrando a VistaFormListarTareasProductoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
+	     case Eventos.VistaListarTareasProductoId:
+	        	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
+	        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	        	gui.update(event, null);
+	        break;
 	     case Eventos.ListarTareasProductoId:
-        	System.out.println("Entrando a ListarTareasProductoId - Controlador");
-        	Set<TTarea> listaproducto = FactoriaSA.getInstance().getSATarea().listarTareasProducto((Integer) objeto);
-        	if (!listaproducto.isEmpty()) gui.update(Eventos.ListarTareasProductoIdOK, null);
-        	else gui.update(Eventos.ListarTareasProductoIdNoOK, objeto);
-        	break;	
-	    	
+	        	System.out.println("Entrando a ListarTareasProductoId - Controlador");
+	        	Set<TTarea> listap = FactoriaSA.getInstance().getSATarea().listarTareasProducto((Integer) objeto);
+	        	if (listap == null) {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasProductoId, null);
+	        		gui.update(Eventos.ListarTareasProductoIdNoOK, null);
+	        	} else {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasProductoId, null);
+	        		gui.update(event, listap);
+	        		gui.update(Eventos.VistaListarTareasProductoId, null);
+	        	}
+	        	break;
 	    //FACTURA
         	
 	     case Eventos.MainWindowFactura:
@@ -520,12 +548,12 @@ public class ControladorImp extends Controlador {
 	    	else gui.update(Eventos.CerrarCarritoOK, null);
 	    	break;
 	     case Eventos.VistaAnyadirProductoCarrito:
-	    	System.out.println("Entrando a VistaAñadirProductoCarrito - Controlador");
+	    	System.out.println("Entrando a VistaAï¿½adirProductoCarrito - Controlador");
 	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
 	    	gui.update(event, null);
 	    	break;
 	     case Eventos.AnyadirProductoCarrito:
-		    System.out.println("Entrando a AñadirProductoCarrito - Controlador");
+		    System.out.println("Entrando a Aï¿½adirProductoCarrito - Controlador");
 		    List<Integer> pair = (List<Integer>) objeto;
 		    res = safactura.anyadirProductoaCarrito(pair.get(0), pair.get(1));
 		    if (res == -1) gui.update(Eventos.AnyadirProductoCarritoNoOk, null);
@@ -537,8 +565,19 @@ public class ControladorImp extends Controlador {
 	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarCarrito, null);
 	    	gui.update(event, listafact);
 	    	gui.update(Eventos.VistaMostrarCarrito, null);
+	    	break;
 	     case Eventos.VistaEliminarProductoCarrito:
-	    	 
+	    	System.out.println("Entrando a VistaEliminarProductoCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.EliminarProductoCarrito:
+		    System.out.println("Entrando a EliminarProductocarrito - Controlador");
+		    List<Integer> pair2 = (List<Integer>) objeto;
+		    res = safactura.eliminarProductodeCarrito(pair2.get(0), pair2.get(1));
+		    if (res == -1) gui.update(Eventos.EliminarProductoCarritoNoOk, null);
+		    else gui.update(Eventos.EliminarProductoCarritoOk, objeto);
+		    break;
 	    }
     }
 }

@@ -40,7 +40,7 @@ public class VistaMostrarTareasID extends JFrame implements IGUI{
 	
 	public void vMostrarTareaID() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareas.class.getResource("/icons/tareas.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaListarTareas.class.getResource("/icons/tarea.png")));
 		setTitle("Mostrar Tarea por ID");
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -68,7 +68,7 @@ public class VistaMostrarTareasID extends JFrame implements IGUI{
 			setVisible(true);
 			break;
 		case Eventos.MostrarTareasID:
-			Set<TTarea> lista = new HashSet<TTarea>();
+			Set<TTarea> lista = new HashSet<>();
 			lista.add((TTarea) object);
 			tareasmodel.setLista(lista);
 			tareasmodel.fireTableStructureChanged();

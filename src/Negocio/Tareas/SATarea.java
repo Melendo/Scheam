@@ -82,29 +82,14 @@ public class SATarea implements ISATarea {
 
 
 	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
-	    Set<TTarea> lista = new HashSet<>();
-	    Set<TTarea> allTareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
-	    
-	    for (TTarea tarea : allTareas) {
-	        if (tarea.getEquipo() == IDEquipo && tarea.getActivo()) {
-	            lista.add(tarea);
-	        }
-	    }
 	    
 	    System.out.println("mostrarTareasEquipo Realizado - SATarea");
-	    return lista;
+	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdEquipo(IDEquipo);
 	}
 
 	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
-	    Set<TTarea> lista = new HashSet<>();
-	    Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
-	    for (TTarea tarea : tareas) {
-	        if (tarea.getProducto() == IDProducto && tarea.getActivo()) {
-	            lista.add(tarea);
-	        }
-	    }
 	    System.out.println("listarTareasProducto Realizado - SATarea");
-	    return lista;
+	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
 	}
 
 	public TTarea mostrarTareaID(Integer IDTarea) {
