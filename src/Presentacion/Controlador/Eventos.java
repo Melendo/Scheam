@@ -85,6 +85,11 @@ public class Eventos {
     public static final int RetirarIntegranteOk = 262;   
     public static final int RetirarIntegranteNoOk = 263;
     
+	public static final int ListarEquiposDeIntegranteId = 270;
+	public static final int VistaFormListarEquiposDeIntegranteId = 271;
+	public static final int VistaListarEquiposDeIntegranteId = 272;
+	public static final int ListarEquiposDeIntegranteIdNoOk = 273;
+	
 	//////////////////////////////////////////////////////////
 	    
 	public static final int MainWindowProducto = 300;
@@ -247,4 +252,5 @@ public class Eventos {
 	public static final int VistaMostrarFacturasIDCliente = 681;
 	public static final int MostrarFacturasIDCliente = 682;
 	public static final int MostrarFacturasIDClienteNoOk = 683;
+
 }

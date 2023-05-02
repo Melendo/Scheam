@@ -232,8 +232,18 @@ public class ControladorImp extends Controlador {
         	if(res==-1) gui.update(Eventos.RetirarIntegranteNoOk, null);
         	else  gui.update(Eventos.RetirarIntegranteOk, null);
 			break;
-
-        
+        case Eventos.VistaFormListarEquiposDeIntegranteId:
+        	System.out.println("Entrando a VistaFormListarEquiposDeIntegranteId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
+        case Eventos.ListarEquiposDeIntegranteId:
+	    	System.out.println("Entrando a ListarEquipos - Controlador");
+	    	Set<TEquipo> listaEqInt = FactoriaSA.getInstance().getSAEquipo().listarEquipos();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquipos, null);
+	    	gui.update(event, listaEqInt);
+	    	gui.update(Eventos.VistaListarEquipos, null);
+	    	break;
         //PRODUCTO
 	    case Eventos.MainWindowProducto:
 	    	System.out.println("Entrando a MainWindowProductoOpen - Controlador");

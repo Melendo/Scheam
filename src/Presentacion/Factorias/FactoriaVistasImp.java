@@ -22,8 +22,10 @@ import Presentacion.Equipo.MainWindowEquipo;
 import Presentacion.Equipo.VistaAltaEquipo;
 import Presentacion.Equipo.VistaAnyadirIntegrante;
 import Presentacion.Equipo.VistaBajaEquipo;
+import Presentacion.Equipo.VistaFormListarEquiposDeIntegranteId;
 import Presentacion.Equipo.VistaFormMostrarEquipoId;
 import Presentacion.Equipo.VistaListarEquipos;
+import Presentacion.Equipo.VistaListarEquiposDeIntegranteId;
 import Presentacion.Equipo.VistaModificarEquipo;
 import Presentacion.Equipo.VistaMostrarEquiposId;
 import Presentacion.Equipo.VistaRetirarIntegrante;
@@ -122,6 +124,12 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaRetirarIntegrante:
 			System.out.println("Entrando a VistaRetirarIntegrante - FactoriaVistasImp");
 			return new VistaRetirarIntegrante();
+		case Eventos.VistaFormListarEquiposDeIntegranteId:
+			System.out.println("Entrando a VistaFormMostrarEquipoID - FactoriaVistasImp");
+			return new VistaFormListarEquiposDeIntegranteId();
+		case Eventos.ListarEquiposDeIntegranteId:
+			System.out.println("Entrando a VistaMostrarEquipoID - FactoriaVistasImp");
+			return new VistaListarEquiposDeIntegranteId();
 		case Eventos.MainWindowProducto: // <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowProducto - FactoriaVistasImp");
 			return new MainWindowProducto();
