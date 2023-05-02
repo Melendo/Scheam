@@ -252,13 +252,14 @@ public class DAOCliente implements IDAOCliente {
 
 							rs = ps.executeQuery();
 							TParticular part = new TParticular();
-
-							part.setID(result.getID());
-							part.setNombre(result.getNombre());
-							part.setActivo(result.getActivo());
-							part.setTelefono(rs.getInt("telefono"));
-							part.setDNI(rs.getString("DNI"));
-
+							if(rs.next()) {
+								part.setID(result.getID());
+								part.setNombre(result.getNombre());
+								part.setActivo(result.getActivo());
+								part.setEmail(result.getEmail());
+								part.setTelefono(rs.getInt("telefono"));
+								part.setDNI(rs.getString("DNI"));
+							}
 							result = part;
 						} catch (SQLException e) {
 							e.printStackTrace();
@@ -269,6 +270,7 @@ public class DAOCliente implements IDAOCliente {
 						dist.setID(result.getID());
 						dist.setNombre(result.getNombre());
 						dist.setActivo(result.getActivo());
+						dist.setEmail(result.getEmail());
 						dist.setCIF(rs.getString("CIF"));
 						dist.setDireccion(rs.getString("direccion"));
 

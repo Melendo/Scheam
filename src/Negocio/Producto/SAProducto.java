@@ -104,10 +104,13 @@ public class SAProducto implements ISAProducto {
 
 	public TProducto mostrarProductoID(Integer IDProducto) {
 		TProducto emp = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
-		if (emp.getIdproyecto() != -1)
-			return emp;
-		else {
-			emp.setIdproyecto(-1);
+		if (emp.getIdproyecto() != -1) {
+			if(!emp.getActivo())
+				emp.setIdproyecto(-1);
+			
+					return emp;
+		}else {
+				emp.setIdproyecto(-1);		
 			return emp;
 		}
 	}

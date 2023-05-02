@@ -59,13 +59,11 @@ public class SACliente implements ISACliente {
 					&& FactoriaDAOImp.getInstance().getDaoCliente().readByEmail(cliente.getEmail()).getID() != -1) { // mostrarClienteEmail(cliente.getID()).getID()
 																														// !=
 																														// -
-				System.out
-						.println("modificarCliente no realizado (cliente tiene un ID o Email coincidente)- SACliente");
+				System.out.println("modificarCliente no realizado (cliente tiene un ID o Email coincidente)- SACliente");
 				return -2;
 			} else {
 				if (cliente.getEmail() == null)
 					cliente.setEmail(cli.getEmail());
-				;
 				if (cliente.getNombre() == null)
 					cliente.setNombre(cli.getNombre());
 				if (cliente.getActivo() == null)

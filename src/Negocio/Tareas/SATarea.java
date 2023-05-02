@@ -112,9 +112,9 @@ public class SATarea implements ISATarea {
 	}
 
 	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
-		DAOEquipo equip = FactoriaDAOImp.getInstance().getDaoEquipo();
+		TEquipo equip = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
 
-		if (equip.readByID(IDEquipo).getIdEquipo() == -1) {
+		if (equip.getIdEquipo() == -1 || !equip.getActivo()) {
 			System.out.println("ListarEquiposTareaID no realizado (equipo no existe o esta inactivo)- SATarea");
 			return null;
 		} else {
@@ -124,12 +124,12 @@ public class SATarea implements ISATarea {
 	}
 
 	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
-		DAOProducto prod = FactoriaDAOImp.getInstance().getDaoProducto();
+		TProducto prod = FactoriaDAOImp.getInstance().getDaoProducto().readById(IDProducto);
 
-		if (prod.readById(IDProducto).getIdproyecto() == -1) {
+		if (prod.getIdproyecto() == -1 || !prod.getActivo()) {
 			System.out.println("ListarProductosTareaID no realizado (producto no existe o esta inactivo)- SATarea");
 			return null;
-		} else {
+		} else {			
 			System.out.println("listarTareasProducto Realizado - SATarea");
 			return FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
 		}

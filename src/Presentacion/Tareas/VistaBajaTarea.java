@@ -103,7 +103,7 @@ public class VistaBajaTarea extends JFrame implements IGUI{
 			break;
 		case Eventos.BajaTareaOK:
 			JOptionPane.showMessageDialog(null, "Éxito dando de Baja");
-			Controlador.getInstance().update(Eventos.MainWindowEmpleado, null);
+			Controlador.getInstance().update(Eventos.MainWindowTarea, null);
 			break;
 		case Eventos.BajaTareaNoOK:
 			JOptionPane.showMessageDialog(null, "Error al dar de Baja");

@@ -39,8 +39,8 @@ public class VistaAnyadirProductoCarrito extends JFrame implements IGUI {
 	
 	public void vAnyadirProductoCarrito() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Añadir Producto a Carrito");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAltaTarea.class.getResource("/icons/factura/añadir_producto_carrito-removebg-preview.png")));
+		setTitle("Aï¿½adir Producto a Carrito");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaAltaTarea.class.getResource("/icons/factura/aniadir_producto_carrito-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -52,9 +52,9 @@ public class VistaAnyadirProductoCarrito extends JFrame implements IGUI {
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Añadir Producto a Carrito");
+		JLabel logo = new JLabel("      AÃ±adir Producto a Carrito");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaAltaTarea.class.getResource("/icons/factura/añadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaAltaTarea.class.getResource("/icons/factura/aniadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
@@ -119,11 +119,11 @@ public class VistaAnyadirProductoCarrito extends JFrame implements IGUI {
 			setVisible(true);
 			break;
 		case Eventos.AnyadirProductoCarritoOk:
-			JOptionPane.showMessageDialog(null, "Éxito añadiendo producto");
+			JOptionPane.showMessageDialog(null, "ï¿½xito aï¿½adiendo producto");
 			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 			break;
 		case Eventos.AnyadirProductoCarritoNoOk:
-			JOptionPane.showMessageDialog(null, "Error añadiendo producto");
+			JOptionPane.showMessageDialog(null, "Error aï¿½adiendo producto");
 			cerrar = false;
 			break;
 		case Eventos.NecesitasCarrito:
