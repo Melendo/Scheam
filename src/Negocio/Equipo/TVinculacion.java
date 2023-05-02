@@ -3,7 +3,7 @@ package Negocio.Equipo;
 public class TVinculacion {
 
 	private int id_1;
-	private int id_2;	
+	private int id_2;
 	private boolean activo;
 
 	public int getId_1() {
@@ -30,5 +30,4 @@ public class TVinculacion {
 		this.activo = activo;
 	}
 
-	
 }

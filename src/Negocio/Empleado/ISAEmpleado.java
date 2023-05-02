@@ -13,7 +13,7 @@ public interface ISAEmpleado {
 	public Set<TEmpleado> listarEmpleados();
 
 	public TEmpleado mostrarEmpleadoID(Integer IDEmpleado);
-	
+
 	public Set<TEmpleado> listarIntegrantesIdEquipo(Integer IDEquipo);
-	
+
 }

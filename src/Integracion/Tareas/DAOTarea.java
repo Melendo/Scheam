@@ -1,35 +1,34 @@
 package Integracion.Tareas;
 
-import Negocio.Producto.TProducto;
-import Negocio.Tareas.TTarea;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import Negocio.Tareas.TTarea;
 
 public class DAOTarea implements IDAOTarea {
 
 	Connection con;
-	
+
 	public DAOTarea() {
-	
-	System.out.println("Intentando Conexión - DAOTarea");
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scheam", "root", "");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	System.out.println("Conexión Realizada - DAOTarea");
+
+		System.out.println("Intentando Conexión - DAOTarea");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/scheam", "root", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("Conexión Realizada - DAOTarea");
 
 	}
-	
+
 	public Integer create(TTarea tarea) {
-		
+
 		System.out.println("Intentando create - DAOTarea");
 		try {
 			PreparedStatement ps;
@@ -61,7 +60,7 @@ public class DAOTarea implements IDAOTarea {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idtarea);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
 			System.out.println("Delete Realizado - DAOTarea");
@@ -77,22 +76,22 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando Modify - DAOTarea");
 		try {
 			PreparedStatement ps;
-						
+
 			String sql = "UPDATE tarea set nombre = ?,  equipo = ?, producto = ?, terminada = ?, activo = ? where id_tarea = ?";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, tarea.getNombre());
 			ps.setInt(2, tarea.getEquipo());
 			ps.setInt(3, tarea.getProducto());
 			ps.setBoolean(4, tarea.getTerminada());
 			ps.setBoolean(5, tarea.getActivo());
 			ps.setInt(6, tarea.getIdTarea());
-			
+
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
-			
+
 			System.out.println("Modify Realizado - DAOTarea");
 
 		} catch (SQLException e) {
@@ -109,7 +108,7 @@ public class DAOTarea implements IDAOTarea {
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE activo");
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
@@ -134,13 +133,13 @@ public class DAOTarea implements IDAOTarea {
 				con.close();
 				System.out.println("Readall realizado - DAOTarea");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 	public TTarea readById(Integer idtarea) {
 		System.out.println("Intentando readByDNI - DAOTarea");
 		TTarea result = new TTarea();
@@ -150,9 +149,9 @@ public class DAOTarea implements IDAOTarea {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.next()) 
+			if (!rs.next())
 				result.setIdTarea(idtarea);
-			else  {
+			else {
 				result.setIdTarea(rs.getInt("id_tarea"));
 				result.setNombre(rs.getString("nombre"));
 				result.setEquipo(rs.getInt("equipo"));
@@ -160,7 +159,7 @@ public class DAOTarea implements IDAOTarea {
 				result.setTerminada(rs.getBoolean("terminada"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
@@ -173,72 +172,70 @@ public class DAOTarea implements IDAOTarea {
 	}
 
 	public Set<TTarea> listarIdEquipo(Integer idEquipo) {
-	    System.out.println("Intentando listar tareas por equipo - DAOTarea");
-	    Set<TTarea> result = new HashSet<>();
-	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ? and activo = true");
-	        ps.setInt(1, idEquipo);
+		System.out.println("Intentando listar tareas por equipo - DAOTarea");
+		Set<TTarea> result = new HashSet<>();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ? and activo = true");
+			ps.setInt(1, idEquipo);
 
-	        ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
-	        while (rs.next()) {
-	            TTarea tarea = new TTarea();
-	            tarea.setIdTarea(rs.getInt("id_tarea"));
-	            tarea.setNombre(rs.getString("nombre"));
-	            tarea.setEquipo(rs.getInt("equipo"));
-	            tarea.setProducto(rs.getInt("producto"));
-	            tarea.setTerminada(rs.getBoolean("terminada"));
-	            tarea.setActivo(rs.getBoolean("activo"));
-	            result.add(tarea);
-	        }
+			while (rs.next()) {
+				TTarea tarea = new TTarea();
+				tarea.setIdTarea(rs.getInt("id_tarea"));
+				tarea.setNombre(rs.getString("nombre"));
+				tarea.setEquipo(rs.getInt("equipo"));
+				tarea.setProducto(rs.getInt("producto"));
+				tarea.setTerminada(rs.getBoolean("terminada"));
+				tarea.setActivo(rs.getBoolean("activo"));
+				result.add(tarea);
+			}
 
-	        rs.close();
-	        ps.close();
-	        con.close();
-	        System.out.println("Listado de tareas por equipo realizado - DAOTarea");
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("Listado de tareas por equipo realizado - DAOTarea");
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
-	/*public TProducto listarIdProducto(Integer idtarea) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
-	}*/
-	
+	/*
+	 * public TProducto listarIdProducto(Integer idtarea) { // begin-user-code //
+	 * TODO Auto-generated method stub return null; // end-user-code }
+	 */
+
 	public Set<TTarea> listarIdProducto(Integer idProducto) {
-	    System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
-	    Set<TTarea> result = new HashSet<>();
-	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ? and activo = true");
-	        ps.setInt(1, idProducto);
+		System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
+		Set<TTarea> result = new HashSet<>();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ? and activo = true");
+			ps.setInt(1, idProducto);
 
-	        ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
-	        while (rs.next()) {
-	            TTarea tarea = new TTarea();
-	            tarea.setIdTarea(rs.getInt("id_tarea"));
-	            tarea.setNombre(rs.getString("nombre"));
-	            tarea.setEquipo(rs.getInt("equipo"));
-	            tarea.setProducto(rs.getInt("producto"));
-	            tarea.setTerminada(rs.getBoolean("terminada"));
-	            tarea.setActivo(rs.getBoolean("activo"));
-	            result.add(tarea);
-	        }
+			while (rs.next()) {
+				TTarea tarea = new TTarea();
+				tarea.setIdTarea(rs.getInt("id_tarea"));
+				tarea.setNombre(rs.getString("nombre"));
+				tarea.setEquipo(rs.getInt("equipo"));
+				tarea.setProducto(rs.getInt("producto"));
+				tarea.setTerminada(rs.getBoolean("terminada"));
+				tarea.setActivo(rs.getBoolean("activo"));
+				result.add(tarea);
+			}
 
-	        rs.close();
-	        ps.close();
-	        con.close();
-	        System.out.println("Listado de tareas por ID de producto realizado - DAOTarea");
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("Listado de tareas por ID de producto realizado - DAOTarea");
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public Integer closeTask(Integer idtarea) {
@@ -249,7 +246,7 @@ public class DAOTarea implements IDAOTarea {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idtarea);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
 			System.out.println("Tarea Cerrada - DAOTarea");
@@ -260,7 +257,7 @@ public class DAOTarea implements IDAOTarea {
 		}
 		return 1;
 	}
-	
+
 	public TTarea readByNombre(String nombre) {
 		System.out.println("Intentando readByNombre - DAOTarea");
 		TTarea result = new TTarea();
@@ -270,9 +267,9 @@ public class DAOTarea implements IDAOTarea {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.next()) 
+			if (!rs.next())
 				result.setIdTarea(-1);
-			else  {
+			else {
 				result.setIdTarea(rs.getInt("id_tarea"));
 				result.setNombre(rs.getString("nombre"));
 				result.setEquipo(rs.getInt("equipo"));
@@ -280,11 +277,11 @@ public class DAOTarea implements IDAOTarea {
 				result.setTerminada(rs.getBoolean("terminada"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 			if (result.getIdTarea() == -1)
 				System.out.println("readByNombre realizado (no encontró nombre) - DAOTarea");
 			else

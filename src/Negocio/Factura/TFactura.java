@@ -19,20 +19,19 @@ public class TFactura {
 	private Integer IDCliente;
 
 	private Set<TLineaFactura> set;
-	
 
 	public Integer getIdFactura() {
 		return IDFactura;
 	}
-	
+
 	public void setIdFactura(int id) {
 		this.IDFactura = id;
 	}
-	
+
 	public Boolean isActivo() {
 		return Activo;
 	}
-	
+
 	public void setActivo(Boolean activo) {
 		Activo = activo;
 	}
@@ -40,7 +39,7 @@ public class TFactura {
 	public Double getImporte() {
 		return Importe;
 	}
-	
+
 	public void setImporte(Double importe) {
 		Importe = importe;
 	}
@@ -60,28 +59,27 @@ public class TFactura {
 	public void setIDCliente(Integer IDClienteFactura) {
 		IDCliente = IDClienteFactura;
 	}
-	
-	public Set<TLineaFactura> getLineas(){
+
+	public Set<TLineaFactura> getLineas() {
 		return set;
 	}
-	
+
 	public void setLineas(Set<TLineaFactura> lf) {
 		set = lf;
 	}
-	public Integer addElement (TLineaFactura lf) {
-		if(set.add(lf)) {
+
+	public Integer addElement(TLineaFactura lf) {
+		if (set.add(lf)) {
 			return 1;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}
-	
-	public Integer removeElement (TLineaFactura lf) {
-		if(set.remove(lf)) {
+
+	public Integer removeElement(TLineaFactura lf) {
+		if (set.remove(lf)) {
 			return 1;
-		}
-		else {
+		} else {
 			return -1;
 		}
 	}

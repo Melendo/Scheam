@@ -3,13 +3,12 @@
  */
 package Integracion.Factorias;
 
-import Integracion.Empleado.DAOEmpleado;
 import Integracion.Cliente.DAOCliente;
+import Integracion.Empleado.DAOEmpleado;
 import Integracion.Equipo.DAOEquipo;
 import Integracion.Factura.DAOFactura;
 import Integracion.Producto.DAOProducto;
 import Integracion.Tareas.DAOTarea;
-
 
 public class FactoriaDAOImp extends FactoriaDAO {
 
@@ -42,6 +41,5 @@ public class FactoriaDAOImp extends FactoriaDAO {
 	public DAOTarea getDaoTarea() {
 		return new DAOTarea();
 	}
-	
-	
+
 }

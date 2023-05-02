@@ -17,10 +17,9 @@ import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
 import Negocio.Equipo.TVinculacion;
-	
 
-public class DAOEquipo implements IDAOEquipo {	
-	
+public class DAOEquipo implements IDAOEquipo {
+
 	Connection con;
 
 	public DAOEquipo() {
@@ -36,7 +35,7 @@ public class DAOEquipo implements IDAOEquipo {
 
 	@Override
 	public Integer create(TEquipo equipo) {
-		
+
 		System.out.println("Intentando create - DAOEquipo");
 		try {
 			PreparedStatement ps;
@@ -44,47 +43,47 @@ public class DAOEquipo implements IDAOEquipo {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, equipo.getNombre());
 			ps.setBoolean(2, true);
-			
+
 			ps.executeUpdate();
-			
+
 			ps.close();
-						
+
 			equipo.setIdEquipo(readByNombre(equipo.getNombre()).getIdEquipo());
-						
-			if(equipo instanceof TEquipoDesarrollo){
+
+			if (equipo instanceof TEquipoDesarrollo) {
 				PreparedStatement ps1;
 
 				sql = "INSERT INTO equipodesarrollo (ID_EQUIPO, TECNOLOGIA) VALUES (?,?);";
 				ps1 = con.prepareStatement(sql);
-				
+
 				ps1.setInt(1, equipo.getIdEquipo());
 				ps1.setString(2, ((TEquipoDesarrollo) equipo).getTecnologia());
-				
+
 				ps1.executeUpdate();
-				
+
 				ps1.close();
-				
+
 			} else if (equipo instanceof TEquipoDisenio) {
-				
+
 				PreparedStatement ps2;
 				sql = "INSERT INTO equipodisenyo (ID_EQUIPO, CAMPO) VALUES (?,?);";
 				ps2 = con.prepareStatement(sql);
-				
+
 				ps2.setInt(1, equipo.getIdEquipo());
 				ps2.setString(2, ((TEquipoDisenio) equipo).getCampoDisenio());
-				
+
 				ps2.executeUpdate();
-				
+
 				ps2.close();
 			}
-			con.close();	
+			con.close();
 
-		}catch (SQLException e) {
-				e.printStackTrace();
-				return -1;
-			}			
-			System.out.println("Create Realizado - DAOEquipo");
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		System.out.println("Create Realizado - DAOEquipo");
+
 		return 1;
 	}
 
@@ -97,7 +96,7 @@ public class DAOEquipo implements IDAOEquipo {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idequipo);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			stmt.close();
 			con.close();
@@ -114,41 +113,39 @@ public class DAOEquipo implements IDAOEquipo {
 		System.out.println("Intentando Modify - DAOEquipo");
 		try {
 			PreparedStatement ps;
-						
+
 			String sql = "UPDATE equipo set nombre = ?, activo = ? where id_equipo = ?";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, equipo.getNombre());
 			ps.setBoolean(2, equipo.getActivo());
 			ps.setInt(3, equipo.getIdEquipo());
-			
+
 			ps.executeUpdate();
 
-			
 			if (equipo instanceof TEquipoDesarrollo) {
 				sql = "UPDATE equipodesarrollo set TECNOLOGIA = ? WHERE id_equipo = ?";
 				ps = con.prepareStatement(sql);
-				
+
 				ps.setString(1, ((TEquipoDesarrollo) equipo).getTecnologia());
 				ps.setInt(2, equipo.getIdEquipo());
 				ps.executeUpdate();
 
 				ps.close();
-			}else {
+			} else {
 				sql = "UPDATE equipodisenyo set CAMPO = ? WHERE id_equipo = ?";
 				PreparedStatement ps1 = con.prepareStatement(sql);
-				
+
 				ps1.setString(1, ((TEquipoDisenio) equipo).getCampoDisenio());
 				ps1.setInt(2, equipo.getIdEquipo());
 				ps1.executeUpdate();
-				
+
 				ps1.close();
 			}
 
-			
 			ps.close();
 			con.close();
-			
+
 			System.out.println("Modify Realizado - DAOEquipo");
 
 		} catch (SQLException e) {
@@ -173,22 +170,22 @@ public class DAOEquipo implements IDAOEquipo {
 			List<Integer> iddis = new ArrayList<Integer>();
 			List<TEquipoDisenio> eDis = new ArrayList<TEquipoDisenio>();
 
-			while (rsdes.next()) { //getting all ids in EquipoDesarrollo table
+			while (rsdes.next()) { // getting all ids in EquipoDesarrollo table
 				iddes.add(rsdes.getInt("ID_EQUIPO"));
 				TEquipoDesarrollo eDesAux = new TEquipoDesarrollo();
 				eDesAux.setIdEquipo(rsdes.getInt("ID_EQUIPO"));
 				eDesAux.setTecnologia(rsdes.getString("TECNOLOGIA"));
 				eDes.add(eDesAux);
 			}
-			
-			while (rsdis.next()) { //getting all ids in EquipoDisenio table
+
+			while (rsdis.next()) { // getting all ids in EquipoDisenio table
 				iddis.add(rsdis.getInt("ID_EQUIPO"));
 				TEquipoDisenio eDisAux = new TEquipoDisenio();
 				eDisAux.setIdEquipo(rsdis.getInt("ID_EQUIPO"));
 				eDisAux.setCampoDisenio(rsdis.getString("CAMPO"));
 				eDis.add(eDisAux);
 			}
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
@@ -205,7 +202,7 @@ public class DAOEquipo implements IDAOEquipo {
 					auxEDis.setCampoDisenio(eDis.get(iddis.indexOf(auxEDis.getIdEquipo())).getCampoDisenio());
 					result.add(auxEDis);
 				}
-				
+
 				while (rs.next()) {
 					if (iddes.contains(rs.getInt("id_equipo"))) {
 						TEquipoDesarrollo auxEDes = new TEquipoDesarrollo();
@@ -235,71 +232,71 @@ public class DAOEquipo implements IDAOEquipo {
 	public TEquipo readByID(Integer idequipo) {
 		System.out.println("Intentando readByID - DAOEquipo");
 		TEquipo result = new TEquipoDesarrollo();
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from equipo where id_equipo = ?");
 			ps.setInt(1, idequipo);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				result.setIdEquipo(-1);
-			}else {
+			} else {
 				result.setIdEquipo(rs.getInt("id_equipo"));
 				result.setNombre(rs.getString("nombre"));
 				result.setActivo(rs.getBoolean("activo"));
-				
+
 				rs.close();
 				ps.close();
-				
+
 				ps = con.prepareStatement("select tecnologia from equipodesarrollo where ID_EQUIPO = ?");
-				ps.setInt(1, idequipo);				
+				ps.setInt(1, idequipo);
 				ResultSet rs1 = ps.executeQuery();
-				
-				if(!rs1.next()) {
+
+				if (!rs1.next()) {
 					rs1.close();
 					ps.close();
-					
+
 					ps = con.prepareStatement("select campo from equipodisenyo where ID_EQUIPO = ?");
 					ps.setInt(1, idequipo);
-					
+
 					ResultSet rs2 = ps.executeQuery();
-					if(!rs2.next()) {
+					if (!rs2.next()) {
 						result.setIdEquipo(-1);
-					}else {
-					TEquipoDisenio eqdi = new TEquipoDisenio(); 
-					
-					eqdi.setIdEquipo(result.getIdEquipo());
-					eqdi.setNombre(result.getNombre());
-					eqdi.setActivo(result.getActivo());
-					eqdi.setCampoDisenio(rs2.getString("CAMPO"));
-					
-					rs2.close();
-					ps.close();
-					con.close();
-					
-					return eqdi;
+					} else {
+						TEquipoDisenio eqdi = new TEquipoDisenio();
+
+						eqdi.setIdEquipo(result.getIdEquipo());
+						eqdi.setNombre(result.getNombre());
+						eqdi.setActivo(result.getActivo());
+						eqdi.setCampoDisenio(rs2.getString("CAMPO"));
+
+						rs2.close();
+						ps.close();
+						con.close();
+
+						return eqdi;
 					}
-				}else {
-					TEquipoDesarrollo eqde = new TEquipoDesarrollo(); 
-					
+				} else {
+					TEquipoDesarrollo eqde = new TEquipoDesarrollo();
+
 					eqde.setIdEquipo(result.getIdEquipo());
 					eqde.setNombre(result.getNombre());
 					eqde.setActivo(result.getActivo());
 					eqde.setTecnologia(rs1.getString("TECNOLOGIA"));
-					
+
 					rs1.close();
 					rs.close();
 					ps.close();
 					con.close();
-										
+
 					return eqde;
-				}				
-			}		
+				}
+			}
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -308,47 +305,47 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Integer anyadirIntegrante(TVinculacion pert) {
-		
+
 		System.out.println("Intentando añadirIntegrante - DAOEquipo");
-		if(pert.isActivo()){
+		if (pert.isActivo()) {
 			try {
 				PreparedStatement ps;
-							
+
 				String sql = "INSERT INTO pertenece (ID_equipo, ID_empleado, activo) VALUES (?,?,?);";
 				ps = con.prepareStatement(sql);
-				
+
 				ps.setInt(1, pert.getId_1());
 				ps.setInt(2, pert.getId_2());
 				ps.setBoolean(3, pert.isActivo());
-	
+
 				ps.executeUpdate();
-				
+
 				ps.close();
 				con.close();
-				
+
 				System.out.println("añadirIntegrante Realizado - DAOEquipo");
-	
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
 			}
-		}else{
+		} else {
 			try {
 				PreparedStatement ps;
-							
+
 				String sql = "UPDATE pertenece SET activo = true where ID_equipo = ? and ID_empleado = ?;";
 				ps = con.prepareStatement(sql);
-				
+
 				ps.setInt(1, pert.getId_1());
 				ps.setInt(2, pert.getId_2());
-	
+
 				ps.executeUpdate();
-				
+
 				ps.close();
 				con.close();
-				
+
 				System.out.println("añadirIntegrante Realizado - DAOEquipo");
-	
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return -1;
@@ -361,18 +358,18 @@ public class DAOEquipo implements IDAOEquipo {
 		System.out.println("Intentando bajaIntegrante - DAOEquipo");
 		try {
 			PreparedStatement ps;
-						
+
 			String sql = "UPDATE pertenece set activo = false where ID_equipo = ? and ID_empleado = ?;";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, pert.getId_1());
 			ps.setInt(2, pert.getId_2());
 
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
-			
+
 			System.out.println("bajaIntegrante Realizado - DAOEquipo");
 
 		} catch (SQLException e) {
@@ -381,34 +378,33 @@ public class DAOEquipo implements IDAOEquipo {
 		}
 		return 1;
 	}
-	
+
 	public TVinculacion isVinculado(Integer idempleado, Integer idequipo) {
-				
+
 		System.out.println("Intentando pertenece - DAOEquipo");
 		TVinculacion tvin = new TVinculacion();
 
 		try {
-			
-			PreparedStatement ps;						
+
+			PreparedStatement ps;
 			String sql = "select * from pertenece where ID_equipo = ? and ID_empleado = ?;";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, idequipo);
 			ps.setInt(2, idempleado);
 
-			ResultSet rs = 	ps.executeQuery();
-			
-			if(!rs.next()){ 			
+			ResultSet rs = ps.executeQuery();
+
+			if (!rs.next()) {
 				tvin.setId_1(-1);
-			}
-			else{
+			} else {
 				tvin.setId_1(rs.getInt("id_equipo"));
 				tvin.setId_2(rs.getInt("id_empleado"));
 				tvin.setActivo(rs.getBoolean("activo"));
 			}
 			ps.close();
 			con.close();
-			
+
 			System.out.println("pertenece Realizado - DAOEquipo");
 
 		} catch (SQLException e) {
@@ -418,7 +414,7 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado) {
-		
+
 		System.out.println("Intentando listarEquiposEmpleadoId - DAOEquipo");
 		Set<TEquipo> result = new HashSet<TEquipo>();
 		Vector<Integer> id = new Vector<Integer>();
@@ -426,30 +422,29 @@ public class DAOEquipo implements IDAOEquipo {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE ID_EMPLEADO = ?");
 			ps.setInt(1, idempleado);
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
 				id.add(rs.getInt("ID_EQUIPO"));
-			
-				while(rs.next()) 
+
+				while (rs.next())
 					id.add(rs.getInt("ID_EQUIPO"));
-											
-				if(id.size() > 0) {
+
+				if (id.size() > 0) {
 					TEquipo aux = new TEquipo();
-					for(int i = 0; i < id.size(); i++) {						
-						aux = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(id.elementAt(i));	
-						result.add(aux);												
-					}										
-				}							
-			} 
-			
+					for (int i = 0; i < id.size(); i++) {
+						aux = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(id.elementAt(i));
+						result.add(aux);
+					}
+				}
+			}
+
 			rs.close();
 			ps.close();
 			con.close();
 			System.out.println("listarEquiposEmpleadoId realizado - DAOEquipo");
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -459,13 +454,13 @@ public class DAOEquipo implements IDAOEquipo {
 	public TEquipo readByNombre(String nombre) {
 		System.out.println("Intentando readByID - DAOEquipo");
 		TEquipo result = new TEquipo();
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from equipo where nombre like ?");
 			ps.setString(1, nombre);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next())
 				result.setNombre("-1");
 			else {
@@ -473,14 +468,14 @@ public class DAOEquipo implements IDAOEquipo {
 				result.setNombre(rs.getString("nombre"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
-			}catch(SQLException e) {
-				e.printStackTrace();
-				
-			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
 		return result;
 	}
-	
+
 	public boolean pertenece(int id_equipo) {
 		System.out.println("Intentando pertenece - DAOEmpleado");
 		boolean found = false;
@@ -488,36 +483,36 @@ public class DAOEquipo implements IDAOEquipo {
 			PreparedStatement ps;
 			String sql = "select * from pertenece where id_equipo = ? and activo = true;";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, id_equipo);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				TVinculacion tvin = new TVinculacion();
 				tvin.setActivo(rs.getBoolean("activo"));
-				if(tvin.isActivo()) 
+				if (tvin.isActivo())
 					found = true;
-				
-				while(rs.next() && !found) {
+
+				while (rs.next() && !found) {
 					tvin.setActivo(rs.getBoolean("activo"));
-					if(tvin.isActivo()) 
+					if (tvin.isActivo())
 						found = true;
 				}
-			}else{
+			} else {
 				found = false;
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Terminado pertenece - DAOEmpleado");
 		return found;
 	}
-		
+
 }

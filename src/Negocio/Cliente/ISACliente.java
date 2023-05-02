@@ -6,7 +6,7 @@ package Negocio.Cliente;
 import java.util.Set;
 
 public interface ISACliente {
-	
+
 	public Integer altaCliente(TCliente cliente);
 
 	public Integer bajaCliente(Integer IDcliente);
@@ -15,5 +15,5 @@ public interface ISACliente {
 
 	public TCliente mostrarClienteID(Integer IDcliente);
 
-	public Set mostrarClientes();
+	public Set<TCliente> mostrarClientes();
 }
