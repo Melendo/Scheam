@@ -87,6 +87,25 @@ public class TareasTest extends TestCase{
 	
 	public void testmostrarTareaId() {
 		
+		TTarea tarea = new TTarea();
+		tarea.setActivo(true);
+		tarea.setNombre("pruebata");
+		tarea.setEquipo(2);
+		tarea.setIdTarea(null);
+		tarea.setProducto(1);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+					
+		TTarea Aux = FactoriaSA.getInstance().getSATarea().mostrarTareaID(505);
+		int resultado = Aux.getIdTarea();
+	    assertEquals("id desconocida", -1, resultado);
+	    
+	    
+	    TTarea Aux2 = FactoriaSA.getInstance().getSATarea().mostrarTareaID(tarea.getIdTarea());
+		resultado = Aux2.getIdTarea();
+		int rEsperado = tarea.getIdTarea();
+	    assertEquals("id desconocida", rEsperado, resultado);
 	}
 	
 	public void testlistarTareas() {
@@ -107,13 +126,80 @@ public class TareasTest extends TestCase{
 	
 	public void testlistarTareaEquipoId() {
 		
+		TTarea tarea = new TTarea();
+		tarea.setActivo(true);
+		tarea.setNombre("pruebata");
+		tarea.setEquipo(2);
+		tarea.setIdTarea(null);
+		tarea.setProducto(1);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+		
+		Set<TTarea> lista = FactoriaSA.getInstance().getSATarea().listarTareasEquipo(tarea.getEquipo());
+		assertTrue("lista", lista.size() > 0);
+		
+		TTarea tarea2 = new TTarea();
+		tarea2.setActivo(true);
+		tarea2.setNombre("pruebato");
+		tarea.setEquipo(70);
+		tarea.setIdTarea(null);
+		tarea.setProducto(1);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+		
+		Set<TTarea> lista2 = FactoriaSA.getInstance().getSATarea().listarTareasEquipo(tarea.getEquipo());
+		assertFalse("lista", lista2.size() < 0);
 	}
 	
 	public void testlistarTareaProductoId() {
+		TTarea tarea = new TTarea();
+		tarea.setActivo(true);
+		tarea.setNombre("pruebata");
+		tarea.setEquipo(2);
+		tarea.setIdTarea(null);
+		tarea.setProducto(1);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
 		
+		Set<TTarea> lista = FactoriaSA.getInstance().getSATarea().listarTareasProducto(tarea.getProducto());
+		assertTrue("lista", lista.size() > 0);
+		
+		TTarea tarea2 = new TTarea();
+		tarea2.setActivo(true);
+		tarea2.setNombre("pruebato");
+		tarea.setEquipo(70);
+		tarea.setIdTarea(null);
+		tarea.setProducto(50);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+		
+		Set<TTarea> lista2 = FactoriaSA.getInstance().getSATarea().listarTareasEquipo(tarea.getProducto());
+		assertFalse("lista", lista2.size() < 0);
 	}
 	
 	public void testcerrarTarea() {
+		TTarea tarea = new TTarea();
+		tarea.setActivo(true);
+		tarea.setNombre("pruebatwa");
+		tarea.setEquipo(3);
+		tarea.setIdTarea(null);
+		tarea.setProducto(2);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		
+		int resultado = FactoriaSA.getInstance().getSATarea().cerrarTarea(tarea.getIdTarea());		
+        assertEquals("cerar Tarea Realizado - SATarea", 1, resultado);
+	
+        resultado = FactoriaSA.getInstance().getSATarea().cerrarTarea(tarea.getIdTarea());	
+        assertEquals("cerrar Tarea ya desactivo", -2, resultado);
+        
+        resultado = FactoriaSA.getInstance().getSATarea().cerrarTarea(1000);			
+        assertEquals("no existe", -1, resultado);
+        
 		
 	}
 	
