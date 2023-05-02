@@ -5,6 +5,7 @@ package Negocio.Tareas;
 
 import java.util.Set;
 
+import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Equipo.TEquipo;
 import Negocio.Producto.TProducto;
@@ -116,9 +117,16 @@ public class SATarea implements ISATarea {
 	}
 
 	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
-	    
+		DAOEquipo equip = FactoriaDAOImp.getInstance().getDaoEquipo();
+		
+		if (equip.readByID(IDEquipo).getIdEquipo() == -1) {
+			System.out.println("ListarEquiposTareaID no realizado (equipo no existe o esta inactivo)- SATarea");
+			return null;
+		}
+		else {
 	    System.out.println("mostrarTareasEquipo Realizado - SATarea");
 	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdEquipo(IDEquipo);
+		}
 	}
 
 	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
