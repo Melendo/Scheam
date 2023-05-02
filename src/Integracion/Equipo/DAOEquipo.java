@@ -422,7 +422,7 @@ public class DAOEquipo implements IDAOEquipo {
 		Set<TEquipo> result = new HashSet<TEquipo>();
 		int ids[] = new int[100];
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE idempleado = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE ID_EMPLEADO = ?");
 			ps.setInt(1, idempleado);
 			ResultSet rs = ps.executeQuery();
 			
@@ -431,12 +431,12 @@ public class DAOEquipo implements IDAOEquipo {
 			} else {
 				int j = 0;
 				if(rs.getBoolean("activo")) {
-					ids[j] = rs.getInt("idequipo");
+					ids[j] = rs.getInt("ID_EQUIPO");
 					j++;
 				}
 				while(rs.next()) {
 					if(rs.getBoolean("activo")) {
-						ids[j] = rs.getInt("idequipo");
+						ids[j] = rs.getInt("ID_EQUIPO");
 						j++;					}	
 				}
 				
