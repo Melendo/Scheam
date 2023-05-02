@@ -67,7 +67,7 @@ public class DAOEquipo implements IDAOEquipo {
 			} else if (equipo instanceof TEquipoDisenio) {
 				
 				PreparedStatement ps2;
-				sql = "INSERT INTO equipodisenyo (ID_EQUIPO, CAMPO_DISEnyO) VALUES (?,?);";
+				sql = "INSERT INTO equipodisenyo (ID_EQUIPO, CAMPO) VALUES (?,?);";
 				ps2 = con.prepareStatement(sql);
 				
 				ps2.setInt(1, equipo.getIdEquipo());
@@ -461,7 +461,7 @@ public class DAOEquipo implements IDAOEquipo {
 		TEquipo result = new TEquipo();
 		
 		try {
-			PreparedStatement ps = con.prepareStatement("select * from equipo where nombre = ?");
+			PreparedStatement ps = con.prepareStatement("select * from equipo where nombre like ?");
 			ps.setString(1, nombre);
 			
 			ResultSet rs = ps.executeQuery();
