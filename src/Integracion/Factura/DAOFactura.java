@@ -162,6 +162,7 @@ public class DAOFactura implements IDAOFactura {
 	public TFactura readById(Integer idfactura) {
 		System.out.println("Intentando readByID - DAOFactura");
 		TFactura result = new TFactura();
+		Set<TLineaFactura> set = new HashSet<TLineaFactura>()
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from factura where idfactura = ?");
 			ps.setInt(1, idfactura);
@@ -188,6 +189,7 @@ public class DAOFactura implements IDAOFactura {
 			TLineaFactura aux;
 
 			if (!rs1.next()) {
+				result.setLineas(null);
 				return result;
 			} else {
 				aux = new TLineaFactura();
@@ -195,16 +197,17 @@ public class DAOFactura implements IDAOFactura {
 				aux.setIdProducto(rs1.getInt("idproducto"));
 				aux.setCantidad(rs1.getInt("cantidad"));
 				aux.setPrecio(rs1.getDouble("preciopp"));
-				result.addElement(aux);
+				set.add(aux);
 				while (rs.next()) {
 					aux = new TLineaFactura();
 					aux.setIdFactura(rs1.getInt("idfactura"));
 					aux.setIdProducto(rs1.getInt("idproducto"));
 					aux.setCantidad(rs1.getInt("cantidad"));
 					aux.setPrecio(rs1.getDouble("preciopp"));
-					result.addElement(aux);
+					set.add(aux);
 				}
 			}
+			result.setLineas(set);
 			rs1.close();
 			ps1.close();
 			con.close();
