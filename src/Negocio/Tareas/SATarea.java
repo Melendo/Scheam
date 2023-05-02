@@ -25,17 +25,17 @@ public class SATarea implements ISATarea {
 		}
 		else {
 			
-			if (tarea.getProducto() == null) {
+			if (tar.getProducto() == null) {
 				
 				System.out.println("altaTarea No Realizado (producto no existe) - SATarea");
 				return -1;
 			}
 			
-			if (tarea.getEquipo() == null) {
+			if (tar.getEquipo() == null) {
 				System.out.println("altaTarea No Realizado (equipo no existe) - SATarea");
 				return -1;
 			}
-			if (tarea.getActivo()) {
+			if (tar.getActivo()) {
 				System.out.println("altaTarea No Realizado (existe y activo) - SATarea");
 				return -1;
 			} else {
