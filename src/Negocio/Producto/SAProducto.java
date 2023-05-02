@@ -124,7 +124,7 @@ public class SAProducto implements ISAProducto {
 			}
 			if (!emp.getActivo()) {
 				System.out.println("cerrarProducto No Realizado (ya cerrado) - SAProducto");
-				return 2;
+				return -2;
 			}
 
 			return FactoriaDAOImp.getInstance().getDaoProducto().cerrarProducto(IDProducto);

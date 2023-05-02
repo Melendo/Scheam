@@ -261,9 +261,71 @@ public class ProductoTest extends TestCase{
 		producto = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre());
 					
 		TProducto Aux = FactoriaSA.getInstance().getSAProducto().mostrarProductoID(10000);
-		 int resultado = Aux.getIdproyecto();
-	     assertEquals("id desconocida", -1, resultado);
+		int resultado = Aux.getIdproyecto();
+	    assertEquals("id desconocida", -1, resultado);
+	    
+	    
+	    TProducto Aux2 = FactoriaSA.getInstance().getSAProducto().mostrarProductoID(producto.getIdproyecto());
+		resultado = Aux2.getIdproyecto();
+		int rEsperado = producto.getIdproyecto();
+	    assertEquals("id desconocida", rEsperado, resultado);
 	}
+	
+	public void testCerrarProducto() {
+		
+		TProducto producto = new TProducto();
+		producto.setActivo(true);
+		producto.setFechalanzamiento(17102003);
+		producto.setGenero("Aventura");
+		producto.setIdproyecto(null);
+		producto.setNombre("TestCerrarN");
+		producto.setPEGI(18);
+		producto.setPrecio(15.98);
+		producto.setStock(3);
+		producto.setTerminado(false);
+		
+		FactoriaSA.getInstance().getSAProducto().altaProducto(producto);
+		producto = FactoriaDAOImp.getInstance().getDaoProducto().readByNombre(producto.getNombre());
+		
+		int resultado = FactoriaSA.getInstance().getSAProducto().cerrarProducto(producto.getIdproyecto());		
+        assertEquals("cerar Producto Realizado - SAProducto", 1, resultado);
+	
+        resultado = FactoriaSA.getInstance().getSAProducto().cerrarProducto(producto.getIdproyecto());	
+        assertEquals("cerrar Producto ya desactivo", -2, resultado);
+        
+        resultado = FactoriaSA.getInstance().getSAProducto().cerrarProducto(10000);			
+        assertEquals("no existe", -1, resultado);
+        
+    
+        
+        TEquipoDesarrollo equipo = new TEquipoDesarrollo();
+        equipo.setActivo(null);
+        equipo.setIdEquipo(null);
+        equipo.setNombre("EPrueba");
+        equipo.setTecnologia("iuuh");
+
+        FactoriaSA.getInstance().getSAEquipo().altaEquipo(equipo);
+		
+        
+        TEquipo equipoAux = FactoriaDAOImp.getInstance().getDaoEquipo().readByNombre(equipo.getNombre());
+        
+        TTarea tarea = new TTarea();
+        tarea.setActivo(true);
+        tarea.setEquipo(equipoAux.getIdEquipo());
+        tarea.setIdTarea(null);
+        tarea.setNombre("TPrueba");
+        tarea.setProducto(producto.getIdproyecto());
+        tarea.setTerminada(false);
+        
+        FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+        
+        resultado = FactoriaSA.getInstance().getSAProducto().bajaProducto(producto.getIdproyecto());		
+        assertEquals("cerrarProducto No Realizado (en tarea activa)", -3, resultado);
+		
+		
+		
+	}
+	
 	
 
 }
