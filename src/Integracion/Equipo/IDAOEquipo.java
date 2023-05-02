@@ -26,5 +26,5 @@ public interface IDAOEquipo {
 	
 	public TEquipo readByNombre(String nombre);
 	
-	public TVinculacion pertenece(Integer idempleado, Integer idequipo);
+	public TVinculacion isVinculado(Integer idempleado, Integer idequipo);
 }

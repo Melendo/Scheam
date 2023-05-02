@@ -56,6 +56,7 @@ public class Eventos {
     public static final int BajaEquipoOK = 222;
     public static final int BajaEquipoNoOK = 223;
     public static final int BajaEquipoNoOK2 = 224;
+	public static final int BajaEquipoNoOK3 = 225;
     
     public static final int VistaModificarEquipo = 230;
     public static final int ModificarEquipo = 231;
@@ -252,5 +253,6 @@ public class Eventos {
 	public static final int VistaMostrarFacturasIDCliente = 681;
 	public static final int MostrarFacturasIDCliente = 682;
 	public static final int MostrarFacturasIDClienteNoOk = 683;
+
 
 }

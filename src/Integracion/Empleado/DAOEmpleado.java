@@ -1,5 +1,6 @@
 package Integracion.Empleado;
 
+import Negocio.TVinculacion;
 import Negocio.Empleado.TEmpleado;
 
 import java.sql.Connection;
@@ -293,7 +294,16 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()){
-				found = true;
+				TVinculacion tvin = new TVinculacion();
+				tvin.setActivo(rs.getBoolean("activo"));
+				if(tvin.isActivo()) 
+					found = true;
+				
+				while(rs.next() && !found) {
+					tvin.setActivo(rs.getBoolean("activo"));
+					if(tvin.isActivo()) 
+						found = true;
+				}
 			}else{
 				found = false;
 			}

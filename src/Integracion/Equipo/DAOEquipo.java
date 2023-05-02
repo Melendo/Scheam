@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
@@ -381,7 +382,7 @@ public class DAOEquipo implements IDAOEquipo {
 		return 1;
 	}
 	
-	public TVinculacion pertenece(Integer idempleado, Integer idequipo) {
+	public TVinculacion isVinculado(Integer idempleado, Integer idequipo) {
 				
 		System.out.println("Intentando pertenece - DAOEquipo");
 		TVinculacion tvin = new TVinculacion();
@@ -444,7 +445,7 @@ public class DAOEquipo implements IDAOEquipo {
 					TEquipo aux = new TEquipo();
 					for(int i = 0; i < j; i++) {
 						
-						aux = readByID(ids[i]);	
+						aux = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(ids[i]);	
 						result.add(aux);
 							
 						}
@@ -485,6 +486,45 @@ public class DAOEquipo implements IDAOEquipo {
 				
 			}
 		return result;
+	}
+	
+	public boolean pertenece(int id_equipo) {
+		System.out.println("Intentando pertenece - DAOEmpleado");
+		boolean found = false;
+		try {
+			PreparedStatement ps;
+			String sql = "select * from pertenece where id_equipo = ? and activo = true;";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, id_equipo);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()){
+				TVinculacion tvin = new TVinculacion();
+				tvin.setActivo(rs.getBoolean("activo"));
+				if(tvin.isActivo()) 
+					found = true;
+				
+				while(rs.next() && !found) {
+					tvin.setActivo(rs.getBoolean("activo"));
+					if(tvin.isActivo()) 
+						found = true;
+				}
+			}else{
+				found = false;
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Terminado pertenece - DAOEmpleado");
+		return found;
 	}
 		
 }

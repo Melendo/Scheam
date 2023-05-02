@@ -64,7 +64,7 @@ public class VistaListarIntegrantesEquipoId extends JFrame implements IGUI {
 			empleadosmodel.fireTableStructureChanged();
 			break;
 		case Eventos.ListarIntegrantesEquipoNoOk:
-			JOptionPane.showMessageDialog(null, "Error. El empleado no existe");
+			JOptionPane.showMessageDialog(null, "Error. El equipo no existe");
 			Controlador.getInstance().update(Eventos.VistaFormListarIntegrantesEquipoId, null);
 			break; 
 		}

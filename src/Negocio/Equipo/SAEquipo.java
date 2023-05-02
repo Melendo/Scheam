@@ -39,7 +39,10 @@ public class SAEquipo implements ISAEquipo {
 			System.out.println("bajaEquipo No Realizado (no exite) - SAEquipo");
 			return -1;
 		}
-		
+		if(FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(IDEquipo)) {
+			System.out.println("bajaEquipo No Realizado, Equipo con empleados Vinculados - SAEquipo");
+			return - 3;
+		}
 		if(!equ.getActivo()) {
 			System.out.println("bajaEquipo No Realizado (ya dado de baja) - SAEquipo");
 			return -2;
@@ -116,7 +119,7 @@ public class SAEquipo implements ISAEquipo {
 			}
 			else {
 				TVinculacion tvin = new TVinculacion();
-				tvin = FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1());
+				tvin = FactoriaDAOImp.getInstance().getDaoEquipo().isVinculado(pert.getId_2(), pert.getId_1());
 				if(tvin.getId_1() != -1) {
 					if(tvin.isActivo()){
 						System.out.println("AñadirIntegrante no realizado (El empleado ya esta en el equipo)- SAEquipo");
@@ -136,7 +139,7 @@ public class SAEquipo implements ISAEquipo {
 
 	public Integer retirarIntegrante(TVinculacion pert) {
 		TVinculacion tvin = new TVinculacion();
-		tvin = FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(pert.getId_2(), pert.getId_1());
+		tvin = FactoriaDAOImp.getInstance().getDaoEquipo().isVinculado(pert.getId_2(), pert.getId_1());
 		if(tvin.getId_1() == -1) {
 			System.out.println("retirarIntegrante no realizado (El empleado no esta en el equipo)- SAEquipo");
 			return -1;

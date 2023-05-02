@@ -125,10 +125,10 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			System.out.println("Entrando a VistaRetirarIntegrante - FactoriaVistasImp");
 			return new VistaRetirarIntegrante();
 		case Eventos.VistaFormListarEquiposDeIntegranteId:
-			System.out.println("Entrando a VistaFormMostrarEquipoID - FactoriaVistasImp");
+			System.out.println("Entrando a VistaFormListarEquiposDeIntegranteId - FactoriaVistasImp");
 			return new VistaFormListarEquiposDeIntegranteId();
-		case Eventos.ListarEquiposDeIntegranteId:
-			System.out.println("Entrando a VistaMostrarEquipoID - FactoriaVistasImp");
+		case Eventos.VistaListarEquiposDeIntegranteId:
+			System.out.println("Entrando a VistaListarEquiposDeIntegranteId - FactoriaVistasImp");
 			return new VistaListarEquiposDeIntegranteId();
 		case Eventos.MainWindowProducto: // <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowProducto - FactoriaVistasImp");

@@ -162,6 +162,7 @@ public class ControladorImp extends Controlador {
         	res = FactoriaSA.getInstance().getSAEquipo().bajaEquipo((Integer) objeto);
         	if (res == -1) gui.update(Eventos.BajaEquipoNoOK, null);
         	else if(res == -2) gui.update(Eventos.BajaEquipoNoOK2, null);
+        	else if(res == -3) gui.update(Eventos.BajaEquipoNoOK3, null);
         	else gui.update(Eventos.BajaEquipoOK, objeto);
         	break;
         	
@@ -237,13 +238,24 @@ public class ControladorImp extends Controlador {
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event,null);
         	break;
+        case Eventos.VistaListarEquiposDeIntegranteId:
+        	System.out.println("Entrando a VistaListarEquiposDeIntegranteId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
         case Eventos.ListarEquiposDeIntegranteId:
 	    	System.out.println("Entrando a ListarEquipos - Controlador");
-	    	Set<TEquipo> listaEqInt = FactoriaSA.getInstance().getSAEquipo().listarEquipos();
-	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquipos, null);
-	    	gui.update(event, listaEqInt);
-	    	gui.update(Eventos.VistaListarEquipos, null);
+	    	Set<TEquipo> listaEqInt = FactoriaSA.getInstance().getSAEquipo().listarEquiposEmpleadoId((Integer) objeto);
+	    	if (listaEqInt == null) {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquiposDeIntegranteId, null);
+        		gui.update(Eventos.ListarEquiposDeIntegranteIdNoOk, null);
+        	} else {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquiposDeIntegranteId, null);
+        		gui.update(event, listaEqInt);
+        		gui.update(Eventos.VistaListarEquiposDeIntegranteId, null);
+        	}
 	    	break;
+	    	
         //PRODUCTO
 	    case Eventos.MainWindowProducto:
 	    	System.out.println("Entrando a MainWindowProductoOpen - Controlador");
