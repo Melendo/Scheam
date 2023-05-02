@@ -4,6 +4,7 @@ import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAO;
 import Integracion.Factorias.FactoriaDAOImp;
+import Negocio.Empleado.TEmpleado;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
@@ -63,14 +64,45 @@ public class TareasTest extends TestCase{
 	
 	public void testmodificarTarea() {
 		
+		if (FactoriaDAO.getInstance().getDaoTarea().readById(2).getIdTarea() == -1) {
+        	TTarea tarea = new TTarea();
+        	tarea.setNombre("teswte2");
+    		tarea.setEquipo(34);
+    		tarea.setProducto(91);
+    		tarea.setTerminada(false);
+            FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+    	}
+    	
+    	TTarea tarea = FactoriaDAO.getInstance().getDaoTarea().readById(2);
+    	tarea.setProducto(2);
+    	tarea.setEquipo(1);
+    	int resultado = FactoriaSA.getInstance().getSATarea().modificarTarea(tarea);
+    	assertEquals("La tarea ha sido modificada", 1, resultado);
+    	
+    	TTarea tarea2 = new TTarea();
+    	tarea2.setIdTarea(99);
+    	resultado = FactoriaSA.getInstance().getSATarea().modificarTarea(tarea2);
+    	assertEquals("La tarea no existe en la base de datos", -1, resultado);
 	}
 	
 	public void testmostrarTareaId() {
 		
 	}
 	
-	public void testlistarTarea() {
+	public void testlistarTareas() {
 		
+		TTarea tarea = new TTarea();
+		tarea.setActivo(true);
+		tarea.setNombre("pruebata");
+		tarea.setEquipo(2);
+		tarea.setIdTarea(null);
+		tarea.setProducto(1);
+		tarea.setTerminada(false);
+		FactoriaSA.getInstance().getSATarea().altaTarea(tarea);
+		tarea = FactoriaDAOImp.getInstance().getDaoTarea().readByNombre(tarea.getNombre());
+		
+		Set<TTarea> lista = FactoriaSA.getInstance().getSATarea().listarTareas();
+    	assertTrue("lista", lista.size() > 0);
 	}
 	
 	public void testlistarTareaEquipoId() {
