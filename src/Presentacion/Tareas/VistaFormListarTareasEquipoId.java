@@ -81,7 +81,8 @@ public class VistaFormListarTareasEquipoId extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				Controlador.getInstance().update(Eventos.MainWindowTarea, null);
+				dispose();
 			}
 		});
 		cancelbutton.setBounds(250, 144, 90, 23);
@@ -99,15 +100,12 @@ public class VistaFormListarTareasEquipoId extends JFrame implements IGUI {
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaListarTareasEquipoId:
+		case Eventos.VistaFormListarTareasEquipoId:
 			setVisible(true);
 			break;
-		case Eventos.ListarTareasEquipoId:
-			Controlador.getInstance().update(Eventos.MainWindowTarea, null);
-			break;
-		case Eventos.ListarTareasEquipoIdNoOK:
-			JOptionPane.showMessageDialog(null, "El id_equipo no existe o el equipo no tiene tareas");			
-			Controlador.getInstance().update(Eventos.VistaFormMostrarTareasID, null);
+		case Eventos.MostrarTareasIDNoOK:
+			JOptionPane.showMessageDialog(null, "El id_equipo no existe o el equipo no tiene tareas");	
+			cerrar = false;
 			break;
 		}
 	}

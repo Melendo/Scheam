@@ -479,17 +479,28 @@ public class ControladorImp extends Controlador {
 	    	else if(res == -2) gui.update(Eventos.CerrarTareaNoOK2, null);
 	    	else gui.update(Eventos.CerrarTareaOK, objeto);
 	    	break;
+	    case Eventos.VistaFormListarTareasEquipoId:
+        	System.out.println("Entrando a VistaFormListarTareasEquipoId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
 	     case Eventos.VistaListarTareasEquipoId:
         	System.out.println("Entrando a VistaListarTareasEquipoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
 	     case Eventos.ListarTareasEquipoId:
-        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
-        	Set<TTarea> listaequipo = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
-        	if (!listaequipo.isEmpty()) gui.update(Eventos.ListarTareasEquipoIdOK, null);
-        	else gui.update(Eventos.ListarTareasEquipoIdNoOK, objeto);
-        	break;	
+	        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
+	        	Set<TTarea> listat = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
+	        	if (listat == null) {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(Eventos.ListarTareasEquipoIdNoOK, null);
+	        	} else {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(event, listat);
+	        		gui.update(Eventos.VistaListarTareasEquipoId, null);
+	        	}
+	        	break;
 	     case Eventos.VistaListarTareasProductoId:
         	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);

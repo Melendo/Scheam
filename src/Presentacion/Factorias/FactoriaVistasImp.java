@@ -185,6 +185,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaCerrarTarea:
 			System.out.println("Entrando a VistaCerrarTarea - FactoriaVistasImp");
 			return new VistaCerrarTarea();
+		case Eventos.VistaFormListarTareasEquipoId:
+			System.out.println("Entrando a VistaFormListarTareasEquipoId - FactoriaVistasImp");
+			return new VistaFormListarTareasEquipoId();
 		case Eventos.VistaListarTareasEquipoId:
 			System.out.println("Entrando a VistaListarTareasEquipoId - FactoriaVistasImp");
 			return new VistaFormListarTareasEquipoId();
