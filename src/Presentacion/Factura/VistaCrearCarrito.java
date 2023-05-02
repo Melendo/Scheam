@@ -108,6 +108,10 @@ public class VistaCrearCarrito extends JFrame implements IGUI {
 			JOptionPane.showMessageDialog(null, "Error abriendo carrito");
 			cerrar = false;
 			break;
+		case Eventos.NecesitasCarrito:
+			JOptionPane.showMessageDialog(null, "Ya tienes un carrito abierto.");
+			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+			break; 
 		}
 	}
 

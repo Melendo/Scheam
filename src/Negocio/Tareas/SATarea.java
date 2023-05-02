@@ -20,7 +20,6 @@ public class SATarea implements ISATarea {
 		return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
 		}
 
-
 	public Integer bajaTarea(Integer IDTarea) {
 		System.out.println("Intentando bajaTarea - SATarea");
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(IDTarea);
@@ -38,7 +37,6 @@ public class SATarea implements ISATarea {
 		}
 	}
 
-	
 	public Integer modificarTarea(TTarea tarea) {
 		
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
@@ -71,8 +69,6 @@ public class SATarea implements ISATarea {
 				return FactoriaDAOImp.getInstance().getDaoTarea().modify(tarea);
 			}				
 		}
-	
-
 
 	public Set<TTarea> listarTareas() {
 		Set<TTarea> lista = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
@@ -80,31 +76,15 @@ public class SATarea implements ISATarea {
 		return lista;
 	}
 
-
 	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
-	    Set<TTarea> lista = new HashSet<>();
-	    Set<TTarea> allTareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
-	    
-	    for (TTarea tarea : allTareas) {
-	        if (tarea.getEquipo() == IDEquipo && tarea.getActivo()) {
-	            lista.add(tarea);
-	        }
-	    }
 	    
 	    System.out.println("mostrarTareasEquipo Realizado - SATarea");
-	    return lista;
+	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdEquipo(IDEquipo);
 	}
 
 	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
-	    Set<TTarea> lista = new HashSet<>();
-	    Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
-	    for (TTarea tarea : tareas) {
-	        if (tarea.getProducto() == IDProducto && tarea.getActivo()) {
-	            lista.add(tarea);
-	        }
-	    }
 	    System.out.println("listarTareasProducto Realizado - SATarea");
-	    return lista;
+	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
 	}
 
 	public TTarea mostrarTareaID(Integer IDTarea) {
@@ -119,7 +99,6 @@ public class SATarea implements ISATarea {
 			return tar;
 		}
 	}
-
 
 	public Integer cerrarTarea(Integer IDTarea) {
 	    System.out.println("Intentando cerrarTarea - SATarea");

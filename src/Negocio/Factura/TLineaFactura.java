@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Negocio.Factura;
 
 public class TLineaFactura {

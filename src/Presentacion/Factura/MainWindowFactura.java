@@ -82,7 +82,6 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		cerrarcarritobutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.CerrarCarrito, null);
-				dispose();
 			}
 		});
 		cerrarcarritobutton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -100,7 +99,6 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Controlador.getInstance().update(Eventos.EliminarCarrito, null);
-				dispose();
 			}
 		});
 		buttonpanel.add(eliminarcarritobutton);
@@ -113,8 +111,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		mostrarcarritobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaModificarEmpleado, null);
-				dispose();
+				Controlador.getInstance().update(Eventos.MostrarCarrito, null);
 			}
 		});
 		buttonpanel.add(mostrarcarritobutton);
@@ -127,7 +124,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		aniadirproductobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.ListarEmpleado, null);
+				Controlador.getInstance().update(Eventos.VistaAnyadirProductoCarrito, null);
 				dispose();
 			}
 		});
@@ -141,7 +138,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		quitarproductobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormMostrarEmpleadoID, null);
+				Controlador.getInstance().update(Eventos.VistaEliminarProductoCarrito, null);
 				dispose();
 			}
 		});
@@ -169,7 +166,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		mostrarfacturasidbutton.setBackground(Color.WHITE);
 		mostrarfacturasidbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormListarIntegrantesEquipoId, null);
+				Controlador.getInstance().update(Eventos.VistaFormMostrarFacturaID, null);
 				dispose();
 			}
 		});
@@ -186,11 +183,15 @@ public class MainWindowFactura extends JFrame implements IGUI {
 			break;
 		case Eventos.CerrarCarritoOK:
 			JOptionPane.showMessageDialog(null, "Éxito cerrando carrito");
-			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
 			break; 
 		case Eventos.CerrarCarritoNoOK:
 			JOptionPane.showMessageDialog(null, "Error cerrando carrito");
-			Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+			break; 
+		case Eventos.NecesitasCarrito:
+			JOptionPane.showMessageDialog(null, "Necesitas un Carrito abierto para hacer esto.");
+			break;
+		case Eventos.EliminarCarritoOk:
+			JOptionPane.showMessageDialog(null, "Éxito eliminando carrito");
 			break; 
 		}
 	}

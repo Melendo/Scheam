@@ -1,8 +1,8 @@
 
 package Integracion.Equipo;
 
+import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
-import Negocio.Equipo.TVinculacion;
 
 import java.util.Set;
 

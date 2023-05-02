@@ -6,12 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
-import Negocio.Equipo.TVinculacion;
+import Negocio.Factura.TFactura;
 	
 
 public class DAOEquipo implements IDAOEquipo {	
@@ -154,8 +158,77 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Set<TEquipo> readAll() {
-		
-		return null;
+		System.out.println("Intentando readAll - DAOEquipo");
+		Set<TEquipo> result = new HashSet<TEquipo>();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM equipo WHERE activo");
+			PreparedStatement psdes = con.prepareStatement("SELECT * FROM equipodesarrollo");
+			PreparedStatement psdis = con.prepareStatement("SELECT * FROM equipodisenyo");
+			ResultSet rs = ps.executeQuery();
+			ResultSet rsdes = psdes.executeQuery();
+			ResultSet rsdis = psdis.executeQuery();
+			List<Integer> iddes = new ArrayList<Integer>();
+			List<TEquipoDesarrollo> eDes = new ArrayList<TEquipoDesarrollo>();
+			List<Integer> iddis = new ArrayList<Integer>();
+			List<TEquipoDisenio> eDis = new ArrayList<TEquipoDisenio>();
+
+			while (rsdes.next()) { //getting all ids in EquipoDesarrollo table
+				iddes.add(rsdes.getInt("ID_EQUIPO"));
+				TEquipoDesarrollo eDesAux = new TEquipoDesarrollo();
+				eDesAux.setIdEquipo(rsdes.getInt("ID_EQUIPO"));
+				eDesAux.setTecnologia(rsdes.getString("TECNOLOGIA"));
+				eDes.add(eDesAux);
+			}
+			
+			while (rsdis.next()) { //getting all ids in EquipoDisenio table
+				iddis.add(rsdis.getInt("ID_EQUIPO"));
+				TEquipoDisenio eDisAux = new TEquipoDisenio();
+				eDisAux.setIdEquipo(rsdis.getInt("ID_EQUIPO"));
+				eDisAux.setCampoDisenio(rsdis.getString("CAMPO"));
+				eDis.add(eDisAux);
+			}
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				if (iddes.contains(rs.getInt("ID_EQUIPO"))) {
+					TEquipoDesarrollo auxEDes = new TEquipoDesarrollo();
+					auxEDes.setIdEquipo(rs.getInt("ID_EQUIPO"));
+					auxEDes.setNombre(rs.getString("NOMBRE"));
+					auxEDes.setTecnologia(eDes.get(iddes.indexOf(auxEDes.getIdEquipo())).getTecnologia());
+					result.add(auxEDes);
+				} else if (iddis.contains(rs.getInt("ID_EQUIPO"))) {
+					TEquipoDisenio auxEDis = new TEquipoDisenio();
+					auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
+					auxEDis.setNombre(rs.getString("NOMBRE"));
+					auxEDis.setCampoDisenio(eDis.get(iddis.indexOf(auxEDis.getIdEquipo())).getCampoDisenio());
+					result.add(auxEDis);
+				}
+				
+				while (rs.next()) {
+					if (iddes.contains(rs.getInt("id_equipo"))) {
+						TEquipoDesarrollo auxEDes = new TEquipoDesarrollo();
+						auxEDes.setIdEquipo(rs.getInt("ID_EQUIPO"));
+						auxEDes.setNombre(rs.getString("NOMBRE"));
+						auxEDes.setTecnologia(eDes.get(iddes.indexOf(auxEDes.getIdEquipo())).getTecnologia());
+						result.add(auxEDes);
+					} else if (iddis.contains(rs.getInt("id_equipo"))) {
+						TEquipoDisenio auxEDis = new TEquipoDisenio();
+						auxEDis.setIdEquipo(rs.getInt("ID_EQUIPO"));
+						auxEDis.setNombre(rs.getString("NOMBRE"));
+						auxEDis.setCampoDisenio(eDis.get(iddis.indexOf(auxEDis.getIdEquipo())).getCampoDisenio());
+						result.add(auxEDis);
+					}
+				}
+				rs.close();
+				ps.close();
+				con.close();
+			}
+			System.out.println("Readall realizado - DAOEquipo");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public TEquipo readByID(Integer idequipo) {
@@ -329,7 +402,7 @@ public class DAOEquipo implements IDAOEquipo {
 			}
 			else{
 				tvin.setId_1(rs.getInt("id_equipo"));
-				tvin.setId_1(rs.getInt("id_empleado"));
+				tvin.setId_2(rs.getInt("id_empleado"));
 				tvin.setActivo(rs.getBoolean("activo"));
 			}
 			ps.close();
@@ -344,8 +417,48 @@ public class DAOEquipo implements IDAOEquipo {
 	}
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("Intentando listarEquiposEmpleadoId - DAOEquipo");
+		Set<TEquipo> result = new HashSet<TEquipo>();
+		int ids[] = new int[100];
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE ID_EMPLEADO = ?");
+			ps.setInt(1, idempleado);
+			ResultSet rs = ps.executeQuery();
+			
+			if (!rs.next()) {
+				return result;
+			} else {
+				int j = 0;
+				if(rs.getBoolean("activo")) {
+					ids[j] = rs.getInt("ID_EQUIPO");
+					j++;
+				}
+				while(rs.next()) {
+					if(rs.getBoolean("activo")) {
+						ids[j] = rs.getInt("ID_EQUIPO");
+						j++;					}	
+				}
+				
+				if(j != 0) {
+					TEquipo aux = new TEquipo();
+					for(int i = 0; i < j; i++) {
+						
+						aux = readByID(ids[i]);	
+						result.add(aux);
+							
+						}
+					}										
+				}							
+				rs.close();
+				ps.close();
+				con.close();
+				System.out.println("listarEquiposEmpleadoId realizado - DAOEquipo");
+			} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

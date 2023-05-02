@@ -69,8 +69,8 @@ public class Eventos {
     public static final int MostrarEquipoIDOK = 243;
     public static final int MostrarEquipoIDNoOK = 244;
     
-    public static final int VistaListarEquipo = 245;
-    public static final int ListarEquipo = 246;
+    public static final int VistaListarEquipos = 245;
+    public static final int ListarEquipos = 246;
     
     public static final int VistaAnyadirIntegrante = 250;
     public static final int AnyadirIntegrante = 251;
@@ -79,6 +79,11 @@ public class Eventos {
     public static final int AnyadirIntegranteNoOk2 = 254;
     public static final int AnyadirIntegranteNoOk3 = 255;
     public static final int AnyadirIntegranteNoOk4 = 256;
+    
+    public static final int VistaRetirarIntegrante = 260;
+    public static final int RetirarIntegrante = 261;
+    public static final int RetirarIntegranteOk = 262;   
+    public static final int RetirarIntegranteNoOk = 263;
     
 	//////////////////////////////////////////////////////////
 	    
@@ -194,15 +199,16 @@ public class Eventos {
 	public static final int ListarTareasEquipoIdOK = 573;
 	public static final int ListarTareasEquipoIdNoOK = 574;
 	
-	
-	public static final int VistaListarTareasProductoId = 580;
-	public static final int ListarTareasProductoId = 581;
-	public static final int ListarTareasProductoIdOK = 582;
-	public static final int ListarTareasProductoIdNoOK = 583;
+	public static final int VistaFormListarTareasProductoId = 580;
+	public static final int VistaListarTareasProductoId = 581;
+	public static final int ListarTareasProductoId = 582;
+	public static final int ListarTareasProductoIdOK = 583;
+	public static final int ListarTareasProductoIdNoOK = 584;
 	
 	////////////////////////////////////////////////////////////////////////////
 	
 	public static final int MainWindowFactura = 600;
+	public static final int NecesitasCarrito = 601;
 	
 	public static final int VistaCrearCarrito = 610;
 	public static final int CrearCarrito = 611;
@@ -215,4 +221,26 @@ public class Eventos {
 	public static final int CerrarCarritoNoOK = 623;
 	
 	public static final int EliminarCarrito = 630;
+	public static final int EliminarCarritoOk = 631;
+	
+	public static final int VistaAnyadirProductoCarrito = 640;
+	public static final int AnyadirProductoCarrito = 641;
+	public static final int AnyadirProductoCarritoOk = 642;
+	public static final int AnyadirProductoCarritoNoOk = 643;
+	
+	public static final int VistaEliminarProductoCarrito = 650;
+	public static final int EliminarProductoCarrito = 651;
+	public static final int EliminarProductoCarritoOk = 652;
+	public static final int EliminarProductoCarritoNoOk = 653;
+	
+	public static final int VistaMostrarCarrito = 660;
+	public static final int MostrarCarrito = 661;
+	public static final int MostrarCarritoNoOk = 662;
+	
+    public static final int VistaFormMostrarFacturaID = 670;
+    public static final int VistaMostrarFacturaID = 671;
+    public static final int MostrarFacturaID = 672;
+    public static final int MostrarFacturaIDOK = 674;
+    public static final int MostrarFacturaIDNoOK = 675;
+	
 }

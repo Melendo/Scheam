@@ -2,13 +2,16 @@
 package Presentacion.Controlador;
 
 import java.util.Set;
+import java.util.List;
 
+import Negocio.TVinculacion;
 import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
-import Negocio.Equipo.TVinculacion;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Factura.SAFactura;
+import Negocio.Factura.TFactura;
+import Negocio.Factura.TLineaFactura;
 import Negocio.Producto.TProducto;
 import Negocio.Tareas.TTarea;
 import Presentacion.IGUI;
@@ -198,6 +201,13 @@ public class ControladorImp extends Controlador {
 	        	gui.update(Eventos.VistaMostrarEquipoID, null);
         	}
         	break;
+        case Eventos.ListarEquipos:
+	    	System.out.println("Entrando a ListarEquipos - Controlador");
+	    	Set<TEquipo> listaEq = FactoriaSA.getInstance().getSAEquipo().listarEquipos();
+	    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarEquipos, null);
+	    	gui.update(event, listaEq);
+	    	gui.update(Eventos.VistaListarEquipos, null);
+	    	break;
         case Eventos.VistaAnyadirIntegrante:
         	System.out.println("Entrando a VistaAnyadirIntegrante - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
@@ -210,6 +220,17 @@ public class ControladorImp extends Controlador {
         	else if(res==-2) gui.update(Eventos.AnyadirIntegranteNoOk2, null);
         	else if(res==-3) gui.update(Eventos.AnyadirIntegranteNoOk4, null);
         	else  gui.update(Eventos.AnyadirIntegranteOk, null);
+			break;
+        case Eventos.VistaRetirarIntegrante:
+        	System.out.println("Entrando a VistaRetirarIntegrante - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event, null);
+        	break;
+        case Eventos.RetirarIntegrante:
+        	System.out.println("Entrando a RetirarIntegrante - Controlador");
+        	res = FactoriaSA.getInstance().getSAEquipo().retirarIntegrante((TVinculacion) objeto);
+        	if(res==-1) gui.update(Eventos.RetirarIntegranteNoOk, null);
+        	else  gui.update(Eventos.RetirarIntegranteOk, null);
 			break;
 
         
@@ -459,29 +480,50 @@ public class ControladorImp extends Controlador {
 	    	else if(res == -2) gui.update(Eventos.CerrarTareaNoOK2, null);
 	    	else gui.update(Eventos.CerrarTareaOK, objeto);
 	    	break;
+	    case Eventos.VistaFormListarTareasEquipoId:
+        	System.out.println("Entrando a VistaFormListarTareasEquipoId - Controlador");
+        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+        	gui.update(event,null);
+        	break;
 	     case Eventos.VistaListarTareasEquipoId:
         	System.out.println("Entrando a VistaListarTareasEquipoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
 	     case Eventos.ListarTareasEquipoId:
-        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
-        	Set<TTarea> listaequipo = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
-        	if (!listaequipo.isEmpty()) gui.update(Eventos.ListarTareasEquipoIdOK, null);
-        	else gui.update(Eventos.ListarTareasEquipoIdNoOK, objeto);
-        	break;	
-	     case Eventos.VistaListarTareasProductoId:
-        	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
+	        	System.out.println("Entrando a ListarTareasEquipoId - Controlador");
+	        	Set<TTarea> listat = FactoriaSA.getInstance().getSATarea().listarTareasEquipo((Integer) objeto);
+	        	if (listat == null) {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(Eventos.ListarTareasEquipoIdNoOK, null);
+	        	} else {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasEquipoId, null);
+	        		gui.update(event, listat);
+	        		gui.update(Eventos.VistaListarTareasEquipoId, null);
+	        	}
+	        	break;
+	     case Eventos.VistaFormListarTareasProductoId:
+        	System.out.println("Entrando a VistaFormListarTareasProductoId - Controlador");
         	gui = FactoriaVistas.getInstance().generateFrame(event, null);
         	gui.update(event, null);
         	break;
+	     case Eventos.VistaListarTareasProductoId:
+	        	System.out.println("Entrando a VistaListarTareasProductoId - Controlador");
+	        	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	        	gui.update(event, null);
+	        break;
 	     case Eventos.ListarTareasProductoId:
-        	System.out.println("Entrando a ListarTareasProductoId - Controlador");
-        	Set<TTarea> listaproducto = FactoriaSA.getInstance().getSATarea().listarTareasProducto((Integer) objeto);
-        	if (!listaproducto.isEmpty()) gui.update(Eventos.ListarTareasProductoIdOK, null);
-        	else gui.update(Eventos.ListarTareasProductoIdNoOK, objeto);
-        	break;	
-	    	
+	        	System.out.println("Entrando a ListarTareasProductoId - Controlador");
+	        	Set<TTarea> listap = FactoriaSA.getInstance().getSATarea().listarTareasProducto((Integer) objeto);
+	        	if (listap == null) {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasProductoId, null);
+	        		gui.update(Eventos.ListarTareasProductoIdNoOK, null);
+	        	} else {
+	        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaListarTareasProductoId, null);
+	        		gui.update(event, listap);
+	        		gui.update(Eventos.VistaListarTareasProductoId, null);
+	        	}
+	        	break;
 	    //FACTURA
         	
 	     case Eventos.MainWindowFactura:
@@ -498,13 +540,77 @@ public class ControladorImp extends Controlador {
 		    System.out.println("Entrando a CrearCarrito - Controlador"); 
 	    	res = safactura.crearCarrito((Integer) objeto);
 	    	if (res == -1) gui.update(Eventos.CrearCarritoNoOk, null);
+	    	else if (res == -2) gui.update(Eventos.NecesitasCarrito, null);
 	    	else gui.update(Eventos.CrearCarritoOk, null);
 	    	break;
 	     case Eventos.CerrarCarrito:
 	    	System.out.println("Entrando a CerrarCarrito - Controlador"); 
 	    	res = safactura.cerrarCarrito();
 	    	if (res == -1) gui.update(Eventos.CerrarCarritoNoOK, null);
+	    	else if (res == -2) gui.update(Eventos.NecesitasCarrito, null);
 	    	else gui.update(Eventos.CerrarCarritoOK, null);
+	    	break;
+	     case Eventos.EliminarCarrito:
+		    System.out.println("Entrando a EliminarCarrito - Controlador");
+		    res = safactura.eliminarCarrito();
+		    if (res == -1) gui.update(Eventos.NecesitasCarrito, null);
+		    else gui.update(Eventos.EliminarCarritoOk, null);
+		    break;
+	     case Eventos.VistaAnyadirProductoCarrito:
+	    	System.out.println("Entrando a VistaA�adirProductoCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.AnyadirProductoCarrito:
+		    System.out.println("Entrando a A�adirProductoCarrito - Controlador");
+		    List<Integer> pair = (List<Integer>) objeto;
+		    res = safactura.anyadirProductoaCarrito(pair.get(0), pair.get(1));
+		    if (res == -1) gui.update(Eventos.AnyadirProductoCarritoNoOk, null);
+	    	else if (res == -2) gui.update(Eventos.NecesitasCarrito, null);
+		    else gui.update(Eventos.AnyadirProductoCarritoOk, objeto);
+		    break;
+	     case Eventos.MostrarCarrito:
+			System.out.println("Entrando a MostrarCarrito - Controlador");
+	    	Set<TLineaFactura> listafact = safactura.mostrarCarrito();
+	    	if (listafact == null) {
+	    		gui.update(Eventos.NecesitasCarrito, null);
+	    	} else {
+		    	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarCarrito, null);
+		    	gui.update(event, listafact);
+		    	gui.update(Eventos.VistaMostrarCarrito, null);
+	    	}
+	    	break;
+	     case Eventos.VistaEliminarProductoCarrito:
+	    	System.out.println("Entrando a VistaEliminarProductoCarrito - Controlador");
+	    	gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	gui.update(event, null);
+	    	break;
+	     case Eventos.EliminarProductoCarrito:
+		    System.out.println("Entrando a EliminarProductocarrito - Controlador");
+		    List<Integer> pair2 = (List<Integer>) objeto;
+		    res = safactura.eliminarProductodeCarrito(pair2.get(0), pair2.get(1));
+		    if (res == -1) gui.update(Eventos.EliminarProductoCarritoNoOk, null);
+	    	else if (res == -2) gui.update(Eventos.NecesitasCarrito, null);
+		    else gui.update(Eventos.EliminarProductoCarritoOk, objeto);
+		    break;
+	     case Eventos.VistaFormMostrarFacturaID:
+	    	 System.out.println("Entrando a VistaFormMostrarFacturaID - Controlador");
+	    	 gui = FactoriaVistas.getInstance().generateFrame(event, null);
+	    	 gui.update(event, null);
+	    	 break;
+	     case Eventos.MostrarFacturaID:
+	    	System.out.println("Entrando a MostrarFacturaID Controlador");
+        	TFactura fact = safactura.mostrarFacturaID((int) objeto);
+        	if(fact.getIdFactura() == -1) {
+        		gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturaID, null);
+        		gui.update(Eventos.MostrarFacturaID, null);
+        	}
+        	else {
+            	gui = FactoriaVistas.getInstance().generateFrame(Eventos.VistaMostrarFacturaID, null);
+	        	gui.update(event,  fact);
+	        	gui.update(Eventos.VistaMostrarFacturaID, null);
+        	}
+        	break;
 	    	
 	    }
     }

@@ -157,7 +157,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		listequipobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaListarTareasEquipoId, null);
+				Controlador.getInstance().update(Eventos.VistaFormListarTareasEquipoId, null);
 				dispose();
 			}
 		});
@@ -171,7 +171,7 @@ public class MainWindowTarea extends JFrame implements IGUI {
 		listproductobutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaListarTareasProductoId, null);
+				Controlador.getInstance().update(Eventos.VistaFormListarTareasProductoId, null);
 				dispose();
 			}
 		});

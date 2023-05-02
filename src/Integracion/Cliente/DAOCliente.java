@@ -80,7 +80,6 @@ public class DAOCliente implements IDAOCliente {
 		return 1;
 	}
 
-
 	public Integer delete(Integer idcliente) {
 		System.out.println("Intentando Delete - DAOCliente");
 		try {
@@ -184,15 +183,15 @@ public class DAOCliente implements IDAOCliente {
 					TDistribuidor auxdist = new TDistribuidor();
 					auxdist.setID(rs.getInt("id_cliente"));
 					auxdist.setNombre(rs.getString("nombre"));
-					auxdist.setEmail("email");
+					auxdist.setEmail(rs.getString("email"));
 					auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
-					auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+					auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());
 					result.add(auxdist);
 				} else if (idpart.contains(rs.getInt("id_cliente"))) {
 					TParticular auxpart = new TParticular();
 					auxpart.setID(rs.getInt("id_cliente"));
 					auxpart.setNombre(rs.getString("nombre"));
-					auxpart.setEmail("email");
+					auxpart.setEmail(rs.getString("email"));
 					auxpart.setDNI(part.get(idpart.indexOf(auxpart.getID())).getDNI());
 					auxpart.setTelefono(part.get(idpart.indexOf(auxpart.getID())).getTelefono());
 					result.add(auxpart);
@@ -203,15 +202,15 @@ public class DAOCliente implements IDAOCliente {
 						TDistribuidor auxdist = new TDistribuidor();
 						auxdist.setID(rs.getInt("id_cliente"));
 						auxdist.setNombre(rs.getString("nombre"));
-						auxdist.setEmail("email");
+						auxdist.setEmail(rs.getString("email"));
 						auxdist.setCIF(dist.get(iddist.indexOf(auxdist.getID())).getCIF());
-						auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());;
+						auxdist.setDireccion(dist.get(iddist.indexOf(auxdist.getID())).getDireccion());
 						result.add(auxdist);
 					} else if (idpart.contains(rs.getInt("id_cliente"))) {
 						TParticular auxpart = new TParticular();
 						auxpart.setID(rs.getInt("id_cliente"));
 						auxpart.setNombre(rs.getString("nombre"));
-						auxpart.setEmail("email");
+						auxpart.setEmail(rs.getString("email"));
 						auxpart.setDNI(part.get(idpart.indexOf(auxpart.getID())).getDNI());
 						auxpart.setTelefono(part.get(idpart.indexOf(auxpart.getID())).getTelefono());
 						result.add(auxpart);

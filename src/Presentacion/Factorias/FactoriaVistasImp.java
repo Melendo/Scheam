@@ -23,10 +23,17 @@ import Presentacion.Equipo.VistaAltaEquipo;
 import Presentacion.Equipo.VistaAnyadirIntegrante;
 import Presentacion.Equipo.VistaBajaEquipo;
 import Presentacion.Equipo.VistaFormMostrarEquipoId;
+import Presentacion.Equipo.VistaListarEquipos;
 import Presentacion.Equipo.VistaModificarEquipo;
 import Presentacion.Equipo.VistaMostrarEquiposId;
+import Presentacion.Equipo.VistaRetirarIntegrante;
 import Presentacion.Factura.MainWindowFactura;
+import Presentacion.Factura.VistaAnyadirProductoCarrito;
 import Presentacion.Factura.VistaCrearCarrito;
+import Presentacion.Factura.VistaEliminarProductoCarrito;
+import Presentacion.Factura.VistaFormMostrarFacturaID;
+import Presentacion.Factura.VistaMostrarCarrito;
+import Presentacion.Factura.VistaMostrarFacturaID;
 import Presentacion.Producto.MainWindowProducto;
 import Presentacion.Producto.VistaAltaProducto;
 import Presentacion.Producto.VistaBajaProducto;
@@ -41,7 +48,9 @@ import Presentacion.Tareas.VistaBajaTarea;
 import Presentacion.Tareas.VistaCerrarTarea;
 import Presentacion.Tareas.VistaFormMostrarTareasID;
 import Presentacion.Tareas.VistaListarTareas;
+import Presentacion.Tareas.VistaListarTareasEquipoId;
 import Presentacion.Tareas.VistaFormListarTareasEquipoId;
+import Presentacion.Tareas.VistaFormListarTareasProductoId;
 import Presentacion.Tareas.VistaListarTareasProductoId;
 import Presentacion.Tareas.VistaModificarTarea;
 import Presentacion.Tareas.VistaMostrarTareasID;
@@ -102,9 +111,15 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaMostrarEquipoID:
 			System.out.println("Entrando a VistaMostrarEquipoID - FactoriaVistasImp");
 			return new VistaMostrarEquiposId();	
+		case Eventos.VistaListarEquipos:
+			System.out.println("Entrando a VistaListarEquipos - FactoriaVistasImp");
+			return new VistaListarEquipos();
 		case Eventos.VistaAnyadirIntegrante:
 			System.out.println("Entrando a VistaAnyadirIntegrante - FactoriaVistasImp");
 			return new VistaAnyadirIntegrante();
+		case Eventos.VistaRetirarIntegrante:
+			System.out.println("Entrando a VistaRetirarIntegrante - FactoriaVistasImp");
+			return new VistaRetirarIntegrante();
 		case Eventos.MainWindowProducto: // <----------------------------------------------------------------------------
 			System.out.println("Entrando a MainWindowProducto - FactoriaVistasImp");
 			return new MainWindowProducto();
@@ -174,9 +189,15 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaCerrarTarea:
 			System.out.println("Entrando a VistaCerrarTarea - FactoriaVistasImp");
 			return new VistaCerrarTarea();
+		case Eventos.VistaFormListarTareasEquipoId:
+			System.out.println("Entrando a VistaFormListarTareasEquipoId - FactoriaVistasImp");
+			return new VistaFormListarTareasEquipoId();
 		case Eventos.VistaListarTareasEquipoId:
 			System.out.println("Entrando a VistaListarTareasEquipoId - FactoriaVistasImp");
-			return new VistaFormListarTareasEquipoId();
+			return new VistaListarTareasEquipoId();
+		case Eventos.VistaFormListarTareasProductoId:
+			System.out.println("Entrando a VistaFormListarTareasProductoId - FactoriaVistasImp");
+			return new VistaFormListarTareasProductoId();
 		case Eventos.VistaListarTareasProductoId:
 			System.out.println("Entrando a VistaListarTareasProductoId - FactoriaVistasImp");
 			return new VistaListarTareasProductoId();
@@ -186,6 +207,21 @@ public class FactoriaVistasImp extends FactoriaVistas {
 		case Eventos.VistaCrearCarrito:
 			System.out.println("Entrando a VistaCrearCarrito - FactoriaVistasImp");
 			return new VistaCrearCarrito();
+		case Eventos.VistaAnyadirProductoCarrito:
+			System.out.println("Entrando a AnyadirProductoCarrito - FactoriaVistasImp");
+			return new VistaAnyadirProductoCarrito();
+		case Eventos.VistaMostrarCarrito:
+			System.out.println("Entrando a MostrarCarrito - FactoriaVistasImp");
+			return new VistaMostrarCarrito();
+		case Eventos.VistaEliminarProductoCarrito:
+			System.out.println("Entrando a EliminarProductoCarrito - FactoriaVistasImp");
+			return new VistaEliminarProductoCarrito();
+		case Eventos.VistaFormMostrarFacturaID:
+			System.out.println("Entrando a VistaFormMostrarFacturaID - FactoriaVistasImp");
+			return new VistaFormMostrarFacturaID();
+		case Eventos.VistaMostrarFacturaID:
+			System.out.println("Entrando a VistaMostrarFacturaID - FactoriaVistasImp");
+			return new VistaMostrarFacturaID();
 		default:
 			return null;
 		}

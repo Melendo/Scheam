@@ -72,7 +72,6 @@ public class DAOTarea implements IDAOTarea {
 		return 1;
 	}
 
-
 	public Integer modify(TTarea tarea) {
 		System.out.println("Intentando Modify - DAOTarea");
 		try {
@@ -140,8 +139,6 @@ public class DAOTarea implements IDAOTarea {
 		}
 		return result;
 	}
-
-
 	
 	public TTarea readById(Integer idtarea) {
 		System.out.println("Intentando readByDNI - DAOTarea");
@@ -174,12 +171,11 @@ public class DAOTarea implements IDAOTarea {
 		return result;
 	}
 
-
 	public Set<TTarea> listarIdEquipo(Integer idEquipo) {
 	    System.out.println("Intentando listar tareas por equipo - DAOTarea");
 	    Set<TTarea> result = new HashSet<>();
 	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE equipo = ?");
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ?");
 	        ps.setInt(1, idEquipo);
 
 	        ResultSet rs = ps.executeQuery();
@@ -217,7 +213,7 @@ public class DAOTarea implements IDAOTarea {
 	    System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
 	    Set<TTarea> result = new HashSet<>();
 	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE producto = ?");
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ?");
 	        ps.setInt(1, idProducto);
 
 	        ResultSet rs = ps.executeQuery();
@@ -243,7 +239,6 @@ public class DAOTarea implements IDAOTarea {
 	    }
 	    return result;
 	}
-
 
 	public Integer closeTask(Integer idtarea) {
 		System.out.println("Intentando Cerrar Tarea - DAOTarea");
