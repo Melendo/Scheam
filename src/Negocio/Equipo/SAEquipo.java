@@ -3,7 +3,6 @@ package Negocio.Equipo;
 
 import java.util.Set;
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.TVinculacion;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Tareas.TTarea;
 

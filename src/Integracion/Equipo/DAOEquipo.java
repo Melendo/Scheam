@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Set;
 
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
+import Negocio.Equipo.TVinculacion;
 import Negocio.Factura.TFactura;
 	
 

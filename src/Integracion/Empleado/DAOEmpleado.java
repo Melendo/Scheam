@@ -1,7 +1,7 @@
 package Integracion.Empleado;
 
-import Negocio.TVinculacion;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TVinculacion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -3,8 +3,6 @@ package Negocio.Equipo;
 
 import java.util.Set;
 
-import Negocio.TVinculacion;
-
 public interface ISAEquipo {
 
 	public Integer altaEquipo(TEquipo equipo);
