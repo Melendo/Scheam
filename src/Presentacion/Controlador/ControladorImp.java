@@ -25,7 +25,8 @@ public class ControladorImp extends Controlador {
 	
 	private SAFactura safactura = FactoriaSA.getInstance().getSAFactura();
 
-    public void update(int event, Object objeto) {
+    @SuppressWarnings("unchecked")
+	public void update(int event, Object objeto) {
     	int res;
     	
         switch (event){

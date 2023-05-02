@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Vector;
 
 public class DAOEmpleado implements IDAOEmpleado {
 
@@ -219,33 +220,29 @@ public class DAOEmpleado implements IDAOEmpleado {
 	public Set<TEmpleado> listarIdEquipo(Integer idequipo) {
 		System.out.println("Intentando listarIdEquipo - DAOEmpleado");
 		Set<TEmpleado> result = new HashSet<TEmpleado>();
-		int ids[] = new int[100];
+		Vector<Integer> id = new Vector<Integer>();
+		
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE id_equipo = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE id_equipo = ? and activo = true");
 			ps.setInt(1, idequipo);
 			ResultSet rs = ps.executeQuery();
 			
 			if (!rs.next()) {
 				return result;
 			} else {
-				int j = 0;
-				if(rs.getBoolean("activo")) {
-					ids[j] = rs.getInt("id_empleado");
-					j++;
-				}
-				while(rs.next()) {
-					if(rs.getBoolean("activo")) {
-						ids[j] = rs.getInt("id_empleado");
-						j++;					}	
-				}
+				id.add(rs.getInt("id_empleado"));
 				
-				if(j != 0) {
+				while(rs.next()) 
+					id.add(rs.getInt("id_empleado"));
 					
-					for(int i = 0; i < j; i++) {
+					
+				if(id.size() > 0) {
+					
+					for(int i = 0; i < id.size(); i++) {
 						
 						PreparedStatement ps1 = con.prepareStatement("SELECT * FROM empleados WHERE id_empleado = ?");
 						
-						ps1.setInt(1, ids[i]);
+						ps1.setInt(1, id.elementAt(i));
 						ResultSet rs1 =  ps1.executeQuery();
 						
 						if(!rs1.next()) {
@@ -268,12 +265,14 @@ public class DAOEmpleado implements IDAOEmpleado {
 							}
 						}
 					}										
-				}							
-				rs.close();
-				ps.close();
-				con.close();
-				System.out.println("listarIdEquipo realizado - DAOEmpleado");
+				}	
 			}
+					
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("listarIdEquipo realizado - DAOEmpleado");
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
