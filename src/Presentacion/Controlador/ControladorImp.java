@@ -4,10 +4,10 @@ package Presentacion.Controlador;
 import java.util.Set;
 import java.util.List;
 
-import Negocio.TVinculacion;
 import Negocio.Cliente.TCliente;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Equipo.TEquipo;
+import Negocio.Equipo.TVinculacion;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Factura.SAFactura;
 import Negocio.Factura.TFactura;
@@ -25,7 +25,8 @@ public class ControladorImp extends Controlador {
 	
 	private SAFactura safactura = FactoriaSA.getInstance().getSAFactura();
 
-    public void update(int event, Object objeto) {
+    @SuppressWarnings("unchecked")
+	public void update(int event, Object objeto) {
     	int res;
     	
         switch (event){

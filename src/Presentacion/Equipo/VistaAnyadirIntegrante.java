@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Negocio.TVinculacion;
+import Negocio.Equipo.TVinculacion;
 import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;

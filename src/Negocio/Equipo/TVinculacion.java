@@ -1,4 +1,4 @@
-package Negocio;
+package Negocio.Equipo;
 
 public class TVinculacion {
 

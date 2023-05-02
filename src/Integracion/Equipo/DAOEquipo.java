@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 
 import Integracion.Factorias.FactoriaDAOImp;
-import Negocio.TVinculacion;
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TEquipoDesarrollo;
 import Negocio.Equipo.TEquipoDisenio;
-import Negocio.Factura.TFactura;
+import Negocio.Equipo.TVinculacion;
 	
 
 public class DAOEquipo implements IDAOEquipo {	
@@ -421,7 +421,7 @@ public class DAOEquipo implements IDAOEquipo {
 		
 		System.out.println("Intentando listarEquiposEmpleadoId - DAOEquipo");
 		Set<TEquipo> result = new HashSet<TEquipo>();
-		int ids[] = new int[100];
+		Vector<Integer> id = new Vector<Integer>();
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE ID_EMPLEADO = ?");
 			ps.setInt(1, idempleado);
@@ -430,32 +430,25 @@ public class DAOEquipo implements IDAOEquipo {
 			if (!rs.next()) {
 				return result;
 			} else {
-				int j = 0;
-				if(rs.getBoolean("activo")) {
-					ids[j] = rs.getInt("ID_EQUIPO");
-					j++;
-				}
-				while(rs.next()) {
-					if(rs.getBoolean("activo")) {
-						ids[j] = rs.getInt("ID_EQUIPO");
-						j++;					}	
-				}
-				
-				if(j != 0) {
+				id.add(rs.getInt("ID_EQUIPO"));
+			
+				while(rs.next()) 
+					id.add(rs.getInt("ID_EQUIPO"));
+											
+				if(id.size() > 0) {
 					TEquipo aux = new TEquipo();
-					for(int i = 0; i < j; i++) {
-						
-						aux = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(ids[i]);	
-						result.add(aux);
-							
-						}
+					for(int i = 0; i < id.size(); i++) {						
+						aux = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(id.elementAt(i));	
+						result.add(aux);												
 					}										
 				}							
-				rs.close();
-				ps.close();
-				con.close();
-				System.out.println("listarEquiposEmpleadoId realizado - DAOEquipo");
 			} 
+			
+			rs.close();
+			ps.close();
+			con.close();
+			System.out.println("listarEquiposEmpleadoId realizado - DAOEquipo");
+		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
