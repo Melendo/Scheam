@@ -199,11 +199,11 @@ public class Eventos {
 	public static final int ListarTareasEquipoIdOK = 573;
 	public static final int ListarTareasEquipoIdNoOK = 574;
 	
-	
-	public static final int VistaListarTareasProductoId = 580;
-	public static final int ListarTareasProductoId = 581;
-	public static final int ListarTareasProductoIdOK = 582;
-	public static final int ListarTareasProductoIdNoOK = 583;
+	public static final int VistaFormListarTareasProductoId = 580;
+	public static final int VistaListarTareasProductoId = 581;
+	public static final int ListarTareasProductoId = 582;
+	public static final int ListarTareasProductoIdOK = 583;
+	public static final int ListarTareasProductoIdNoOK = 584;
 	
 	////////////////////////////////////////////////////////////////////////////
 	

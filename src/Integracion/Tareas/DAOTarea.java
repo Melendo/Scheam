@@ -217,7 +217,7 @@ public class DAOTarea implements IDAOTarea {
 	    System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
 	    Set<TTarea> result = new HashSet<>();
 	    try {
-	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tareas WHERE producto = ?");
+	        PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ?");
 	        ps.setInt(1, idProducto);
 
 	        ResultSet rs = ps.executeQuery();
