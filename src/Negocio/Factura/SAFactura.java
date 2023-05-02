@@ -132,6 +132,11 @@ public class SAFactura implements ISAFactura {
 			    		System.out.println("No se ha eliminado el producto del carrito (la cantidad a eliminar es mayor que la cantidad en el carrito) - SAFactura");
 			    		return -1;
 			    	}
+			    	else if (s.getCantidad()== cantidad) {
+			    		carrito.setLineasFactura(null);
+			    		System.out.println("Se ha eliminado correctamente el numero de productos - SAFactura");
+			    		return 1;
+			    	}
 			    	else {
 			    		int cant = s.getCantidad() - cantidad;
 			    		s.setCantidad(cant);
