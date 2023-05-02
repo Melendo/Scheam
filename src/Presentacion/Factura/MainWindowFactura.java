@@ -117,7 +117,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		buttonpanel.add(mostrarcarritobutton);
 		
 		JButton aniadirproductobutton = new JButton("Añadir Producto a Carrito");
-		aniadirproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/factura/añadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
+		aniadirproductobutton.setIcon(new ImageIcon(new ImageIcon(MainWindowEmpleado.class.getResource("/icons/factura/aniadir_producto_carrito-removebg-preview.png")).getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH)));
 		aniadirproductobutton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		aniadirproductobutton.setHorizontalTextPosition(SwingConstants.CENTER);
 		aniadirproductobutton.setBackground(Color.WHITE);
