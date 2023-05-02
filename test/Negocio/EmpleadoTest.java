@@ -5,6 +5,8 @@ import java.util.Set;
 import Integracion.Factorias.FactoriaDAO;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Factorias.FactoriaSA;
+import Negocio.Equipo.TEquipoDesarrollo;
+
 import junit.framework.TestCase;
 
 public class EmpleadoTest extends TestCase {
@@ -47,10 +49,20 @@ public class EmpleadoTest extends TestCase {
         resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(99999);
         assertEquals("No existe el empleado", -1, resultado);
         
-        resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(1);
+    	if (FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo() == -1) {
+        	TEquipoDesarrollo equipo = new TEquipoDesarrollo();
+        	equipo.setNombre("Tests JUnit");
+        	equipo.setTecnologia("JUnit");
+        	FactoriaSA.getInstance().getSAEquipo().altaEquipo(equipo);	
+    	}
+    	TVinculacion vinc =  new TVinculacion();
+    	vinc.setId_1(FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo());
+    	vinc.setId_2(FactoriaDAO.getInstance().getDaoEmpleado().readByDNI("12345680B").getIdEmpleado());
+        
+        resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(vinc.getId_2());
         assertEquals("El empleado está en un equipo", -3, resultado);
         
-        resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(2);
+        resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(emp.getIdEmpleado());
         assertEquals("El empleado ya está dado de baja", -2, resultado);
     }
     
@@ -77,8 +89,17 @@ public class EmpleadoTest extends TestCase {
     	resultado = FactoriaSA.getInstance().getSAEmpleado().modificarEmpleado(emp2);
     	assertEquals("El empleado no existe en la base de datos", -1, resultado);
     	
-    	empleado.setDNI("00000000P");
-    	resultado = FactoriaSA.getInstance().getSAEmpleado().modificarEmpleado(empleado);
+    	TEmpleado empleado2 = new TEmpleado();
+        empleado2.setDNI("22222222P");
+        empleado2.setNombre("Alicia");
+        empleado2.setApellidos("Gómez");
+        empleado2.setE_mail("alicia@ucm.es");
+        empleado2.setTlfn(123456789);
+        empleado2.setSueldo(1500.0);
+        FactoriaSA.getInstance().getSAEmpleado().altaEmpleado(empleado2);
+    	empleado2.setDNI("00000000P");
+    	empleado2.setIdEmpleado(FactoriaDAO.getInstance().getDaoEmpleado().readByDNI("22222222P").getIdEmpleado());
+    	resultado = FactoriaSA.getInstance().getSAEmpleado().modificarEmpleado(empleado2);
     	assertEquals("El DNI ya existe en la base de datos", -2, resultado);
     }
     
@@ -103,7 +124,9 @@ public class EmpleadoTest extends TestCase {
     public void testListarIntegrantesIdEquipo() {
     	Set<TEmpleado> resultado = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo(999);
     	assertTrue("El equipo no existe", resultado == null);
-    	resultado = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo(1);
-    	assertTrue("El equipo existe", resultado.size() > 0);
+    	
+    	resultado = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo(FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo());
+    	System.out.println(resultado);
+    	assertEquals("El equipo existe", 1, resultado.size());
     }
 }
