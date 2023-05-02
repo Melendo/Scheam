@@ -5,6 +5,7 @@ import java.util.Set;
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.TVinculacion;
 import Negocio.Empleado.TEmpleado;
+import Negocio.Tareas.TTarea;
 
 public class SAEquipo implements ISAEquipo {
 
@@ -34,7 +35,11 @@ public class SAEquipo implements ISAEquipo {
 		
 		System.out.println("Intentando bajaEquipo - SAEquipo");
 		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
+		Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().listarIdEquipo(IDEquipo);
 
+		if(!tareas.isEmpty()) {
+			return -4;
+		}
 		if (equ.getIdEquipo() == -1) {
 			System.out.println("bajaEquipo No Realizado (no exite) - SAEquipo");
 			return -1;
