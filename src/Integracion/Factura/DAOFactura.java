@@ -162,7 +162,7 @@ public class DAOFactura implements IDAOFactura {
 	public TFactura readById(Integer idfactura) {
 		System.out.println("Intentando readByID - DAOFactura");
 		TFactura result = new TFactura();
-		Set<TLineaFactura> set = new HashSet<TLineaFactura>()
+		Set<TLineaFactura> set = new HashSet<TLineaFactura>();
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from factura where idfactura = ?");
 			ps.setInt(1, idfactura);
@@ -198,7 +198,7 @@ public class DAOFactura implements IDAOFactura {
 				aux.setCantidad(rs1.getInt("cantidad"));
 				aux.setPrecio(rs1.getDouble("preciopp"));
 				set.add(aux);
-				while (rs.next()) {
+				while (rs1.next()) {
 					aux = new TLineaFactura();
 					aux.setIdFactura(rs1.getInt("idfactura"));
 					aux.setIdProducto(rs1.getInt("idproducto"));
