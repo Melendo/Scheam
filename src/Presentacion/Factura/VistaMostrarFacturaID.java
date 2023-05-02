@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.HashSet;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 
 public class VistaMostrarFacturaID extends JFrame implements IGUI {
@@ -79,9 +81,12 @@ public class VistaMostrarFacturaID extends JFrame implements IGUI {
 			lista.add(factura);
 			facturamodel.setLista(lista);
 			facturamodel.fireTableStructureChanged();
-			
 			lineasmodel.setLista(factura.getLineas());
 			lineasmodel.fireTableStructureChanged();
+		case Eventos.MostrarFacturaIDNoOK:
+			JOptionPane.showMessageDialog(null, "Error. La factura no existe");
+			Controlador.getInstance().update(Eventos.VistaFormMostrarFacturaID, null);
+			break;
 		}
 	}
 }
