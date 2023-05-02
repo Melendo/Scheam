@@ -133,7 +133,7 @@ public class SAFactura implements ISAFactura {
 			    		return -1;
 			    	}
 			    	else if (s.getCantidad()== cantidad) {
-			    		carrito.setLineasFactura(null);
+			    		carrito.removeElement(s);
 			    		System.out.println("Se ha eliminado correctamente el numero de productos - SAFactura");
 			    		return 1;
 			    	}
