@@ -12,5 +12,5 @@ public class TEquipoDesarrollo extends TEquipo {
 	public void setTecnologia(String tecnologia) {
 		Tecnologia = tecnologia;
 	}
-	
+
 }

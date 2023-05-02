@@ -13,5 +13,4 @@ public class TEquipoDisenio extends TEquipo {
 		CampoDisenio = campoDisenio;
 	}
 
-	
 }

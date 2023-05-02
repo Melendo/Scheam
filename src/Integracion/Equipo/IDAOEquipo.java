@@ -1,10 +1,10 @@
 
 package Integracion.Equipo;
 
+import java.util.Set;
+
 import Negocio.Equipo.TEquipo;
 import Negocio.Equipo.TVinculacion;
-
-import java.util.Set;
 
 public interface IDAOEquipo {
 
@@ -13,7 +13,7 @@ public interface IDAOEquipo {
 	public Integer delete(Integer idequipo);
 
 	public Integer modify(TEquipo equipo);
-	
+
 	public Set<TEquipo> readAll();
 
 	public TEquipo readByID(Integer idequipo);
@@ -23,8 +23,8 @@ public interface IDAOEquipo {
 	public Integer bajaIntegrante(TVinculacion pert);
 
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer idempleado);
-	
+
 	public TEquipo readByNombre(String nombre);
-	
+
 	public TVinculacion isVinculado(Integer idempleado, Integer idequipo);
 }

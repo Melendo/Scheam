@@ -3,8 +3,8 @@
  */
 package Negocio.Factorias;
 
-import Negocio.Empleado.SAEmpleado;
 import Negocio.Cliente.SACliente;
+import Negocio.Empleado.SAEmpleado;
 import Negocio.Equipo.SAEquipo;
 import Negocio.Factura.SAFactura;
 import Negocio.Producto.SAProducto;
@@ -41,6 +41,5 @@ public class FactoriaSAImp extends FactoriaSA {
 	public SATarea getSATarea() {
 		return new SATarea();
 	}
-
 
 }
