@@ -54,8 +54,8 @@ public class DAOFactura implements IDAOFactura {
 			ps1 = con.prepareStatement(sql);
 			TFactura fct = FactoriaDAO.getInstance().getDaoFactura().getLastCreated();
 			for (TLineaFactura s : set) {
-				ps1.setInt(1, fct.getIdFactura());
-				ps1.setInt(2, factura.getIDCliente());
+				ps1.setInt(1, s.getIdProducto());
+				ps1.setInt(2, fct.getIdFactura());
 				ps1.setInt(3, s.getCantidad());
 				ps1.setDouble(4, s.getPrecio());
 				ps1.executeUpdate();
