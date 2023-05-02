@@ -219,10 +219,10 @@ public class SAFactura implements ISAFactura {
 			System.out.println("Necesitas abrir un carrito pendejo");
 			return null;
 		}
-		else if(carrito.getLineasFactura().isEmpty()) {
+		/*else if(carrito.getLineasFactura().isEmpty()) {
 			System.out.println("Tu carrito esta vacio");
 			return null;
-		}
+		}*/
 		return carrito.getLineasFactura();
 	}
 	
