@@ -7,6 +7,7 @@ import java.util.Set;
 
 import Integracion.Equipo.DAOEquipo;
 import Integracion.Factorias.FactoriaDAOImp;
+import Integracion.Producto.DAOProducto;
 import Negocio.Equipo.TEquipo;
 import Negocio.Producto.TProducto;
 
@@ -130,8 +131,16 @@ public class SATarea implements ISATarea {
 	}
 
 	public Set<TTarea> listarTareasProducto(Integer IDProducto) {
+		DAOProducto prod = FactoriaDAOImp.getInstance().getDaoProducto();
+		
+		if (prod.readById(IDProducto).getIdproyecto() == -1) {
+			System.out.println("ListarProductosTareaID no realizado (producto no existe o esta inactivo)- SATarea");
+			return null;
+		}
+		else {
 	    System.out.println("listarTareasProducto Realizado - SATarea");
 	    return FactoriaDAOImp.getInstance().getDaoTarea().listarIdProducto(IDProducto);
+		}
 	}
 
 	public TTarea mostrarTareaID(Integer IDTarea) {

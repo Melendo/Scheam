@@ -74,7 +74,7 @@ public class VistaListarTareasProductoId extends JFrame implements IGUI {
 			tareasmodel.fireTableStructureChanged();
 			break;
 		case Eventos.ListarTareasProductoIdNoOK:
-			JOptionPane.showMessageDialog(null, "Error. La Tarea no existe");
+			JOptionPane.showMessageDialog(null, "Error. El Producto no existe");
 			Controlador.getInstance().update(Eventos.VistaFormListarTareasProductoId, null);
 			break; 
 		}
