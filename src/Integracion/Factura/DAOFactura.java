@@ -35,12 +35,11 @@ public class DAOFactura implements IDAOFactura {
 		System.out.println("Intentando create - DAOFactura");
 		try {
 			PreparedStatement ps;
-			String sql = "INSERT INTO factura (idcliente, fecha, importe, activo) VALUES (?,?,?,?);";
+			String sql = "INSERT INTO factura (fecha, importe, activo) VALUES (?,?,?);";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, factura.getIDCliente());
-			ps.setDate(2, factura.getFecha());
-			ps.setDouble(3, factura.getImporte());
-			ps.setBoolean(4, true);
+			ps.setDate(1, factura.getFecha());
+			ps.setDouble(2, factura.getImporte());
+			ps.setBoolean(3, true);
 
 			ps.executeUpdate();
 			ps.close();
