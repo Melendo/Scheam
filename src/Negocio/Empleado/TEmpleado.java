@@ -2,17 +2,16 @@
 package Negocio.Empleado;
 
 public class TEmpleado {
-	
+
 	private Integer idEmpleado;
 	private String DNI;
 	private String nombre;
 	private String apellidos;
 	private String e_mail;
 	private Integer tlfn;
-	private Double sueldo;	
+	private Double sueldo;
 	private Boolean activo;
 
-	
 	public Integer getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -76,5 +75,5 @@ public class TEmpleado {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
-	
+
 }

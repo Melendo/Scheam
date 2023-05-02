@@ -3,10 +3,9 @@
  */
 package Integracion.Factura;
 
-import Negocio.Factura.TFactura;
 import java.util.Set;
-import Negocio.Cliente.TCliente;
 
+import Negocio.Factura.TFactura;
 
 public interface IDAOFactura {
 
@@ -21,6 +20,6 @@ public interface IDAOFactura {
 	public TFactura readById(Integer idfactura);
 
 	public Set<TFactura> listarFacturasIDCliente(Integer idcliente);
-	
+
 	public TFactura getLastCreated();
 }

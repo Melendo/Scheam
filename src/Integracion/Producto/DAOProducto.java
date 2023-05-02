@@ -1,8 +1,5 @@
 package Integracion.Producto;
 
-import Negocio.Empleado.TEmpleado;
-import Negocio.Producto.TProducto;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,10 +9,12 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import Negocio.Producto.TProducto;
+
 public class DAOProducto implements IDAOProducto {
 
 	Connection con;
-	
+
 	public DAOProducto() {
 		System.out.println("Intentando Conexión - DAOProducto");
 		try {
@@ -26,7 +25,7 @@ public class DAOProducto implements IDAOProducto {
 		}
 		System.out.println("Conexión Realizada - DAOProducto");
 	}
-	
+
 	public Integer create(TProducto producto) {
 		System.out.println("Intentando create - DAOProducto");
 		try {
@@ -34,14 +33,14 @@ public class DAOProducto implements IDAOProducto {
 			PreparedStatement ps;
 			String sql = "INSERT INTO productos (nombre, fechalanzamiento, precio, genero, PEGI, terminado, activo, stock) VALUES (?,?,?,?,?,?,?,?);";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, producto.getNombre());
 			ps.setInt(2, producto.getFechalanzamiento());
 			ps.setDouble(3, producto.getPrecio());
 			ps.setString(4, producto.getGenero());
 			ps.setInt(5, producto.getPEGI());
-			ps.setBoolean(6, false); //terminado
-			ps.setBoolean(7, true); //activo
+			ps.setBoolean(6, false); // terminado
+			ps.setBoolean(7, true); // activo
 			ps.setInt(8, producto.getStock());
 
 			ps.executeUpdate();
@@ -55,9 +54,6 @@ public class DAOProducto implements IDAOProducto {
 		}
 		return 1;
 
-		
-		
-		
 	}
 
 	public Integer delete(Integer idproducto) {
@@ -69,7 +65,7 @@ public class DAOProducto implements IDAOProducto {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idproducto);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			stmt.close();
 			con.close();
@@ -84,22 +80,22 @@ public class DAOProducto implements IDAOProducto {
 
 	public Integer modify(TProducto producto) {
 		System.out.println("Intentando modify - DAOProducto");
-		try {					
+		try {
 			Statement stmt = con.createStatement();
 			PreparedStatement ps;
 			String sql = "UPDATE productos set nombre = ?,  fechalanzamiento = ?, precio = ?, genero = ?, PEGI = ?, terminado = ?, activo = ?, stock = ? where id_proyecto = ?";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, producto.getNombre());
 			ps.setInt(2, producto.getFechalanzamiento());
 			ps.setDouble(3, producto.getPrecio());
 			ps.setString(4, producto.getGenero());
 			ps.setInt(5, producto.getPEGI());
 			ps.setBoolean(6, producto.getTerminado()); //
-			ps.setBoolean(7, true); //activo
+			ps.setBoolean(7, true); // activo
 			ps.setInt(8, producto.getStock());
 			ps.setInt(9, producto.getIdproyecto());
-			
+
 			ps.executeUpdate();
 			stmt.close();
 			con.close();
@@ -119,7 +115,7 @@ public class DAOProducto implements IDAOProducto {
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM productos WHERE activo");
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
@@ -150,7 +146,7 @@ public class DAOProducto implements IDAOProducto {
 				con.close();
 				System.out.println("Readall realizado - DAOProducto");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -166,9 +162,9 @@ public class DAOProducto implements IDAOProducto {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.next()) 
+			if (!rs.next())
 				result.setIdproyecto(-1);
-			else  {
+			else {
 				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
 				result.setGenero(rs.getString("genero"));
 				result.setIdproyecto(rs.getInt("id_proyecto"));
@@ -179,11 +175,11 @@ public class DAOProducto implements IDAOProducto {
 				result.setTerminado(rs.getBoolean("terminado"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 			if (result.getIdproyecto() == -1)
 				System.out.println("ReadById realizado (no encontró id_proyecto) - DAOProducto");
 			else
@@ -204,7 +200,7 @@ public class DAOProducto implements IDAOProducto {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idproducto);
 			ps.executeUpdate();
-			
+
 			stmt.close();
 			con.close();
 			System.out.println("CerrarProducto Realizado - DAOProducto");
@@ -226,9 +222,9 @@ public class DAOProducto implements IDAOProducto {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.next()) 
+			if (!rs.next())
 				result.setIdproyecto(-1);
-			else  {
+			else {
 				result.setFechalanzamiento(rs.getInt("fechalanzamiento"));
 				result.setGenero(rs.getString("genero"));
 				result.setIdproyecto(rs.getInt("id_proyecto"));
@@ -239,11 +235,11 @@ public class DAOProducto implements IDAOProducto {
 				result.setTerminado(rs.getBoolean("terminado"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 			if (result.getIdproyecto() == -1)
 				System.out.println("readByNombre realizado (no encontró nombre) - DAOProducto");
 			else

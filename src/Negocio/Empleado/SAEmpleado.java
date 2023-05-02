@@ -1,9 +1,9 @@
 package Negocio.Empleado;
 
 import java.util.Set;
-import Integracion.Factorias.FactoriaDAOImp;
-import Integracion.Empleado.DAOEmpleado;
+
 import Integracion.Equipo.DAOEquipo;
+import Integracion.Factorias.FactoriaDAOImp;
 
 public class SAEmpleado implements ISAEmpleado {
 
@@ -38,15 +38,14 @@ public class SAEmpleado implements ISAEmpleado {
 			System.out.println("bajaEmpleado No Realizado (no exite) - SAEmpleado");
 			return -1;
 		}
-		if(!FactoriaDAOImp.getInstance().getDaoEmpleado().pertenece(id)){
-			if(emp.getActivo()) {
+		if (!FactoriaDAOImp.getInstance().getDaoEmpleado().pertenece(id)) {
+			if (emp.getActivo()) {
 				System.out.println("bajaEmpleado Realizado - SAEmpleado");
 				return FactoriaDAOImp.getInstance().getDaoEmpleado().delete(id);
-			} else{
+			} else {
 				return -2;
 			}
-		}
-		else {
+		} else {
 			return -3;
 		}
 	}
@@ -54,16 +53,16 @@ public class SAEmpleado implements ISAEmpleado {
 	public Integer modificarEmpleado(TEmpleado empleado) {
 
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(empleado.getIdEmpleado());
-		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
-		System.out.println("modificarEmpleado no realizado (empleado no existe o esta inactivo)- SAEmpleado");
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()) {
+			System.out.println("modificarEmpleado no realizado (empleado no existe o esta inactivo)- SAEmpleado");
 			return -1;
-			} else {
-			if (empleado.getDNI() != null  && FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1"){
+		} else {
+			if (empleado.getDNI() != null
+					&& FactoriaDAOImp.getInstance().getDaoEmpleado().readByDNI(empleado.getDNI()).getDNI() != "-1") {
 				System.out.println("modificarEmpleado no realizado (empleado tiene un DNI coincidente)- SAEmpleado");
 				return -2;
-				}
-			else {
-					
+			} else {
+
 				if (empleado.getDNI() == null)
 					empleado.setDNI(emp.getDNI());
 				if (empleado.getNombre() == null)
@@ -76,12 +75,12 @@ public class SAEmpleado implements ISAEmpleado {
 					empleado.setTlfn(emp.getTlfn());
 				if (empleado.getSueldo() == null)
 					empleado.setSueldo(emp.getSueldo());
-				if(empleado.getActivo() == null) {
+				if (empleado.getActivo() == null) {
 					empleado.setActivo(true);
 				}
 				System.out.println("modificarEmpleado Realizado - SAEmpleado");
 				return FactoriaDAOImp.getInstance().getDaoEmpleado().modify(empleado);
-			}				
+			}
 		}
 	}
 
@@ -96,8 +95,7 @@ public class SAEmpleado implements ISAEmpleado {
 		if (emp.getIdEmpleado() != -1 && emp.getActivo()) {
 			System.out.println("mostrarEmpleadoID Realizado - SAEmpleado");
 			return emp;
-		}
-		else { 
+		} else {
 			emp.setIdEmpleado(-1);
 			System.out.println("mostrarEmpleadoID no realizado (empleado no existe o no esta activo) - SAEmpleado");
 			return emp;

@@ -2,6 +2,7 @@
 package Negocio.Equipo;
 
 import java.util.Set;
+
 import Integracion.Factorias.FactoriaDAOImp;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Tareas.TTarea;
@@ -9,10 +10,10 @@ import Negocio.Tareas.TTarea;
 public class SAEquipo implements ISAEquipo {
 
 	public Integer altaEquipo(TEquipo equipo) {
-		
+
 		System.out.println("Intentando altaEquipo - SAEquipo");
 		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByNombre(equipo.getNombre());
-		
+
 		if (equ.getNombre().equals("-1")) {
 			System.out.println("altaEquipo Realizado (creado) - SAEquipo");
 			return FactoriaDAOImp.getInstance().getDaoEquipo().create(equipo);
@@ -20,7 +21,7 @@ public class SAEquipo implements ISAEquipo {
 			if (equ.getActivo()) {
 				System.out.println("altaEquipo No Realizado (existe y activo) - SAEquipo");
 				return -1;
-			}else {
+			} else {
 				equipo.setActivo(true);
 				equipo.setIdEquipo(equ.getIdEquipo());
 				System.out.println("altaEquipo Realizado (reactivado) - SAEquipo");
@@ -31,26 +32,26 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer bajaEquipo(Integer IDEquipo) {
-		
+
 		System.out.println("Intentando bajaEquipo - SAEquipo");
 		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
 		Set<TTarea> tareas = FactoriaDAOImp.getInstance().getDaoTarea().listarIdEquipo(IDEquipo);
 
-		if(!tareas.isEmpty()) {
+		if (!tareas.isEmpty()) {
 			return -4;
 		}
 		if (equ.getIdEquipo() == -1) {
 			System.out.println("bajaEquipo No Realizado (no exite) - SAEquipo");
 			return -1;
 		}
-		if(FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(IDEquipo)) {
+		if (FactoriaDAOImp.getInstance().getDaoEquipo().pertenece(IDEquipo)) {
 			System.out.println("bajaEquipo No Realizado, Equipo con empleados Vinculados - SAEquipo");
-			return - 3;
+			return -3;
 		}
-		if(!equ.getActivo()) {
+		if (!equ.getActivo()) {
 			System.out.println("bajaEquipo No Realizado (ya dado de baja) - SAEquipo");
 			return -2;
-		} else{
+		} else {
 			System.out.println("bajaEquipo Realizado - SAEquipo");
 			return FactoriaDAOImp.getInstance().getDaoEquipo().delete(IDEquipo);
 		}
@@ -58,35 +59,34 @@ public class SAEquipo implements ISAEquipo {
 
 	public Integer modificarEquipo(TEquipo equipo) {
 		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(equipo.getIdEquipo());
-		if (equ.getIdEquipo() == -1 || !equ.getActivo()){
-		System.out.println("modificarEquipo no realizado (equipo no existe o esta inactivo)- SAEquipo");
+		if (equ.getIdEquipo() == -1 || !equ.getActivo()) {
+			System.out.println("modificarEquipo no realizado (equipo no existe o esta inactivo)- SAEquipo");
 			return -1;
 		} else {
-			if (equipo.getNombre() != null  && FactoriaDAOImp.getInstance().getDaoEquipo().readByNombre(equipo.getNombre()).getNombre() != "-1"){
+			if (equipo.getNombre() != null && FactoriaDAOImp.getInstance().getDaoEquipo()
+					.readByNombre(equipo.getNombre()).getNombre() != "-1") {
 				System.out.println("modificarEquipo no realizado (equipo tiene un Nombre coincidente)- SAEquipo");
 				return -2;
-			}
-			else {
+			} else {
 				if (equipo.getNombre() == null)
 					equipo.setNombre(equ.getNombre());
 				if (equipo.getActivo() == null)
 					equipo.setActivo(true);
-				
+
 				if (equipo instanceof TEquipoDesarrollo) {
-					if(((TEquipoDesarrollo) equipo).getTecnologia()== null) {
+					if (((TEquipoDesarrollo) equipo).getTecnologia() == null) {
 						((TEquipoDesarrollo) equipo).setTecnologia(((TEquipoDesarrollo) equ).getTecnologia());
 					}
-				}
-				else {
-					if (((TEquipoDisenio) equipo).getCampoDisenio()== null) {
+				} else {
+					if (((TEquipoDisenio) equipo).getCampoDisenio() == null) {
 						((TEquipoDisenio) equipo).setCampoDisenio(((TEquipoDisenio) equ).getCampoDisenio());
 					}
 				}
-			
+
 			}
 			System.out.println("modificarEquipo Realizado - SAEquipo");
 			return FactoriaDAOImp.getInstance().getDaoEquipo().modify(equipo);
-		}				
+		}
 	}
 
 	public Set<TEquipo> listarEquipos() {
@@ -97,11 +97,10 @@ public class SAEquipo implements ISAEquipo {
 
 	public TEquipo mostrarEquipoID(Integer IDEquipo) {
 		TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(IDEquipo);
-		if (equ.getIdEquipo() != -1 && equ.getActivo()){
-		System.out.println("mostrarEquipo Realizado - SAEquipo");
+		if (equ.getIdEquipo() != -1 && equ.getActivo()) {
+			System.out.println("mostrarEquipo Realizado - SAEquipo");
 			return equ;
-			}
-		else { 
+		} else {
 			equ.setIdEquipo(-1);
 			System.out.println("mostrarEquipo no Realizado - SAEquipo");
 			return equ;
@@ -109,31 +108,29 @@ public class SAEquipo implements ISAEquipo {
 	}
 
 	public Integer anyadirIntegrante(TVinculacion pert) {
-		
+
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(pert.getId_2());
-		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()) {
 			System.out.println("AñadirIntegrante no realizado (empleado no existe o esta inactivo)- SAEquipo");
 			return -1;
-		}
-		else {
+		} else {
 			TEquipo equ = FactoriaDAOImp.getInstance().getDaoEquipo().readByID(pert.getId_1());
-			if (equ.getIdEquipo() == -1 || !equ.getActivo()){
+			if (equ.getIdEquipo() == -1 || !equ.getActivo()) {
 				System.out.println("AñadirIntegrante no realizado (equipo no existe o esta inactivo)- SAEquipo");
 				return -2;
-			}
-			else {
+			} else {
 				TVinculacion tvin = new TVinculacion();
 				tvin = FactoriaDAOImp.getInstance().getDaoEquipo().isVinculado(pert.getId_2(), pert.getId_1());
-				if(tvin.getId_1() != -1) {
-					if(tvin.isActivo()){
-						System.out.println("AñadirIntegrante no realizado (El empleado ya esta en el equipo)- SAEquipo");
+				if (tvin.getId_1() != -1) {
+					if (tvin.isActivo()) {
+						System.out
+								.println("AñadirIntegrante no realizado (El empleado ya esta en el equipo)- SAEquipo");
 						return -3;
-					}else{
+					} else {
 						System.out.println("AñadirIntegrante realizado - SAEquipo");
 						return FactoriaDAOImp.getInstance().getDaoEquipo().anyadirIntegrante(tvin);
 					}
-				}
-				else {
+				} else {
 					System.out.println("AñadirIntegrante realizado - SAEquipo");
 					return FactoriaDAOImp.getInstance().getDaoEquipo().anyadirIntegrante(pert);
 				}
@@ -144,23 +141,22 @@ public class SAEquipo implements ISAEquipo {
 	public Integer retirarIntegrante(TVinculacion pert) {
 		TVinculacion tvin = new TVinculacion();
 		tvin = FactoriaDAOImp.getInstance().getDaoEquipo().isVinculado(pert.getId_2(), pert.getId_1());
-		if(tvin.getId_1() == -1) {
+		if (tvin.getId_1() == -1) {
 			System.out.println("retirarIntegrante no realizado (El empleado no esta en el equipo)- SAEquipo");
 			return -1;
-		}
-		else {
-			if(tvin.isActivo()) {
+		} else {
+			if (tvin.isActivo()) {
 				System.out.println("retirarIntegrante realizado - SAEquipo");
 				return FactoriaDAOImp.getInstance().getDaoEquipo().bajaIntegrante(pert);
-			}else {
+			} else {
 				return -1;
 			}
 		}
 	}
-	
+
 	public Set<TEquipo> listarEquiposEmpleadoId(Integer IDEmpleado) {
 		TEmpleado emp = FactoriaDAOImp.getInstance().getDaoEmpleado().readById(IDEmpleado);
-		if (emp.getIdEmpleado() == -1 || !emp.getActivo()){
+		if (emp.getIdEmpleado() == -1 || !emp.getActivo()) {
 			System.out.println("ListarEquiposEmpleado no realizado (empleado no existe o esta inactivo)- SAEquipo");
 			return null;
 		}

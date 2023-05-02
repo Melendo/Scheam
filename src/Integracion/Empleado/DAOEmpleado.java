@@ -1,16 +1,16 @@
 package Integracion.Empleado;
 
-import Negocio.Empleado.TEmpleado;
-import Negocio.Equipo.TVinculacion;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
+
+import Negocio.Empleado.TEmpleado;
+import Negocio.Equipo.TVinculacion;
 
 public class DAOEmpleado implements IDAOEmpleado {
 
@@ -61,7 +61,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idempleado);
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
 			System.out.println("Delete Realizado - DAOEmpleado");
@@ -77,10 +77,10 @@ public class DAOEmpleado implements IDAOEmpleado {
 		System.out.println("Intentando Modify - DAOEmpleado");
 		try {
 			PreparedStatement ps;
-						
+
 			String sql = "UPDATE empleados set nombre = ?,  apellidos = ?, dni = ?, email = ?, telefono = ?, sueldo = ?, activo = ? where id_empleado = ?";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setString(1, empleado.getNombre());
 			ps.setString(2, empleado.getApellidos());
 			ps.setString(3, empleado.getDNI());
@@ -90,10 +90,10 @@ public class DAOEmpleado implements IDAOEmpleado {
 			ps.setBoolean(7, empleado.getActivo());
 			ps.setInt(8, empleado.getIdEmpleado());
 			ps.executeUpdate();
-			
+
 			ps.close();
 			con.close();
-			
+
 			System.out.println("Modify Realizado - DAOEmpleado");
 
 		} catch (SQLException e) {
@@ -110,7 +110,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM empleados WHERE activo");
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
@@ -139,14 +139,14 @@ public class DAOEmpleado implements IDAOEmpleado {
 				con.close();
 				System.out.println("Readall realizado - DAOEmpleado");
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
-	
+
 	public TEmpleado readByDNI(String dni) {
 		System.out.println("Intentando readByDNI - DAOEmpleado");
 		TEmpleado result = new TEmpleado();
@@ -156,9 +156,9 @@ public class DAOEmpleado implements IDAOEmpleado {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (!rs.next()) 
+			if (!rs.next())
 				result.setDNI("-1");
-			else  {
+			else {
 				result.setIdEmpleado(rs.getInt("id_empleado"));
 				result.setNombre(rs.getString("nombre"));
 				result.setApellidos(rs.getString("apellidos"));
@@ -168,11 +168,11 @@ public class DAOEmpleado implements IDAOEmpleado {
 				result.setSueldo(rs.getDouble("sueldo"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 			if (result.getDNI().equals("-1"))
 				System.out.println("ReadByDNI realizado (no encontró DNI) - DAOEmpleado");
 			else
@@ -183,7 +183,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 		}
 		return result;
 	}
-	
+
 	public TEmpleado readById(Integer idempleado) {
 		System.out.println("Intentando readByID - DAOEmpleado");
 		TEmpleado result = new TEmpleado();
@@ -205,7 +205,7 @@ public class DAOEmpleado implements IDAOEmpleado {
 				result.setSueldo(rs.getDouble("sueldo"));
 				result.setActivo(rs.getBoolean("activo"));
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
@@ -221,38 +221,38 @@ public class DAOEmpleado implements IDAOEmpleado {
 		System.out.println("Intentando listarIdEquipo - DAOEmpleado");
 		Set<TEmpleado> result = new HashSet<TEmpleado>();
 		Vector<Integer> id = new Vector<Integer>();
-		
+
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM pertenece WHERE id_equipo = ? and activo = true");
+			PreparedStatement ps = con
+					.prepareStatement("SELECT * FROM pertenece WHERE id_equipo = ? and activo = true");
 			ps.setInt(1, idequipo);
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (!rs.next()) {
 				return result;
 			} else {
 				id.add(rs.getInt("id_empleado"));
-				
-				while(rs.next()) 
+
+				while (rs.next())
 					id.add(rs.getInt("id_empleado"));
-					
-					
-				if(id.size() > 0) {
-					
-					for(int i = 0; i < id.size(); i++) {
-						
+
+				if (id.size() > 0) {
+
+					for (int i = 0; i < id.size(); i++) {
+
 						PreparedStatement ps1 = con.prepareStatement("SELECT * FROM empleados WHERE id_empleado = ?");
-						
+
 						ps1.setInt(1, id.elementAt(i));
-						ResultSet rs1 =  ps1.executeQuery();
-						
-						if(!rs1.next()) {
-							//return result;
+						ResultSet rs1 = ps1.executeQuery();
+
+						if (!rs1.next()) {
+							// return result;
 							System.out.println("Intentando listarIdEquipo - DAOEmpleado");
 						} else {
 							TEmpleado aux = new TEmpleado();
-							
+
 							aux.setActivo(rs1.getBoolean("activo"));
-							if(aux.getActivo()) {
+							if (aux.getActivo()) {
 								aux.setIdEmpleado(rs1.getInt("id_empleado"));
 								aux.setNombre(rs1.getString("nombre"));
 								aux.setApellidos(rs1.getString("apellidos"));
@@ -260,73 +260,61 @@ public class DAOEmpleado implements IDAOEmpleado {
 								aux.setE_mail(rs1.getString("email"));
 								aux.setTlfn(rs1.getInt("telefono"));
 								aux.setSueldo(rs1.getDouble("sueldo"));
-								
+
 								result.add(aux);
 							}
 						}
-					}										
-				}	
+					}
+				}
 			}
-					
+
 			rs.close();
 			ps.close();
 			con.close();
 			System.out.println("listarIdEquipo realizado - DAOEmpleado");
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
-	public boolean pertenece(int id_empleado){
+
+	public boolean pertenece(int id_empleado) {
 		System.out.println("Intentando pertenece - DAOEmpleado");
 		boolean found = false;
 		try {
 			PreparedStatement ps;
 			String sql = "select * from pertenece where id_empleado = ? and activo = true;";
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, id_empleado);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				TVinculacion tvin = new TVinculacion();
 				tvin.setActivo(rs.getBoolean("activo"));
-				if(tvin.isActivo()) 
+				if (tvin.isActivo())
 					found = true;
-				
-				while(rs.next() && !found) {
+
+				while (rs.next() && !found) {
 					tvin.setActivo(rs.getBoolean("activo"));
-					if(tvin.isActivo()) 
+					if (tvin.isActivo())
 						found = true;
 				}
-			}else{
+			} else {
 				found = false;
 			}
-			
+
 			rs.close();
 			ps.close();
 			con.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Terminado pertenece - DAOEmpleado");
 		return found;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
