@@ -138,7 +138,8 @@ public class MainWindowEquipo extends JFrame implements IGUI {
 		listarequipodeintbutton.setBackground(Color.WHITE);
 		listarequipodeintbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Controlador.getInstance().update(Eventos.VistaFormListarEquiposDeIntegranteId, null);
+				dispose();
 			}
 		});
 		buttonpanel.add(listarequipodeintbutton);

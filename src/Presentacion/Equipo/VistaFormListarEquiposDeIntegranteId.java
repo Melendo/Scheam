@@ -1,5 +1,11 @@
+package Presentacion.Equipo;
 
-package Presentacion.Factura;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,28 +20,22 @@ import Presentacion.IGUI;
 import Presentacion.Controlador.Controlador;
 import Presentacion.Controlador.Eventos;
 
-import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-
-public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
+public class VistaFormListarEquiposDeIntegranteId extends JFrame implements IGUI{
 	
 	private JPanel contentPane;
 	private JTextField idtextfield;
 	
 	private boolean cerrar = true;
+
 	
-	public VistaFormMostrarFacturasIDCliente () {
-		vFormMostrarEmpleadoID();
+	public VistaFormListarEquiposDeIntegranteId() {
+		vFormListarEquiposDeIntegranteId();
 	}
 
-	public void vFormMostrarEmpleadoID() {
+	public void vFormListarEquiposDeIntegranteId() {
 		setMinimumSize(new Dimension(500, 360));
-		setTitle("Mostrar Facturas por ID de Cliente");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_todos-removebg-preview.png")));
+		setTitle("Listar Equipo de un Integrante");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VistaFormListarEquiposDeIntegranteId.class.getResource("/icons/generales/listar_uno-removebg-preview.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 360);
 		contentPane = new JPanel();
@@ -47,9 +47,9 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 		JPanel titlepanel = new JPanel();
 		contentPane.add(titlepanel, BorderLayout.NORTH);
 		
-		JLabel logo = new JLabel("      Buscar ID Cliente para Facturas");
+		JLabel logo = new JLabel("      Listar Equipo de un Integrante");
 		logo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormMostrarFacturasIDCliente.class.getResource("/icons/generales/listar_todos-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		logo.setIcon(new ImageIcon(new ImageIcon(VistaFormListarEquiposDeIntegranteId.class.getResource("/icons/generales/listar_uno-removebg-preview.png")).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		titlepanel.add(logo);
 		
 		JPanel infopanel = new JPanel();
@@ -78,7 +78,7 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 		JButton cancelbutton = new JButton("Cancelar");
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.MainWindowFactura, null);
+				Controlador.getInstance().update(Eventos.MainWindowEquipo, null);
 				dispose();
 			}
 		});
@@ -86,27 +86,28 @@ public class VistaFormMostrarFacturasIDCliente extends JFrame implements IGUI {
 		infopanel.add(cancelbutton);
 	}
 	
-	
 	private void ok() {
-		int idcliente = Integer.parseInt(idtextfield.getText());
-		Controlador.getInstance().update(Eventos.MostrarFacturasIDCliente, idcliente);
+		int idequipo = Integer.parseInt(idtextfield.getText());
+		Controlador.getInstance().update(Eventos.ListarEquiposDeIntegranteId, idequipo);
 		if (cerrar)
 			dispose();
 		else
 			cerrar = true;
 	}
-
+	
+	
 	@Override
 	public void update(int event, Object object) {
 		switch(event) {
-		case Eventos.VistaFormMostrarFacturasIDCliente:
+		case Eventos.VistaFormListarEquiposDeIntegranteId:
 			setVisible(true);
 			break;
-		case Eventos.MostrarFacturasIDClienteNoOk:
-			JOptionPane.showMessageDialog(null, "Error. El cliente no existe");
+		case Eventos.ListarEquiposDeIntegranteIdNoOk:
+			JOptionPane.showMessageDialog(null, "Error. El equipo no existe");
 			cerrar = false;
 			break;
 		}
 		
 	}
+
 }

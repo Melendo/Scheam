@@ -152,7 +152,7 @@ public class MainWindowFactura extends JFrame implements IGUI {
 		listfacturasbutton.setBackground(Color.WHITE);
 		listfacturasbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().update(Eventos.VistaFormListarIntegrantesEquipoId, null);
+				Controlador.getInstance().update(Eventos.VistaFormMostrarFacturasIDCliente, null);
 				dispose();
 			}
 		});
