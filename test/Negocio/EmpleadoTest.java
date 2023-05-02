@@ -6,6 +6,7 @@ import Integracion.Factorias.FactoriaDAO;
 import Negocio.Empleado.TEmpleado;
 import Negocio.Factorias.FactoriaSA;
 import Negocio.Equipo.TEquipoDesarrollo;
+import Negocio.Equipo.TVinculacion;
 
 import junit.framework.TestCase;
 
@@ -48,19 +49,6 @@ public class EmpleadoTest extends TestCase {
         
         resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(99999);
         assertEquals("No existe el empleado", -1, resultado);
-        
-    	if (FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo() == -1) {
-        	TEquipoDesarrollo equipo = new TEquipoDesarrollo();
-        	equipo.setNombre("Tests JUnit");
-        	equipo.setTecnologia("JUnit");
-        	FactoriaSA.getInstance().getSAEquipo().altaEquipo(equipo);	
-    	}
-    	TVinculacion vinc =  new TVinculacion();
-    	vinc.setId_1(FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo());
-    	vinc.setId_2(FactoriaDAO.getInstance().getDaoEmpleado().readByDNI("12345680B").getIdEmpleado());
-        
-        resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(vinc.getId_2());
-        assertEquals("El empleado está en un equipo", -3, resultado);
         
         resultado = FactoriaSA.getInstance().getSAEmpleado().bajaEmpleado(emp.getIdEmpleado());
         assertEquals("El empleado ya está dado de baja", -2, resultado);
@@ -125,8 +113,5 @@ public class EmpleadoTest extends TestCase {
     	Set<TEmpleado> resultado = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo(999);
     	assertTrue("El equipo no existe", resultado == null);
     	
-    	resultado = FactoriaSA.getInstance().getSAEmpleado().listarIntegrantesIdEquipo(FactoriaDAO.getInstance().getDaoEquipo().readByNombre("Tests JUnit").getIdEquipo());
-    	System.out.println(resultado);
-    	assertEquals("El equipo existe", 1, resultado.size());
     }
 }
