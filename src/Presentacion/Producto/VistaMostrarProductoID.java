@@ -81,10 +81,10 @@ public class VistaMostrarProductoID extends JFrame implements IGUI, ActionListen
 			productosmodel.setLista(lista);
 			productosmodel.fireTableStructureChanged();
 			break;
-		case Eventos.MostrarProductoIDOK:
+		case Eventos.MostrarProductoIDNoOK:
 			JOptionPane.showMessageDialog(null, "Error. El producto no existe");
 			Controlador.getInstance().update(Eventos.VistaFormMostrarProductoID, null);
-			break;
+			break;	
 		}
 	}
 		
