@@ -72,7 +72,6 @@ public class DAOTarea implements IDAOTarea {
 		return 1;
 	}
 
-
 	public Integer modify(TTarea tarea) {
 		System.out.println("Intentando Modify - DAOTarea");
 		try {
@@ -140,8 +139,6 @@ public class DAOTarea implements IDAOTarea {
 		}
 		return result;
 	}
-
-
 	
 	public TTarea readById(Integer idtarea) {
 		System.out.println("Intentando readByDNI - DAOTarea");
@@ -173,7 +170,6 @@ public class DAOTarea implements IDAOTarea {
 		}
 		return result;
 	}
-
 
 	public Set<TTarea> listarIdEquipo(Integer idEquipo) {
 	    System.out.println("Intentando listar tareas por equipo - DAOTarea");
@@ -243,7 +239,6 @@ public class DAOTarea implements IDAOTarea {
 	    }
 	    return result;
 	}
-
 
 	public Integer closeTask(Integer idtarea) {
 		System.out.println("Intentando Cerrar Tarea - DAOTarea");

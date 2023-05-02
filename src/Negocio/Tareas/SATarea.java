@@ -20,7 +20,6 @@ public class SATarea implements ISATarea {
 		return FactoriaDAOImp.getInstance().getDaoTarea().create(tarea);
 		}
 
-
 	public Integer bajaTarea(Integer IDTarea) {
 		System.out.println("Intentando bajaTarea - SATarea");
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(IDTarea);
@@ -38,7 +37,6 @@ public class SATarea implements ISATarea {
 		}
 	}
 
-	
 	public Integer modificarTarea(TTarea tarea) {
 		
 		TTarea tar = FactoriaDAOImp.getInstance().getDaoTarea().readById(tarea.getIdTarea());
@@ -71,15 +69,12 @@ public class SATarea implements ISATarea {
 				return FactoriaDAOImp.getInstance().getDaoTarea().modify(tarea);
 			}				
 		}
-	
-
 
 	public Set<TTarea> listarTareas() {
 		Set<TTarea> lista = FactoriaDAOImp.getInstance().getDaoTarea().readAll();
 		System.out.println("mostrarTareas Realizado - SATarea");
 		return lista;
 	}
-
 
 	public Set<TTarea> listarTareasEquipo(Integer IDEquipo) {
 	    
@@ -104,7 +99,6 @@ public class SATarea implements ISATarea {
 			return tar;
 		}
 	}
-
 
 	public Integer cerrarTarea(Integer IDTarea) {
 	    System.out.println("Intentando cerrarTarea - SATarea");

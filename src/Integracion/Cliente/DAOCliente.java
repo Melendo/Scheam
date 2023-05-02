@@ -80,7 +80,6 @@ public class DAOCliente implements IDAOCliente {
 		return 1;
 	}
 
-
 	public Integer delete(Integer idcliente) {
 		System.out.println("Intentando Delete - DAOCliente");
 		try {
