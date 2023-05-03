@@ -175,7 +175,7 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando listar tareas por equipo - DAOTarea");
 		Set<TTarea> result = new HashSet<>();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ? and activo = true");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE equipo = ? and activo = true and terminada = false");
 			ps.setInt(1, idEquipo);
 
 			ResultSet rs = ps.executeQuery();
@@ -211,7 +211,7 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando listar tareas por ID de producto - DAOTarea");
 		Set<TTarea> result = new HashSet<>();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ? and activo = true");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM tarea WHERE producto = ? and activo = true and terminada = false");
 			ps.setInt(1, idProducto);
 
 			ResultSet rs = ps.executeQuery();
@@ -242,7 +242,7 @@ public class DAOTarea implements IDAOTarea {
 		System.out.println("Intentando Cerrar Tarea - DAOTarea");
 		try {
 			PreparedStatement ps;
-			String sql = "UPDATE tareas set terminada = true where id_tarea = ?";
+			String sql = "UPDATE tarea set terminada = true where id_tarea = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, idtarea);
 			ps.executeUpdate();
